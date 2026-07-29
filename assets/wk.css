@@ -102,12 +102,9 @@
   font-family: 'Alegreya Sans'; font-style: italic; font-weight: 400;
   font-display: swap; src: url('fonts/alegreya-sans-latin-400-italic.woff2') format('woff2');
 }
-/* Alegreya Sans hat keinen 600er-Schnitt – 500 und 700 spannen den Bereich
-   auf, den die Seite mit font-weight:600 anspricht. */
-@font-face {
-  font-family: 'Alegreya Sans'; font-style: normal; font-weight: 500;
-  font-display: swap; src: url('fonts/alegreya-sans-latin-500-normal.woff2') format('woff2');
-}
+/* Alegreya Sans hat keinen echten 600er-Schnitt. Die Seite nutzt
+   font-weight:600 an 200 Stellen – dieser Aufruf zeigt auf den 700er, damit
+   der Browser nicht synthetisch fettet. */
 @font-face {
   font-family: 'Alegreya Sans'; font-style: normal; font-weight: 600;
   font-display: swap; src: url('fonts/alegreya-sans-latin-700-normal.woff2') format('woff2');
@@ -140,7 +137,13 @@ html, body {
 a { color: var(--wk-pink-ink); text-decoration: none; }
 a:hover { color: var(--wk-pink-700); text-decoration: underline; }
 
-img { max-width: 100%; }
+/* height:auto ist hier zwingend, nicht Kosmetik. Die <img>-Tags tragen
+ * width/height als Attribute, damit der Browser das Seitenverhältnis kennt
+ * und kein Layoutsprung entsteht. Attribute wirken als Presentation Hints
+ * mit sehr niedriger Priorität: die Inline-Breite gewinnt, die Attribut-Höhe
+ * bliebe aber stehen und würde das Bild vertikal strecken. Diese Regel
+ * neutralisiert sie - eine Inline-Höhe im style-Attribut gewinnt weiter. */
+img { max-width: 100%; height: auto; }
 
 /* Tastaturfokus muss sichtbar sein – der Rosa-Ring hat auf Creme und auf
    dunklem Wald genug Kontrast. */
