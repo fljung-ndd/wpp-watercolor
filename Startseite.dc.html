@@ -29,6 +29,7 @@
 
 <div style="background:var(--wk-paper);overflow-x:hidden">
 
+<a class="wk-skip" href="#inhalt">Zum Inhalt springen</a>
 <header style="position:sticky;top:0;z-index:60;background:var(--wk-forest-800);box-shadow:0 2px 14px rgba(8,45,36,.25)">
   <div style="max-width:1300px;margin:0 auto;display:flex;align-items:center;gap:18px;padding:9px 20px">
     <a href="./Startseite.dc.html" style="display:flex;align-items:center;gap:11px;flex:0 0 auto">
@@ -41,7 +42,7 @@
         <a href="./Ueber mich.dc.html" style="color:var(--wk-on-dark-soft)">Über mich</a>
         <a href="./Mein Ansatz.dc.html" style="color:var(--wk-on-dark-soft)">Mein Ansatz</a>
         <a href="./Angebot.dc.html" style="color:var(--wk-on-dark-soft)">Angebot</a>
-        <span onClick="{{ toggleFuerWen }}" style="position:relative;cursor:pointer;color:var(--wk-paper)">Für wen ▾
+        <span style="position:relative;display:inline-flex"><button onClick="{{ toggleFuerWen }}" aria-expanded="{{ menuFuerWen }}" style="background:none;border:none;padding:0;font-family:inherit;font-size:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:4px;color:var(--wk-paper)">Für wen <span aria-hidden="true">▾</span></button>
           <sc-if value="{{ menuFuerWen }}" hint-placeholder-val="{{ false }}">
             <span style="position:absolute;top:30px;left:-12px;background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:12px;box-shadow:0 10px 26px rgba(8,45,36,.3);padding:8px;display:flex;flex-direction:column;min-width:158px;z-index:70">
               <a href="./Fuer Teams.dc.html" style="padding:8px 12px;border-radius:8px;color:var(--wk-ink)">Für Teams</a>
@@ -49,7 +50,7 @@
             </span>
           </sc-if>
         </span>
-        <span onClick="{{ toggleWissen }}" style="position:relative;cursor:pointer;color:var(--wk-paper)">Wissen ▾
+        <span style="position:relative;display:inline-flex"><button onClick="{{ toggleWissen }}" aria-expanded="{{ menuWissen }}" style="background:none;border:none;padding:0;font-family:inherit;font-size:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:4px;color:var(--wk-paper)">Wissen <span aria-hidden="true">▾</span></button>
           <sc-if value="{{ menuWissen }}" hint-placeholder-val="{{ false }}">
             <span style="position:absolute;top:30px;left:-12px;background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:12px;box-shadow:0 10px 26px rgba(8,45,36,.3);padding:8px;display:flex;flex-direction:column;min-width:186px;z-index:70">
               <a href="./Autismus.dc.html" style="padding:8px 12px;border-radius:8px;color:var(--wk-ink)">Autismus verstehen</a>
@@ -61,7 +62,7 @@
       </nav>
     </sc-if>
     <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
-      <button onClick="{{ toggleDrawer }}" aria-label="Menü" style="margin-left:auto;width:48px;height:48px;background:rgba(245,237,224,.12);border:1px solid rgba(245,237,224,.3);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer">
+      <button onClick="{{ toggleDrawer }}" aria-label="Menü" aria-expanded="{{ drawer }}" style="margin-left:auto;width:48px;height:48px;background:rgba(245,237,224,.12);border:1px solid rgba(245,237,224,.3);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer">
         <span style="width:22px;height:2px;background:var(--wk-paper);display:block"></span>
         <span style="width:22px;height:2px;background:var(--wk-paper);display:block"></span>
         <span style="width:22px;height:2px;background:var(--wk-paper);display:block"></span>
@@ -86,7 +87,7 @@
 </header>
 
 <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
-  <section style="position:relative;background:var(--wk-paper)">
+  <section id="inhalt" tabindex="-1" style="position:relative;background:var(--wk-paper)">
     <img loading="lazy" decoding="async" width="1600" height="900" src="assets/hero-startseite.webp" alt="Portrait mit Ziege, Pinguin und Waldkätzchen" style="width:100%;display:block">
     <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(245,237,224,.94) 24%, rgba(245,237,224,.66) 46%, rgba(245,237,224,0) 70%);pointer-events:none"></div>
     <div style="position:absolute;inset:0;display:flex;align-items:center">
@@ -291,7 +292,7 @@
 
 <sc-if value="{{ contactOpen }}" hint-placeholder-val="{{ false }}">
   <div onClick="{{ closeContact }}" style="position:fixed;inset:0;background:rgba(8,35,28,.6);z-index:100;display:flex;align-items:center;justify-content:center;padding:18px">
-    <div onClick="{{ stop }}" style="background:var(--wk-paper-warm);border-radius:20px;max-width:460px;width:100%;padding:30px 26px;box-shadow:0 22px 60px rgba(0,0,0,.4);position:relative">
+    <div onClick="{{ stop }}" role="dialog" aria-modal="true" aria-label="Kontakt aufnehmen" style="background:var(--wk-paper-warm);border-radius:20px;max-width:460px;width:100%;padding:30px 26px;box-shadow:0 22px 60px rgba(0,0,0,.4);position:relative">
       <button onClick="{{ closeContact }}" aria-label="Schließen" style="position:absolute;top:12px;right:14px;width:44px;height:44px;background:none;border:none;font-size:24px;color:var(--wk-ink-muted);cursor:pointer">×</button>
       <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
         <h3 style="font-family:Alegreya,serif;font-size:27px;color:var(--wk-ink-strong);margin:0 0 6px">Kontakt aufnehmen</h3>

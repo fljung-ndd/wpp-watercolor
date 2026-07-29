@@ -64,7 +64,9 @@
   /* ---- Schrift auf dunklem Wald -------------------------------------- */
   --wk-on-dark:        #F5EDE0;  /* 10,3:1 auf forest-900               */
   --wk-on-dark-soft:   #C6D3C9;  /*  6,9:1                              */
-  --wk-on-dark-muted:  #A3B3A8;  /*  4,9:1 – Untergrenze, nicht weicher */
+  /* Hell genug, dass es auch auf der hellsten Waldstufe (forest-700, der
+     Drawer-Hintergrund) noch 4,54:1 erreicht. Nicht weiter abdunkeln. */
+  --wk-on-dark-muted:  #B4C1B8;  /* 6,5 / 5,5 / 4,5:1 auf forest 900/800/700 */
 
   /* ---- Typografie ---------------------------------------------------- */
   --wk-font-serif: Alegreya, Georgia, 'Times New Roman', serif;
