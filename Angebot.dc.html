@@ -1,182 +1,190 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
+<title>Angebot – Waldkätzchen</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon.png" type="image/png" sizes="256x256">
+<link rel="apple-touch-icon" href="favicon.png">
+<meta name="description" content="Begleitung, Beratung und Fallbesprechung für Familien, Väter, Kitas, Schulen und pädagogische Teams.">
+<link rel="stylesheet" href="assets/wk.css">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/alegreya-latin-600-normal.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/alegreya-sans-latin-400-normal.woff2">
+<link rel="preload" as="image" href="assets/hero-startseite.webp" media="(min-width:1000px)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/hero-startseite-sm.webp" media="(max-width:999px)" fetchpriority="high">
+<!-- React lokal statt von unpkg.com: spart DNS + TLS + Roundtrip zu einem
+     fremden Host im kritischen Pfad. support.js erkennt window.React und
+     überspringt den CDN-Fallback. -->
+<script src="./vendor/react.production.min.js" defer></script>
+<script src="./vendor/react-dom.production.min.js" defer></script>
+<script src="./support.js" defer></script>
 </head>
 <body>
 <x-dc>
 <helmet>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Angebot – Waldkätzchen</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Alegreya+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-<style>
-  html,body{margin:0;padding:0;background:#f5ede0;color:#2f4038;font-family:'Alegreya Sans',sans-serif;-webkit-font-smoothing:antialiased;}
-  a{color:#ef4f7a;text-decoration:none;} a:hover{color:#d13a63;}
-  *{box-sizing:border-box;}
-  img{max-width:100%;}
-</style>
 </helmet>
 
-<div style="background:#f5ede0;overflow-x:hidden">
+<div style="background:var(--wk-paper);overflow-x:hidden">
 
-<header style="position:sticky;top:0;z-index:60;background:#084f3f;box-shadow:0 2px 14px rgba(8,45,36,.25)">
+<a class="wk-skip" href="#inhalt">Zum Inhalt springen</a>
+<header style="position:sticky;top:0;z-index:60;background:var(--wk-forest-800);box-shadow:0 2px 14px rgba(8,45,36,.25)">
   <div style="max-width:1300px;margin:0 auto;display:flex;align-items:center;gap:18px;padding:9px 20px">
     <a href="./Startseite.dc.html" style="display:flex;align-items:center;gap:11px;flex:0 0 auto">
-      <span style="width:46px;height:46px;border-radius:50%;background:#f5ede0;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;border:2px solid rgba(245,237,224,.4)"><img src="assets/cat-teal.png" alt="" style="width:34px;display:block"></span>
-      <span style="font-family:Alegreya,serif;font-size:28px;font-weight:600;color:#f5ede0">Waldkätzchen</span>
+      <span style="width:46px;height:46px;border-radius:50%;background:var(--wk-paper);display:flex;align-items:flex-end;justify-content:center;overflow:hidden;border:2px solid rgba(245,237,224,.4)"><img decoding="async" width="96" height="144" src="assets/cat-teal-logo.webp" alt="" style="width:34px;display:block"></span>
+      <span style="font-family:Alegreya,serif;font-size:28px;font-weight:600;color:var(--wk-paper)">Waldkätzchen</span>
     </a>
     <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
-      <nav style="display:flex;align-items:center;gap:18px;margin-left:auto;font-size:15.5px;color:#dcd6c0">
-        <a href="./Startseite.dc.html" style="color:#dcd6c0">Startseite</a>
-        <a href="./Ueber mich.dc.html" style="color:#dcd6c0">Über mich</a>
-        <a href="./Mein Ansatz.dc.html" style="color:#dcd6c0">Mein Ansatz</a>
-        <a href="./Angebot.dc.html" style="color:#f5ede0;font-weight:600;border-bottom:2px solid #ef4f7a;padding-bottom:2px">Angebot</a>
-        <span onClick="{{ toggleFuerWen }}" style="position:relative;cursor:pointer;color:#f5ede0">Für wen ▾
+      <nav style="display:flex;align-items:center;gap:18px;margin-left:auto;font-size:15.5px;color:var(--wk-on-dark-soft)">
+        <a href="./Startseite.dc.html" style="color:var(--wk-on-dark-soft)">Startseite</a>
+        <a href="./Ueber mich.dc.html" style="color:var(--wk-on-dark-soft)">Über mich</a>
+        <a href="./Mein Ansatz.dc.html" style="color:var(--wk-on-dark-soft)">Mein Ansatz</a>
+        <a href="./Angebot.dc.html" style="color:var(--wk-paper);font-weight:600;border-bottom:2px solid var(--wk-pink-ink);padding-bottom:2px">Angebot</a>
+        <span style="position:relative;display:inline-flex"><button onClick="{{ toggleFuerWen }}" aria-expanded="{{ menuFuerWen }}" style="background:none;border:none;padding:0;font-family:inherit;font-size:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:4px;color:var(--wk-paper)">Für wen <span aria-hidden="true">▾</span></button>
           <sc-if value="{{ menuFuerWen }}" hint-placeholder-val="{{ false }}">
-            <span style="position:absolute;top:30px;left:-12px;background:#fbf5e6;border:1px solid #e0d3b4;border-radius:12px;box-shadow:0 10px 26px rgba(8,45,36,.3);padding:8px;display:flex;flex-direction:column;min-width:158px;z-index:70">
-              <a href="./Fuer Teams.dc.html" style="padding:8px 12px;border-radius:8px;color:#2f4038">Für Teams</a>
-              <a href="./Fuer Vaeter.dc.html" style="padding:8px 12px;border-radius:8px;color:#2f4038">Für Väter</a>
+            <span style="position:absolute;top:30px;left:-12px;background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:12px;box-shadow:0 10px 26px rgba(8,45,36,.3);padding:8px;display:flex;flex-direction:column;min-width:158px;z-index:70">
+              <a href="./Fuer Teams.dc.html" style="padding:8px 12px;border-radius:8px;color:var(--wk-ink)">Für Teams</a>
+              <a href="./Fuer Vaeter.dc.html" style="padding:8px 12px;border-radius:8px;color:var(--wk-ink)">Für Väter</a>
             </span>
           </sc-if>
         </span>
-        <span onClick="{{ toggleWissen }}" style="position:relative;cursor:pointer;color:#f5ede0">Wissen ▾
+        <span style="position:relative;display:inline-flex"><button onClick="{{ toggleWissen }}" aria-expanded="{{ menuWissen }}" style="background:none;border:none;padding:0;font-family:inherit;font-size:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:4px;color:var(--wk-paper)">Wissen <span aria-hidden="true">▾</span></button>
           <sc-if value="{{ menuWissen }}" hint-placeholder-val="{{ false }}">
-            <span style="position:absolute;top:30px;left:-12px;background:#fbf5e6;border:1px solid #e0d3b4;border-radius:12px;box-shadow:0 10px 26px rgba(8,45,36,.3);padding:8px;display:flex;flex-direction:column;min-width:186px;z-index:70">
-              <a href="./Autismus.dc.html" style="padding:8px 12px;border-radius:8px;color:#2f4038">Autismus verstehen</a>
+            <span style="position:absolute;top:30px;left:-12px;background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:12px;box-shadow:0 10px 26px rgba(8,45,36,.3);padding:8px;display:flex;flex-direction:column;min-width:186px;z-index:70">
+              <a href="./Autismus.dc.html" style="padding:8px 12px;border-radius:8px;color:var(--wk-ink)">Autismus verstehen</a>
             </span>
           </sc-if>
         </span>
-        <a href="./Kontakt.dc.html" style="color:#f5ede0">Kontakt</a>
-        <button onClick="{{ openContact }}" style="background:#ef4f7a;color:#fff;border:none;border-radius:999px;padding:11px 20px;font-family:'Alegreya Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:9px" style-hover="background:#d13a63">Kontakt aufnehmen <span>♡</span></button>
+        <a href="./Kontakt.dc.html" style="color:var(--wk-paper)">Kontakt</a>
+        <button onClick="{{ openContact }}" style="background:var(--wk-pink-ink);color:#fff;border:none;border-radius:999px;padding:11px 20px;font-family:'Alegreya Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:9px" style-hover="background:var(--wk-pink-700)">Kontakt aufnehmen <span>♡</span></button>
       </nav>
     </sc-if>
     <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
-      <button onClick="{{ toggleDrawer }}" aria-label="Menü" style="margin-left:auto;width:48px;height:48px;background:rgba(245,237,224,.12);border:1px solid rgba(245,237,224,.3);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer">
-        <span style="width:22px;height:2px;background:#f5ede0;display:block"></span>
-        <span style="width:22px;height:2px;background:#f5ede0;display:block"></span>
-        <span style="width:22px;height:2px;background:#f5ede0;display:block"></span>
+      <button onClick="{{ toggleDrawer }}" aria-label="Menü" aria-expanded="{{ drawer }}" style="margin-left:auto;width:48px;height:48px;background:rgba(245,237,224,.12);border:1px solid rgba(245,237,224,.3);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer">
+        <span style="width:22px;height:2px;background:var(--wk-paper);display:block"></span>
+        <span style="width:22px;height:2px;background:var(--wk-paper);display:block"></span>
+        <span style="width:22px;height:2px;background:var(--wk-paper);display:block"></span>
       </button>
     </sc-if>
   </div>
   <sc-if value="{{ drawer }}" hint-placeholder-val="{{ false }}">
-    <div style="background:#0a5a47;border-top:1px solid rgba(245,237,224,.16);padding:12px 20px 20px;display:flex;flex-direction:column;font-size:17px">
-      <a href="./Startseite.dc.html" style="padding:13px 6px;color:#f5ede0">Startseite</a>
-      <a href="./Ueber mich.dc.html" style="padding:13px 6px;color:#f5ede0">Über mich</a>
-      <a href="./Mein Ansatz.dc.html" style="padding:13px 6px;color:#f5ede0">Mein Ansatz</a>
-      <a href="./Angebot.dc.html" style="padding:13px 6px;color:#f5ede0;font-weight:600">Angebot</a>
-      <div style="padding:13px 6px 6px;color:#8fb3a4;font-size:13.5px;letter-spacing:.08em;text-transform:uppercase">Für wen</div>
-      <a href="./Fuer Teams.dc.html" style="padding:13px 6px;color:#f5ede0">Für Teams</a>
-      <a href="./Fuer Vaeter.dc.html" style="padding:13px 6px;color:#f5ede0">Für Väter</a>
-      <div style="padding:13px 6px 6px;color:#8fb3a4;font-size:13.5px;letter-spacing:.08em;text-transform:uppercase">Wissen</div>
-      <a href="./Autismus.dc.html" style="padding:13px 6px;color:#f5ede0">Autismus verstehen</a>
-      <a href="./Kontakt.dc.html" style="padding:13px 6px;color:#f5ede0">Kontakt</a>
-      <button onClick="{{ openContact }}" style="margin-top:14px;background:#ef4f7a;color:#fff;border:none;border-radius:999px;padding:15px;font-family:'Alegreya Sans',sans-serif;font-size:16.5px;font-weight:600;cursor:pointer">Kontakt aufnehmen ♡</button>
+    <div style="background:var(--wk-forest-700);border-top:1px solid rgba(245,237,224,.16);padding:12px 20px 20px;display:flex;flex-direction:column;font-size:17px">
+      <a href="./Startseite.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Startseite</a>
+      <a href="./Ueber mich.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Über mich</a>
+      <a href="./Mein Ansatz.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Mein Ansatz</a>
+      <a href="./Angebot.dc.html" style="padding:13px 6px;color:var(--wk-paper);font-weight:600">Angebot</a>
+      <div style="padding:13px 6px 6px;color:var(--wk-on-dark-muted);font-size:13.5px;letter-spacing:.08em;text-transform:uppercase">Für wen</div>
+      <a href="./Fuer Teams.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Für Teams</a>
+      <a href="./Fuer Vaeter.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Für Väter</a>
+      <div style="padding:13px 6px 6px;color:var(--wk-on-dark-muted);font-size:13.5px;letter-spacing:.08em;text-transform:uppercase">Wissen</div>
+      <a href="./Autismus.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Autismus verstehen</a>
+      <a href="./Kontakt.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Kontakt</a>
+      <button onClick="{{ openContact }}" style="margin-top:14px;background:var(--wk-pink-ink);color:#fff;border:none;border-radius:999px;padding:15px;font-family:'Alegreya Sans',sans-serif;font-size:16.5px;font-weight:600;cursor:pointer">Kontakt aufnehmen ♡</button>
     </div>
   </sc-if>
 </header>
 
 <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
-  <section style="position:relative;background:#f5ede0">
-    <img src="assets/hero-startseite.png" alt="Portrait mit Ziege, Pinguin und Waldkätzchen" style="width:100%;display:block">
+  <section id="inhalt" tabindex="-1" style="position:relative;background:var(--wk-paper)">
+    <img loading="lazy" decoding="async" width="1600" height="900" src="assets/hero-startseite.webp" alt="Portrait mit Ziege, Pinguin und Waldkätzchen" style="width:100%;display:block">
     <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(245,237,224,.94) 24%, rgba(245,237,224,.66) 46%, rgba(245,237,224,0) 70%);pointer-events:none"></div>
     <div style="position:absolute;inset:0;display:flex;align-items:center">
       <div style="max-width:1300px;margin:0 auto;width:100%;padding:0 26px">
         <div style="max-width:min(48%,560px)">
-          <div style="font-size:14.5px;color:#5d6b5f;margin-bottom:12px"><a href="./Startseite.dc.html" style="color:#5d6b5f">Startseite</a> &nbsp;›&nbsp; <span style="color:#ef4f7a;font-weight:600">Angebot</span></div>
-          <h1 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(28px,3.7vw,50px);line-height:1.06;margin:0 0 6px;color:#0d3b30">Angebote,<br>die zu eurem Alltag passen.</h1>
-          <div style="color:#ef4f7a;font-family:Alegreya,serif;font-size:clamp(18px,2.1vw,26px);margin-bottom:16px">Verstehen. Verbinden. Verändern.</div>
+          <div style="font-size:14.5px;color:var(--wk-ink-muted);margin-bottom:12px"><a href="./Startseite.dc.html" style="color:var(--wk-ink-muted)">Startseite</a> &nbsp;›&nbsp; <span style="color:var(--wk-pink-ink);font-weight:600">Angebot</span></div>
+          <h1 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(28px,3.7vw,50px);line-height:1.06;margin:0 0 6px;color:var(--wk-ink-strong)">Angebote,<br>die zu eurem Alltag passen.</h1>
+          <div style="color:var(--wk-pink-ink);font-family:Alegreya,serif;font-size:clamp(18px,2.1vw,26px);margin-bottom:16px">Verstehen. Verbinden. Verändern.</div>
           <p style="font-size:clamp(14.5px,1.25vw,16.5px);line-height:1.55;margin:0 0 12px;max-width:44ch">Jede Familie, jedes Kind und jede Situation ist einzigartig. Ich begleite Kinder, Jugendliche, Eltern, Familien und Väter dabei, neue Wege zu finden: verständnisvoll, alltagstauglich und mit klarem Blick auf das Wesentliche.</p>
-          <p style="font-size:clamp(14.5px,1.25vw,16.5px);line-height:1.55;margin:0;max-width:44ch">Mit besonderem Fokus auf Autismus, PDA und herausfordernde Dynamiken. <span style="color:#ef4f7a">♡</span></p>
+          <p style="font-size:clamp(14.5px,1.25vw,16.5px);line-height:1.55;margin:0;max-width:44ch">Mit besonderem Fokus auf Autismus, PDA und herausfordernde Dynamiken. <span style="color:var(--wk-pink-ink)">♡</span></p>
         </div>
       </div>
     </div>
   </section>
 </sc-if>
 <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
-  <section style="background:#f5ede0">
-    <img src="assets/hero-startseite.png" alt="Portrait mit Ziege, Pinguin und Waldkätzchen" style="width:100%;display:block">
+  <section style="background:var(--wk-paper)">
+    <img loading="lazy" decoding="async" width="900" height="507" src="assets/hero-startseite-sm.webp" alt="Portrait mit Ziege, Pinguin und Waldkätzchen" style="width:100%;display:block">
     <div style="padding:16px 22px 32px">
-      <div style="font-size:14px;color:#5d6b5f;margin-bottom:10px"><a href="./Startseite.dc.html" style="color:#5d6b5f">Startseite</a> &nbsp;›&nbsp; <span style="color:#ef4f7a;font-weight:600">Angebot</span></div>
-      <h1 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(28px,7vw,42px);line-height:1.08;margin:0 0 6px;color:#0d3b30">Angebote, die zu eurem Alltag passen.</h1>
-      <div style="color:#ef4f7a;font-family:Alegreya,serif;font-size:clamp(18px,5vw,26px);margin-bottom:14px">Verstehen. Verbinden. Verändern.</div>
+      <div style="font-size:14px;color:var(--wk-ink-muted);margin-bottom:10px"><a href="./Startseite.dc.html" style="color:var(--wk-ink-muted)">Startseite</a> &nbsp;›&nbsp; <span style="color:var(--wk-pink-ink);font-weight:600">Angebot</span></div>
+      <h1 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(28px,7vw,42px);line-height:1.08;margin:0 0 6px;color:var(--wk-ink-strong)">Angebote, die zu eurem Alltag passen.</h1>
+      <div style="color:var(--wk-pink-ink);font-family:Alegreya,serif;font-size:clamp(18px,5vw,26px);margin-bottom:14px">Verstehen. Verbinden. Verändern.</div>
       <p style="font-size:16px;line-height:1.55;margin:0 0 12px">Jede Familie, jedes Kind und jede Situation ist einzigartig. Ich begleite Kinder, Jugendliche, Eltern, Familien und Väter dabei, neue Wege zu finden: verständnisvoll, alltagstauglich und mit klarem Blick auf das Wesentliche.</p>
-      <p style="font-size:16px;line-height:1.55;margin:0">Mit besonderem Fokus auf Autismus, PDA und herausfordernde Dynamiken. <span style="color:#ef4f7a">♡</span></p>
+      <p style="font-size:16px;line-height:1.55;margin:0">Mit besonderem Fokus auf Autismus, PDA und herausfordernde Dynamiken. <span style="color:var(--wk-pink-ink)">♡</span></p>
     </div>
   </section>
 </sc-if>
 
 <section style="position:relative;padding:36px 20px 10px">
-  <img src="assets/side/flowerLeft.png" alt="" loading="lazy" style="position:absolute;left:-30px;bottom:-10px;width:clamp(80px,10vw,150px);opacity:.8;pointer-events:none">
+  <img decoding="async" width="173" height="175" src="assets/side/flowerLeft.webp" alt="" loading="lazy" style="position:absolute;left:-30px;bottom:-10px;width:clamp(80px,10vw,150px);opacity:.8;pointer-events:none">
   <div style="max-width:1240px;margin:0 auto;position:relative">
-    <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(26px,3.4vw,36px);color:#0d3b30;margin:0 0 4px">Meine Angebote im Überblick</h2>
-    <div style="width:220px;height:3px;background:#ef4f7a;border-radius:2px;opacity:.75;margin-bottom:24px"></div>
+    <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(26px,3.4vw,36px);color:var(--wk-ink-strong);margin:0 0 4px">Meine Angebote im Überblick</h2>
+    <div style="width:220px;height:3px;background:var(--wk-pink-ink);border-radius:2px;opacity:.75;margin-bottom:24px"></div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px">
 
-      <div style="background:#e7edd9;border-radius:18px;padding:20px;display:flex;gap:16px;align-items:flex-start">
-        <img src="assets/chars/05_pinguin.png" alt="" loading="lazy" style="width:104px;flex:0 0 auto;border-radius:14px;mix-blend-mode:multiply">
+      <div style="background:var(--wk-paper-warm);border-radius:18px;padding:20px;display:flex;gap:16px;align-items:flex-start">
+        <img decoding="async" width="512" height="512" src="assets/chars/05_pinguin.webp" alt="" loading="lazy" style="width:104px;flex:0 0 auto;border-radius:14px;mix-blend-mode:multiply">
         <div>
-          <div style="font-family:Alegreya,serif;font-size:21px;font-weight:700;color:#0d3b30;margin-bottom:8px">Einzel- und Familienbegleitung</div>
-          <p style="font-size:14px;line-height:1.5;color:#41513f;margin:0 0 10px">Ich schaue mit euch auf das, was gerade wichtig ist, und begleite Kinder, Jugendliche und Familien in herausfordernden Phasen.</p>
-          <div style="font-size:13.5px;line-height:1.7;color:#41513f">• Systemische Begleitung und Gespräche<br>• Stärkung von Beziehung und Bindung<br>• Stärken entdecken und nutzen<br>• Lösungen entwickeln, die im Alltag tragen</div>
+          <div style="font-family:Alegreya,serif;font-size:21px;font-weight:700;color:var(--wk-ink-strong);margin-bottom:8px">Einzel- und Familienbegleitung</div>
+          <p style="font-size:14px;line-height:1.5;color:var(--wk-ink-soft);margin:0 0 10px">Ich schaue mit euch auf das, was gerade wichtig ist, und begleite Kinder, Jugendliche und Familien in herausfordernden Phasen.</p>
+          <div style="font-size:13.5px;line-height:1.7;color:var(--wk-ink-soft)">• Systemische Begleitung und Gespräche<br>• Stärkung von Beziehung und Bindung<br>• Stärken entdecken und nutzen<br>• Lösungen entwickeln, die im Alltag tragen</div>
         </div>
       </div>
 
-      <div style="background:#f7dfe2;border-radius:18px;padding:20px;display:flex;gap:16px;align-items:flex-start">
-        <img src="assets/chars/04_roter_panda.png" alt="" loading="lazy" style="width:104px;flex:0 0 auto;border-radius:14px;mix-blend-mode:multiply">
+      <div style="background:var(--wk-pink-050);border-radius:18px;padding:20px;display:flex;gap:16px;align-items:flex-start">
+        <img decoding="async" width="512" height="512" src="assets/chars/04_roter_panda.webp" alt="" loading="lazy" style="width:104px;flex:0 0 auto;border-radius:14px;mix-blend-mode:multiply">
         <div>
-          <div style="font-family:Alegreya,serif;font-size:21px;font-weight:700;color:#a03a58;margin-bottom:8px">Elternberatung</div>
-          <p style="font-size:14px;line-height:1.5;color:#4b3a40;margin:0 0 10px">Elternsein ist wunderbar – und manchmal herausfordernd. Ich unterstütze euch dabei, Sicherheit im eigenen Handeln zu gewinnen.</p>
-          <div style="font-size:13.5px;line-height:1.7;color:#4b3a40">• Erziehungsfragen und Unsicherheiten klären<br>• Grenzen, Regeln und Verbindung im Blick behalten<br>• Entlastung im Familienalltag finden<br>• Selbstfürsorge als Elternteil stärken</div>
+          <div style="font-family:Alegreya,serif;font-size:21px;font-weight:700;color:var(--wk-pink-700);margin-bottom:8px">Elternberatung</div>
+          <p style="font-size:14px;line-height:1.5;color:var(--wk-ink-soft);margin:0 0 10px">Elternsein ist wunderbar – und manchmal herausfordernd. Ich unterstütze euch dabei, Sicherheit im eigenen Handeln zu gewinnen.</p>
+          <div style="font-size:13.5px;line-height:1.7;color:var(--wk-ink-soft)">• Erziehungsfragen und Unsicherheiten klären<br>• Grenzen, Regeln und Verbindung im Blick behalten<br>• Entlastung im Familienalltag finden<br>• Selbstfürsorge als Elternteil stärken</div>
         </div>
       </div>
 
-      <div style="background:#dfe9ea;border-radius:18px;padding:20px;display:flex;gap:16px;align-items:flex-start">
-        <img src="assets/chars/11_schnecke_rakete.png" alt="" loading="lazy" style="width:104px;flex:0 0 auto;border-radius:14px;mix-blend-mode:multiply">
+      <div style="background:var(--wk-cyan-050);border-radius:18px;padding:20px;display:flex;gap:16px;align-items:flex-start">
+        <img decoding="async" width="512" height="512" src="assets/chars/11_schnecke_rakete.webp" alt="" loading="lazy" style="width:104px;flex:0 0 auto;border-radius:14px;mix-blend-mode:multiply">
         <div>
-          <div style="font-family:Alegreya,serif;font-size:21px;font-weight:700;color:#0d3b30;margin-bottom:8px">Begleitung bei herausforderndem Verhalten</div>
-          <p style="font-size:14px;line-height:1.5;color:#3f4c4e;margin:0 0 10px">Wenn Verhalten zur Belastung wird, braucht es Verständnis statt Bewertung und hilfreiche Strategien statt Druck.</p>
-          <div style="font-size:13.5px;line-height:1.7;color:#3f4c4e">• Funktion und Botschaft des Verhaltens erkennen<br>• Gewaltfreie Kommunikation und Deeskalation<br>• Individuelle, alltagstaugliche Lösungen entwickeln<br>• Schritt für Schritt zu mehr Kooperation</div>
+          <div style="font-family:Alegreya,serif;font-size:21px;font-weight:700;color:var(--wk-ink-strong);margin-bottom:8px">Begleitung bei herausforderndem Verhalten</div>
+          <p style="font-size:14px;line-height:1.5;color:var(--wk-ink-soft);margin:0 0 10px">Wenn Verhalten zur Belastung wird, braucht es Verständnis statt Bewertung und hilfreiche Strategien statt Druck.</p>
+          <div style="font-size:13.5px;line-height:1.7;color:var(--wk-ink-soft)">• Funktion und Botschaft des Verhaltens erkennen<br>• Gewaltfreie Kommunikation und Deeskalation<br>• Individuelle, alltagstaugliche Lösungen entwickeln<br>• Schritt für Schritt zu mehr Kooperation</div>
         </div>
       </div>
 
-      <div style="background:#e8eedb;border-radius:18px;padding:20px;display:flex;gap:16px;align-items:flex-start">
-        <img src="assets/chars/02_katta.png" alt="" loading="lazy" style="width:104px;flex:0 0 auto;border-radius:14px;mix-blend-mode:multiply">
+      <div style="background:var(--wk-paper-warm);border-radius:18px;padding:20px;display:flex;gap:16px;align-items:flex-start">
+        <img decoding="async" width="512" height="512" src="assets/chars/02_katta.webp" alt="" loading="lazy" style="width:104px;flex:0 0 auto;border-radius:14px;mix-blend-mode:multiply">
         <div>
-          <div style="font-family:Alegreya,serif;font-size:21px;font-weight:700;color:#0d3b30;margin-bottom:8px">Autismus &amp; PDA verstehen</div>
-          <p style="font-size:14px;line-height:1.5;color:#41513f;margin:0 0 10px">Neurodiversität ist keine Störung, sondern eine andere Art, die Welt zu erleben. Ich helfe, Autismus und PDA besser zu verstehen.</p>
-          <div style="font-size:13.5px;line-height:1.7;color:#41513f">• Verständnis für Bedürfnisse und Besonderheiten<br>• Anpassung von Alltag, Schule und Umfeld<br>• Unterstützung bei Diagnostik und Nachgesprächen<br>• Verbindung statt Anpassungsdruck</div>
+          <div style="font-family:Alegreya,serif;font-size:21px;font-weight:700;color:var(--wk-ink-strong);margin-bottom:8px">Autismus &amp; PDA verstehen</div>
+          <p style="font-size:14px;line-height:1.5;color:var(--wk-ink-soft);margin:0 0 10px">Neurodiversität ist keine Störung, sondern eine andere Art, die Welt zu erleben. Ich helfe, Autismus und PDA besser zu verstehen.</p>
+          <div style="font-size:13.5px;line-height:1.7;color:var(--wk-ink-soft)">• Verständnis für Bedürfnisse und Besonderheiten<br>• Anpassung von Alltag, Schule und Umfeld<br>• Unterstützung bei Diagnostik und Nachgesprächen<br>• Verbindung statt Anpassungsdruck</div>
         </div>
       </div>
 
-      <div style="background:#dfe9ea;border-radius:18px;padding:20px;display:flex;gap:16px;align-items:flex-start">
-        <img src="assets/chars/03_leopard_krone.png" alt="" loading="lazy" style="width:104px;flex:0 0 auto;border-radius:14px;mix-blend-mode:multiply">
+      <div style="background:var(--wk-cyan-050);border-radius:18px;padding:20px;display:flex;gap:16px;align-items:flex-start">
+        <img decoding="async" width="512" height="512" src="assets/chars/03_leopard_krone.webp" alt="" loading="lazy" style="width:104px;flex:0 0 auto;border-radius:14px;mix-blend-mode:multiply">
         <div>
-          <div style="font-family:Alegreya,serif;font-size:21px;font-weight:700;color:#0d3b30;margin-bottom:8px">Väter im Blick</div>
-          <p style="font-size:14px;line-height:1.5;color:#3f4c4e;margin:0 0 10px">Väter wollen präsent sein – und ihren eigenen Weg finden. Ich begleite dabei, den Platz in der Familie zu stärken.</p>
-          <div style="font-size:13.5px;line-height:1.7;color:#3f4c4e">• Rollenfindung und Selbstverständnis<br>• Bindung und Beziehung gestalten<br>• Vereinbarkeit von Familie, Beruf und Ich<br>• Ehrlicher Austausch ohne Bewertung</div>
+          <div style="font-family:Alegreya,serif;font-size:21px;font-weight:700;color:var(--wk-ink-strong);margin-bottom:8px">Väter im Blick</div>
+          <p style="font-size:14px;line-height:1.5;color:var(--wk-ink-soft);margin:0 0 10px">Väter wollen präsent sein – und ihren eigenen Weg finden. Ich begleite dabei, den Platz in der Familie zu stärken.</p>
+          <div style="font-size:13.5px;line-height:1.7;color:var(--wk-ink-soft)">• Rollenfindung und Selbstverständnis<br>• Bindung und Beziehung gestalten<br>• Vereinbarkeit von Familie, Beruf und Ich<br>• Ehrlicher Austausch ohne Bewertung</div>
           <a href="./Fuer Vaeter.dc.html" style="display:inline-block;margin-top:10px;font-size:14px;font-weight:600">Mehr erfahren →</a>
         </div>
       </div>
 
-      <div style="background:#f6e7c8;border-radius:18px;padding:20px;display:flex;gap:16px;align-items:flex-start">
-        <img src="assets/chars/16_pinguin_sprechblase.png" alt="" loading="lazy" style="width:104px;flex:0 0 auto;border-radius:14px;mix-blend-mode:multiply">
+      <div style="background:var(--wk-yellow-050);border-radius:18px;padding:20px;display:flex;gap:16px;align-items:flex-start">
+        <img decoding="async" width="512" height="512" src="assets/chars/16_pinguin_sprechblase.webp" alt="" loading="lazy" style="width:104px;flex:0 0 auto;border-radius:14px;mix-blend-mode:multiply">
         <div>
-          <div style="font-family:Alegreya,serif;font-size:21px;font-weight:700;color:#8a5b1f;margin-bottom:8px">Fachberatung für Teams, Kitas und Schulen</div>
-          <p style="font-size:14px;line-height:1.5;color:#4c412c;margin:0 0 10px">Professionelle brauchen Räume zum Verstehen, Verarbeiten und Weiterentwickeln. Ich unterstütze Teams praxisnah und lösungsorientiert.</p>
-          <div style="font-size:13.5px;line-height:1.7;color:#4c412c">• Fallberatungen und kollegiale Beratung<br>• Teamtage und Prozessbegleitung<br>• Fachinput zu Autismus, PDA und Beziehung<br>• Entwicklung eines stärkenorientierten Miteinanders</div>
+          <div style="font-family:Alegreya,serif;font-size:21px;font-weight:700;color:var(--wk-yellow-ink);margin-bottom:8px">Fachberatung für Teams, Kitas und Schulen</div>
+          <p style="font-size:14px;line-height:1.5;color:var(--wk-ink-soft);margin:0 0 10px">Professionelle brauchen Räume zum Verstehen, Verarbeiten und Weiterentwickeln. Ich unterstütze Teams praxisnah und lösungsorientiert.</p>
+          <div style="font-size:13.5px;line-height:1.7;color:var(--wk-ink-soft)">• Fallberatungen und kollegiale Beratung<br>• Teamtage und Prozessbegleitung<br>• Fachinput zu Autismus, PDA und Beziehung<br>• Entwicklung eines stärkenorientierten Miteinanders</div>
           <a href="./Fuer Teams.dc.html" style="display:inline-block;margin-top:10px;font-size:14px;font-weight:600">Mehr erfahren →</a>
         </div>
       </div>
 
-      <div style="background:#e7edd9;border-radius:18px;padding:20px;display:flex;gap:16px;align-items:flex-start">
-        <img src="assets/chars/17_katze_pinguin_umarmung.png" alt="" loading="lazy" style="width:104px;flex:0 0 auto;border-radius:14px;mix-blend-mode:multiply">
+      <div style="background:var(--wk-paper-warm);border-radius:18px;padding:20px;display:flex;gap:16px;align-items:flex-start">
+        <img decoding="async" width="512" height="512" src="assets/chars/17_katze_pinguin_umarmung.webp" alt="" loading="lazy" style="width:104px;flex:0 0 auto;border-radius:14px;mix-blend-mode:multiply">
         <div>
-          <div style="font-family:Alegreya,serif;font-size:21px;font-weight:700;color:#0d3b30;margin-bottom:8px">Workshops, Impulse &amp; Vorträge</div>
-          <p style="font-size:14px;line-height:1.5;color:#41513f;margin:0 0 10px">Wissen, das bewegt – Impulse, die bleiben. In Vorträgen, Workshops und Fortbildungen vermittle ich fundiertes, praxisnahes Wissen.</p>
-          <div style="font-size:13.5px;line-height:1.7;color:#41513f">• Impulsvorträge, Workshops, Inhouse-Seminare, Elternabende<br>• Themen z. B.: Co-Regulation, Umgang mit Wut, Übergänge gestalten, PDA im Alltag<br>• Für Eltern, Fachkräfte und Interessierte</div>
+          <div style="font-family:Alegreya,serif;font-size:21px;font-weight:700;color:var(--wk-ink-strong);margin-bottom:8px">Workshops, Impulse &amp; Vorträge</div>
+          <p style="font-size:14px;line-height:1.5;color:var(--wk-ink-soft);margin:0 0 10px">Wissen, das bewegt – Impulse, die bleiben. In Vorträgen, Workshops und Fortbildungen vermittle ich fundiertes, praxisnahes Wissen.</p>
+          <div style="font-size:13.5px;line-height:1.7;color:var(--wk-ink-soft)">• Impulsvorträge, Workshops, Inhouse-Seminare, Elternabende<br>• Themen z. B.: Co-Regulation, Umgang mit Wut, Übergänge gestalten, PDA im Alltag<br>• Für Eltern, Fachkräfte und Interessierte</div>
         </div>
       </div>
 
@@ -184,93 +192,93 @@
   </div>
 </section>
 
-<section style="overflow:hidden;position:relative;padding:36px 20px 34px;background:#f8f1e2;margin-top:30px">
-  <img src="assets/section/section_light.png" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none">
+<section style="overflow:hidden;position:relative;padding:36px 20px 34px;background:var(--wk-paper-warm);margin-top:30px">
+  <img decoding="async" width="1400" height="467" src="assets/sections/section_light.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none">
   <div style="position:relative;max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:30px">
     <div>
-      <h3 style="font-family:Alegreya,serif;font-weight:600;font-size:25px;color:#0d3b30;margin:0 0 8px">Wie Begleitung aussehen kann</h3>
-      <p style="font-size:14px;line-height:1.55;color:#4b5a4f;margin:0 0 16px">Jede Unterstützung ist so individuell wie die Menschen, die ich begleite. Das passende Format finde ich mit euch.</p>
-      <div style="display:flex;flex-direction:column;gap:12px;font-size:14.5px;color:#3f4f44">
-        <div style="display:flex;gap:12px;align-items:center"><img src="assets/icons/learningCourse.png" alt="" loading="lazy" style="width:44px;height:44px;object-fit:contain;flex:0 0 auto;mix-blend-mode:multiply"><span><strong>Online</strong> – flexibel und ortsunabhängig per Video oder Telefon.</span></div>
-        <div style="display:flex;gap:12px;align-items:center"><img src="assets/icons/smallHouse.png" alt="" loading="lazy" style="width:44px;height:44px;object-fit:contain;flex:0 0 auto;mix-blend-mode:multiply"><span><strong>Vor Ort</strong> – in der Natur, zu Hause oder an einem neutralen Ort.</span></div>
-        <div style="display:flex;gap:12px;align-items:center"><img src="assets/icons/clock.png" alt="" loading="lazy" style="width:44px;height:44px;object-fit:contain;flex:0 0 auto;mix-blend-mode:multiply"><span><strong>Kurzimpulse</strong> – für akute Situationen und schnelle Entlastung.</span></div>
-        <div style="display:flex;gap:12px;align-items:center"><img src="assets/icons/notebookHeart.png" alt="" loading="lazy" style="width:44px;height:44px;object-fit:contain;flex:0 0 auto;mix-blend-mode:multiply"><span><strong>Längere Begleitung</strong> – über mehrere Wochen oder Monate.</span></div>
-        <div style="display:flex;gap:12px;align-items:center"><img src="assets/icons/network.png" alt="" loading="lazy" style="width:44px;height:44px;object-fit:contain;flex:0 0 auto;mix-blend-mode:multiply"><span><strong>Prozessbegleitung</strong> – bei Veränderungen, Trennungen, Umbrüchen oder Entwicklungsphasen.</span></div>
+      <h3 style="font-family:Alegreya,serif;font-weight:600;font-size:25px;color:var(--wk-ink-strong);margin:0 0 8px">Wie Begleitung aussehen kann</h3>
+      <p style="font-size:14px;line-height:1.55;color:var(--wk-ink-soft);margin:0 0 16px">Jede Unterstützung ist so individuell wie die Menschen, die ich begleite. Das passende Format finde ich mit euch.</p>
+      <div style="display:flex;flex-direction:column;gap:12px;font-size:14.5px;color:var(--wk-ink-soft)">
+        <div style="display:flex;gap:12px;align-items:center"><img decoding="async" width="108" height="107" src="assets/icons/learningCourse.webp" alt="" loading="lazy" style="width:44px;height:44px;object-fit:contain;flex:0 0 auto;mix-blend-mode:multiply"><span><strong>Online</strong> – flexibel und ortsunabhängig per Video oder Telefon.</span></div>
+        <div style="display:flex;gap:12px;align-items:center"><img decoding="async" width="104" height="103" src="assets/icons/smallHouse.webp" alt="" loading="lazy" style="width:44px;height:44px;object-fit:contain;flex:0 0 auto;mix-blend-mode:multiply"><span><strong>Vor Ort</strong> – in der Natur, zu Hause oder an einem neutralen Ort.</span></div>
+        <div style="display:flex;gap:12px;align-items:center"><img decoding="async" width="108" height="107" src="assets/icons/clock.webp" alt="" loading="lazy" style="width:44px;height:44px;object-fit:contain;flex:0 0 auto;mix-blend-mode:multiply"><span><strong>Kurzimpulse</strong> – für akute Situationen und schnelle Entlastung.</span></div>
+        <div style="display:flex;gap:12px;align-items:center"><img decoding="async" width="108" height="107" src="assets/icons/notebookHeart.webp" alt="" loading="lazy" style="width:44px;height:44px;object-fit:contain;flex:0 0 auto;mix-blend-mode:multiply"><span><strong>Längere Begleitung</strong> – über mehrere Wochen oder Monate.</span></div>
+        <div style="display:flex;gap:12px;align-items:center"><img decoding="async" width="99" height="83" src="assets/icons/network.webp" alt="" loading="lazy" style="width:44px;height:44px;object-fit:contain;flex:0 0 auto;mix-blend-mode:multiply"><span><strong>Prozessbegleitung</strong> – bei Veränderungen, Trennungen, Umbrüchen oder Entwicklungsphasen.</span></div>
       </div>
-      <p style="font-size:14px;line-height:1.55;color:#4b5a4f;margin:16px 0 0">Immer mit dem Ziel: mehr Verständnis, mehr Verbindung und mehr handlungsfähige Lösungen für euren Alltag.</p>
+      <p style="font-size:14px;line-height:1.55;color:var(--wk-ink-soft);margin:16px 0 0">Immer mit dem Ziel: mehr Verständnis, mehr Verbindung und mehr handlungsfähige Lösungen für euren Alltag.</p>
     </div>
 
     <div>
-      <h3 style="font-family:Alegreya,serif;font-weight:600;font-size:25px;color:#0d3b30;margin:0 0 8px">Typische Anliegen</h3>
-      <p style="font-size:14px;line-height:1.55;color:#4b5a4f;margin:0 0 16px">Es gibt viele Gründe, warum ihr euch Unterstützung wünscht. Hier sind einige Themen, die mich häufig erreichen.</p>
+      <h3 style="font-family:Alegreya,serif;font-weight:600;font-size:25px;color:var(--wk-ink-strong);margin:0 0 8px">Typische Anliegen</h3>
+      <p style="font-size:14px;line-height:1.55;color:var(--wk-ink-soft);margin:0 0 16px">Es gibt viele Gründe, warum ihr euch Unterstützung wünscht. Hier sind einige Themen, die mich häufig erreichen.</p>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(94px,1fr));gap:12px;text-align:center">
-        <div><img src="assets/chars/10_wuetende_katze.png" alt="" loading="lazy" style="width:100%;border-radius:14px;mix-blend-mode:multiply"><div style="font-size:13.5px;font-weight:600;margin-top:4px">Wut</div></div>
-        <div><img src="assets/chars/06_waldhoehle.png" alt="" loading="lazy" style="width:100%;border-radius:14px;mix-blend-mode:multiply"><div style="font-size:13.5px;font-weight:600;margin-top:4px">Rückzug</div></div>
-        <div><img src="assets/chars/13_ueberforderung.png" alt="" loading="lazy" style="width:100%;border-radius:14px;mix-blend-mode:multiply"><div style="font-size:13.5px;font-weight:600;margin-top:4px">Überforderung</div></div>
-        <div><img src="assets/chars/01_wegweiser.png" alt="" loading="lazy" style="width:100%;border-radius:14px;mix-blend-mode:multiply"><div style="font-size:13.5px;font-weight:600;margin-top:4px">Übergänge</div></div>
-        <div><img src="assets/chars/15_alltag.png" alt="" loading="lazy" style="width:100%;border-radius:14px;mix-blend-mode:multiply"><div style="font-size:13.5px;font-weight:600;margin-top:4px">Schule</div></div>
-        <div><img src="assets/chars/04_roter_panda.png" alt="" loading="lazy" style="width:100%;border-radius:14px;mix-blend-mode:multiply"><div style="font-size:13.5px;font-weight:600;margin-top:4px">Geschwister</div></div>
-        <div><img src="assets/chars/12_masking.png" alt="" loading="lazy" style="width:100%;border-radius:14px;mix-blend-mode:multiply"><div style="font-size:13.5px;font-weight:600;margin-top:4px">Erschöpfung</div></div>
-        <div><img src="assets/chars/09_haende_herz.png" alt="" loading="lazy" style="width:100%;border-radius:14px;mix-blend-mode:multiply"><div style="font-size:13.5px;font-weight:600;margin-top:4px">Co-Regulation</div></div>
+        <div><img decoding="async" width="512" height="512" src="assets/chars/10_wuetende_katze.webp" alt="" loading="lazy" style="width:100%;border-radius:14px;mix-blend-mode:multiply"><div style="font-size:13.5px;font-weight:600;margin-top:4px">Wut</div></div>
+        <div><img decoding="async" width="512" height="512" src="assets/chars/06_waldhoehle.webp" alt="" loading="lazy" style="width:100%;border-radius:14px;mix-blend-mode:multiply"><div style="font-size:13.5px;font-weight:600;margin-top:4px">Rückzug</div></div>
+        <div><img decoding="async" width="512" height="512" src="assets/chars/13_ueberforderung.webp" alt="" loading="lazy" style="width:100%;border-radius:14px;mix-blend-mode:multiply"><div style="font-size:13.5px;font-weight:600;margin-top:4px">Überforderung</div></div>
+        <div><img decoding="async" width="512" height="512" src="assets/chars/01_wegweiser.webp" alt="" loading="lazy" style="width:100%;border-radius:14px;mix-blend-mode:multiply"><div style="font-size:13.5px;font-weight:600;margin-top:4px">Übergänge</div></div>
+        <div><img decoding="async" width="512" height="512" src="assets/chars/15_alltag.webp" alt="" loading="lazy" style="width:100%;border-radius:14px;mix-blend-mode:multiply"><div style="font-size:13.5px;font-weight:600;margin-top:4px">Schule</div></div>
+        <div><img decoding="async" width="512" height="512" src="assets/chars/04_roter_panda.webp" alt="" loading="lazy" style="width:100%;border-radius:14px;mix-blend-mode:multiply"><div style="font-size:13.5px;font-weight:600;margin-top:4px">Geschwister</div></div>
+        <div><img decoding="async" width="512" height="512" src="assets/chars/12_masking.webp" alt="" loading="lazy" style="width:100%;border-radius:14px;mix-blend-mode:multiply"><div style="font-size:13.5px;font-weight:600;margin-top:4px">Erschöpfung</div></div>
+        <div><img decoding="async" width="512" height="512" src="assets/chars/09_haende_herz.webp" alt="" loading="lazy" style="width:100%;border-radius:14px;mix-blend-mode:multiply"><div style="font-size:13.5px;font-weight:600;margin-top:4px">Co-Regulation</div></div>
       </div>
-      <p style="font-size:14px;line-height:1.55;color:#4b5a4f;margin:16px 0 0">Was euch gerade bewegt, ist wichtig. Ich schaue es mit euch an.</p>
+      <p style="font-size:14px;line-height:1.55;color:var(--wk-ink-soft);margin:16px 0 0">Was euch gerade bewegt, ist wichtig. Ich schaue es mit euch an.</p>
     </div>
 
     <div>
-      <h3 style="font-family:Alegreya,serif;font-weight:600;font-size:25px;color:#0d3b30;margin:0 0 8px">Für wen ich da bin</h3>
-      <p style="font-size:14px;line-height:1.55;color:#4b5a4f;margin:0 0 16px">Meine Angebote richten sich an Menschen, die Veränderung und Verbindung möchten.</p>
+      <h3 style="font-family:Alegreya,serif;font-weight:600;font-size:25px;color:var(--wk-ink-strong);margin:0 0 8px">Für wen ich da bin</h3>
+      <p style="font-size:14px;line-height:1.55;color:var(--wk-ink-soft);margin:0 0 16px">Meine Angebote richten sich an Menschen, die Veränderung und Verbindung möchten.</p>
       <div style="display:flex;flex-direction:column;gap:13px;font-size:14.5px">
-        <div style="display:flex;gap:11px"><span style="color:#ef4f7a">♡</span><div><strong>Familien</strong><br><span style="color:#4b5a4f;font-size:13.5px">in herausfordernden Phasen</span></div></div>
-        <div style="display:flex;gap:11px"><span style="color:#ef4f7a">♡</span><div><strong>Kinder</strong><br><span style="color:#4b5a4f;font-size:13.5px">mit besonderen Bedürfnissen und großen Gefühlen</span></div></div>
-        <div style="display:flex;gap:11px"><span style="color:#ef4f7a">♡</span><div><strong>Jugendliche</strong><br><span style="color:#4b5a4f;font-size:13.5px">auf der Suche nach sich und ihrem Platz</span></div></div>
-        <div style="display:flex;gap:11px"><span style="color:#ef4f7a">♡</span><div><strong>Eltern</strong><br><span style="color:#4b5a4f;font-size:13.5px">auf der Suche nach Halt und Klarheit</span></div></div>
-        <div style="display:flex;gap:11px"><span style="color:#ef4f7a">♡</span><div><strong>Väter</strong><br><span style="color:#4b5a4f;font-size:13.5px">auf ihrem eigenen Weg in der Familie</span></div></div>
-        <div style="display:flex;gap:11px"><span style="color:#ef4f7a">♡</span><div><strong>Fachkräfte &amp; Begleitende</strong><br><span style="color:#4b5a4f;font-size:13.5px">Menschen, die Kinder und Familien unterstützen</span></div></div>
+        <div style="display:flex;gap:11px"><span style="color:var(--wk-pink-ink)">♡</span><div><strong>Familien</strong><br><span style="color:var(--wk-ink-soft);font-size:13.5px">in herausfordernden Phasen</span></div></div>
+        <div style="display:flex;gap:11px"><span style="color:var(--wk-pink-ink)">♡</span><div><strong>Kinder</strong><br><span style="color:var(--wk-ink-soft);font-size:13.5px">mit besonderen Bedürfnissen und großen Gefühlen</span></div></div>
+        <div style="display:flex;gap:11px"><span style="color:var(--wk-pink-ink)">♡</span><div><strong>Jugendliche</strong><br><span style="color:var(--wk-ink-soft);font-size:13.5px">auf der Suche nach sich und ihrem Platz</span></div></div>
+        <div style="display:flex;gap:11px"><span style="color:var(--wk-pink-ink)">♡</span><div><strong>Eltern</strong><br><span style="color:var(--wk-ink-soft);font-size:13.5px">auf der Suche nach Halt und Klarheit</span></div></div>
+        <div style="display:flex;gap:11px"><span style="color:var(--wk-pink-ink)">♡</span><div><strong>Väter</strong><br><span style="color:var(--wk-ink-soft);font-size:13.5px">auf ihrem eigenen Weg in der Familie</span></div></div>
+        <div style="display:flex;gap:11px"><span style="color:var(--wk-pink-ink)">♡</span><div><strong>Fachkräfte &amp; Begleitende</strong><br><span style="color:var(--wk-ink-soft);font-size:13.5px">Menschen, die Kinder und Familien unterstützen</span></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<section style="position:relative;background:#0a3f33;overflow:hidden">
-  <img src="assets/footer-band.png" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center bottom;opacity:.95">
+<section style="position:relative;background:var(--wk-forest-800);overflow:hidden">
+  <img decoding="async" width="1600" height="286" src="assets/footer-band.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center bottom;opacity:.95">
   <div style="position:relative;max-width:1240px;margin:0 auto;padding:48px 22px 54px;display:flex;flex-wrap:wrap;gap:26px;align-items:center;justify-content:space-between">
     <div style="flex:1 1 420px;max-width:620px;text-shadow:0 2px 14px rgba(6,30,24,.55)">
-      <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(26px,3.2vw,38px);line-height:1.15;color:#f5ede0;margin:0 0 10px">Der nächste Schritt – ich begleite euch dabei.</h2>
-      <p style="color:#e3ddc9;font-size:16.5px;line-height:1.55;margin:0">Ob erste Fragen, akute Herausforderung oder der Wunsch nach Veränderung – ich freue mich, euch kennenzulernen und zu schauen, was euch jetzt weiterbringt.</p>
+      <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(26px,3.2vw,38px);line-height:1.15;color:var(--wk-paper);margin:0 0 10px">Der nächste Schritt – ich begleite euch dabei.</h2>
+      <p style="color:var(--wk-paper-warm);font-size:16.5px;line-height:1.55;margin:0">Ob erste Fragen, akute Herausforderung oder der Wunsch nach Veränderung – ich freue mich, euch kennenzulernen und zu schauen, was euch jetzt weiterbringt.</p>
     </div>
     <div style="flex:0 1 280px;display:flex;flex-direction:column;gap:10px">
-      <button onClick="{{ openContact }}" style="background:#ef4f7a;color:#fff;border:none;border-radius:999px;padding:14px 28px;font-family:'Alegreya Sans',sans-serif;font-size:16px;font-weight:600;cursor:pointer;box-shadow:0 8px 20px rgba(6,30,24,.35)" style-hover="background:#d13a63">Kontakt aufnehmen&nbsp;&nbsp;♡</button>
-      <div style="color:#f4a3b8;font-size:15px;text-align:center">Ich bin gerne für euch da.</div>
+      <button onClick="{{ openContact }}" style="background:var(--wk-pink-ink);color:#fff;border:none;border-radius:999px;padding:14px 28px;font-family:'Alegreya Sans',sans-serif;font-size:16px;font-weight:600;cursor:pointer;box-shadow:0 8px 20px rgba(6,30,24,.35)" style-hover="background:var(--wk-pink-700)">Kontakt aufnehmen&nbsp;&nbsp;♡</button>
+      <div style="color:var(--wk-pink);font-size:15px;text-align:center">Ich bin gerne für euch da.</div>
     </div>
   </div>
 </section>
 
-<footer style="background:#07382d;color:#a9b7ad">
+<footer style="background:var(--wk-forest-900);color:var(--wk-on-dark-soft)">
   <div style="max-width:1240px;margin:0 auto;padding:36px 22px 22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:26px">
     <div>
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
-        <span style="width:42px;height:42px;border-radius:50%;background:#f5ede0;display:flex;align-items:flex-end;justify-content:center;overflow:hidden"><img src="assets/cat-teal.png" alt="" style="width:31px;display:block"></span>
-        <span style="font-family:Alegreya,serif;font-size:24px;color:#f5ede0">Waldkätzchen</span>
+        <span style="width:42px;height:42px;border-radius:50%;background:var(--wk-paper);display:flex;align-items:flex-end;justify-content:center;overflow:hidden"><img decoding="async" width="96" height="144" src="assets/cat-teal-logo.webp" alt="" style="width:31px;display:block"></span>
+        <span style="font-family:Alegreya,serif;font-size:24px;color:var(--wk-paper)">Waldkätzchen</span>
       </div>
-      <div style="font-size:13.5px;color:#8fa396;margin-bottom:10px">Verstehen. Verbinden. Verändern.</div>
-      <div style="font-size:14px;line-height:1.55">Begleitung für Kinder, Jugendliche und Familien im Autismus-Spektrum. <span style="color:#ef8ba5">♡</span></div>
+      <div style="font-size:13.5px;color:var(--wk-on-dark-muted);margin-bottom:10px">Verstehen. Verbinden. Verändern.</div>
+      <div style="font-size:14px;line-height:1.55">Begleitung für Kinder, Jugendliche und Familien im Autismus-Spektrum. <span style="color:var(--wk-pink)">♡</span></div>
     </div>
     <div>
-      <div style="font-family:Alegreya,serif;font-size:17px;color:#f5ede0;margin-bottom:10px">Navigation</div>
+      <div style="font-family:Alegreya,serif;font-size:17px;color:var(--wk-paper);margin-bottom:10px">Navigation</div>
       <div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px">
-        <a href="./Startseite.dc.html" style="color:#a9b7ad">Startseite</a>
-        <a href="./Ueber mich.dc.html" style="color:#a9b7ad">Über mich</a>
-        <a href="./Mein Ansatz.dc.html" style="color:#a9b7ad">Mein Ansatz</a>
-        <a href="./Angebot.dc.html" style="color:#a9b7ad">Angebot</a>
-        <a href="./Fuer Teams.dc.html" style="color:#a9b7ad">Für Teams</a>
-        <a href="./Fuer Vaeter.dc.html" style="color:#a9b7ad">Für Väter</a>
-        <a href="./Kontakt.dc.html" style="color:#a9b7ad">Kontakt</a>
+        <a href="./Startseite.dc.html" style="color:var(--wk-on-dark-soft)">Startseite</a>
+        <a href="./Ueber mich.dc.html" style="color:var(--wk-on-dark-soft)">Über mich</a>
+        <a href="./Mein Ansatz.dc.html" style="color:var(--wk-on-dark-soft)">Mein Ansatz</a>
+        <a href="./Angebot.dc.html" style="color:var(--wk-on-dark-soft)">Angebot</a>
+        <a href="./Fuer Teams.dc.html" style="color:var(--wk-on-dark-soft)">Für Teams</a>
+        <a href="./Fuer Vaeter.dc.html" style="color:var(--wk-on-dark-soft)">Für Väter</a>
+        <a href="./Kontakt.dc.html" style="color:var(--wk-on-dark-soft)">Kontakt</a>
       </div>
     </div>
     <div>
-      <div style="font-family:Alegreya,serif;font-size:17px;color:#f5ede0;margin-bottom:10px">Themen</div>
+      <div style="font-family:Alegreya,serif;font-size:17px;color:var(--wk-paper);margin-bottom:10px">Themen</div>
       <div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px">
-        <a href="./Autismus.dc.html" style="color:#a9b7ad">Autismus verstehen</a>
+        <a href="./Autismus.dc.html" style="color:var(--wk-on-dark-soft)">Autismus verstehen</a>
         <span>PDA im Alltag</span>
         <span>Herausforderndes Verhalten</span>
         <span>Familienalltag</span>
@@ -279,11 +287,11 @@
       </div>
     </div>
     <div>
-      <div style="font-family:Alegreya,serif;font-size:17px;color:#f5ede0;margin-bottom:10px">Rechtliches</div>
+      <div style="font-family:Alegreya,serif;font-size:17px;color:var(--wk-paper);margin-bottom:10px">Rechtliches</div>
       <div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px"><span>Impressum</span><span>Datenschutz</span><span>AGB</span></div>
     </div>
     <div>
-      <div style="font-family:Alegreya,serif;font-size:17px;color:#f5ede0;margin-bottom:10px">Kontakt</div>
+      <div style="font-family:Alegreya,serif;font-size:17px;color:var(--wk-paper);margin-bottom:10px">Kontakt</div>
       <div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px">
         <span>hallo@waldkaetzchen.de</span>
         <span>+49 160 1234567</span>
@@ -292,28 +300,28 @@
       </div>
     </div>
   </div>
-  <div style="border-top:1px solid rgba(245,237,224,.13);padding:14px 22px;text-align:center;font-size:13px;color:#7f9188">© 2026 Waldkätzchen – Alle Rechte vorbehalten</div>
+  <div style="border-top:1px solid rgba(245,237,224,.13);padding:14px 22px;text-align:center;font-size:13px;color:var(--wk-on-dark-muted)">© 2026 Waldkätzchen – Alle Rechte vorbehalten</div>
 </footer>
 
 <sc-if value="{{ contactOpen }}" hint-placeholder-val="{{ false }}">
   <div onClick="{{ closeContact }}" style="position:fixed;inset:0;background:rgba(8,35,28,.6);z-index:100;display:flex;align-items:center;justify-content:center;padding:18px">
-    <div onClick="{{ stop }}" style="background:#faf3e4;border-radius:20px;max-width:460px;width:100%;padding:30px 26px;box-shadow:0 22px 60px rgba(0,0,0,.4);position:relative">
-      <button onClick="{{ closeContact }}" aria-label="Schließen" style="position:absolute;top:12px;right:14px;width:44px;height:44px;background:none;border:none;font-size:24px;color:#6c7d70;cursor:pointer">×</button>
+    <div onClick="{{ stop }}" role="dialog" aria-modal="true" aria-label="Kontakt aufnehmen" style="background:var(--wk-paper-warm);border-radius:20px;max-width:460px;width:100%;padding:30px 26px;box-shadow:0 22px 60px rgba(0,0,0,.4);position:relative">
+      <button onClick="{{ closeContact }}" aria-label="Schließen" style="position:absolute;top:12px;right:14px;width:44px;height:44px;background:none;border:none;font-size:24px;color:var(--wk-ink-muted);cursor:pointer">×</button>
       <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
-        <h3 style="font-family:Alegreya,serif;font-size:27px;color:#0d3b30;margin:0 0 6px">Kontakt aufnehmen</h3>
-        <p style="font-size:15px;margin:0 0 18px;color:#4b5a4f">Schreib mir – ich melde mich zeitnah zurück.</p>
+        <h3 style="font-family:Alegreya,serif;font-size:27px;color:var(--wk-ink-strong);margin:0 0 6px">Kontakt aufnehmen</h3>
+        <p style="font-size:15px;margin:0 0 18px;color:var(--wk-ink-soft)">Schreib mir – ich melde mich zeitnah zurück.</p>
         <div style="display:flex;flex-direction:column;gap:12px">
-          <input placeholder="Dein Name" style="border:1px solid #dccdaa;border-radius:11px;padding:14px;font-family:'Alegreya Sans',sans-serif;font-size:15.5px;background:#fffdf6;color:#2f4038">
-          <input placeholder="E-Mail-Adresse" style="border:1px solid #dccdaa;border-radius:11px;padding:14px;font-family:'Alegreya Sans',sans-serif;font-size:15.5px;background:#fffdf6;color:#2f4038">
-          <textarea placeholder="Deine Nachricht" rows="4" style="border:1px solid #dccdaa;border-radius:11px;padding:14px;font-family:'Alegreya Sans',sans-serif;font-size:15.5px;background:#fffdf6;color:#2f4038;resize:vertical"></textarea>
-          <button onClick="{{ send }}" style="background:#ef4f7a;color:#fff;border:none;border-radius:999px;padding:15px;font-family:'Alegreya Sans',sans-serif;font-size:16.5px;font-weight:600;cursor:pointer" style-hover="background:#d13a63">Nachricht senden ♡</button>
+          <input placeholder="Dein Name" style="border:1px solid var(--wk-line-soft);border-radius:11px;padding:14px;font-family:'Alegreya Sans',sans-serif;font-size:15.5px;background:var(--wk-paper-card);color:var(--wk-ink)">
+          <input placeholder="E-Mail-Adresse" style="border:1px solid var(--wk-line-soft);border-radius:11px;padding:14px;font-family:'Alegreya Sans',sans-serif;font-size:15.5px;background:var(--wk-paper-card);color:var(--wk-ink)">
+          <textarea placeholder="Deine Nachricht" rows="4" style="border:1px solid var(--wk-line-soft);border-radius:11px;padding:14px;font-family:'Alegreya Sans',sans-serif;font-size:15.5px;background:var(--wk-paper-card);color:var(--wk-ink);resize:vertical"></textarea>
+          <button onClick="{{ send }}" style="background:var(--wk-pink-ink);color:#fff;border:none;border-radius:999px;padding:15px;font-family:'Alegreya Sans',sans-serif;font-size:16.5px;font-weight:600;cursor:pointer" style-hover="background:var(--wk-pink-700)">Nachricht senden ♡</button>
         </div>
       </sc-if>
       <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
         <div style="text-align:center;padding:16px 0">
-          <img src="assets/chars/09_haende_herz.png" alt="" style="width:130px;mix-blend-mode:multiply">
-          <h3 style="font-family:Alegreya,serif;font-size:27px;color:#0d3b30;margin:12px 0 6px">Danke für deine Nachricht!</h3>
-          <p style="font-size:15px;color:#4b5a4f;margin:0">Ich melde mich so bald wie möglich.<br>(Demo – es wurde noch nichts versendet.)</p>
+          <img loading="lazy" decoding="async" width="512" height="512" src="assets/chars/09_haende_herz.webp" alt="" style="width:130px;mix-blend-mode:multiply">
+          <h3 style="font-family:Alegreya,serif;font-size:27px;color:var(--wk-ink-strong);margin:12px 0 6px">Danke für deine Nachricht!</h3>
+          <p style="font-size:15px;color:var(--wk-ink-soft);margin:0">Ich melde mich so bald wie möglich.<br>(Demo – es wurde noch nichts versendet.)</p>
         </div>
       </sc-if>
     </div>

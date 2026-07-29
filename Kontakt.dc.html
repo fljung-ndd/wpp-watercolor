@@ -1,106 +1,114 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
+<title>Kontakt – Waldkätzchen</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon.png" type="image/png" sizes="256x256">
+<link rel="apple-touch-icon" href="favicon.png">
+<meta name="description" content="Kontakt zu Waldkätzchen – Sie müssen nicht alles perfekt formulieren. Der erste Schritt zählt.">
+<link rel="stylesheet" href="assets/wk.css">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/alegreya-latin-600-normal.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/alegreya-sans-latin-400-normal.woff2">
+<link rel="preload" as="image" href="assets/hero-startseite.webp" media="(min-width:1000px)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/hero-startseite-sm.webp" media="(max-width:999px)" fetchpriority="high">
+<!-- React lokal statt von unpkg.com: spart DNS + TLS + Roundtrip zu einem
+     fremden Host im kritischen Pfad. support.js erkennt window.React und
+     überspringt den CDN-Fallback. -->
+<script src="./vendor/react.production.min.js" defer></script>
+<script src="./vendor/react-dom.production.min.js" defer></script>
+<script src="./support.js" defer></script>
 </head>
 <body>
 <x-dc>
 <helmet>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kontakt – Waldkätzchen</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Alegreya+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-<style>
-  html,body{margin:0;padding:0;background:#f5ede0;color:#2f4038;font-family:'Alegreya Sans',sans-serif;-webkit-font-smoothing:antialiased;}
-  a{color:#ef4f7a;text-decoration:none;} a:hover{color:#d13a63;}
-  *{box-sizing:border-box;}
-  img{max-width:100%;}
-</style>
 </helmet>
 
-<div style="background:#f5ede0;overflow-x:hidden">
+<div style="background:var(--wk-paper);overflow-x:hidden">
 
-<header style="position:sticky;top:0;z-index:60;background:#084f3f;box-shadow:0 2px 14px rgba(8,45,36,.25)">
+<a class="wk-skip" href="#inhalt">Zum Inhalt springen</a>
+<header style="position:sticky;top:0;z-index:60;background:var(--wk-forest-800);box-shadow:0 2px 14px rgba(8,45,36,.25)">
   <div style="max-width:1300px;margin:0 auto;display:flex;align-items:center;gap:18px;padding:9px 20px">
     <a href="./Startseite.dc.html" style="display:flex;align-items:center;gap:11px;flex:0 0 auto">
-      <span style="width:46px;height:46px;border-radius:50%;background:#f5ede0;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;border:2px solid rgba(245,237,224,.4)"><img src="assets/cat-teal.png" alt="" style="width:34px;display:block"></span>
-      <span style="font-family:Alegreya,serif;font-size:28px;font-weight:600;color:#f5ede0">Waldkätzchen</span>
+      <span style="width:46px;height:46px;border-radius:50%;background:var(--wk-paper);display:flex;align-items:flex-end;justify-content:center;overflow:hidden;border:2px solid rgba(245,237,224,.4)"><img decoding="async" width="96" height="144" src="assets/cat-teal-logo.webp" alt="" style="width:34px;display:block"></span>
+      <span style="font-family:Alegreya,serif;font-size:28px;font-weight:600;color:var(--wk-paper)">Waldkätzchen</span>
     </a>
     <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
-      <nav style="display:flex;align-items:center;gap:18px;margin-left:auto;font-size:15.5px;color:#dcd6c0">
-        <a href="./Startseite.dc.html" style="color:#dcd6c0">Startseite</a>
-        <a href="./Ueber mich.dc.html" style="color:#dcd6c0">Über mich</a>
-        <a href="./Mein Ansatz.dc.html" style="color:#dcd6c0">Mein Ansatz</a>
-        <a href="./Angebot.dc.html" style="color:#dcd6c0">Angebot</a>
-        <span onClick="{{ toggleFuerWen }}" style="position:relative;cursor:pointer;color:#f5ede0">Für wen ▾
+      <nav style="display:flex;align-items:center;gap:18px;margin-left:auto;font-size:15.5px;color:var(--wk-on-dark-soft)">
+        <a href="./Startseite.dc.html" style="color:var(--wk-on-dark-soft)">Startseite</a>
+        <a href="./Ueber mich.dc.html" style="color:var(--wk-on-dark-soft)">Über mich</a>
+        <a href="./Mein Ansatz.dc.html" style="color:var(--wk-on-dark-soft)">Mein Ansatz</a>
+        <a href="./Angebot.dc.html" style="color:var(--wk-on-dark-soft)">Angebot</a>
+        <span style="position:relative;display:inline-flex"><button onClick="{{ toggleFuerWen }}" aria-expanded="{{ menuFuerWen }}" style="background:none;border:none;padding:0;font-family:inherit;font-size:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:4px;color:var(--wk-paper)">Für wen <span aria-hidden="true">▾</span></button>
           <sc-if value="{{ menuFuerWen }}" hint-placeholder-val="{{ false }}">
-            <span style="position:absolute;top:30px;left:-12px;background:#fbf5e6;border:1px solid #e0d3b4;border-radius:12px;box-shadow:0 10px 26px rgba(8,45,36,.3);padding:8px;display:flex;flex-direction:column;min-width:158px;z-index:70">
-              <a href="./Fuer Teams.dc.html" style="padding:8px 12px;border-radius:8px;color:#2f4038">Für Teams</a>
-              <a href="./Fuer Vaeter.dc.html" style="padding:8px 12px;border-radius:8px;color:#2f4038">Für Väter</a>
+            <span style="position:absolute;top:30px;left:-12px;background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:12px;box-shadow:0 10px 26px rgba(8,45,36,.3);padding:8px;display:flex;flex-direction:column;min-width:158px;z-index:70">
+              <a href="./Fuer Teams.dc.html" style="padding:8px 12px;border-radius:8px;color:var(--wk-ink)">Für Teams</a>
+              <a href="./Fuer Vaeter.dc.html" style="padding:8px 12px;border-radius:8px;color:var(--wk-ink)">Für Väter</a>
             </span>
           </sc-if>
         </span>
-        <span onClick="{{ toggleWissen }}" style="position:relative;cursor:pointer;color:#f5ede0">Wissen ▾
+        <span style="position:relative;display:inline-flex"><button onClick="{{ toggleWissen }}" aria-expanded="{{ menuWissen }}" style="background:none;border:none;padding:0;font-family:inherit;font-size:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:4px;color:var(--wk-paper)">Wissen <span aria-hidden="true">▾</span></button>
           <sc-if value="{{ menuWissen }}" hint-placeholder-val="{{ false }}">
-            <span style="position:absolute;top:30px;left:-12px;background:#fbf5e6;border:1px solid #e0d3b4;border-radius:12px;box-shadow:0 10px 26px rgba(8,45,36,.3);padding:8px;display:flex;flex-direction:column;min-width:186px;z-index:70">
-              <a href="./Autismus.dc.html" style="padding:8px 12px;border-radius:8px;color:#2f4038">Autismus verstehen</a>
+            <span style="position:absolute;top:30px;left:-12px;background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:12px;box-shadow:0 10px 26px rgba(8,45,36,.3);padding:8px;display:flex;flex-direction:column;min-width:186px;z-index:70">
+              <a href="./Autismus.dc.html" style="padding:8px 12px;border-radius:8px;color:var(--wk-ink)">Autismus verstehen</a>
             </span>
           </sc-if>
         </span>
-        <a href="./Kontakt.dc.html" style="color:#e8b04b;font-weight:600;border-bottom:2px solid #e8b04b;padding-bottom:2px">Kontakt</a>
-        <a href="./Kontakt.dc.html" style="background:#ef4f7a;color:#fff;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;display:flex;align-items:center;gap:9px" style-hover="background:#d13a63">Kontakt aufnehmen <span>♡</span></a>
+        <a href="./Kontakt.dc.html" style="color:var(--wk-yellow);font-weight:600;border-bottom:2px solid var(--wk-yellow);padding-bottom:2px">Kontakt</a>
+        <a href="./Kontakt.dc.html" style="background:var(--wk-pink-ink);color:#fff;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;display:flex;align-items:center;gap:9px" style-hover="background:var(--wk-pink-700)">Kontakt aufnehmen <span>♡</span></a>
       </nav>
     </sc-if>
     <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
-      <button onClick="{{ toggleDrawer }}" aria-label="Menü" style="margin-left:auto;width:48px;height:48px;background:rgba(245,237,224,.12);border:1px solid rgba(245,237,224,.3);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer">
-        <span style="width:22px;height:2px;background:#f5ede0;display:block"></span>
-        <span style="width:22px;height:2px;background:#f5ede0;display:block"></span>
-        <span style="width:22px;height:2px;background:#f5ede0;display:block"></span>
+      <button onClick="{{ toggleDrawer }}" aria-label="Menü" aria-expanded="{{ drawer }}" style="margin-left:auto;width:48px;height:48px;background:rgba(245,237,224,.12);border:1px solid rgba(245,237,224,.3);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer">
+        <span style="width:22px;height:2px;background:var(--wk-paper);display:block"></span>
+        <span style="width:22px;height:2px;background:var(--wk-paper);display:block"></span>
+        <span style="width:22px;height:2px;background:var(--wk-paper);display:block"></span>
       </button>
     </sc-if>
   </div>
   <sc-if value="{{ drawer }}" hint-placeholder-val="{{ false }}">
-    <div style="background:#0a5a47;border-top:1px solid rgba(245,237,224,.16);padding:12px 20px 20px;display:flex;flex-direction:column;font-size:17px">
-      <a href="./Startseite.dc.html" style="padding:13px 6px;color:#f5ede0">Startseite</a>
-      <a href="./Ueber mich.dc.html" style="padding:13px 6px;color:#f5ede0">Über mich</a>
-      <a href="./Mein Ansatz.dc.html" style="padding:13px 6px;color:#f5ede0">Mein Ansatz</a>
-      <a href="./Angebot.dc.html" style="padding:13px 6px;color:#f5ede0">Angebot</a>
-      <div style="padding:13px 6px 6px;color:#8fb3a4;font-size:13.5px;letter-spacing:.08em;text-transform:uppercase">Für wen</div>
-      <a href="./Fuer Teams.dc.html" style="padding:13px 6px;color:#f5ede0">Für Teams</a>
-      <a href="./Fuer Vaeter.dc.html" style="padding:13px 6px;color:#f5ede0">Für Väter</a>
-      <div style="padding:13px 6px 6px;color:#8fb3a4;font-size:13.5px;letter-spacing:.08em;text-transform:uppercase">Wissen</div>
-      <a href="./Autismus.dc.html" style="padding:13px 6px;color:#f5ede0">Autismus verstehen</a>
-      <a href="./Kontakt.dc.html" style="padding:13px 6px;color:#e8b04b;font-weight:600">Kontakt</a>
+    <div style="background:var(--wk-forest-700);border-top:1px solid rgba(245,237,224,.16);padding:12px 20px 20px;display:flex;flex-direction:column;font-size:17px">
+      <a href="./Startseite.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Startseite</a>
+      <a href="./Ueber mich.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Über mich</a>
+      <a href="./Mein Ansatz.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Mein Ansatz</a>
+      <a href="./Angebot.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Angebot</a>
+      <div style="padding:13px 6px 6px;color:var(--wk-on-dark-muted);font-size:13.5px;letter-spacing:.08em;text-transform:uppercase">Für wen</div>
+      <a href="./Fuer Teams.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Für Teams</a>
+      <a href="./Fuer Vaeter.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Für Väter</a>
+      <div style="padding:13px 6px 6px;color:var(--wk-on-dark-muted);font-size:13.5px;letter-spacing:.08em;text-transform:uppercase">Wissen</div>
+      <a href="./Autismus.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Autismus verstehen</a>
+      <a href="./Kontakt.dc.html" style="padding:13px 6px;color:var(--wk-yellow);font-weight:600">Kontakt</a>
     </div>
   </sc-if>
 </header>
 
 <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
-  <section style="position:relative;background:#f5ede0;overflow:hidden">
-    <img src="assets/hero-startseite.png" alt="Portrait mit Ziege, Pinguin und Waldkätzchen" style="width:100%;display:block">
+  <section id="inhalt" tabindex="-1" style="position:relative;background:var(--wk-paper);overflow:hidden">
+    <img loading="lazy" decoding="async" width="1600" height="900" src="assets/hero-startseite.webp" alt="Portrait mit Ziege, Pinguin und Waldkätzchen" style="width:100%;display:block">
     <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(245,237,224,.97) 46%, rgba(245,237,224,.72) 62%, rgba(245,237,224,0) 80%);pointer-events:none"></div>
     <div style="position:absolute;inset:0;display:flex;align-items:center">
       <div style="max-width:1300px;margin:0 auto;width:100%;padding:0 26px">
         <div style="max-width:min(46%,540px)">
-          <h1 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(30px,3.7vw,52px);line-height:1.05;margin:0 0 8px;color:#0d3b30">Ich freue mich,<br>von dir zu hören.</h1>
-          <div style="color:#ef4f7a;font-family:Alegreya,serif;font-size:clamp(17px,1.9vw,25px);margin-bottom:clamp(10px,1.4vw,18px)">Jede Reise beginnt mit einem kleinen Schritt.</div>
+          <h1 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(30px,3.7vw,52px);line-height:1.05;margin:0 0 8px;color:var(--wk-ink-strong)">Ich freue mich,<br>von dir zu hören.</h1>
+          <div style="color:var(--wk-pink-ink);font-family:Alegreya,serif;font-size:clamp(17px,1.9vw,25px);margin-bottom:clamp(10px,1.4vw,18px)">Jede Reise beginnt mit einem kleinen Schritt.</div>
           <p style="font-size:clamp(14px,1.2vw,16px);line-height:1.55;margin:0 0 clamp(8px,1vw,14px);max-width:42ch">Du musst nicht alles perfekt formulieren. Es ist völlig okay, wenn du gerade viele Fragen hast oder noch nicht weißt, wo du anfangen sollst.</p>
-          <p style="font-size:clamp(14px,1.2vw,16px);line-height:1.55;margin:0;max-width:42ch">Schreib mir einfach, wie es dir gerade geht. Ein ehrlicher Kontakt kann der erste sanfte Schritt in Richtung Veränderung sein. <span style="color:#ef4f7a">♡</span></p>
+          <p style="font-size:clamp(14px,1.2vw,16px);line-height:1.55;margin:0;max-width:42ch">Schreib mir einfach, wie es dir gerade geht. Ein ehrlicher Kontakt kann der erste sanfte Schritt in Richtung Veränderung sein. <span style="color:var(--wk-pink-ink)">♡</span></p>
         </div>
       </div>
     </div>
   </section>
 </sc-if>
 <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
-  <section style="background:#f5ede0">
-    <img src="assets/hero-startseite.png" alt="Portrait mit Ziege, Pinguin und Waldkätzchen" style="width:100%;display:block">
+  <section style="background:var(--wk-paper)">
+    <img loading="lazy" decoding="async" width="900" height="507" src="assets/hero-startseite-sm.webp" alt="Portrait mit Ziege, Pinguin und Waldkätzchen" style="width:100%;display:block">
     <div style="padding:16px 22px 30px">
-      <h1 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(30px,7.5vw,44px);line-height:1.08;margin:0 0 8px;color:#0d3b30">Ich freue mich, von dir zu hören.</h1>
-      <div style="color:#ef4f7a;font-family:Alegreya,serif;font-size:clamp(19px,5vw,25px);margin-bottom:16px">Jede Reise beginnt mit einem kleinen Schritt.</div>
+      <h1 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(30px,7.5vw,44px);line-height:1.08;margin:0 0 8px;color:var(--wk-ink-strong)">Ich freue mich, von dir zu hören.</h1>
+      <div style="color:var(--wk-pink-ink);font-family:Alegreya,serif;font-size:clamp(19px,5vw,25px);margin-bottom:16px">Jede Reise beginnt mit einem kleinen Schritt.</div>
       <p style="font-size:16px;line-height:1.6;margin:0 0 12px">Du musst nicht alles perfekt formulieren. Es ist völlig okay, wenn du gerade viele Fragen hast oder noch nicht weißt, wo du anfangen sollst.</p>
-      <p style="font-size:16px;line-height:1.6;margin:0">Schreib mir einfach, wie es dir gerade geht. Ein ehrlicher Kontakt kann der erste sanfte Schritt in Richtung Veränderung sein. <span style="color:#ef4f7a">♡</span></p>
+      <p style="font-size:16px;line-height:1.6;margin:0">Schreib mir einfach, wie es dir gerade geht. Ein ehrlicher Kontakt kann der erste sanfte Schritt in Richtung Veränderung sein. <span style="color:var(--wk-pink-ink)">♡</span></p>
     </div>
   </section>
 </sc-if>
@@ -108,29 +116,29 @@
 <section style="position:relative;padding:34px 20px 20px">
   <div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;align-items:start">
 
-    <div style="background:url(assets/box/card-green.png) center/100% 100% no-repeat;padding:clamp(26px,3vw,38px) clamp(24px,3vw,34px)">
-      <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:24px;color:#0d3b30;margin:0 0 8px">So erreichst du mich</h2>
-      <p style="font-size:14.5px;line-height:1.5;color:#4b5a4f;margin:0 0 20px">Ich bin gerne für dich da – auf dem Weg, der für dich passt.</p>
+    <div style="background:url(assets/box/card-green.webp) center/100% 100% no-repeat;padding:clamp(26px,3vw,38px) clamp(24px,3vw,34px)">
+      <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:24px;color:var(--wk-ink-strong);margin:0 0 8px">So erreichst du mich</h2>
+      <p style="font-size:14.5px;line-height:1.5;color:var(--wk-ink-soft);margin:0 0 20px">Ich bin gerne für dich da – auf dem Weg, der für dich passt.</p>
       <div style="display:flex;flex-direction:column;gap:16px">
-        <div style="display:flex;gap:13px;align-items:flex-start"><span style="width:36px;height:36px;flex:0 0 auto;border-radius:50%;background:url(assets/wc/circle_pink.png) center/contain no-repeat;display:flex;align-items:center;justify-content:center;color:#b0405f;font-size:16px">✉</span><div><div style="font-size:14.5px;font-weight:700;color:#0d3b30">E-Mail</div><div style="font-size:14px;color:#4b5a4f">hallo@waldkaetzchen.de</div></div></div>
-        <div style="display:flex;gap:13px;align-items:flex-start"><span style="width:36px;height:36px;flex:0 0 auto;border-radius:50%;background:url(assets/wc/circle_pink.png) center/contain no-repeat;display:flex;align-items:center;justify-content:center;color:#b0405f;font-size:16px">☎</span><div><div style="font-size:14.5px;font-weight:700;color:#0d3b30">Telefon</div><div style="font-size:14px;color:#4b5a4f">+49 160 1234567</div></div></div>
-        <div style="display:flex;gap:13px;align-items:flex-start"><span style="width:36px;height:36px;flex:0 0 auto;border-radius:50%;background:url(assets/wc/circle_pink.png) center/contain no-repeat;display:flex;align-items:center;justify-content:center;color:#b0405f;font-size:16px">⌖</span><div><div style="font-size:14.5px;font-weight:700;color:#0d3b30">Ort</div><div style="font-size:14px;color:#4b5a4f">Berlin &amp; Online</div></div></div>
-        <div style="display:flex;gap:13px;align-items:flex-start"><span style="width:36px;height:36px;flex:0 0 auto;border-radius:50%;background:url(assets/wc/circle_pink.png) center/contain no-repeat;display:flex;align-items:center;justify-content:center;color:#b0405f;font-size:16px">◷</span><div><div style="font-size:14.5px;font-weight:700;color:#0d3b30">Antwortzeit</div><div style="font-size:14px;color:#4b5a4f">Ich antworte in der Regel innerhalb von 24–48 Stunden.</div></div></div>
+        <div style="display:flex;gap:13px;align-items:flex-start"><span style="width:36px;height:36px;flex:0 0 auto;border-radius:50%;background:url(assets/wc/circle_pink.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center;color:var(--wk-pink-ink);font-size:16px">✉</span><div><div style="font-size:14.5px;font-weight:700;color:var(--wk-ink-strong)">E-Mail</div><div style="font-size:14px;color:var(--wk-ink-soft)">hallo@waldkaetzchen.de</div></div></div>
+        <div style="display:flex;gap:13px;align-items:flex-start"><span style="width:36px;height:36px;flex:0 0 auto;border-radius:50%;background:url(assets/wc/circle_pink.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center;color:var(--wk-pink-ink);font-size:16px">☎</span><div><div style="font-size:14.5px;font-weight:700;color:var(--wk-ink-strong)">Telefon</div><div style="font-size:14px;color:var(--wk-ink-soft)">+49 160 1234567</div></div></div>
+        <div style="display:flex;gap:13px;align-items:flex-start"><span style="width:36px;height:36px;flex:0 0 auto;border-radius:50%;background:url(assets/wc/circle_pink.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center;color:var(--wk-pink-ink);font-size:16px">⌖</span><div><div style="font-size:14.5px;font-weight:700;color:var(--wk-ink-strong)">Ort</div><div style="font-size:14px;color:var(--wk-ink-soft)">Berlin &amp; Online</div></div></div>
+        <div style="display:flex;gap:13px;align-items:flex-start"><span style="width:36px;height:36px;flex:0 0 auto;border-radius:50%;background:url(assets/wc/circle_pink.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center;color:var(--wk-pink-ink);font-size:16px">◷</span><div><div style="font-size:14.5px;font-weight:700;color:var(--wk-ink-strong)">Antwortzeit</div><div style="font-size:14px;color:var(--wk-ink-soft)">Ich antworte in der Regel innerhalb von 24–48 Stunden.</div></div></div>
       </div>
-      <div style="margin-top:22px;background:url(assets/wc/sq-petrol.png) center/100% 100% no-repeat;padding:18px 20px">
-        <div style="font-size:14px;line-height:1.55;color:#25453c">Wenn es dir schwerfällt, mir zu schreiben, ist auch eine kurze Nachricht völlig in Ordnung. Ein paar Zeilen reichen. <span style="color:#b0405f">♡</span></div>
+      <div style="margin-top:22px;background:url(assets/wc/sq-petrol.webp) center/100% 100% no-repeat;padding:18px 20px">
+        <div style="font-size:14px;line-height:1.55;color:var(--wk-forest-900)">Wenn es dir schwerfällt, mir zu schreiben, ist auch eine kurze Nachricht völlig in Ordnung. Ein paar Zeilen reichen. <span style="color:var(--wk-pink-ink)">♡</span></div>
       </div>
     </div>
 
-    <div style="background:url(assets/box/card-green.png) center/100% 100% no-repeat;padding:clamp(26px,3vw,38px) clamp(24px,3vw,34px)">
-      <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:24px;color:#0d3b30;margin:0 0 20px">Schreib mir eine Nachricht</h2>
+    <div style="background:url(assets/box/card-green.webp) center/100% 100% no-repeat;padding:clamp(26px,3vw,38px) clamp(24px,3vw,34px)">
+      <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:24px;color:var(--wk-ink-strong);margin:0 0 20px">Schreib mir eine Nachricht</h2>
       <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
         <div style="display:flex;flex-direction:column;gap:13px">
-          <input placeholder="Name" style="border:1px solid #e2d1c6;border-radius:8px;padding:14px;font-family:'Alegreya Sans',sans-serif;font-size:15px;background:#fffdf7;color:#2f4038">
-          <input placeholder="E-Mail" style="border:1px solid #e2d1c6;border-radius:8px;padding:14px;font-family:'Alegreya Sans',sans-serif;font-size:15px;background:#fffdf7;color:#2f4038">
-          <div style="display:flex;align-items:center;gap:10px;border:1px solid #e2d1c6;border-radius:8px;padding:0 14px;background:#fffdf7">
-            <span style="font-size:15px;color:#2f4038;flex:0 0 auto">Thema</span>
-            <select style="flex:1;border:none;background:transparent;padding:14px 0;font-family:'Alegreya Sans',sans-serif;font-size:15px;color:#7b8a7f;outline:none">
+          <input placeholder="Name" style="border:1px solid var(--wk-line);border-radius:8px;padding:14px;font-family:'Alegreya Sans',sans-serif;font-size:15px;background:var(--wk-paper-card);color:var(--wk-ink)">
+          <input placeholder="E-Mail" style="border:1px solid var(--wk-line);border-radius:8px;padding:14px;font-family:'Alegreya Sans',sans-serif;font-size:15px;background:var(--wk-paper-card);color:var(--wk-ink)">
+          <div style="display:flex;align-items:center;gap:10px;border:1px solid var(--wk-line);border-radius:8px;padding:0 14px;background:var(--wk-paper-card)">
+            <span style="font-size:15px;color:var(--wk-ink);flex:0 0 auto">Thema</span>
+            <select style="flex:1;border:none;background:transparent;padding:14px 0;font-family:'Alegreya Sans',sans-serif;font-size:15px;color:var(--wk-ink-muted);outline:none">
               <option>Bitte wählen …</option>
               <option>Einzel- und Familienbegleitung</option>
               <option>Elternberatung</option>
@@ -141,58 +149,58 @@
               <option>Workshop oder Vortrag</option>
             </select>
           </div>
-          <div style="border:1px solid #e2d1c6;border-radius:8px;padding:12px 14px;background:#fffdf7">
-            <div style="font-size:15px;color:#2f4038;margin-bottom:6px">Nachricht</div>
-            <textarea placeholder="Erzähl mir, was dich bewegt." rows="4" style="width:100%;border:none;background:transparent;font-family:'Alegreya Sans',sans-serif;font-size:15px;color:#2f4038;resize:vertical;outline:none"></textarea>
+          <div style="border:1px solid var(--wk-line);border-radius:8px;padding:12px 14px;background:var(--wk-paper-card)">
+            <div style="font-size:15px;color:var(--wk-ink);margin-bottom:6px">Nachricht</div>
+            <textarea placeholder="Erzähl mir, was dich bewegt." rows="4" style="width:100%;border:none;background:transparent;font-family:'Alegreya Sans',sans-serif;font-size:15px;color:var(--wk-ink);resize:vertical;outline:none"></textarea>
           </div>
-          <button onClick="{{ send }}" style="margin-top:6px;background:#cf5878;color:#fff;border:none;border-radius:8px;padding:15px;font-family:'Alegreya Sans',sans-serif;font-size:16.5px;font-weight:600;cursor:pointer" style-hover="background:#b8455f">Nachricht senden&nbsp;&nbsp;→</button>
-          <div style="display:flex;gap:8px;align-items:center;justify-content:center;font-size:12.5px;color:#7b8a7f"><span>🔒</span><span>Deine Daten werden vertraulich behandelt.</span></div>
+          <button onClick="{{ send }}" style="margin-top:6px;background:var(--wk-pink-ink);color:#fff;border:none;border-radius:8px;padding:15px;font-family:'Alegreya Sans',sans-serif;font-size:16.5px;font-weight:600;cursor:pointer" style-hover="background:var(--wk-pink-ink)">Nachricht senden&nbsp;&nbsp;→</button>
+          <div style="display:flex;gap:8px;align-items:center;justify-content:center;font-size:12.5px;color:var(--wk-ink-muted)"><span>🔒</span><span>Deine Daten werden vertraulich behandelt.</span></div>
         </div>
       </sc-if>
       <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
         <div style="text-align:center;padding:14px 0">
-          <img src="assets/chars/09_haende_herz.png" alt="" style="width:140px;mix-blend-mode:multiply">
-          <h3 style="font-family:Alegreya,serif;font-size:25px;color:#0a6b5c;margin:12px 0 8px">Danke für deine Nachricht!</h3>
-          <p style="font-size:15px;color:#4b5a4f;margin:0">Ich melde mich innerhalb von 24–48 Stunden.<br>(Demo – es wurde noch nichts versendet.)</p>
+          <img loading="lazy" decoding="async" width="512" height="512" src="assets/chars/09_haende_herz.webp" alt="" style="width:140px;mix-blend-mode:multiply">
+          <h3 style="font-family:Alegreya,serif;font-size:25px;color:var(--wk-forest-600);margin:12px 0 8px">Danke für deine Nachricht!</h3>
+          <p style="font-size:15px;color:var(--wk-ink-soft);margin:0">Ich melde mich innerhalb von 24–48 Stunden.<br>(Demo – es wurde noch nichts versendet.)</p>
         </div>
       </sc-if>
     </div>
 
-    <div style="background:url(assets/box/card-rose.png) center/100% 100% no-repeat;padding:clamp(26px,3vw,38px) clamp(24px,3vw,34px);text-align:left">
-      <div style="text-align:center;color:#cf5878;font-size:24px;margin-bottom:10px">♡</div>
-      <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:24px;color:#0d3b30;margin:0 0 14px">Du musst nicht alles perfekt formulieren.</h2>
-      <p style="font-size:14.5px;line-height:1.6;color:#4b3a40;margin:0 0 12px">Unsicherheit, Zweifel oder ein Durcheinander im Kopf sind ganz normal.</p>
-      <p style="font-size:14.5px;line-height:1.6;color:#4b3a40;margin:0">Hier gibt es keinen Druck und keine Erwartungen – nur einen sicheren Raum, in dem du sein darfst, wie du bist.</p>
-      <img src="assets/chars/04_roter_panda.png" alt="" loading="lazy" style="display:block;width:140px;margin:12px 0 0 auto;mix-blend-mode:multiply">
+    <div style="background:url(assets/box/card-rose.webp) center/100% 100% no-repeat;padding:clamp(26px,3vw,38px) clamp(24px,3vw,34px);text-align:left">
+      <div style="text-align:center;color:var(--wk-pink-ink);font-size:24px;margin-bottom:10px">♡</div>
+      <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:24px;color:var(--wk-ink-strong);margin:0 0 14px">Du musst nicht alles perfekt formulieren.</h2>
+      <p style="font-size:14.5px;line-height:1.6;color:var(--wk-ink-soft);margin:0 0 12px">Unsicherheit, Zweifel oder ein Durcheinander im Kopf sind ganz normal.</p>
+      <p style="font-size:14.5px;line-height:1.6;color:var(--wk-ink-soft);margin:0">Hier gibt es keinen Druck und keine Erwartungen – nur einen sicheren Raum, in dem du sein darfst, wie du bist.</p>
+      <img decoding="async" width="512" height="512" src="assets/chars/04_roter_panda.webp" alt="" loading="lazy" style="display:block;width:140px;margin:12px 0 0 auto;mix-blend-mode:multiply">
     </div>
 
   </div>
 </section>
 
 <section style="position:relative;padding:20px 20px 20px;overflow:hidden">
-  <img src="assets/section/section_light.png" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;-webkit-mask-image:linear-gradient(180deg,transparent,#000 18%,#000 82%,transparent);mask-image:linear-gradient(180deg,transparent,#000 18%,#000 82%,transparent);pointer-events:none">
+  <img decoding="async" width="1400" height="467" src="assets/sections/section_light.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;-webkit-mask-image:linear-gradient(180deg,transparent,#000 18%,#000 82%,transparent);mask-image:linear-gradient(180deg,transparent,#000 18%,#000 82%,transparent);pointer-events:none">
   <div style="position:relative;max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;gap:26px;align-items:center">
-    <h2 style="flex:1 1 100%;font-family:Alegreya,serif;font-weight:600;font-size:clamp(24px,3vw,32px);color:#0d3b30;margin:0">Der erste Schritt – so geht es weiter</h2>
+    <h2 style="flex:1 1 100%;font-family:Alegreya,serif;font-weight:600;font-size:clamp(24px,3vw,32px);color:var(--wk-ink-strong);margin:0">Der erste Schritt – so geht es weiter</h2>
     <div style="flex:1 1 100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;text-align:center">
       <div>
-        <div style="position:relative;width:76px;height:76px;margin:0 auto 10px;background:url(assets/wc/circle_petrol.png) center/contain no-repeat;display:flex;align-items:center;justify-content:center;font-size:26px;color:#0a4437">✉<span style="position:absolute;top:-4px;left:-6px;width:30px;height:30px;border-radius:50%;background:#2f9089;color:#fff;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center">1</span></div>
-        <div style="font-family:Alegreya,serif;font-size:17.5px;font-weight:700;color:#0d3b30;margin-bottom:6px">Du meldest dich</div>
-        <div style="font-size:13px;line-height:1.5;color:#4b5a4f">Du schreibst mir – so, wie es für dich gerade passt. Das kann kurz oder ausführlich sein.</div>
+        <div style="position:relative;width:76px;height:76px;margin:0 auto 10px;background:url(assets/wc/circle_petrol.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center;font-size:26px;color:var(--wk-forest-700)">✉<span style="position:absolute;top:-4px;left:-6px;width:30px;height:30px;border-radius:50%;background:var(--wk-petrol-600);color:#fff;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center">1</span></div>
+        <div style="font-family:Alegreya,serif;font-size:17.5px;font-weight:700;color:var(--wk-ink-strong);margin-bottom:6px">Du meldest dich</div>
+        <div style="font-size:13px;line-height:1.5;color:var(--wk-ink-soft)">Du schreibst mir – so, wie es für dich gerade passt. Das kann kurz oder ausführlich sein.</div>
       </div>
       <div>
-        <div style="position:relative;width:76px;height:76px;margin:0 auto 10px;background:url(assets/wc/circle_yellow.png) center/contain no-repeat;display:flex;align-items:center;justify-content:center;font-size:26px;color:#8a5b1f">♡<span style="position:absolute;top:-4px;left:-6px;width:30px;height:30px;border-radius:50%;background:#e8b04b;color:#fff;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center">2</span></div>
-        <div style="font-family:Alegreya,serif;font-size:17.5px;font-weight:700;color:#0d3b30;margin-bottom:6px">Ich melde mich bei dir</div>
-        <div style="font-size:13px;line-height:1.5;color:#4b5a4f">Ich antworte persönlich und schaue mit dir, was für dich stimmig ist.</div>
+        <div style="position:relative;width:76px;height:76px;margin:0 auto 10px;background:url(assets/wc/circle_yellow.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center;font-size:26px;color:var(--wk-yellow-ink)">♡<span style="position:absolute;top:-4px;left:-6px;width:30px;height:30px;border-radius:50%;background:var(--wk-yellow);color:#fff;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center">2</span></div>
+        <div style="font-family:Alegreya,serif;font-size:17.5px;font-weight:700;color:var(--wk-ink-strong);margin-bottom:6px">Ich melde mich bei dir</div>
+        <div style="font-size:13px;line-height:1.5;color:var(--wk-ink-soft)">Ich antworte persönlich und schaue mit dir, was für dich stimmig ist.</div>
       </div>
       <div>
-        <div style="position:relative;width:76px;height:76px;margin:0 auto 10px;background:url(assets/wc/circle_pink.png) center/contain no-repeat;display:flex;align-items:center;justify-content:center;font-size:24px;color:#a8455f">❧<span style="position:absolute;top:-4px;left:-6px;width:30px;height:30px;border-radius:50%;background:#ef4f7a;color:#fff;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center">3</span></div>
-        <div style="font-family:Alegreya,serif;font-size:17.5px;font-weight:700;color:#0d3b30;margin-bottom:6px">Wir finden den passenden Weg</div>
-        <div style="font-size:13px;line-height:1.5;color:#4b5a4f">In einem unverbindlichen Gespräch lernen wir uns kennen und klären erste Fragen.</div>
+        <div style="position:relative;width:76px;height:76px;margin:0 auto 10px;background:url(assets/wc/circle_pink.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--wk-pink-ink)">❧<span style="position:absolute;top:-4px;left:-6px;width:30px;height:30px;border-radius:50%;background:var(--wk-pink-ink);color:#fff;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center">3</span></div>
+        <div style="font-family:Alegreya,serif;font-size:17.5px;font-weight:700;color:var(--wk-ink-strong);margin-bottom:6px">Wir finden den passenden Weg</div>
+        <div style="font-size:13px;line-height:1.5;color:var(--wk-ink-soft)">In einem unverbindlichen Gespräch lernen wir uns kennen und klären erste Fragen.</div>
       </div>
       <div>
-        <div style="position:relative;width:76px;height:76px;margin:0 auto 10px;background:url(assets/wc/circle_blue.png) center/contain no-repeat;display:flex;align-items:center;justify-content:center;font-size:24px;color:#33697a">✿<span style="position:absolute;top:-4px;left:-6px;width:30px;height:30px;border-radius:50%;background:#5b9aa8;color:#fff;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center">4</span></div>
-        <div style="font-family:Alegreya,serif;font-size:17.5px;font-weight:700;color:#0d3b30;margin-bottom:6px">Deine Reise beginnt</div>
-        <div style="font-size:13px;line-height:1.5;color:#4b5a4f">Wenn es für dich passt, begleite ich dich Schritt für Schritt auf deinem Weg.</div>
+        <div style="position:relative;width:76px;height:76px;margin:0 auto 10px;background:url(assets/wc/circle_blue.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--wk-cyan-ink)">✿<span style="position:absolute;top:-4px;left:-6px;width:30px;height:30px;border-radius:50%;background:var(--wk-cyan);color:#fff;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center">4</span></div>
+        <div style="font-family:Alegreya,serif;font-size:17.5px;font-weight:700;color:var(--wk-ink-strong);margin-bottom:6px">Deine Reise beginnt</div>
+        <div style="font-size:13px;line-height:1.5;color:var(--wk-ink-soft)">Wenn es für dich passt, begleite ich dich Schritt für Schritt auf deinem Weg.</div>
       </div>
     </div>
   </div>
@@ -200,98 +208,98 @@
 
 <section style="position:relative;padding:20px 20px 30px">
   <div style="max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;gap:24px;align-items:center">
-    <img src="assets/chars/05_pinguin.png" alt="" loading="lazy" style="flex:0 1 170px;min-width:120px;mix-blend-mode:multiply">
+    <img decoding="async" width="512" height="512" src="assets/chars/05_pinguin.webp" alt="" loading="lazy" style="flex:0 1 170px;min-width:120px;mix-blend-mode:multiply">
     <div style="flex:1 1 460px;min-width:280px">
-      <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(23px,2.9vw,30px);color:#0d3b30;margin:0 0 18px">Vielleicht fragst du dich …</h2>
+      <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(23px,2.9vw,30px);color:var(--wk-ink-strong);margin:0 0 18px">Vielleicht fragst du dich …</h2>
       <div style="display:flex;flex-direction:column;gap:10px">
-        <div onClick="{{ toggle1 }}" style="background:rgba(255,253,247,.75);border:1px solid #e6d8c0;border-radius:10px;padding:14px 16px;cursor:pointer">
-          <div style="display:flex;justify-content:space-between;gap:12px;font-size:15px;font-weight:600;color:#2f4038">Für wen ist die Begleitung geeignet? <span style="color:#8b9a8e">⌄</span></div>
-          <sc-if value="{{ faq1 }}" hint-placeholder-val="{{ false }}"><div style="font-size:14px;line-height:1.55;color:#4b5a4f;margin-top:10px">Für Kinder, Jugendliche, Eltern, Familien und Väter – und für Fachkräfte, die Kinder und Familien begleiten.</div></sc-if>
+        <div onClick="{{ toggle1 }}" style="background:rgba(255,253,247,.75);border:1px solid var(--wk-line);border-radius:10px;padding:14px 16px;cursor:pointer">
+          <div style="display:flex;justify-content:space-between;gap:12px;font-size:15px;font-weight:600;color:var(--wk-ink)">Für wen ist die Begleitung geeignet? <span style="color:var(--wk-ink-muted)">⌄</span></div>
+          <sc-if value="{{ faq1 }}" hint-placeholder-val="{{ false }}"><div style="font-size:14px;line-height:1.55;color:var(--wk-ink-soft);margin-top:10px">Für Kinder, Jugendliche, Eltern, Familien und Väter – und für Fachkräfte, die Kinder und Familien begleiten.</div></sc-if>
         </div>
-        <div onClick="{{ toggle2 }}" style="background:rgba(255,253,247,.75);border:1px solid #e6d8c0;border-radius:10px;padding:14px 16px;cursor:pointer">
-          <div style="display:flex;justify-content:space-between;gap:12px;font-size:15px;font-weight:600;color:#2f4038">Findet die Begleitung online oder in Präsenz statt? <span style="color:#8b9a8e">⌄</span></div>
-          <sc-if value="{{ faq2 }}" hint-placeholder-val="{{ false }}"><div style="font-size:14px;line-height:1.55;color:#4b5a4f;margin-top:10px">Beides ist möglich: online per Video oder Telefon, vor Ort in Berlin, zu Hause oder draußen in der Natur.</div></sc-if>
+        <div onClick="{{ toggle2 }}" style="background:rgba(255,253,247,.75);border:1px solid var(--wk-line);border-radius:10px;padding:14px 16px;cursor:pointer">
+          <div style="display:flex;justify-content:space-between;gap:12px;font-size:15px;font-weight:600;color:var(--wk-ink)">Findet die Begleitung online oder in Präsenz statt? <span style="color:var(--wk-ink-muted)">⌄</span></div>
+          <sc-if value="{{ faq2 }}" hint-placeholder-val="{{ false }}"><div style="font-size:14px;line-height:1.55;color:var(--wk-ink-soft);margin-top:10px">Beides ist möglich: online per Video oder Telefon, vor Ort in Berlin, zu Hause oder draußen in der Natur.</div></sc-if>
         </div>
-        <div onClick="{{ toggle3 }}" style="background:rgba(255,253,247,.75);border:1px solid #e6d8c0;border-radius:10px;padding:14px 16px;cursor:pointer">
-          <div style="display:flex;justify-content:space-between;gap:12px;font-size:15px;font-weight:600;color:#2f4038">Was kostet eine Begleitung? <span style="color:#8b9a8e">⌄</span></div>
-          <sc-if value="{{ faq3 }}" hint-placeholder-val="{{ false }}"><div style="font-size:14px;line-height:1.55;color:#4b5a4f;margin-top:10px">Das hängt von Umfang und Format ab. Im ersten Gespräch kläre ich das transparent mit dir – ohne Verpflichtung.</div></sc-if>
+        <div onClick="{{ toggle3 }}" style="background:rgba(255,253,247,.75);border:1px solid var(--wk-line);border-radius:10px;padding:14px 16px;cursor:pointer">
+          <div style="display:flex;justify-content:space-between;gap:12px;font-size:15px;font-weight:600;color:var(--wk-ink)">Was kostet eine Begleitung? <span style="color:var(--wk-ink-muted)">⌄</span></div>
+          <sc-if value="{{ faq3 }}" hint-placeholder-val="{{ false }}"><div style="font-size:14px;line-height:1.55;color:var(--wk-ink-soft);margin-top:10px">Das hängt von Umfang und Format ab. Im ersten Gespräch kläre ich das transparent mit dir – ohne Verpflichtung.</div></sc-if>
         </div>
-        <div onClick="{{ toggle4 }}" style="background:rgba(255,253,247,.75);border:1px solid #e6d8c0;border-radius:10px;padding:14px 16px;cursor:pointer">
-          <div style="display:flex;justify-content:space-between;gap:12px;font-size:15px;font-weight:600;color:#2f4038">Wie schnell kann es losgehen? <span style="color:#8b9a8e">⌄</span></div>
-          <sc-if value="{{ faq4 }}" hint-placeholder-val="{{ false }}"><div style="font-size:14px;line-height:1.55;color:#4b5a4f;margin-top:10px">Ich antworte innerhalb von 24–48 Stunden. Einen ersten Termin finden wir meist innerhalb von ein bis zwei Wochen.</div></sc-if>
+        <div onClick="{{ toggle4 }}" style="background:rgba(255,253,247,.75);border:1px solid var(--wk-line);border-radius:10px;padding:14px 16px;cursor:pointer">
+          <div style="display:flex;justify-content:space-between;gap:12px;font-size:15px;font-weight:600;color:var(--wk-ink)">Wie schnell kann es losgehen? <span style="color:var(--wk-ink-muted)">⌄</span></div>
+          <sc-if value="{{ faq4 }}" hint-placeholder-val="{{ false }}"><div style="font-size:14px;line-height:1.55;color:var(--wk-ink-soft);margin-top:10px">Ich antworte innerhalb von 24–48 Stunden. Einen ersten Termin finden wir meist innerhalb von ein bis zwei Wochen.</div></sc-if>
         </div>
-        <div onClick="{{ toggle5 }}" style="background:rgba(255,253,247,.75);border:1px solid #e6d8c0;border-radius:10px;padding:14px 16px;cursor:pointer">
-          <div style="display:flex;justify-content:space-between;gap:12px;font-size:15px;font-weight:600;color:#2f4038">Was, wenn ich mir noch unsicher bin? <span style="color:#8b9a8e">⌄</span></div>
-          <sc-if value="{{ faq5 }}" hint-placeholder-val="{{ false }}"><div style="font-size:14px;line-height:1.55;color:#4b5a4f;margin-top:10px">Dann schreib mir trotzdem. Unsicherheit ist ein guter Anfang – du entscheidest danach in Ruhe, ob es für dich passt.</div></sc-if>
+        <div onClick="{{ toggle5 }}" style="background:rgba(255,253,247,.75);border:1px solid var(--wk-line);border-radius:10px;padding:14px 16px;cursor:pointer">
+          <div style="display:flex;justify-content:space-between;gap:12px;font-size:15px;font-weight:600;color:var(--wk-ink)">Was, wenn ich mir noch unsicher bin? <span style="color:var(--wk-ink-muted)">⌄</span></div>
+          <sc-if value="{{ faq5 }}" hint-placeholder-val="{{ false }}"><div style="font-size:14px;line-height:1.55;color:var(--wk-ink-soft);margin-top:10px">Dann schreib mir trotzdem. Unsicherheit ist ein guter Anfang – du entscheidest danach in Ruhe, ob es für dich passt.</div></sc-if>
         </div>
       </div>
     </div>
-    <div style="flex:0 1 230px;min-width:210px;position:relative;background:url(assets/box/card-green.png) center/100% 100% no-repeat;padding:26px 24px;transform:rotate(1.5deg)">
+    <div style="flex:0 1 230px;min-width:210px;position:relative;background:url(assets/box/card-green.webp) center/100% 100% no-repeat;padding:26px 24px;transform:rotate(1.5deg)">
       <span style="position:absolute;top:-10px;left:50%;transform:translateX(-50%) rotate(-3deg);width:70px;height:20px;background:rgba(224,196,140,.7);border:1px solid rgba(170,140,85,.3)"></span>
-      <div style="font-family:Alegreya,serif;font-size:18px;font-weight:700;color:#0d3b30;margin-bottom:10px">Nimm dir die Zeit, die du brauchst.</div>
-      <div style="font-size:13.5px;line-height:1.6;color:#4b5a4f">Es geht nicht darum, sofort zu entscheiden. Es geht darum, dir die Tür zu öffnen – wenn du bereit bist. <span style="color:#ef4f7a">♡</span></div>
+      <div style="font-family:Alegreya,serif;font-size:18px;font-weight:700;color:var(--wk-ink-strong);margin-bottom:10px">Nimm dir die Zeit, die du brauchst.</div>
+      <div style="font-size:13.5px;line-height:1.6;color:var(--wk-ink-soft)">Es geht nicht darum, sofort zu entscheiden. Es geht darum, dir die Tür zu öffnen – wenn du bereit bist. <span style="color:var(--wk-pink-ink)">♡</span></div>
     </div>
   </div>
 </section>
 
-<section style="position:relative;background:#0a3f33;overflow:hidden">
-  <img src="assets/footer-band.png" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center bottom;opacity:.95">
+<section style="position:relative;background:var(--wk-forest-800);overflow:hidden">
+  <img decoding="async" width="1600" height="286" src="assets/footer-band.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center bottom;opacity:.95">
   <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,45,36,.62),rgba(8,45,36,.42));pointer-events:none"></div>
   <div style="position:relative;max-width:1240px;margin:0 auto;padding:40px 22px 46px;display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:center">
     <div style="flex:1 1 420px;max-width:620px;text-align:center;text-shadow:0 2px 14px rgba(6,30,24,.6)">
-      <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(24px,3.1vw,36px);line-height:1.15;color:#f5ede0;margin:0 0 10px">Egal, wie klein der erste Schritt ist – er zählt.</h2>
-      <p style="color:#e3ddc9;font-size:16px;line-height:1.55;margin:0 0 20px">Ich freue mich darauf, von dir zu hören und gemeinsam herauszufinden, welche Schritte dich weiterbringen.</p>
-      <a href="./Kontakt.dc.html" style="display:inline-block;background:#ef4f7a;color:#fff;border-radius:999px;padding:14px 32px;font-size:16.5px;font-weight:600;box-shadow:0 8px 20px rgba(6,30,24,.35)" style-hover="background:#d13a63">Kontakt aufnehmen&nbsp;&nbsp;♡</a>
+      <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(24px,3.1vw,36px);line-height:1.15;color:var(--wk-paper);margin:0 0 10px">Egal, wie klein der erste Schritt ist – er zählt.</h2>
+      <p style="color:var(--wk-paper-warm);font-size:16px;line-height:1.55;margin:0 0 20px">Ich freue mich darauf, von dir zu hören und gemeinsam herauszufinden, welche Schritte dich weiterbringen.</p>
+      <a href="./Kontakt.dc.html" style="display:inline-block;background:var(--wk-pink-ink);color:#fff;border-radius:999px;padding:14px 32px;font-size:16.5px;font-weight:600;box-shadow:0 8px 20px rgba(6,30,24,.35)" style-hover="background:var(--wk-pink-700)">Kontakt aufnehmen&nbsp;&nbsp;♡</a>
     </div>
   </div>
 </section>
 
-<footer style="background:#07382d;color:#a9b7ad;position:relative;overflow:hidden">
-  <img src="assets/side/flowerRight.png" alt="" loading="lazy" style="position:absolute;right:-20px;bottom:0;width:clamp(90px,10vw,160px);opacity:.35;pointer-events:none">
+<footer style="background:var(--wk-forest-900);color:var(--wk-on-dark-soft);position:relative;overflow:hidden">
+  <img decoding="async" width="187" height="154" src="assets/side/flowerRight.webp" alt="" loading="lazy" style="position:absolute;right:-20px;bottom:0;width:clamp(90px,10vw,160px);opacity:.35;pointer-events:none">
   <div style="position:relative;max-width:1240px;margin:0 auto;padding:36px 22px 22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:26px">
     <div>
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
-        <span style="width:42px;height:42px;border-radius:50%;background:#f5ede0;display:flex;align-items:flex-end;justify-content:center;overflow:hidden"><img src="assets/cat-teal.png" alt="" style="width:31px;display:block"></span>
-        <span style="font-family:Alegreya,serif;font-size:24px;color:#f5ede0">Waldkätzchen</span>
+        <span style="width:42px;height:42px;border-radius:50%;background:var(--wk-paper);display:flex;align-items:flex-end;justify-content:center;overflow:hidden"><img decoding="async" width="96" height="144" src="assets/cat-teal-logo.webp" alt="" style="width:31px;display:block"></span>
+        <span style="font-family:Alegreya,serif;font-size:24px;color:var(--wk-paper)">Waldkätzchen</span>
       </div>
-      <div style="font-size:14px;line-height:1.6">Verstehen. Verbinden. Verändern.<br>Für Kinder, Eltern und Familien. <span style="color:#ef8ba5">♡</span></div>
+      <div style="font-size:14px;line-height:1.6">Verstehen. Verbinden. Verändern.<br>Für Kinder, Eltern und Familien. <span style="color:var(--wk-pink)">♡</span></div>
     </div>
     <div>
-      <div style="font-family:Alegreya,serif;font-size:17px;color:#f5ede0;margin-bottom:10px">Navigation</div>
+      <div style="font-family:Alegreya,serif;font-size:17px;color:var(--wk-paper);margin-bottom:10px">Navigation</div>
       <div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px">
-        <a href="./Ueber mich.dc.html" style="color:#a9b7ad">Über mich</a>
-        <a href="./Mein Ansatz.dc.html" style="color:#a9b7ad">Mein Ansatz</a>
-        <a href="./Angebot.dc.html" style="color:#a9b7ad">Angebot</a>
-        <a href="./Fuer Teams.dc.html" style="color:#a9b7ad">Für wen</a>
-        <a href="./Autismus.dc.html" style="color:#a9b7ad">Wissen</a>
-        <a href="./Kontakt.dc.html" style="color:#e8b04b">Kontakt</a>
+        <a href="./Ueber mich.dc.html" style="color:var(--wk-on-dark-soft)">Über mich</a>
+        <a href="./Mein Ansatz.dc.html" style="color:var(--wk-on-dark-soft)">Mein Ansatz</a>
+        <a href="./Angebot.dc.html" style="color:var(--wk-on-dark-soft)">Angebot</a>
+        <a href="./Fuer Teams.dc.html" style="color:var(--wk-on-dark-soft)">Für wen</a>
+        <a href="./Autismus.dc.html" style="color:var(--wk-on-dark-soft)">Wissen</a>
+        <a href="./Kontakt.dc.html" style="color:var(--wk-yellow)">Kontakt</a>
       </div>
     </div>
     <div>
-      <div style="font-family:Alegreya,serif;font-size:17px;color:#f5ede0;margin-bottom:10px">Angebot</div>
+      <div style="font-family:Alegreya,serif;font-size:17px;color:var(--wk-paper);margin-bottom:10px">Angebot</div>
       <div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px">
-        <a href="./Angebot.dc.html" style="color:#a9b7ad">Familienbegleitung</a>
-        <a href="./Angebot.dc.html" style="color:#a9b7ad">Elternbegleitung</a>
-        <a href="./Angebot.dc.html" style="color:#a9b7ad">Einzelberatung</a>
-        <a href="./Angebot.dc.html" style="color:#a9b7ad">Workshops &amp; Vorträge</a>
-        <a href="./Fuer Teams.dc.html" style="color:#a9b7ad">Beratung für Fachkräfte</a>
+        <a href="./Angebot.dc.html" style="color:var(--wk-on-dark-soft)">Familienbegleitung</a>
+        <a href="./Angebot.dc.html" style="color:var(--wk-on-dark-soft)">Elternbegleitung</a>
+        <a href="./Angebot.dc.html" style="color:var(--wk-on-dark-soft)">Einzelberatung</a>
+        <a href="./Angebot.dc.html" style="color:var(--wk-on-dark-soft)">Workshops &amp; Vorträge</a>
+        <a href="./Fuer Teams.dc.html" style="color:var(--wk-on-dark-soft)">Beratung für Fachkräfte</a>
       </div>
     </div>
     <div>
-      <div style="font-family:Alegreya,serif;font-size:17px;color:#f5ede0;margin-bottom:10px">Rechtliches</div>
+      <div style="font-family:Alegreya,serif;font-size:17px;color:var(--wk-paper);margin-bottom:10px">Rechtliches</div>
       <div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px"><span>Impressum</span><span>Datenschutz</span><span>AGB</span></div>
     </div>
     <div>
-      <div style="font-family:Alegreya,serif;font-size:17px;color:#f5ede0;margin-bottom:10px">Kontakt</div>
+      <div style="font-family:Alegreya,serif;font-size:17px;color:var(--wk-paper);margin-bottom:10px">Kontakt</div>
       <div style="display:flex;flex-direction:column;gap:9px;font-size:14.5px">
-        <span style="display:flex;gap:9px;align-items:center"><span style="color:#e8b04b">✉</span>hallo@waldkaetzchen.de</span>
-        <span style="display:flex;gap:9px;align-items:center"><span style="color:#e8b04b">☎</span>+49 160 1234567</span>
-        <span style="display:flex;gap:9px;align-items:center"><span style="color:#e8b04b">⌖</span>Berlin &amp; Online</span>
-        <span style="display:flex;gap:9px;align-items:center"><span style="color:#e8b04b">⊕</span>www.waldkaetzchen.de</span>
+        <span style="display:flex;gap:9px;align-items:center"><span style="color:var(--wk-yellow)">✉</span>hallo@waldkaetzchen.de</span>
+        <span style="display:flex;gap:9px;align-items:center"><span style="color:var(--wk-yellow)">☎</span>+49 160 1234567</span>
+        <span style="display:flex;gap:9px;align-items:center"><span style="color:var(--wk-yellow)">⌖</span>Berlin &amp; Online</span>
+        <span style="display:flex;gap:9px;align-items:center"><span style="color:var(--wk-yellow)">⊕</span>www.waldkaetzchen.de</span>
       </div>
     </div>
   </div>
-  <div style="position:relative;border-top:1px solid rgba(245,237,224,.13);padding:14px 22px;text-align:center;font-size:13px;color:#7f9188">© 2026 Waldkätzchen – Alle Rechte vorbehalten</div>
+  <div style="position:relative;border-top:1px solid rgba(245,237,224,.13);padding:14px 22px;text-align:center;font-size:13px;color:var(--wk-on-dark-muted)">© 2026 Waldkätzchen – Alle Rechte vorbehalten</div>
 </footer>
 </div>
 </x-dc>
