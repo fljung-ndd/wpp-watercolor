@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kontakt – Waldkätzchen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Alegreya+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;padding:0;background:#f5ede0;color:#2f4038;font-family:'Alegreya Sans',sans-serif;-webkit-font-smoothing:antialiased;}
+  a{color:#ef4f7a;text-decoration:none;} a:hover{color:#d13a63;}
+  *{box-sizing:border-box;}
+  img{max-width:100%;}
+</style>
+</helmet>
+
+<div style="background:#f5ede0;overflow-x:hidden">
+
+<header style="position:sticky;top:0;z-index:60;background:#084f3f;box-shadow:0 2px 14px rgba(8,45,36,.25)">
+  <div style="max-width:1300px;margin:0 auto;display:flex;align-items:center;gap:18px;padding:9px 20px">
+    <a href="./Startseite.dc.html" style="display:flex;align-items:center;gap:11px;flex:0 0 auto">
+      <span style="width:46px;height:46px;border-radius:50%;background:#f5ede0;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;border:2px solid rgba(245,237,224,.4)"><img src="assets/cat-teal.png" alt="" style="width:34px;display:block"></span>
+      <span style="font-family:Alegreya,serif;font-size:28px;font-weight:600;color:#f5ede0">Waldkätzchen</span>
+    </a>
+    <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+      <nav style="display:flex;align-items:center;gap:18px;margin-left:auto;font-size:15.5px;color:#dcd6c0">
+        <a href="./Startseite.dc.html" style="color:#dcd6c0">Startseite</a>
+        <a href="./Ueber mich.dc.html" style="color:#dcd6c0">Über mich</a>
+        <a href="./Mein Ansatz.dc.html" style="color:#dcd6c0">Mein Ansatz</a>
+        <a href="./Angebot.dc.html" style="color:#dcd6c0">Angebot</a>
+        <span onClick="{{ toggleFuerWen }}" style="position:relative;cursor:pointer;color:#f5ede0">Für wen ▾
+          <sc-if value="{{ menuFuerWen }}" hint-placeholder-val="{{ false }}">
+            <span style="position:absolute;top:30px;left:-12px;background:#fbf5e6;border:1px solid #e0d3b4;border-radius:12px;box-shadow:0 10px 26px rgba(8,45,36,.3);padding:8px;display:flex;flex-direction:column;min-width:158px;z-index:70">
+              <a href="./Fuer Teams.dc.html" style="padding:8px 12px;border-radius:8px;color:#2f4038">Für Teams</a>
+              <a href="./Fuer Vaeter.dc.html" style="padding:8px 12px;border-radius:8px;color:#2f4038">Für Väter</a>
+            </span>
+          </sc-if>
+        </span>
+        <span onClick="{{ toggleWissen }}" style="position:relative;cursor:pointer;color:#f5ede0">Wissen ▾
+          <sc-if value="{{ menuWissen }}" hint-placeholder-val="{{ false }}">
+            <span style="position:absolute;top:30px;left:-12px;background:#fbf5e6;border:1px solid #e0d3b4;border-radius:12px;box-shadow:0 10px 26px rgba(8,45,36,.3);padding:8px;display:flex;flex-direction:column;min-width:186px;z-index:70">
+              <a href="./Autismus.dc.html" style="padding:8px 12px;border-radius:8px;color:#2f4038">Autismus verstehen</a>
+            </span>
+          </sc-if>
+        </span>
+        <a href="./Kontakt.dc.html" style="color:#e8b04b;font-weight:600;border-bottom:2px solid #e8b04b;padding-bottom:2px">Kontakt</a>
+        <a href="./Kontakt.dc.html" style="background:#ef4f7a;color:#fff;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;display:flex;align-items:center;gap:9px" style-hover="background:#d13a63">Kontakt aufnehmen <span>♡</span></a>
+      </nav>
+    </sc-if>
+    <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+      <button onClick="{{ toggleDrawer }}" aria-label="Menü" style="margin-left:auto;width:48px;height:48px;background:rgba(245,237,224,.12);border:1px solid rgba(245,237,224,.3);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer">
+        <span style="width:22px;height:2px;background:#f5ede0;display:block"></span>
+        <span style="width:22px;height:2px;background:#f5ede0;display:block"></span>
+        <span style="width:22px;height:2px;background:#f5ede0;display:block"></span>
+      </button>
+    </sc-if>
+  </div>
+  <sc-if value="{{ drawer }}" hint-placeholder-val="{{ false }}">
+    <div style="background:#0a5a47;border-top:1px solid rgba(245,237,224,.16);padding:12px 20px 20px;display:flex;flex-direction:column;font-size:17px">
+      <a href="./Startseite.dc.html" style="padding:13px 6px;color:#f5ede0">Startseite</a>
+      <a href="./Ueber mich.dc.html" style="padding:13px 6px;color:#f5ede0">Über mich</a>
+      <a href="./Mein Ansatz.dc.html" style="padding:13px 6px;color:#f5ede0">Mein Ansatz</a>
+      <a href="./Angebot.dc.html" style="padding:13px 6px;color:#f5ede0">Angebot</a>
+      <div style="padding:13px 6px 6px;color:#8fb3a4;font-size:13.5px;letter-spacing:.08em;text-transform:uppercase">Für wen</div>
+      <a href="./Fuer Teams.dc.html" style="padding:13px 6px;color:#f5ede0">Für Teams</a>
+      <a href="./Fuer Vaeter.dc.html" style="padding:13px 6px;color:#f5ede0">Für Väter</a>
+      <div style="padding:13px 6px 6px;color:#8fb3a4;font-size:13.5px;letter-spacing:.08em;text-transform:uppercase">Wissen</div>
+      <a href="./Autismus.dc.html" style="padding:13px 6px;color:#f5ede0">Autismus verstehen</a>
+      <a href="./Kontakt.dc.html" style="padding:13px 6px;color:#e8b04b;font-weight:600">Kontakt</a>
+    </div>
+  </sc-if>
+</header>
+
+<section style="position:relative;background:#f5ede0;overflow:hidden">
+  <img src="assets/hero-kontakt.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+  <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(245,237,224,.94) 30%, rgba(245,237,224,.7) 52%, rgba(245,237,224,.15) 74%)"></div>
+  <div style="position:relative;max-width:1240px;margin:0 auto;padding:44px 24px 48px">
+    <div style="max-width:min(58%,560px);min-width:min(100%,280px)">
+      <h1 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(34px,4.6vw,56px);line-height:1.06;margin:0 0 8px;color:#0a6b5c">Kontakt aufnehmen <span style="color:#ef4f7a">♡</span></h1>
+      <div style="color:#ef4f7a;font-family:Alegreya,serif;font-size:clamp(19px,2.3vw,27px);margin-bottom:18px">Ich freue mich, von dir zu hören!</div>
+      <p style="font-size:16.5px;line-height:1.6;margin:0;max-width:44ch">Egal, ob du Fragen hast, dir unsicher bist oder einfach nur ein erstes Gefühl bekommen möchtest – schreib mir. Ich bin für dich da.</p>
+    </div>
+  </div>
+</section>
+
+<section style="padding:34px 20px 10px">
+  <div style="max-width:820px;margin:0 auto;background:url(assets/box/card-green.png) center/100% 100% no-repeat;padding:clamp(26px,4vw,42px) clamp(22px,4vw,46px)">
+    <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <label style="font-size:14.5px;font-weight:600;color:#3f4f44">Dein Name
+          <input placeholder="Wie darf ich dich nennen?" style="display:block;width:100%;margin-top:7px;border:1px solid #dccdaa;border-radius:10px;padding:14px;font-family:'Alegreya Sans',sans-serif;font-size:15.5px;font-weight:400;background:#fffdf6;color:#2f4038">
+        </label>
+        <label style="font-size:14.5px;font-weight:600;color:#3f4f44">Deine E-Mail
+          <input placeholder="Damit ich dir antworten kann" style="display:block;width:100%;margin-top:7px;border:1px solid #dccdaa;border-radius:10px;padding:14px;font-family:'Alegreya Sans',sans-serif;font-size:15.5px;font-weight:400;background:#fffdf6;color:#2f4038">
+        </label>
+        <label style="font-size:14.5px;font-weight:600;color:#3f4f44">Betreff
+          <input placeholder="Worum geht es?" style="display:block;width:100%;margin-top:7px;border:1px solid #dccdaa;border-radius:10px;padding:14px;font-family:'Alegreya Sans',sans-serif;font-size:15.5px;font-weight:400;background:#fffdf6;color:#2f4038">
+        </label>
+        <label style="font-size:14.5px;font-weight:600;color:#3f4f44">Deine Nachricht
+          <textarea placeholder="Erzähl mir, was dich bewegt…" rows="5" style="display:block;width:100%;margin-top:7px;border:1px solid #dccdaa;border-radius:10px;padding:14px;font-family:'Alegreya Sans',sans-serif;font-size:15.5px;font-weight:400;background:#fffdf6;color:#2f4038;resize:vertical"></textarea>
+        </label>
+        <button onClick="{{ send }}" style="align-self:center;background:#f08099;color:#fff;border:none;border-radius:999px;padding:14px 34px;font-family:'Alegreya Sans',sans-serif;font-size:16.5px;font-weight:600;cursor:pointer;box-shadow:0 8px 18px rgba(120,60,80,.18)" style-hover="background:#e0688a">Nachricht senden&nbsp;&nbsp;♡</button>
+      </div>
+    </sc-if>
+    <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+      <div style="text-align:center;padding:20px 0">
+        <img src="assets/chars/09_haende_herz.png" alt="" style="width:150px;mix-blend-mode:multiply">
+        <h3 style="font-family:Alegreya,serif;font-size:28px;color:#0a6b5c;margin:14px 0 8px">Danke für deine Nachricht!</h3>
+        <p style="font-size:15.5px;color:#4b5a4f;margin:0">Ich melde mich so bald wie möglich bei dir.<br>(Demo – es wurde noch nichts versendet.)</p>
+      </div>
+    </sc-if>
+  </div>
+</section>
+
+<section style="padding:26px 20px 10px">
+  <div style="max-width:900px;margin:0 auto">
+    <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(22px,2.8vw,29px);color:#0a6b5c;margin:0 0 18px">Andere Wege zu mir</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px">
+      <div style="background:rgba(255,253,246,.5);border:1px solid #e0d3b4;border-radius:14px;padding:18px 20px;display:flex;gap:14px;align-items:center">
+        <span style="font-size:24px">✉</span>
+        <div><div style="font-size:14px;font-weight:700;color:#0d3b30;margin-bottom:3px">E-Mail</div><div style="font-size:14px;color:#4b5a4f">hallo@waldkaetzchen.de</div></div>
+      </div>
+      <div style="background:rgba(255,253,246,.5);border:1px solid #e0d3b4;border-radius:14px;padding:18px 20px;display:flex;gap:14px;align-items:center">
+        <span style="font-size:24px">☎</span>
+        <div><div style="font-size:14px;font-weight:700;color:#0d3b30;margin-bottom:3px">Telefon</div><div style="font-size:14px;color:#4b5a4f">0151 12545678</div></div>
+      </div>
+      <div style="background:rgba(255,253,246,.5);border:1px solid #e0d3b4;border-radius:14px;padding:18px 20px;display:flex;gap:14px;align-items:center">
+        <span style="font-size:24px">⌖</span>
+        <div><div style="font-size:14px;font-weight:700;color:#0d3b30;margin-bottom:3px">Standort</div><div style="font-size:14px;color:#4b5a4f">Online &amp; in der Natur</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="position:relative;padding:30px 20px 22px;overflow:hidden">
+  <img src="assets/section/section_light.png" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+  <div style="position:relative;max-width:900px;margin:0 auto;display:flex;flex-wrap:wrap;gap:22px;align-items:center">
+    <div style="flex:1 1 380px;min-width:270px;background:url(assets/box/card-rose.png) center/100% 100% no-repeat;padding:clamp(24px,4vw,38px) clamp(24px,4vw,42px)">
+      <p style="font-family:Alegreya,serif;font-size:clamp(18px,2.1vw,23px);line-height:1.5;margin:0;color:#0d3b30">„Manchmal braucht es nur einen Menschen, der wirklich zuhört – damit Veränderung möglich wird.“ <span style="color:#ef4f7a">♡</span></p>
+    </div>
+    <img src="assets/chars/11_schnecke_rakete.png" alt="" loading="lazy" style="flex:0 1 220px;min-width:160px;mix-blend-mode:multiply">
+  </div>
+</section>
+
+<div style="display:flex;justify-content:center;align-items:flex-end;gap:clamp(4px,2vw,22px);padding:8px 12px 0;background:#f5ede0;overflow:hidden">
+  <img src="assets/chars/03_leopard_krone.png" alt="" loading="lazy" style="width:clamp(56px,9vw,112px);mix-blend-mode:multiply">
+  <img src="assets/chars/11_schnecke_rakete.png" alt="" loading="lazy" style="width:clamp(56px,9vw,112px);mix-blend-mode:multiply">
+  <img src="assets/chars/05_pinguin.png" alt="" loading="lazy" style="width:clamp(52px,8vw,100px);mix-blend-mode:multiply">
+  <img src="assets/chars/04_roter_panda.png" alt="" loading="lazy" style="width:clamp(56px,9vw,112px);mix-blend-mode:multiply">
+  <img src="assets/chars/02_katta.png" alt="" loading="lazy" style="width:clamp(56px,9vw,112px);mix-blend-mode:multiply">
+</div>
+
+<footer style="background:#07382d;color:#a9b7ad">
+  <div style="max-width:1240px;margin:0 auto;padding:36px 22px 22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:26px">
+    <div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+        <span style="width:42px;height:42px;border-radius:50%;background:#f5ede0;display:flex;align-items:flex-end;justify-content:center;overflow:hidden"><img src="assets/cat-teal.png" alt="" style="width:31px;display:block"></span>
+        <span style="font-family:Alegreya,serif;font-size:24px;color:#f5ede0">Waldkätzchen</span>
+      </div>
+      <div style="font-size:13.5px;color:#8fa396;margin-bottom:10px">Verstehen. Verbinden. Verändern.</div>
+      <div style="font-size:14px;line-height:1.55">Für Kinder, Eltern und Familien. <span style="color:#ef8ba5">♡</span></div>
+    </div>
+    <div>
+      <div style="font-family:Alegreya,serif;font-size:17px;color:#f5ede0;margin-bottom:10px">Navigation</div>
+      <div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px">
+        <a href="./Startseite.dc.html" style="color:#a9b7ad">Startseite</a>
+        <a href="./Ueber mich.dc.html" style="color:#a9b7ad">Über mich</a>
+        <a href="./Mein Ansatz.dc.html" style="color:#a9b7ad">Mein Ansatz</a>
+        <a href="./Angebot.dc.html" style="color:#a9b7ad">Angebot</a>
+        <a href="./Fuer Teams.dc.html" style="color:#a9b7ad">Für Teams</a>
+        <a href="./Fuer Vaeter.dc.html" style="color:#a9b7ad">Für Väter</a>
+        <a href="./Kontakt.dc.html" style="color:#a9b7ad">Kontakt</a>
+      </div>
+    </div>
+    <div>
+      <div style="font-family:Alegreya,serif;font-size:17px;color:#f5ede0;margin-bottom:10px">Themen</div>
+      <div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px">
+        <a href="./Autismus.dc.html" style="color:#a9b7ad">Autismus verstehen</a>
+        <span>PDA im Alltag</span>
+        <span>Herausforderndes Verhalten</span>
+        <span>Familienalltag</span>
+        <span>Rituale &amp; Impulse</span>
+        <span>Selbstfürsorge</span>
+      </div>
+    </div>
+    <div>
+      <div style="font-family:Alegreya,serif;font-size:17px;color:#f5ede0;margin-bottom:10px">Rechtliches</div>
+      <div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px"><span>Impressum</span><span>Datenschutz</span><span>AGB</span></div>
+    </div>
+    <div>
+      <div style="font-family:Alegreya,serif;font-size:17px;color:#f5ede0;margin-bottom:10px">Kontakt</div>
+      <div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px">
+        <span>hallo@waldkaetzchen.de</span>
+        <span>0151 12545678</span>
+        <span>Online &amp; in der Natur</span>
+        <span>www.waldkaetzchen.de</span>
+      </div>
+    </div>
+  </div>
+  <div style="border-top:1px solid rgba(245,237,224,.13);padding:14px 22px;text-align:center;font-size:13px;color:#7f9188">© 2026 Waldkätzchen – Alle Rechte vorbehalten</div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { w: typeof window !== 'undefined' ? window.innerWidth : 1400, menuFuerWen: false, menuWissen: false, drawer: false, sent: false };
+  componentDidMount() {
+    this._onResize = () => this.setState({ w: window.innerWidth });
+    window.addEventListener('resize', this._onResize);
+    this._onResize();
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this._onResize); }
+  renderVals() {
+    const narrow = this.state.w < 1000;
+    return {
+      wide: !narrow,
+      narrow,
+      drawer: narrow && this.state.drawer,
+      menuFuerWen: this.state.menuFuerWen,
+      menuWissen: this.state.menuWissen,
+      sent: this.state.sent,
+      notSent: !this.state.sent,
+      toggleDrawer: () => this.setState(s => ({ drawer: !s.drawer })),
+      toggleFuerWen: () => this.setState(s => ({ menuFuerWen: !s.menuFuerWen, menuWissen: false })),
+      toggleWissen: () => this.setState(s => ({ menuWissen: !s.menuWissen, menuFuerWen: false })),
+      send: () => this.setState({ sent: true }),
+    };
+  }
+}
+</script>
+</body>
+</html>
