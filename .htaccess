@@ -1,0 +1,5 @@
+AuthType Basic
+AuthName "Preview"
+AuthBasicProvider file
+AuthUserFile /web/waldkaetzchencolor.waldkaetzchen.de/.htpasswd
+Require valid-user
