@@ -1,0 +1,4 @@
+# Skills werden per `npx skills add` installiert und sind Werkzeug, nicht
+# Website-Inhalt. Der Deploy laedt mit './*' ohnehin keine Punkt-Ordner hoch.
+.agents/
+.claude/

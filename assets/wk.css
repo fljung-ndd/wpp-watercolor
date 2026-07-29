@@ -128,13 +128,34 @@ x-dc { display: none !important; }
 
 * { box-sizing: border-box; }
 
+html {
+  /* Die Seite ist durchgehend hell. Ohne diese Angabe zeichnet der Browser im
+     Dunkelmodus des Systems Scrollbalken, Formularfelder und Auswahllisten in
+     dunklen Systemfarben in ein cremefarbenes Layout. */
+  color-scheme: light;
+}
+
 html, body {
   margin: 0; padding: 0;
   background: var(--wk-paper);
   color: var(--wk-ink);
   font-family: var(--wk-font-sans);
   -webkit-font-smoothing: antialiased;
+  /* Nimmt die 300-ms-Verzögerung, die mobile Browser für Doppeltipp-Zoom
+     abwarten – Taps auf Buttons und Links fühlen sich sofort an. */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(216, 72, 120, .18);
 }
+
+/* Der Kopfbereich ist sticky und rund 64 px hoch. Ohne scroll-margin würde er
+   jedes per Ankerlink angesprungene Ziel verdecken. */
+h1, h2, h3, [id] { scroll-margin-top: 84px; }
+
+/* Verhindert Schusterjungen in Überschriften. */
+h1, h2, h3, h4 { text-wrap: balance; }
+
+/* Fließtext bleibt davon unberührt, bekommt aber saubere letzte Zeilen. */
+p { text-wrap: pretty; }
 
 a { color: var(--wk-pink-ink); text-decoration: none; }
 a:hover { color: var(--wk-pink-700); text-decoration: underline; }
@@ -187,4 +208,135 @@ img { max-width: 100%; height: auto; }
    darum dort neutral zurückfallen. */
 @media (forced-colors: active) {
   img { mix-blend-mode: normal !important; }
+}
+
+/* ---------------------------------------------------------------------- *
+ * Kontakt-Dialog
+ * Ohne overscroll-behavior scrollt beim Erreichen des Dialogendes die Seite
+ * dahinter weiter – auf Mobilgeräten wirkt der Dialog dadurch "undicht".
+ * ---------------------------------------------------------------------- */
+[role="dialog"] {
+  overscroll-behavior: contain;
+  max-height: calc(100dvh - 36px);
+  overflow-y: auto;
+}
+
+/* Formularfelder brauchen eine eigene Fokusmarkierung: der Rahmen allein
+   verändert sich beim Fokus nicht genug, um ihn zu erkennen. */
+input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 3px solid var(--wk-pink);
+  outline-offset: 1px;
+}
+
+/* Vollflächige Abschnitte reichen bis an den Rand – auf Geräten mit Notch
+   oder Home-Indicator muss der Inhalt dahinter ausweichen. */
+footer, [role="dialog"] {
+  padding-left: max(0px, env(safe-area-inset-left));
+  padding-right: max(0px, env(safe-area-inset-right));
+}
+
+/* ---------------------------------------------------------------------- *
+ * Aquarell-Übergänge zwischen den Abschnitten
+ *
+ * Die Kante ist keine gezeichnete Welle, sondern aus dem echten
+ * Pinselrand der Aquarell-Blobs in assets/wc/ gewonnen (siehe Kommentar
+ * im Generator). edge-wash liefert nur den Alphakanal - die Farben kommen
+ * über --wk-from und --wk-to, deshalb reicht eine Datei für alle Paare.
+ *
+ * Der Streifen füllt sich zuerst mit der unteren Farbe und lässt dann die
+ * obere maskiert hereinbluten. Damit ist er von den Hintergründen seiner
+ * Nachbarn unabhängig: kein Stacking-Problem, kein Ärger mit
+ * overflow:hidden, kein Haarriss an der Naht.
+ * ---------------------------------------------------------------------- */
+.wk-edge {
+  height: clamp(46px, 5.4vw, 82px);
+  background: var(--wk-to, var(--wk-paper));
+  position: relative;
+  overflow: hidden;
+  /* Der Streifen ist Dekoration und darf keine Vorleseposition erzeugen. */
+  pointer-events: none;
+}
+.wk-edge::before {
+  content: "";
+  position: absolute;
+  inset: -1px 0 0;                      /* -1px oben: kein Haarriss zum Abschnitt darüber */
+  background: var(--wk-from, var(--wk-paper));
+  -webkit-mask-image: url('edge-wash.webp');
+          mask-image: url('edge-wash.webp');
+  -webkit-mask-size: 1600px 100%;
+          mask-size: 1600px 100%;
+  -webkit-mask-repeat: repeat-x;
+          mask-repeat: repeat-x;
+  -webkit-mask-position: 0 0;
+          mask-position: 0 0;
+}
+/* Leiser Übergang zwischen zwei Papiertönen: flachere Kante, breiteres
+   Ausbluten. Sonst wirkt der Wechsel Creme/Warmcreme überbetont. */
+.wk-edge--soft { height: clamp(38px, 4.4vw, 64px); }
+.wk-edge--soft::before {
+  -webkit-mask-image: url('edge-wash-soft.webp');
+          mask-image: url('edge-wash-soft.webp');
+}
+/* Zweite Kachelposition, damit zwei Übergänge auf derselben Seite nicht
+   identisch aussehen. */
+.wk-edge--b::before { -webkit-mask-position: -540px 0; mask-position: -540px 0; }
+.wk-edge--c::before { -webkit-mask-position: -1080px 0; mask-position: -1080px 0; }
+
+/* Unterkante des Hero-Fotos: hier blutet das Papier nach oben ins Bild
+   hinein, statt dass das Foto hart abgeschnitten wird. Der Streifen liegt
+   über dem Bild, scaleY dreht die Kante nach oben. */
+.wk-edge-up {
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: clamp(64px, 7.5vw, 124px);
+  background: var(--wk-to, var(--wk-paper));
+  transform: scaleY(-1);
+  pointer-events: none;
+  z-index: 3;
+  -webkit-mask-image: url('edge-wash.webp');
+          mask-image: url('edge-wash.webp');
+  -webkit-mask-size: 1600px 100%;
+          mask-size: 1600px 100%;
+  -webkit-mask-repeat: repeat-x;
+          mask-repeat: repeat-x;
+}
+
+
+/* Im normalen Fluss statt absolut: sitzt direkt hinter dem Hero-Bild und
+   überlappt es per negativem Rand nach oben. Kein z-index, damit die
+   absolut positionierte Hero-Überschrift immer davor liegt. */
+.wk-edge-up--flow {
+  position: relative;
+  left: auto; right: auto; bottom: auto;
+  z-index: auto;
+  margin-top: calc(-1 * clamp(64px, 7.5vw, 124px));
+  margin-bottom: -1px;
+}
+
+
+/* Vollflächige Aquarell-Waschungen hinter einzelnen Abschnitten
+ * (sections/*, footer-band*, footer-bg-home) lagen bisher mit harter Ober-
+ * und Unterkante im Layout: object-fit:cover schneidet die Lavur einfach ab.
+ * Ein senkrechter Verlauf als Maske lässt sie oben und unten auslaufen.
+ *
+ * Hier bewusst ein glatter Verlauf und keine Zackenkante: die gemalte Kante
+ * tragen die .wk-edge-Streifen an den Farbwechseln. Beides an derselben Stelle
+ * würde unruhig. Der Verlauf ist das leise Mittel, die Kante das laute.
+ */
+.wk-wash {
+  -webkit-mask-image: linear-gradient(to bottom,
+      transparent 0, #000 clamp(28px, 4vw, 64px),
+      #000 calc(100% - clamp(28px, 4vw, 64px)), transparent 100%);
+          mask-image: linear-gradient(to bottom,
+      transparent 0, #000 clamp(28px, 4vw, 64px),
+      #000 calc(100% - clamp(28px, 4vw, 64px)), transparent 100%);
+}
+
+/* Wo mask-image fehlt (ältere Browser), bleibt der Streifen eine schlichte
+   Fläche in der unteren Farbe. Das ist genau der Zustand von vorher:
+   ein sauberer Farbwechsel, nur ohne Aquarellkante. */
+@supports not ((-webkit-mask-image: none) or (mask-image: none)) {
+  .wk-edge { height: 0; }
+  .wk-edge-up { display: none; }
+  /* .wk-wash bleibt unmaskiert - das ist der Zustand von vorher. */
 }
