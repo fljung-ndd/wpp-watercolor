@@ -90,6 +90,7 @@
 <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
   <section id="inhalt" tabindex="-1" style="position:relative;background:var(--wk-paper)">
     <img loading="lazy" decoding="async" width="1600" height="900" src="assets/hero-startseite.webp" alt="Portrait mit Ziege, Pinguin und Waldkätzchen" style="width:100%;display:block">
+    <div class="wk-edge-up wk-edge-up--flow" aria-hidden="true" style="--wk-to:var(--wk-paper)"></div>
     <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(245,237,224,.94) 24%, rgba(245,237,224,.66) 46%, rgba(245,237,224,0) 70%);pointer-events:none"></div>
     <div style="position:absolute;inset:0;display:flex;align-items:center">
       <div style="max-width:1300px;margin:0 auto;width:100%;padding:0 26px">
@@ -107,6 +108,7 @@
 <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
   <section style="background:var(--wk-paper)">
     <img loading="lazy" decoding="async" width="900" height="507" src="assets/hero-startseite-sm.webp" alt="Portrait mit Ziege, Pinguin und Waldkätzchen" style="width:100%;display:block">
+    <div class="wk-edge-up wk-edge-up--flow" aria-hidden="true" style="--wk-to:var(--wk-paper)"></div>
     <div style="padding:16px 22px 32px">
       <div style="font-size:14px;color:var(--wk-ink-muted);margin-bottom:10px"><a href="./Startseite.dc.html" style="color:var(--wk-ink-muted)">Startseite</a> &nbsp;›&nbsp; <span style="color:var(--wk-pink-ink);font-weight:600">Angebot</span></div>
       <h1 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(28px,7vw,42px);line-height:1.08;margin:0 0 6px;color:var(--wk-ink-strong)">Angebote, die zu eurem Alltag passen.</h1>
@@ -193,8 +195,9 @@
   </div>
 </section>
 
+<div class="wk-edge wk-edge--soft" aria-hidden="true" style="--wk-from:var(--wk-paper);--wk-to:var(--wk-paper-warm)"></div>
 <section style="overflow:hidden;position:relative;padding:36px 20px 34px;background:var(--wk-paper-warm);margin-top:30px">
-  <img decoding="async" width="1400" height="467" src="assets/sections/section_light.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none">
+  <img class="wk-wash" decoding="async" width="1400" height="467" src="assets/sections/section_light.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none">
   <div style="position:relative;max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:30px">
     <div>
       <h3 style="font-family:Alegreya,serif;font-weight:600;font-size:25px;color:var(--wk-ink-strong);margin:0 0 8px">Wie Begleitung aussehen kann</h3>
@@ -240,8 +243,9 @@
   </div>
 </section>
 
+<div class="wk-edge" aria-hidden="true" style="--wk-from:var(--wk-paper-warm);--wk-to:var(--wk-forest-800)"></div>
 <section style="position:relative;background:var(--wk-forest-800);overflow:hidden">
-  <img decoding="async" width="1600" height="286" src="assets/footer-band.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center bottom;opacity:.95">
+  <img class="wk-wash" decoding="async" width="1600" height="286" src="assets/footer-band.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center bottom;opacity:.95">
   <div style="position:relative;max-width:1240px;margin:0 auto;padding:48px 22px 54px;display:flex;flex-wrap:wrap;gap:26px;align-items:center;justify-content:space-between">
     <div style="flex:1 1 420px;max-width:620px;text-shadow:0 2px 14px rgba(6,30,24,.55)">
       <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(26px,3.2vw,38px);line-height:1.15;color:var(--wk-paper);margin:0 0 10px">Der nächste Schritt – ich begleite euch dabei.</h2>

@@ -89,6 +89,7 @@
 <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
   <section id="inhalt" tabindex="-1" style="position:relative;background:var(--wk-paper);overflow:hidden">
     <img loading="lazy" decoding="async" width="1600" height="900" src="assets/hero-startseite.webp" alt="Portrait mit Ziege, Pinguin und Waldkätzchen" style="width:100%;display:block">
+    <div class="wk-edge-up wk-edge-up--flow" aria-hidden="true" style="--wk-to:var(--wk-paper)"></div>
     <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(245,237,224,.97) 46%, rgba(245,237,224,.72) 62%, rgba(245,237,224,0) 80%);pointer-events:none"></div>
     <div style="position:absolute;inset:0;display:flex;align-items:center">
       <div style="max-width:1300px;margin:0 auto;width:100%;padding:0 26px">
@@ -105,6 +106,7 @@
 <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
   <section style="background:var(--wk-paper)">
     <img loading="lazy" decoding="async" width="900" height="507" src="assets/hero-startseite-sm.webp" alt="Portrait mit Ziege, Pinguin und Waldkätzchen" style="width:100%;display:block">
+    <div class="wk-edge-up wk-edge-up--flow" aria-hidden="true" style="--wk-to:var(--wk-paper)"></div>
     <div style="padding:16px 22px 30px">
       <h1 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(30px,7.5vw,44px);line-height:1.08;margin:0 0 8px;color:var(--wk-ink-strong)">Ich freue mich, von dir zu hören.</h1>
       <div style="color:var(--wk-pink-ink);font-family:Alegreya,serif;font-size:clamp(19px,5vw,25px);margin-bottom:16px">Jede Reise beginnt mit einem kleinen Schritt.</div>
@@ -179,7 +181,7 @@
 </section>
 
 <section style="position:relative;padding:20px 20px 20px;overflow:hidden">
-  <img decoding="async" width="1400" height="467" src="assets/sections/section_light.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;-webkit-mask-image:linear-gradient(180deg,transparent,#000 18%,#000 82%,transparent);mask-image:linear-gradient(180deg,transparent,#000 18%,#000 82%,transparent);pointer-events:none">
+  <img class="wk-wash" decoding="async" width="1400" height="467" src="assets/sections/section_light.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;-webkit-mask-image:linear-gradient(180deg,transparent,#000 18%,#000 82%,transparent);mask-image:linear-gradient(180deg,transparent,#000 18%,#000 82%,transparent);pointer-events:none">
   <div style="position:relative;max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;gap:26px;align-items:center">
     <h2 style="flex:1 1 100%;font-family:Alegreya,serif;font-weight:600;font-size:clamp(24px,3vw,32px);color:var(--wk-ink-strong);margin:0">Der erste Schritt – so geht es weiter</h2>
     <div style="flex:1 1 100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;text-align:center">
@@ -243,8 +245,9 @@
   </div>
 </section>
 
+<div class="wk-edge" aria-hidden="true" style="--wk-from:var(--wk-paper);--wk-to:var(--wk-forest-800)"></div>
 <section style="position:relative;background:var(--wk-forest-800);overflow:hidden">
-  <img decoding="async" width="1600" height="286" src="assets/footer-band.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center bottom;opacity:.95">
+  <img class="wk-wash" decoding="async" width="1600" height="286" src="assets/footer-band.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center bottom;opacity:.95">
   <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,45,36,.62),rgba(8,45,36,.42));pointer-events:none"></div>
   <div style="position:relative;max-width:1240px;margin:0 auto;padding:40px 22px 46px;display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:center">
     <div style="flex:1 1 420px;max-width:620px;text-align:center;text-shadow:0 2px 14px rgba(6,30,24,.6)">

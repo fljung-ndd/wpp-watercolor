@@ -90,6 +90,7 @@
 <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
   <section id="inhalt" tabindex="-1" style="position:relative;background:var(--wk-paper)">
     <img loading="lazy" decoding="async" width="1600" height="900" src="assets/hero-startseite.webp" alt="Portrait mit Ziege, Pinguin und Waldkätzchen" style="width:100%;display:block">
+    <div class="wk-edge-up wk-edge-up--flow" aria-hidden="true" style="--wk-to:var(--wk-paper)"></div>
     <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(245,237,224,.94) 24%, rgba(245,237,224,.66) 46%, rgba(245,237,224,0) 70%);pointer-events:none"></div>
     <div style="position:absolute;inset:0;display:flex;align-items:center">
       <div style="max-width:1300px;margin:0 auto;width:100%;padding:0 26px">
@@ -106,6 +107,7 @@
 <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
   <section style="background:var(--wk-paper)">
     <img loading="lazy" decoding="async" width="900" height="507" src="assets/hero-startseite-sm.webp" alt="Portrait mit Ziege, Pinguin und Waldkätzchen" style="width:100%;display:block">
+    <div class="wk-edge-up wk-edge-up--flow" aria-hidden="true" style="--wk-to:var(--wk-paper)"></div>
     <div style="padding:16px 22px 32px">
       <h1 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(40px,10vw,58px);line-height:1;color:var(--wk-ink-strong);margin:0 0 8px">Waldkätzchen</h1>
       <div style="color:var(--wk-pink-ink);font-family:Alegreya,serif;font-size:clamp(20px,5.5vw,28px);line-height:1.2;margin-bottom:16px">Verstehen. Verbinden. Verändern.</div>
@@ -116,7 +118,7 @@
 </sc-if>
 
 <section style="overflow:hidden;position:relative;padding:14px 20px 46px">
-  <img decoding="async" width="1400" height="467" src="assets/sections/section_light.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none">
+  <img class="wk-wash" decoding="async" width="1400" height="467" src="assets/sections/section_light.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none">
   <img decoding="async" width="173" height="175" src="assets/side/flowerLeft.webp" alt="" loading="lazy" style="position:absolute;left:-30px;bottom:0;width:clamp(90px,11vw,170px);opacity:.85;pointer-events:none">
   <img decoding="async" width="187" height="154" src="assets/side/flowerRight.webp" alt="" loading="lazy" style="position:absolute;right:-26px;top:40px;width:clamp(80px,10vw,150px);opacity:.8;pointer-events:none">
   <div style="max-width:1200px;margin:0 auto;position:relative">
@@ -182,6 +184,7 @@
   </div>
 </section>
 
+<div class="wk-edge wk-edge--soft" aria-hidden="true" style="--wk-from:var(--wk-paper);--wk-to:var(--wk-paper-warm)"></div>
 <section style="position:relative;padding:46px 20px 40px;background:var(--wk-paper-warm)">
   <img decoding="async" width="300" height="450" src="assets/side/plant3.webp" alt="" loading="lazy" style="position:absolute;left:-16px;bottom:6px;width:clamp(70px,8vw,120px);opacity:.85;mix-blend-mode:multiply;pointer-events:none">
   <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:34px;align-items:center;position:relative">
@@ -204,6 +207,7 @@
   </div>
 </section>
 
+<div class="wk-edge wk-edge--soft" aria-hidden="true" style="--wk-from:var(--wk-paper-warm);--wk-to:var(--wk-paper)"></div>
 <section style="position:relative;padding:44px 20px 30px;background:var(--wk-paper)">
   <img decoding="async" width="300" height="450" src="assets/side/plant7.webp" alt="" loading="lazy" style="position:absolute;right:-14px;top:24px;width:clamp(70px,8vw,120px);opacity:.8;mix-blend-mode:multiply;pointer-events:none">
   <div style="max-width:1200px;margin:0 auto;position:relative">
@@ -233,8 +237,9 @@
   </div>
 </sc-if>
 
+<div class="wk-edge" aria-hidden="true" style="--wk-from:var(--wk-paper);--wk-to:var(--wk-forest-800)"></div>
 <section style="position:relative;background:var(--wk-forest-800);overflow:hidden">
-  <img decoding="async" width="1600" height="533" src="assets/footer-bg-home.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.92">
+  <img class="wk-wash" decoding="async" width="1600" height="533" src="assets/footer-bg-home.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.92">
   <div style="position:relative;padding:44px 20px 48px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
     <button onClick="{{ openContact }}" style="background:var(--wk-pink-ink);color:#fff;border:none;border-radius:999px;padding:15px 32px;font-family:'Alegreya Sans',sans-serif;font-size:17px;font-weight:600;cursor:pointer;box-shadow:0 8px 20px rgba(8,45,36,.3)" style-hover="background:var(--wk-pink-700)">Angebot ansehen&nbsp;&nbsp;<span aria-hidden="true">↗</span></button>
     <button onClick="{{ openContact }}" style="background:var(--wk-petrol-600);color:#fff;border:none;border-radius:999px;padding:15px 32px;font-family:'Alegreya Sans',sans-serif;font-size:17px;font-weight:600;cursor:pointer;box-shadow:0 8px 20px rgba(8,45,36,.3)" style-hover="background:var(--wk-petrol-ink)">Kontakt aufnehmen&nbsp;&nbsp;<span aria-hidden="true">♡</span></button>

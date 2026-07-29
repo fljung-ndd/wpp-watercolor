@@ -90,6 +90,7 @@
 <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
   <section id="inhalt" tabindex="-1" style="position:relative;background:var(--wk-paper)">
     <img loading="lazy" decoding="async" width="1600" height="839" src="assets/hero-teams2.webp" alt="Portrait mit Waldkätzchen-Figuren" style="width:100%;display:block">
+    <div class="wk-edge-up wk-edge-up--flow" aria-hidden="true" style="--wk-to:var(--wk-paper)"></div>
     <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(245,237,224,.94) 24%, rgba(245,237,224,.66) 46%, rgba(245,237,224,0) 70%);pointer-events:none"></div>
     <div style="position:absolute;inset:0;display:flex;align-items:center">
       <div style="max-width:1300px;margin:0 auto;width:100%;padding:0 26px">
@@ -108,6 +109,7 @@
 <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
   <section style="background:var(--wk-paper)">
     <img loading="lazy" decoding="async" width="900" height="472" src="assets/hero-teams2-sm.webp" alt="Portrait mit Waldkätzchen-Figuren" style="width:100%;display:block">
+    <div class="wk-edge-up wk-edge-up--flow" aria-hidden="true" style="--wk-to:var(--wk-paper)"></div>
     <div style="padding:16px 22px 32px">
       <div style="font-size:14px;color:var(--wk-ink-muted);margin-bottom:10px"><a href="./Startseite.dc.html" style="color:var(--wk-ink-muted)">Startseite</a> &nbsp;›&nbsp; <span style="color:var(--wk-pink-ink);font-weight:600">Für Teams</span></div>
       <div style="color:var(--wk-pink-ink);font-family:Alegreya,serif;font-size:19px;margin-bottom:6px">Für Teams</div>
@@ -120,7 +122,7 @@
 </sc-if>
 
 <section style="overflow:hidden;position:relative;padding:10px 20px 42px">
-  <img decoding="async" width="1400" height="467" src="assets/sections/section_light.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none">
+  <img class="wk-wash" decoding="async" width="1400" height="467" src="assets/sections/section_light.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none">
   <img decoding="async" width="173" height="175" src="assets/side/flowerLeft.webp" alt="" loading="lazy" style="position:absolute;left:-30px;bottom:-8px;width:clamp(90px,11vw,165px);opacity:.85;pointer-events:none">
   <div style="max-width:1200px;margin:0 auto;position:relative">
     <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(28px,3.6vw,38px);color:var(--wk-ink-strong);margin:0 0 4px">Wobei ich Teams begleite</h2>
@@ -225,6 +227,7 @@
   </div>
 </section>
 
+<div class="wk-edge wk-edge--soft" aria-hidden="true" style="--wk-from:var(--wk-paper);--wk-to:var(--wk-paper-warm)"></div>
 <section style="padding:0 20px 40px;background:var(--wk-paper-warm);padding-top:40px">
   <div style="max-width:1040px;margin:0 auto">
     <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(24px,3vw,32px);color:var(--wk-ink-strong);margin:0 0 24px;text-align:center">Mit wem ich arbeite</h2>
@@ -239,6 +242,7 @@
   </div>
 </section>
 
+<div class="wk-edge wk-edge--soft" aria-hidden="true" style="--wk-from:var(--wk-paper-warm);--wk-to:var(--wk-paper)"></div>
 <sc-if value="{{ figuren }}" hint-placeholder-val="{{ true }}">
   <div style="display:flex;justify-content:center;align-items:flex-end;gap:clamp(4px,2vw,26px);padding:8px 12px 0;background:var(--wk-paper-warm);overflow:hidden">
     <img decoding="async" width="512" height="512" src="assets/chars/02_katta.webp" alt="" loading="lazy" style="width:clamp(58px,10vw,118px);mix-blend-mode:multiply">
@@ -248,8 +252,9 @@
   </div>
 </sc-if>
 
+<div class="wk-edge" aria-hidden="true" style="--wk-from:var(--wk-paper);--wk-to:var(--wk-forest-800)"></div>
 <section style="position:relative;background:var(--wk-forest-800);overflow:hidden">
-  <img decoding="async" width="1600" height="286" src="assets/footer-band.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center bottom;opacity:.95">
+  <img class="wk-wash" decoding="async" width="1600" height="286" src="assets/footer-band.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center bottom;opacity:.95">
   <div style="position:relative;max-width:1240px;margin:0 auto;padding:52px 22px 58px">
     <div style="max-width:560px;text-shadow:0 2px 14px rgba(6,30,24,.55)">
       <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(27px,3.4vw,40px);line-height:1.15;color:var(--wk-paper);margin:0 0 24px">Gemeinsam hinschauen verändert die Handlungssicherheit.</h2>
