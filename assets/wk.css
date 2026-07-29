@@ -128,13 +128,34 @@ x-dc { display: none !important; }
 
 * { box-sizing: border-box; }
 
+html {
+  /* Die Seite ist durchgehend hell. Ohne diese Angabe zeichnet der Browser im
+     Dunkelmodus des Systems Scrollbalken, Formularfelder und Auswahllisten in
+     dunklen Systemfarben in ein cremefarbenes Layout. */
+  color-scheme: light;
+}
+
 html, body {
   margin: 0; padding: 0;
   background: var(--wk-paper);
   color: var(--wk-ink);
   font-family: var(--wk-font-sans);
   -webkit-font-smoothing: antialiased;
+  /* Nimmt die 300-ms-Verzögerung, die mobile Browser für Doppeltipp-Zoom
+     abwarten – Taps auf Buttons und Links fühlen sich sofort an. */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(216, 72, 120, .18);
 }
+
+/* Der Kopfbereich ist sticky und rund 64 px hoch. Ohne scroll-margin würde er
+   jedes per Ankerlink angesprungene Ziel verdecken. */
+h1, h2, h3, [id] { scroll-margin-top: 84px; }
+
+/* Verhindert Schusterjungen in Überschriften. */
+h1, h2, h3, h4 { text-wrap: balance; }
+
+/* Fließtext bleibt davon unberührt, bekommt aber saubere letzte Zeilen. */
+p { text-wrap: pretty; }
 
 a { color: var(--wk-pink-ink); text-decoration: none; }
 a:hover { color: var(--wk-pink-700); text-decoration: underline; }
@@ -187,4 +208,29 @@ img { max-width: 100%; height: auto; }
    darum dort neutral zurückfallen. */
 @media (forced-colors: active) {
   img { mix-blend-mode: normal !important; }
+}
+
+/* ---------------------------------------------------------------------- *
+ * Kontakt-Dialog
+ * Ohne overscroll-behavior scrollt beim Erreichen des Dialogendes die Seite
+ * dahinter weiter – auf Mobilgeräten wirkt der Dialog dadurch "undicht".
+ * ---------------------------------------------------------------------- */
+[role="dialog"] {
+  overscroll-behavior: contain;
+  max-height: calc(100dvh - 36px);
+  overflow-y: auto;
+}
+
+/* Formularfelder brauchen eine eigene Fokusmarkierung: der Rahmen allein
+   verändert sich beim Fokus nicht genug, um ihn zu erkennen. */
+input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 3px solid var(--wk-pink);
+  outline-offset: 1px;
+}
+
+/* Vollflächige Abschnitte reichen bis an den Rand – auf Geräten mit Notch
+   oder Home-Indicator muss der Inhalt dahinter ausweichen. */
+footer, [role="dialog"] {
+  padding-left: max(0px, env(safe-area-inset-left));
+  padding-right: max(0px, env(safe-area-inset-right));
 }

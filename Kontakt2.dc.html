@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kontakt – Waldkätzchen</title>
+<meta name="theme-color" content="#F5EDE0">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="favicon.png" type="image/png" sizes="256x256">
 <link rel="apple-touch-icon" href="favicon.png">
@@ -58,7 +59,7 @@
           </sc-if>
         </span>
         <a href="./Kontakt.dc.html" style="color:var(--wk-yellow);font-weight:600;border-bottom:2px solid var(--wk-yellow);padding-bottom:2px">Kontakt</a>
-        <a href="./Kontakt.dc.html" style="background:var(--wk-pink-ink);color:#fff;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;display:flex;align-items:center;gap:9px" style-hover="background:var(--wk-pink-700)">Kontakt aufnehmen <span>♡</span></a>
+        <a href="./Kontakt.dc.html" style="background:var(--wk-pink-ink);color:#fff;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;display:flex;align-items:center;gap:9px" style-hover="background:var(--wk-pink-700)">Kontakt aufnehmen <span aria-hidden="true">♡</span></a>
       </nav>
     </sc-if>
     <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
@@ -90,7 +91,7 @@
   <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(245,237,224,.94) 30%, rgba(245,237,224,.7) 52%, rgba(245,237,224,.15) 74%)"></div>
   <div style="position:relative;max-width:1240px;margin:0 auto;padding:44px 24px 48px">
     <div style="max-width:min(58%,560px);min-width:min(100%,280px)">
-      <h1 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(34px,4.6vw,56px);line-height:1.06;margin:0 0 8px;color:var(--wk-forest-600)">Kontakt aufnehmen <span style="color:var(--wk-pink-ink)">♡</span></h1>
+      <h1 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(34px,4.6vw,56px);line-height:1.06;margin:0 0 8px;color:var(--wk-forest-600)">Kontakt aufnehmen <span style="color:var(--wk-pink-ink)" aria-hidden="true">♡</span></h1>
       <div style="color:var(--wk-pink-ink);font-family:Alegreya,serif;font-size:clamp(19px,2.3vw,27px);margin-bottom:18px">Ich freue mich, von dir zu hören!</div>
       <p style="font-size:16.5px;line-height:1.6;margin:0;max-width:44ch">Egal, ob du Fragen hast, dir unsicher bist oder einfach nur ein erstes Gefühl bekommen möchtest – schreib mir. Ich bin für dich da.</p>
     </div>
@@ -111,13 +112,13 @@
           <input placeholder="Worum geht es?" style="display:block;width:100%;margin-top:7px;border:1px solid var(--wk-line-soft);border-radius:10px;padding:14px;font-family:'Alegreya Sans',sans-serif;font-size:15.5px;font-weight:400;background:var(--wk-paper-card);color:var(--wk-ink)">
         </label>
         <label style="font-size:14.5px;font-weight:600;color:var(--wk-ink-soft)">Deine Nachricht
-          <textarea placeholder="Erzähl mir, was dich bewegt…" rows="5" style="display:block;width:100%;margin-top:7px;border:1px solid var(--wk-line-soft);border-radius:10px;padding:14px;font-family:'Alegreya Sans',sans-serif;font-size:15.5px;font-weight:400;background:var(--wk-paper-card);color:var(--wk-ink);resize:vertical"></textarea>
+          <textarea name="nachricht" aria-label="Ihre Nachricht" placeholder="Erzähl mir, was dich bewegt…" rows="5" style="display:block;width:100%;margin-top:7px;border:1px solid var(--wk-line-soft);border-radius:10px;padding:14px;font-family:'Alegreya Sans',sans-serif;font-size:15.5px;font-weight:400;background:var(--wk-paper-card);color:var(--wk-ink);resize:vertical"></textarea>
         </label>
-        <button onClick="{{ send }}" style="align-self:center;background:var(--wk-pink);color:#fff;border:none;border-radius:999px;padding:14px 34px;font-family:'Alegreya Sans',sans-serif;font-size:16.5px;font-weight:600;cursor:pointer;box-shadow:0 8px 18px rgba(120,60,80,.18)" style-hover="background:var(--wk-pink)">Nachricht senden&nbsp;&nbsp;♡</button>
+        <button onClick="{{ send }}" style="align-self:center;background:var(--wk-pink);color:#fff;border:none;border-radius:999px;padding:14px 34px;font-family:'Alegreya Sans',sans-serif;font-size:16.5px;font-weight:600;cursor:pointer;box-shadow:0 8px 18px rgba(120,60,80,.18)" style-hover="background:var(--wk-pink)">Nachricht senden&nbsp;&nbsp;<span aria-hidden="true">♡</span></button>
       </div>
     </sc-if>
     <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
-      <div style="text-align:center;padding:20px 0">
+      <div role="status" aria-live="polite" style="text-align:center;padding:20px 0">
         <img loading="lazy" decoding="async" width="512" height="512" src="assets/chars/09_haende_herz.webp" alt="" style="width:150px;mix-blend-mode:multiply">
         <h3 style="font-family:Alegreya,serif;font-size:28px;color:var(--wk-forest-600);margin:14px 0 8px">Danke für deine Nachricht!</h3>
         <p style="font-size:15.5px;color:var(--wk-ink-soft);margin:0">Ich melde mich so bald wie möglich bei dir.<br>(Demo – es wurde noch nichts versendet.)</p>
@@ -150,7 +151,7 @@
   <img decoding="async" width="1400" height="467" src="assets/sections/section_light.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
   <div style="position:relative;max-width:900px;margin:0 auto;display:flex;flex-wrap:wrap;gap:22px;align-items:center">
     <div style="flex:1 1 380px;min-width:270px;background:url(assets/box/card-rose.webp) center/100% 100% no-repeat;padding:clamp(24px,4vw,38px) clamp(24px,4vw,42px)">
-      <p style="font-family:Alegreya,serif;font-size:clamp(18px,2.1vw,23px);line-height:1.5;margin:0;color:var(--wk-ink-strong)">„Manchmal braucht es nur einen Menschen, der wirklich zuhört – damit Veränderung möglich wird.“ <span style="color:var(--wk-pink-ink)">♡</span></p>
+      <p style="font-family:Alegreya,serif;font-size:clamp(18px,2.1vw,23px);line-height:1.5;margin:0;color:var(--wk-ink-strong)">„Manchmal braucht es nur einen Menschen, der wirklich zuhört – damit Veränderung möglich wird.“ <span style="color:var(--wk-pink-ink)" aria-hidden="true">♡</span></p>
     </div>
     <img decoding="async" width="512" height="512" src="assets/chars/11_schnecke_rakete.webp" alt="" loading="lazy" style="flex:0 1 220px;min-width:160px;mix-blend-mode:multiply">
   </div>
@@ -172,7 +173,7 @@
         <span style="font-family:Alegreya,serif;font-size:24px;color:var(--wk-paper)">Waldkätzchen</span>
       </div>
       <div style="font-size:13.5px;color:var(--wk-on-dark-muted);margin-bottom:10px">Verstehen. Verbinden. Verändern.</div>
-      <div style="font-size:14px;line-height:1.55">Für Kinder, Eltern und Familien. <span style="color:var(--wk-pink)">♡</span></div>
+      <div style="font-size:14px;line-height:1.55">Für Kinder, Eltern und Familien. <span style="color:var(--wk-pink)" aria-hidden="true">♡</span></div>
     </div>
     <div>
       <div style="font-family:Alegreya,serif;font-size:17px;color:var(--wk-paper);margin-bottom:10px">Navigation</div>
@@ -224,6 +225,24 @@ class Component extends DCLogic {
     this._onResize();
   }
   componentWillUnmount() { window.removeEventListener('resize', this._onResize); }
+  componentDidUpdate() {
+    // Nach dem Absenden ersetzt die Bestaetigung das Formular. Der Button, auf
+    // dem der Fokus lag, verschwindet dabei - ohne Zutun fiel der Fokus auf
+    // <body>, und eine erst jetzt eingefuegte Live-Region wird von
+    // Screenreadern nicht zuverlaessig vorgelesen. Ein Fokuswechsel auf die
+    // Meldung loest beides.
+    // Das Runtime uebergibt componentDidUpdate nur prevProps, keinen
+    // prevState - die Flanke wird darum selbst gemerkt.
+    if (this.state.sent && !this._sentFocused) {
+      this._sentFocused = true;
+      requestAnimationFrame(() => {
+        const el = document.querySelector('[role="status"]');
+        if (el) { el.setAttribute('tabindex', '-1'); el.focus(); }
+      });
+    } else if (!this.state.sent) {
+      this._sentFocused = false;
+    }
+  }
   renderVals() {
     const narrow = this.state.w < 1000;
     return {

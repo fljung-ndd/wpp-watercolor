@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Angebot – Waldkätzchen</title>
+<meta name="theme-color" content="#F5EDE0">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="favicon.png" type="image/png" sizes="256x256">
 <link rel="apple-touch-icon" href="favicon.png">
@@ -58,7 +59,7 @@
           </sc-if>
         </span>
         <a href="./Kontakt.dc.html" style="color:var(--wk-paper)">Kontakt</a>
-        <button onClick="{{ openContact }}" style="background:var(--wk-pink-ink);color:#fff;border:none;border-radius:999px;padding:11px 20px;font-family:'Alegreya Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:9px" style-hover="background:var(--wk-pink-700)">Kontakt aufnehmen <span>♡</span></button>
+        <button onClick="{{ openContact }}" style="background:var(--wk-pink-ink);color:#fff;border:none;border-radius:999px;padding:11px 20px;font-family:'Alegreya Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:9px" style-hover="background:var(--wk-pink-700)">Kontakt aufnehmen <span aria-hidden="true">♡</span></button>
       </nav>
     </sc-if>
     <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
@@ -81,7 +82,7 @@
       <div style="padding:13px 6px 6px;color:var(--wk-on-dark-muted);font-size:13.5px;letter-spacing:.08em;text-transform:uppercase">Wissen</div>
       <a href="./Autismus.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Autismus verstehen</a>
       <a href="./Kontakt.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Kontakt</a>
-      <button onClick="{{ openContact }}" style="margin-top:14px;background:var(--wk-pink-ink);color:#fff;border:none;border-radius:999px;padding:15px;font-family:'Alegreya Sans',sans-serif;font-size:16.5px;font-weight:600;cursor:pointer">Kontakt aufnehmen ♡</button>
+      <button onClick="{{ openContact }}" style="margin-top:14px;background:var(--wk-pink-ink);color:#fff;border:none;border-radius:999px;padding:15px;font-family:'Alegreya Sans',sans-serif;font-size:16.5px;font-weight:600;cursor:pointer">Kontakt aufnehmen <span aria-hidden="true">♡</span></button>
     </div>
   </sc-if>
 </header>
@@ -97,7 +98,7 @@
           <h1 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(28px,3.7vw,50px);line-height:1.06;margin:0 0 6px;color:var(--wk-ink-strong)">Angebote,<br>die zu eurem Alltag passen.</h1>
           <div style="color:var(--wk-pink-ink);font-family:Alegreya,serif;font-size:clamp(18px,2.1vw,26px);margin-bottom:16px">Verstehen. Verbinden. Verändern.</div>
           <p style="font-size:clamp(14.5px,1.25vw,16.5px);line-height:1.55;margin:0 0 12px;max-width:44ch">Jede Familie, jedes Kind und jede Situation ist einzigartig. Ich begleite Kinder, Jugendliche, Eltern, Familien und Väter dabei, neue Wege zu finden: verständnisvoll, alltagstauglich und mit klarem Blick auf das Wesentliche.</p>
-          <p style="font-size:clamp(14.5px,1.25vw,16.5px);line-height:1.55;margin:0;max-width:44ch">Mit besonderem Fokus auf Autismus, PDA und herausfordernde Dynamiken. <span style="color:var(--wk-pink-ink)">♡</span></p>
+          <p style="font-size:clamp(14.5px,1.25vw,16.5px);line-height:1.55;margin:0;max-width:44ch">Mit besonderem Fokus auf Autismus, PDA und herausfordernde Dynamiken. <span style="color:var(--wk-pink-ink)" aria-hidden="true">♡</span></p>
         </div>
       </div>
     </div>
@@ -111,7 +112,7 @@
       <h1 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(28px,7vw,42px);line-height:1.08;margin:0 0 6px;color:var(--wk-ink-strong)">Angebote, die zu eurem Alltag passen.</h1>
       <div style="color:var(--wk-pink-ink);font-family:Alegreya,serif;font-size:clamp(18px,5vw,26px);margin-bottom:14px">Verstehen. Verbinden. Verändern.</div>
       <p style="font-size:16px;line-height:1.55;margin:0 0 12px">Jede Familie, jedes Kind und jede Situation ist einzigartig. Ich begleite Kinder, Jugendliche, Eltern, Familien und Väter dabei, neue Wege zu finden: verständnisvoll, alltagstauglich und mit klarem Blick auf das Wesentliche.</p>
-      <p style="font-size:16px;line-height:1.55;margin:0">Mit besonderem Fokus auf Autismus, PDA und herausfordernde Dynamiken. <span style="color:var(--wk-pink-ink)">♡</span></p>
+      <p style="font-size:16px;line-height:1.55;margin:0">Mit besonderem Fokus auf Autismus, PDA und herausfordernde Dynamiken. <span style="color:var(--wk-pink-ink)" aria-hidden="true">♡</span></p>
     </div>
   </section>
 </sc-if>
@@ -165,7 +166,7 @@
           <div style="font-family:Alegreya,serif;font-size:21px;font-weight:700;color:var(--wk-ink-strong);margin-bottom:8px">Väter im Blick</div>
           <p style="font-size:14px;line-height:1.5;color:var(--wk-ink-soft);margin:0 0 10px">Väter wollen präsent sein – und ihren eigenen Weg finden. Ich begleite dabei, den Platz in der Familie zu stärken.</p>
           <div style="font-size:13.5px;line-height:1.7;color:var(--wk-ink-soft)">• Rollenfindung und Selbstverständnis<br>• Bindung und Beziehung gestalten<br>• Vereinbarkeit von Familie, Beruf und Ich<br>• Ehrlicher Austausch ohne Bewertung</div>
-          <a href="./Fuer Vaeter.dc.html" style="display:inline-block;margin-top:10px;font-size:14px;font-weight:600">Mehr erfahren →</a>
+          <a href="./Fuer Vaeter.dc.html" style="display:inline-block;margin-top:10px;font-size:14px;font-weight:600">Mehr erfahren <span aria-hidden="true">→</span></a>
         </div>
       </div>
 
@@ -175,7 +176,7 @@
           <div style="font-family:Alegreya,serif;font-size:21px;font-weight:700;color:var(--wk-yellow-ink);margin-bottom:8px">Fachberatung für Teams, Kitas und Schulen</div>
           <p style="font-size:14px;line-height:1.5;color:var(--wk-ink-soft);margin:0 0 10px">Professionelle brauchen Räume zum Verstehen, Verarbeiten und Weiterentwickeln. Ich unterstütze Teams praxisnah und lösungsorientiert.</p>
           <div style="font-size:13.5px;line-height:1.7;color:var(--wk-ink-soft)">• Fallberatungen und kollegiale Beratung<br>• Teamtage und Prozessbegleitung<br>• Fachinput zu Autismus, PDA und Beziehung<br>• Entwicklung eines stärkenorientierten Miteinanders</div>
-          <a href="./Fuer Teams.dc.html" style="display:inline-block;margin-top:10px;font-size:14px;font-weight:600">Mehr erfahren →</a>
+          <a href="./Fuer Teams.dc.html" style="display:inline-block;margin-top:10px;font-size:14px;font-weight:600">Mehr erfahren <span aria-hidden="true">→</span></a>
         </div>
       </div>
 
@@ -228,12 +229,12 @@
       <h3 style="font-family:Alegreya,serif;font-weight:600;font-size:25px;color:var(--wk-ink-strong);margin:0 0 8px">Für wen ich da bin</h3>
       <p style="font-size:14px;line-height:1.55;color:var(--wk-ink-soft);margin:0 0 16px">Meine Angebote richten sich an Menschen, die Veränderung und Verbindung möchten.</p>
       <div style="display:flex;flex-direction:column;gap:13px;font-size:14.5px">
-        <div style="display:flex;gap:11px"><span style="color:var(--wk-pink-ink)">♡</span><div><strong>Familien</strong><br><span style="color:var(--wk-ink-soft);font-size:13.5px">in herausfordernden Phasen</span></div></div>
-        <div style="display:flex;gap:11px"><span style="color:var(--wk-pink-ink)">♡</span><div><strong>Kinder</strong><br><span style="color:var(--wk-ink-soft);font-size:13.5px">mit besonderen Bedürfnissen und großen Gefühlen</span></div></div>
-        <div style="display:flex;gap:11px"><span style="color:var(--wk-pink-ink)">♡</span><div><strong>Jugendliche</strong><br><span style="color:var(--wk-ink-soft);font-size:13.5px">auf der Suche nach sich und ihrem Platz</span></div></div>
-        <div style="display:flex;gap:11px"><span style="color:var(--wk-pink-ink)">♡</span><div><strong>Eltern</strong><br><span style="color:var(--wk-ink-soft);font-size:13.5px">auf der Suche nach Halt und Klarheit</span></div></div>
-        <div style="display:flex;gap:11px"><span style="color:var(--wk-pink-ink)">♡</span><div><strong>Väter</strong><br><span style="color:var(--wk-ink-soft);font-size:13.5px">auf ihrem eigenen Weg in der Familie</span></div></div>
-        <div style="display:flex;gap:11px"><span style="color:var(--wk-pink-ink)">♡</span><div><strong>Fachkräfte &amp; Begleitende</strong><br><span style="color:var(--wk-ink-soft);font-size:13.5px">Menschen, die Kinder und Familien unterstützen</span></div></div>
+        <div style="display:flex;gap:11px"><span style="color:var(--wk-pink-ink)" aria-hidden="true">♡</span><div><strong>Familien</strong><br><span style="color:var(--wk-ink-soft);font-size:13.5px">in herausfordernden Phasen</span></div></div>
+        <div style="display:flex;gap:11px"><span style="color:var(--wk-pink-ink)" aria-hidden="true">♡</span><div><strong>Kinder</strong><br><span style="color:var(--wk-ink-soft);font-size:13.5px">mit besonderen Bedürfnissen und großen Gefühlen</span></div></div>
+        <div style="display:flex;gap:11px"><span style="color:var(--wk-pink-ink)" aria-hidden="true">♡</span><div><strong>Jugendliche</strong><br><span style="color:var(--wk-ink-soft);font-size:13.5px">auf der Suche nach sich und ihrem Platz</span></div></div>
+        <div style="display:flex;gap:11px"><span style="color:var(--wk-pink-ink)" aria-hidden="true">♡</span><div><strong>Eltern</strong><br><span style="color:var(--wk-ink-soft);font-size:13.5px">auf der Suche nach Halt und Klarheit</span></div></div>
+        <div style="display:flex;gap:11px"><span style="color:var(--wk-pink-ink)" aria-hidden="true">♡</span><div><strong>Väter</strong><br><span style="color:var(--wk-ink-soft);font-size:13.5px">auf ihrem eigenen Weg in der Familie</span></div></div>
+        <div style="display:flex;gap:11px"><span style="color:var(--wk-pink-ink)" aria-hidden="true">♡</span><div><strong>Fachkräfte &amp; Begleitende</strong><br><span style="color:var(--wk-ink-soft);font-size:13.5px">Menschen, die Kinder und Familien unterstützen</span></div></div>
       </div>
     </div>
   </div>
@@ -247,7 +248,7 @@
       <p style="color:var(--wk-paper-warm);font-size:16.5px;line-height:1.55;margin:0">Ob erste Fragen, akute Herausforderung oder der Wunsch nach Veränderung – ich freue mich, euch kennenzulernen und zu schauen, was euch jetzt weiterbringt.</p>
     </div>
     <div style="flex:0 1 280px;display:flex;flex-direction:column;gap:10px">
-      <button onClick="{{ openContact }}" style="background:var(--wk-pink-ink);color:#fff;border:none;border-radius:999px;padding:14px 28px;font-family:'Alegreya Sans',sans-serif;font-size:16px;font-weight:600;cursor:pointer;box-shadow:0 8px 20px rgba(6,30,24,.35)" style-hover="background:var(--wk-pink-700)">Kontakt aufnehmen&nbsp;&nbsp;♡</button>
+      <button onClick="{{ openContact }}" style="background:var(--wk-pink-ink);color:#fff;border:none;border-radius:999px;padding:14px 28px;font-family:'Alegreya Sans',sans-serif;font-size:16px;font-weight:600;cursor:pointer;box-shadow:0 8px 20px rgba(6,30,24,.35)" style-hover="background:var(--wk-pink-700)">Kontakt aufnehmen&nbsp;&nbsp;<span aria-hidden="true">♡</span></button>
       <div style="color:var(--wk-pink);font-size:15px;text-align:center">Ich bin gerne für euch da.</div>
     </div>
   </div>
@@ -261,7 +262,7 @@
         <span style="font-family:Alegreya,serif;font-size:24px;color:var(--wk-paper)">Waldkätzchen</span>
       </div>
       <div style="font-size:13.5px;color:var(--wk-on-dark-muted);margin-bottom:10px">Verstehen. Verbinden. Verändern.</div>
-      <div style="font-size:14px;line-height:1.55">Begleitung für Kinder, Jugendliche und Familien im Autismus-Spektrum. <span style="color:var(--wk-pink)">♡</span></div>
+      <div style="font-size:14px;line-height:1.55">Begleitung für Kinder, Jugendliche und Familien im Autismus-Spektrum. <span style="color:var(--wk-pink)" aria-hidden="true">♡</span></div>
     </div>
     <div>
       <div style="font-family:Alegreya,serif;font-size:17px;color:var(--wk-paper);margin-bottom:10px">Navigation</div>
@@ -306,19 +307,19 @@
 <sc-if value="{{ contactOpen }}" hint-placeholder-val="{{ false }}">
   <div onClick="{{ closeContact }}" style="position:fixed;inset:0;background:rgba(8,35,28,.6);z-index:100;display:flex;align-items:center;justify-content:center;padding:18px">
     <div onClick="{{ stop }}" role="dialog" aria-modal="true" aria-label="Kontakt aufnehmen" style="background:var(--wk-paper-warm);border-radius:20px;max-width:460px;width:100%;padding:30px 26px;box-shadow:0 22px 60px rgba(0,0,0,.4);position:relative">
-      <button onClick="{{ closeContact }}" aria-label="Schließen" style="position:absolute;top:12px;right:14px;width:44px;height:44px;background:none;border:none;font-size:24px;color:var(--wk-ink-muted);cursor:pointer">×</button>
+      <button onClick="{{ closeContact }}" aria-label="Schließen" style="position:absolute;top:12px;right:14px;width:44px;height:44px;background:none;border:none;font-size:24px;color:var(--wk-ink-muted);cursor:pointer"><span aria-hidden="true">×</span></button>
       <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
         <h3 style="font-family:Alegreya,serif;font-size:27px;color:var(--wk-ink-strong);margin:0 0 6px">Kontakt aufnehmen</h3>
         <p style="font-size:15px;margin:0 0 18px;color:var(--wk-ink-soft)">Schreib mir – ich melde mich zeitnah zurück.</p>
         <div style="display:flex;flex-direction:column;gap:12px">
-          <input placeholder="Dein Name" style="border:1px solid var(--wk-line-soft);border-radius:11px;padding:14px;font-family:'Alegreya Sans',sans-serif;font-size:15.5px;background:var(--wk-paper-card);color:var(--wk-ink)">
-          <input placeholder="E-Mail-Adresse" style="border:1px solid var(--wk-line-soft);border-radius:11px;padding:14px;font-family:'Alegreya Sans',sans-serif;font-size:15.5px;background:var(--wk-paper-card);color:var(--wk-ink)">
-          <textarea placeholder="Deine Nachricht" rows="4" style="border:1px solid var(--wk-line-soft);border-radius:11px;padding:14px;font-family:'Alegreya Sans',sans-serif;font-size:15.5px;background:var(--wk-paper-card);color:var(--wk-ink);resize:vertical"></textarea>
-          <button onClick="{{ send }}" style="background:var(--wk-pink-ink);color:#fff;border:none;border-radius:999px;padding:15px;font-family:'Alegreya Sans',sans-serif;font-size:16.5px;font-weight:600;cursor:pointer" style-hover="background:var(--wk-pink-700)">Nachricht senden ♡</button>
+          <input type="text" name="name" autocomplete="name" aria-label="Dein Name" placeholder="Dein Name" style="border:1px solid var(--wk-line-soft);border-radius:11px;padding:14px;font-family:'Alegreya Sans',sans-serif;font-size:15.5px;background:var(--wk-paper-card);color:var(--wk-ink)">
+          <input type="email" name="email" autocomplete="email" aria-label="E-Mail-Adresse" spellcheck="false" placeholder="E-Mail-Adresse" style="border:1px solid var(--wk-line-soft);border-radius:11px;padding:14px;font-family:'Alegreya Sans',sans-serif;font-size:15.5px;background:var(--wk-paper-card);color:var(--wk-ink)">
+          <textarea name="nachricht" aria-label="Ihre Nachricht" placeholder="Deine Nachricht …" rows="4" style="border:1px solid var(--wk-line-soft);border-radius:11px;padding:14px;font-family:'Alegreya Sans',sans-serif;font-size:15.5px;background:var(--wk-paper-card);color:var(--wk-ink);resize:vertical"></textarea>
+          <button onClick="{{ send }}" style="background:var(--wk-pink-ink);color:#fff;border:none;border-radius:999px;padding:15px;font-family:'Alegreya Sans',sans-serif;font-size:16.5px;font-weight:600;cursor:pointer" style-hover="background:var(--wk-pink-700)">Nachricht senden <span aria-hidden="true">♡</span></button>
         </div>
       </sc-if>
       <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
-        <div style="text-align:center;padding:16px 0">
+        <div role="status" aria-live="polite" style="text-align:center;padding:16px 0">
           <img loading="lazy" decoding="async" width="512" height="512" src="assets/chars/09_haende_herz.webp" alt="" style="width:130px;mix-blend-mode:multiply">
           <h3 style="font-family:Alegreya,serif;font-size:27px;color:var(--wk-ink-strong);margin:12px 0 6px">Danke für deine Nachricht!</h3>
           <p style="font-size:15px;color:var(--wk-ink-soft);margin:0">Ich melde mich so bald wie möglich.<br>(Demo – es wurde noch nichts versendet.)</p>
@@ -338,6 +339,24 @@ class Component extends DCLogic {
     this._onResize();
   }
   componentWillUnmount() { window.removeEventListener('resize', this._onResize); }
+  componentDidUpdate() {
+    // Nach dem Absenden ersetzt die Bestaetigung das Formular. Der Button, auf
+    // dem der Fokus lag, verschwindet dabei - ohne Zutun fiel der Fokus auf
+    // <body>, und eine erst jetzt eingefuegte Live-Region wird von
+    // Screenreadern nicht zuverlaessig vorgelesen. Ein Fokuswechsel auf die
+    // Meldung loest beides.
+    // Das Runtime uebergibt componentDidUpdate nur prevProps, keinen
+    // prevState - die Flanke wird darum selbst gemerkt.
+    if (this.state.sent && !this._sentFocused) {
+      this._sentFocused = true;
+      requestAnimationFrame(() => {
+        const el = document.querySelector('[role="status"]');
+        if (el) { el.setAttribute('tabindex', '-1'); el.focus(); }
+      });
+    } else if (!this.state.sent) {
+      this._sentFocused = false;
+    }
+  }
   renderVals() {
     const narrow = this.state.w < 1000;
     return {
