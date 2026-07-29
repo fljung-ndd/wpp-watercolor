@@ -22,5 +22,5 @@ jobs:
           password: ${{ secrets.SFTP_PASSWORD }}
           port: ${{ secrets.SFTP_PORT }}
           local_path: './*'
-          remote_path: '/web/waldkaetzchen.waldkaetzchen.de/waldkatze-color'
+          remote_path: '/web/waldkaetzchencolor.waldkaetzchen.de'
           sftp_only: true
