@@ -56,7 +56,21 @@ Require valid-user
   ExpiresByType text/css              "access plus 7 days"
   ExpiresByType text/javascript       "access plus 7 days"
   ExpiresByType application/javascript "access plus 7 days"
-  ExpiresByType text/html             "access plus 0 seconds"
+  # Kein ExpiresByType fuer text/html: das wuerde einen eigenen
+  # Cache-Control-Header setzen, den "Header always set" weiter unten nicht
+  # zuverlaessig ersetzt (siehe Kommentar dort) - Ergebnis waeren zwei
+  # Cache-Control-Header in derselben Antwort. Die Zeile ist ohnehin
+  # ueberfluessig: die "no-store"-Regel deckt Seiten bereits ab, und zwar
+  # staerker als "access plus 0 seconds" es je koennte.
+</IfModule>
+
+<IfModule mod_setenvif.c>
+  # Markiert Anfragen auf Dateitypen, die absichtlich lange im Browser
+  # liegen bleiben duerfen. env= ist auf praktisch jeder Apache-Installation
+  # verfuegbar, anders als die expr=-Bedingung von mod_headers, die erst ab
+  # einer neueren Version existiert und auf manchen Hosts einen 500
+  # (unbekannte Direktive in der .htaccess) ausloesen kann.
+  SetEnvIf Request_URI "\.(webp|png|jpe?g|woff2|js|css)$" WK_LONG_CACHE
 </IfModule>
 
 <IfModule mod_headers.c>
@@ -71,21 +85,19 @@ Require valid-user
   <FilesMatch "\.(webp|png|jpe?g)$">
     Header set Cache-Control "public, max-age=31536000"
   </FilesMatch>
-  # Seiten immer frisch validieren.
-  <FilesMatch "\.html$">
-    Header set Cache-Control "no-cache, must-revalidate"
-  </FilesMatch>
 
-  # Default: nie cachen, auch nicht die nackte Domain ("/") oder eine
-  # Fehlerantwort wie 401/403. Ohne das griff obige Regel nur bei .html-
-  # Endung - "/" hat keine Endung und lief darum ohne jede Cache-Anweisung
-  # raus. Chrome preloadet die oberste Adressleisten-Vorschau im
-  # Hintergrund, bevor Enter gedrueckt wird; ein Basic-Auth-Dialog kann bei
-  # so einem unsichtbaren Preload nicht erscheinen, die 401-Antwort kam
-  # bislang ungeschuetzt zurueck und konnte als "Ergebnis" haengen bleiben.
-  # "always" wirkt auch auf Fehlerantworten, die Bedingung schliesst nur
-  # die Dateitypen aus, die oben bewusst lange gecacht werden.
-  Header always set Cache-Control "no-store" "expr=%{REQUEST_URI} !~ m#\.(webp|png|jpe?g|woff2|js|css)$#"
+  # Alles andere darf nie zwischengespeichert werden: Seiten, die nackte
+  # Domain ("/") und Fehlerantworten wie 401/403. "always" ist hier noetig,
+  # weil normales "Header set" auf Fehlerantworten (4xx/5xx) nicht wirkt -
+  # genau die faellt aber ins Gewicht, siehe unten. "always set" scheint auf
+  # dieser Apache-Version keine schon vorhandene Cache-Control-Kopfzeile
+  # aus mod_expires zu ersetzen, sondern legt eine zweite an - deshalb darf
+  # kein ExpiresByType fuer text/html mehr existieren (siehe oben).
+  # Grund fuer die Regel: Chrome preloadet die oberste Adressleisten-
+  # Vorschau im Hintergrund, bevor Enter gedrueckt wird; ein Basic-Auth-
+  # Dialog kann bei so einem unsichtbaren Preload nicht erscheinen, und eine
+  # ungeschuetzte 401-Antwort auf "/" konnte als "Ergebnis" haengen bleiben.
+  Header always set Cache-Control "no-store" env=!WK_LONG_CACHE
 </IfModule>
 
 # ---------------------------------------------------------------------------
