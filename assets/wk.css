@@ -340,3 +340,117 @@ footer, [role="dialog"] {
   .wk-edge-up { display: none; }
   /* .wk-wash bleibt unmaskiert - das ist der Zustand von vorher. */
 }
+
+/* ---------------------------------------------------------------------- *
+ * Shape-Divider (ShapeDividers.com)
+ *
+ * Die Vorlage hatte den Fuellton #fbd8c2 fest in die SVG-Data-URI
+ * eingebaut. Das ist ein Pfirsichton, der nicht in der Palette vorkommt,
+ * und er laesst sich pro Uebergang nicht wechseln. Deshalb liegen die drei
+ * Formen als eigene SVG-Dateien unter assets/dividers/ und werden hier als
+ * Maske benutzt: die Form kommt aus der Datei, die Farbe aus --wk-from.
+ * Eine Datei deckt damit jedes Farbpaar ab.
+ *
+ * Groessen, Positionen und Breakpoints sind unveraendert aus der Vorlage
+ * uebernommen.
+ *
+ * Der Divider liegt als ::before ueber dem oberen Rand seiner Section und
+ * zeigt die Farbe der Section darueber. Die Section selbst braucht
+ * position:relative und overflow:hidden - beides setzt die Basisklasse.
+ * ---------------------------------------------------------------------- */
+.wk-sd {
+  overflow: hidden;
+  position: relative;
+}
+.wk-sd::before {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: -1px; right: -1px; top: -1px;
+  z-index: 3;
+  pointer-events: none;
+  background: var(--wk-from, var(--wk-paper));
+  -webkit-mask-repeat: no-repeat;          mask-repeat: no-repeat;
+  -webkit-mask-position: 50% 0%;           mask-position: 50% 0%;
+}
+
+/* --- Waldkante: feiner Baumsaum mit Blaettern und kleinen Tieren ------- */
+.wk-sd--wald::before {
+  -webkit-mask-image: url('dividers/wald.svg');  mask-image: url('dividers/wald.svg');
+  -webkit-mask-size: 371% 90px;                  mask-size: 371% 90px;
+  -webkit-mask-position: 50% 0%;                 mask-position: 50% 0%;
+}
+@media (min-width: 768px) {
+  .wk-sd--wald::before {
+    -webkit-mask-size: 362% 90px;   mask-size: 362% 90px;
+    -webkit-mask-position: 42% 0%;  mask-position: 42% 0%;
+  }
+}
+@media (min-width: 1025px) {
+  .wk-sd--wald::before {
+    bottom: -0.1vw; left: -0.1vw; right: -0.1vw; top: -0.1vw;
+    -webkit-mask-size: 199% 90px;   mask-size: 199% 90px;
+    -webkit-mask-position: 50% 0%;  mask-position: 50% 0%;
+  }
+}
+@media (min-width: 2100px) {
+  .wk-sd--wald::before {
+    -webkit-mask-size: 199% calc(2vw + 90px);  mask-size: 199% calc(2vw + 90px);
+  }
+}
+
+/* --- Kreise: verspielte Huegel mit Punkten und Waben ------------------- */
+.wk-sd--kreise::before {
+  -webkit-mask-image: url('dividers/kreise.svg'); mask-image: url('dividers/kreise.svg');
+  -webkit-mask-size: 289% 45px;                   mask-size: 289% 45px;
+  -webkit-mask-position: 33% 0%;                  mask-position: 33% 0%;
+}
+@media (min-width: 768px) {
+  /* Ab Tablet eine eigene, breitere Zeichnung - so war es in der Vorlage. */
+  .wk-sd--kreise::before {
+    -webkit-mask-image: url('dividers/kreise-wide.svg');
+            mask-image: url('dividers/kreise-wide.svg');
+    -webkit-mask-size: 283% 90px;   mask-size: 283% 90px;
+    -webkit-mask-position: 42% 0%;  mask-position: 42% 0%;
+  }
+}
+@media (min-width: 1025px) {
+  .wk-sd--kreise::before {
+    bottom: -0.1vw; left: -0.1vw; right: -0.1vw; top: -0.1vw;
+    -webkit-mask-size: 119% 95px;   mask-size: 119% 95px;
+    -webkit-mask-position: 50% 0%;  mask-position: 50% 0%;
+  }
+}
+@media (min-width: 2100px) {
+  .wk-sd--kreise::before {
+    -webkit-mask-size: 119% calc(2vw + 95px);  mask-size: 119% calc(2vw + 95px);
+  }
+}
+
+/* --- Schraege: ruhige Doppelkante, das leiseste der drei Motive -------- */
+.wk-sd--schraege::before {
+  -webkit-mask-image: url('dividers/schraege.svg'); mask-image: url('dividers/schraege.svg');
+  -webkit-mask-size: 100% 100px;                    mask-size: 100% 100px;
+  -webkit-mask-position: 50% 0%;                    mask-position: 50% 0%;
+}
+@media (min-width: 768px) {
+  .wk-sd--schraege::before {
+    -webkit-mask-size: 100% 116px;  mask-size: 100% 116px;
+  }
+}
+@media (min-width: 1025px) {
+  .wk-sd--schraege::before {
+    bottom: -0.1vw; left: -0.1vw; right: -0.1vw; top: -0.1vw;
+    -webkit-mask-size: 100% 121px;  mask-size: 100% 121px;
+  }
+}
+@media (min-width: 2100px) {
+  .wk-sd--schraege::before {
+    -webkit-mask-size: 100% calc(2vw + 121px);  mask-size: 100% calc(2vw + 121px);
+  }
+}
+
+/* Ohne mask-Unterstuetzung verschwindet der Divider spurlos - die Sections
+   stossen dann sauber aneinander wie vorher. */
+@supports not ((-webkit-mask-image: none) or (mask-image: none)) {
+  .wk-sd::before { display: none; }
+}
