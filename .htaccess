@@ -75,6 +75,17 @@ Require valid-user
   <FilesMatch "\.html$">
     Header set Cache-Control "no-cache, must-revalidate"
   </FilesMatch>
+
+  # Default: nie cachen, auch nicht die nackte Domain ("/") oder eine
+  # Fehlerantwort wie 401/403. Ohne das griff obige Regel nur bei .html-
+  # Endung - "/" hat keine Endung und lief darum ohne jede Cache-Anweisung
+  # raus. Chrome preloadet die oberste Adressleisten-Vorschau im
+  # Hintergrund, bevor Enter gedrueckt wird; ein Basic-Auth-Dialog kann bei
+  # so einem unsichtbaren Preload nicht erscheinen, die 401-Antwort kam
+  # bislang ungeschuetzt zurueck und konnte als "Ergebnis" haengen bleiben.
+  # "always" wirkt auch auf Fehlerantworten, die Bedingung schliesst nur
+  # die Dateitypen aus, die oben bewusst lange gecacht werden.
+  Header always set Cache-Control "no-store" "expr=%{REQUEST_URI} !~ m#\.(webp|png|jpe?g|woff2|js|css)$#"
 </IfModule>
 
 # ---------------------------------------------------------------------------
