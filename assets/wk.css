@@ -449,8 +449,35 @@ footer, [role="dialog"] {
   }
 }
 
+/* --- Freiraum unter dem Divider --------------------------------------- *
+ * Der Divider liegt mit z-index 3 ueber dem Abschnitt. Ohne genug Abstand
+ * oben verschwindet die erste Ueberschrift darunter - lautlos, ohne Fehler.
+ * Der noetige Abstand haengt an der Maskenhoehe und wechselt an denselben
+ * Haltepunkten, deshalb steht er hier neben ihr und nicht als geratener
+ * clamp() im style-Attribut. Die Abschnitte schreiben nur
+ * padding: var(--wk-sd-top) ... - den Rest bestimmt der Haltepunkt.
+ * ---------------------------------------------------------------------- */
+.wk-sd--schraege { --wk-sd-top: 116px; }   /* Maske 100px */
+.wk-sd--kreise   { --wk-sd-top:  62px; }   /* Maske  45px */
+.wk-sd--wald     { --wk-sd-top: 108px; }   /* Maske  90px */
+@media (min-width: 768px) {
+  .wk-sd--schraege { --wk-sd-top: 132px; } /* Maske 116px */
+  .wk-sd--kreise   { --wk-sd-top: 106px; } /* Maske  90px */
+}
+@media (min-width: 1025px) {
+  .wk-sd--schraege { --wk-sd-top: 139px; } /* Maske 121px */
+  .wk-sd--kreise   { --wk-sd-top: 113px; } /* Maske  95px */
+}
+@media (min-width: 2100px) {
+  .wk-sd--schraege { --wk-sd-top: calc(2vw + 139px); }
+  .wk-sd--kreise   { --wk-sd-top: calc(2vw + 113px); }
+  .wk-sd--wald     { --wk-sd-top: calc(2vw + 108px); }
+}
+
 /* Ohne mask-Unterstuetzung verschwindet der Divider spurlos - die Sections
-   stossen dann sauber aneinander wie vorher. */
+   stossen dann sauber aneinander wie vorher. Der Freiraum oben faellt dann
+   mit weg, sonst klaffte eine Luecke ohne Anlass. */
 @supports not ((-webkit-mask-image: none) or (mask-image: none)) {
   .wk-sd::before { display: none; }
+  .wk-sd--schraege, .wk-sd--kreise, .wk-sd--wald { --wk-sd-top: 44px; }
 }
