@@ -349,18 +349,29 @@ footer, [role="dialog"] {
  * die gemalten Figuren wieder frei. Der Inhalt braucht dafür z-index 2 - der
  * Shape-Divider liegt mit 3 darüber und bleibt sichtbar.
  * ---------------------------------------------------------------------- */
-.wk-band { position: relative; }
-.wk-band::after {
+.wk-band, .wk-band-hell { position: relative; }
+.wk-band::after, .wk-band-hell::after {
   content: '';
   position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
+}
+.wk-band::after {
   background:
     radial-gradient(115% 130% at 50% 50%,
       rgba(9, 40, 33, .90) 0%,
       rgba(9, 40, 33, .86) 62%,
       rgba(9, 40, 33, .34) 100%);
+}
+/* Dasselbe gespiegelt: die hellen Lavuren haben dunkle Stellen - gemessen
+   bis hinunter zu L=0,016. Kleine Schrift darüber fiel auf 3,75:1. */
+.wk-band-hell::after {
+  background:
+    radial-gradient(120% 130% at 50% 45%,
+      rgba(248, 241, 226, .90) 0%,
+      rgba(248, 241, 226, .84) 60%,
+      rgba(248, 241, 226, .40) 100%);
 }
 
 /* Wo mask-image fehlt (ältere Browser), bleibt der Streifen eine schlichte
@@ -480,6 +491,35 @@ footer, [role="dialog"] {
   }
 }
 
+/* --- Organisch: weiche, unregelmäßige Kante mit gelösten Tropfen ------- *
+ * Die anderen drei Formen sind geometrisch. Diese ist gewachsen: drei
+ * überlagerte Wellen mit ungeraden Verhältnissen, dazu abgelöste Tropfen.
+ * Sie ist flacher als die schräge Kante und kostet dadurch weniger Höhe.
+ * ---------------------------------------------------------------------- */
+.wk-sd--organisch::before {
+  -webkit-mask-image: url('dividers/organisch.svg'); mask-image: url('dividers/organisch.svg');
+  -webkit-mask-size: 210% 74px;                      mask-size: 210% 74px;
+  -webkit-mask-position: 38% 0%;                     mask-position: 38% 0%;
+}
+@media (min-width: 768px) {
+  .wk-sd--organisch::before {
+    -webkit-mask-size: 140% 88px;   mask-size: 140% 88px;
+    -webkit-mask-position: 45% 0%;  mask-position: 45% 0%;
+  }
+}
+@media (min-width: 1025px) {
+  .wk-sd--organisch::before {
+    bottom: -0.1vw; left: -0.1vw; right: -0.1vw; top: -0.1vw;
+    -webkit-mask-size: 100% 104px;  mask-size: 100% 104px;
+    -webkit-mask-position: 50% 0%;  mask-position: 50% 0%;
+  }
+}
+@media (min-width: 2100px) {
+  .wk-sd--organisch::before {
+    -webkit-mask-size: 100% calc(2vw + 104px);  mask-size: 100% calc(2vw + 104px);
+  }
+}
+
 /* --- Freiraum unter dem Divider --------------------------------------- *
  * Der Divider liegt mit z-index 3 ueber dem Abschnitt. Ohne genug Abstand
  * oben verschwindet die erste Ueberschrift darunter - lautlos, ohne Fehler.
@@ -488,21 +528,25 @@ footer, [role="dialog"] {
  * clamp() im style-Attribut. Die Abschnitte schreiben nur
  * padding: var(--wk-sd-top) ... - den Rest bestimmt der Haltepunkt.
  * ---------------------------------------------------------------------- */
-.wk-sd--schraege { --wk-sd-top: 116px; }   /* Maske 100px */
-.wk-sd--kreise   { --wk-sd-top:  62px; }   /* Maske  45px */
-.wk-sd--wald     { --wk-sd-top: 108px; }   /* Maske  90px */
+.wk-sd--schraege  { --wk-sd-top: 116px; }  /* Maske 100px */
+.wk-sd--kreise    { --wk-sd-top:  62px; }  /* Maske  45px */
+.wk-sd--wald      { --wk-sd-top: 108px; }  /* Maske  90px */
+.wk-sd--organisch { --wk-sd-top:  90px; }  /* Maske  74px */
 @media (min-width: 768px) {
-  .wk-sd--schraege { --wk-sd-top: 132px; } /* Maske 116px */
-  .wk-sd--kreise   { --wk-sd-top: 106px; } /* Maske  90px */
+  .wk-sd--schraege  { --wk-sd-top: 132px; } /* Maske 116px */
+  .wk-sd--kreise    { --wk-sd-top: 106px; } /* Maske  90px */
+  .wk-sd--organisch { --wk-sd-top: 104px; } /* Maske  88px */
 }
 @media (min-width: 1025px) {
-  .wk-sd--schraege { --wk-sd-top: 139px; } /* Maske 121px */
-  .wk-sd--kreise   { --wk-sd-top: 113px; } /* Maske  95px */
+  .wk-sd--schraege  { --wk-sd-top: 139px; } /* Maske 121px */
+  .wk-sd--kreise    { --wk-sd-top: 113px; } /* Maske  95px */
+  .wk-sd--organisch { --wk-sd-top: 122px; } /* Maske 104px */
 }
 @media (min-width: 2100px) {
-  .wk-sd--schraege { --wk-sd-top: calc(2vw + 139px); }
-  .wk-sd--kreise   { --wk-sd-top: calc(2vw + 113px); }
-  .wk-sd--wald     { --wk-sd-top: calc(2vw + 108px); }
+  .wk-sd--schraege  { --wk-sd-top: calc(2vw + 139px); }
+  .wk-sd--kreise    { --wk-sd-top: calc(2vw + 113px); }
+  .wk-sd--wald      { --wk-sd-top: calc(2vw + 108px); }
+  .wk-sd--organisch { --wk-sd-top: calc(2vw + 122px); }
 }
 
 /* Ohne mask-Unterstuetzung verschwindet der Divider spurlos - die Sections
@@ -510,5 +554,74 @@ footer, [role="dialog"] {
    mit weg, sonst klaffte eine Luecke ohne Anlass. */
 @supports not ((-webkit-mask-image: none) or (mask-image: none)) {
   .wk-sd::before { display: none; }
-  .wk-sd--schraege, .wk-sd--kreise, .wk-sd--wald { --wk-sd-top: 44px; }
+  .wk-sd--schraege, .wk-sd--kreise, .wk-sd--wald, .wk-sd--organisch { --wk-sd-top: 44px; }
+}
+
+/* ---------------------------------------------------------------------- *
+ * Wechsel: Sätze, die nacheinander durchlaufen
+ *
+ * Genau fünf Einträge, jeder fünf von fünfundzwanzig Sekunden. Die Anzahl
+ * steckt in den Prozentwerten der Keyframes und lässt sich nicht ohne sie
+ * ändern - deshalb ist sie hier festgeschrieben und nicht als Variable
+ * angedeutet.
+ *
+ * Alle Einträge liegen im selben Rasterfeld: so ist der Kasten so hoch wie
+ * der längste Satz und springt beim Wechsel nicht.
+ *
+ * WCAG 2.2.2 verlangt für automatisch laufende Bewegung eine Möglichkeit,
+ * sie anzuhalten. Das leistet die Checkbox davor - mit der Tastatur
+ * erreichbar, ohne JavaScript. Wer Bewegung abbestellt hat, bekommt statt
+ * des Wechsels alle Sätze untereinander: es geht nichts verloren.
+ * ---------------------------------------------------------------------- */
+/* Schmuck am Rand - Pflanzen, Ranken. Auf schmalen Schirmen schiebt er sich
+   unter den Text, weil der dort die volle Breite braucht. Da hat Schmuck zu
+   weichen: gemessen fiel ein Absatz darüber auf 2,07:1. */
+.wk-nur-breit { display: none; }
+@media (min-width: 900px) { .wk-nur-breit { display: block; } }
+
+.wk-wechsel { display: grid; }
+.wk-wechsel > * {
+  grid-area: 1 / 1;
+  margin: 0;
+  opacity: 0;
+  animation: wk-wechsel 25s infinite;
+  animation-delay: calc(var(--i) * 5s);
+}
+@keyframes wk-wechsel {
+  0%          { opacity: 0; transform: translateY(9px); }
+  2%,  17%    { opacity: 1; transform: none; }
+  20%, 100%   { opacity: 0; transform: translateY(-9px); }
+}
+.wk-wechsel:has(~ .wk-wechsel-pause input:checked) > * { animation-play-state: paused; }
+
+/* Die Schaltfläche steht unter dem Wechsel, nicht darüber: dort unterbricht
+   sie den Satz nicht, bleibt aber in Reichweite. Sie tritt erst hervor,
+   wenn man sie ansteuert. */
+.wk-wechsel-pause {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 14px;
+  padding: 5px 12px 5px 9px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: 12.5px;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+  transition: border-color .15s;
+}
+/* Zurückhaltend über den Rahmen, nicht über opacity: ein halbdurchsichtiger
+   Text hätte auch den Kontrast halbiert und die Beschriftung unlesbar
+   gemacht - genau das war gemessen der Fall. */
+.wk-wechsel-pause { border-color: color-mix(in srgb, currentColor 35%, transparent); }
+.wk-wechsel-pause:hover,
+.wk-wechsel-pause:focus-within { border-color: currentColor; }
+.wk-wechsel-pause input { accent-color: var(--wk-pink-600); width: 14px; height: 14px; margin: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .wk-wechsel { display: block; }
+  .wk-wechsel > * { opacity: 1; animation: none; transform: none; }
+  .wk-wechsel > * + * { margin-top: .7em; }
+  .wk-wechsel-pause { display: none; }
 }
