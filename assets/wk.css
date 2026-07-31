@@ -67,6 +67,10 @@
   /* Hell genug, dass es auch auf der hellsten Waldstufe (forest-700, der
      Drawer-Hintergrund) noch 4,54:1 erreicht. Nicht weiter abdunkeln. */
   --wk-on-dark-muted:  #B4C1B8;  /* 6,5 / 5,5 / 4,5:1 auf forest 900/800/700 */
+  /* Der Markenrosa #D84878 ist eine Illustrationsfarbe: auf dunklem Wald
+     kommt er nur auf 2,4:1. Gleicher Farbton, gleiche Sättigung, nur heller -
+     so bleibt der Akzent erkennbar und lesbar. */
+  --wk-pink-on-dark:   #EDABC1;  /* 6,4 / 5,5 / 4,5:1 auf forest 900/800/700 */
 
   /* ---- Typografie ---------------------------------------------------- */
   --wk-font-serif: Alegreya, Georgia, 'Times New Roman', serif;
@@ -330,6 +334,33 @@ footer, [role="dialog"] {
           mask-image: linear-gradient(to bottom,
       transparent 0, #000 clamp(28px, 4vw, 64px),
       #000 calc(100% - clamp(28px, 4vw, 64px)), transparent 100%);
+}
+
+/* ---------------------------------------------------------------------- *
+ * Leseschleier über den dunklen Bändern
+ *
+ * Die Aquarelle in den CTA-Bändern haben helle Stellen - Nebel, Himmel,
+ * heller Waldboden. Die Schrift darüber ist hell. Gemessen lag der Kontrast
+ * an den hellsten Stellen bei 1,02:1, die Überschrift war dort praktisch
+ * unsichtbar; der Textschatten allein trägt das nicht.
+ *
+ * Der Schleier legt sich zwischen Bild und Text, nicht über beides: in der
+ * Mitte, wo die Zeilen stehen, deckt er kräftig, zu den Rändern hin gibt er
+ * die gemalten Figuren wieder frei. Der Inhalt braucht dafür z-index 2 - der
+ * Shape-Divider liegt mit 3 darüber und bleibt sichtbar.
+ * ---------------------------------------------------------------------- */
+.wk-band { position: relative; }
+.wk-band::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(115% 130% at 50% 50%,
+      rgba(9, 40, 33, .90) 0%,
+      rgba(9, 40, 33, .86) 62%,
+      rgba(9, 40, 33, .34) 100%);
 }
 
 /* Wo mask-image fehlt (ältere Browser), bleibt der Streifen eine schlichte
