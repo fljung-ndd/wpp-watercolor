@@ -37,6 +37,16 @@
   --wk-orange-600:  #C05815;
 
   /* ---- Aquarell-Washes für Karten ------------------------------------ */
+  /* Halb so kraeftig - der Wash auf Kartenpapier gemischt. Auf -050 direkt
+     kam der zugehoerige -ink-Ton gemessen nur auf 4,13 bis 4,47:1: die
+     Textrollen sind gegen Creme gerechnet, nicht gegen den satten Wash.
+     Auf diesen Toenen traegt jeder -ink-Ton wieder mindestens 4,68:1. */
+  --wk-cyan-025:    #E6F4F3;
+  --wk-petrol-025:  #EBF8F1;
+  --wk-yellow-025:  #FCF7E1;
+  --wk-orange-025:  #FCEEE1;
+  --wk-pink-025:    #FBECEE;
+
   --wk-cyan-050:    #CCEBF0;
   --wk-petrol-050:  #D6F2EC;
   --wk-pink-050:    #F7DBE5;
@@ -364,6 +374,14 @@ footer, [role="dialog"] {
       rgba(9, 40, 33, .86) 62%,
       rgba(9, 40, 33, .34) 100%);
 }
+/* Zu den Seiten hin auslaufen lassen: im Abschlussband stehen dort die
+   gemalten Figuren und kein Text. Ohne das liegt der Schleier auch ueber
+   ihnen und sie wirken ausgewaschen. */
+.wk-band--raender::after {
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 10%, #000 90%, transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0, #000 10%, #000 90%, transparent 100%);
+}
+
 /* Dasselbe gespiegelt: die hellen Lavuren haben dunkle Stellen - gemessen
    bis hinunter zu L=0,016. Kleine Schrift darüber fiel auf 3,75:1. */
 .wk-band-hell::after {
@@ -625,3 +643,226 @@ footer, [role="dialog"] {
   .wk-wechsel > * + * { margin-top: .7em; }
   .wk-wechsel-pause { display: none; }
 }
+
+/* ---------------------------------------------------------------------- *
+ * Zweispaltige Section: links dunkel, rechts hell
+ *
+ * Im Blueprint ist "Herausfordernde Dynamiken" keine dunkle Section mit
+ * zwei Spalten darin, sondern ein Schnitt durch die volle Breite: die
+ * linke Haelfte traegt den dunklen Waldgrund, die rechte den hellen. Die
+ * Naht laeuft senkrecht durch die Seite, ohne Rand und ohne Luecke.
+ *
+ * Der Leseschleier kommt aus .wk-band / .wk-band-hell - dieselbe gepruefte
+ * Mechanik wie bei den Baendern, nur auf eine halbe Breite angewandt. Der
+ * Inhalt braucht darum z-index 2.
+ *
+ * Unter 900px stapeln die Haelften. Der dunkle Teil bleibt oben: er traegt
+ * die Ueberschrift, und die Reihenfolge im Quelltext ist die Lesereihenfolge.
+ * ---------------------------------------------------------------------- */
+.wk-split { display: grid; grid-template-columns: 1fr; }
+@media (min-width: 900px) { .wk-split { grid-template-columns: 1fr 1fr; } }
+
+.wk-split__h {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(32px, 4vw, 60px) clamp(22px, 3.4vw, 52px);
+}
+.wk-split__bg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+.wk-split__in { position: relative; z-index: 2; width: 100%; }
+/* Ab Tablet ruecken die beiden Inhalte an die Naht heran, statt jeweils in
+   ihrer Haelfte zu schwimmen - so liest sich das Paar als ein Satz. */
+@media (min-width: 900px) {
+  .wk-split__h--dunkel { padding-left: clamp(26px, 5vw, 84px); }
+  .wk-split__h--hell   { padding-right: clamp(26px, 5vw, 84px); }
+  .wk-split__in { max-width: 560px; }
+}
+
+/* Der Schleier aus .wk-band ist auf die CTA-Baender gerechnet, deren
+   Aquarelle helle Nebelstellen haben. section2_dark ist durchgehend dunkel -
+   dort deckt derselbe Wert den gemalten Waldsaum zu, den der Blueprint
+   gerade zeigen will. Hier reicht deutlich weniger; gemessen bleibt die
+   Ueberschrift ueber 4,5:1. */
+.wk-split__h--dunkel::after {
+  background: radial-gradient(120% 130% at 34% 50%,
+    rgba(9, 40, 33, .89) 0%,
+    rgba(9, 40, 33, .82) 58%,
+    rgba(9, 40, 33, .22) 100%);
+}
+
+/* Feste Spaltenzahl statt auto-fit: der Blueprint setzt vier und drei.
+   auto-fit haette bei dieser Spaltenbreite fuenf und zwei ergeben. */
+.wk-raster4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(104px, 1fr)); gap: 10px; }
+@media (min-width: 900px) { .wk-raster4 { grid-template-columns: repeat(4, 1fr); } }
+.wk-raster5 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 13px; }
+@media (min-width: 1040px) { .wk-raster5 { grid-template-columns: repeat(5, 1fr); } }
+/* Drei und drei wie im Blueprint. auto-fit haette bei dieser Kartenbreite
+   vier und zwei ergeben - die zweite Reihe stuende dann halb leer. */
+.wk-raster3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+@media (min-width: 940px) { .wk-raster3 { grid-template-columns: repeat(3, 1fr); } }
+
+/* ---------------------------------------------------------------------- *
+ * Abschlussband
+ *
+ * Das Hintergrundbild (uploads/footer/background_footer2.png, optimiert als
+ * assets/footer-bg-home.webp) traegt den Farbwechsel selbst: oben Creme,
+ * unten Wald, an den Raendern die Figuren. Deshalb steht hier kein Divider -
+ * das Bild ist der Uebergang.
+ *
+ * Wo genau die Kante im Bild landet, haengt am Zuschnitt und damit an der
+ * Fensterbreite. Darauf darf die Lesbarkeit nicht beruhen: der Schleier
+ * legt oben Creme und unten Wald fest, unabhaengig vom Zuschnitt. Die
+ * Figuren an den Raendern bleiben frei.
+ * ---------------------------------------------------------------------- */
+.wk-abschluss { position: relative; overflow: hidden; background: var(--wk-forest-800); }
+.wk-abschluss::after {
+  content: '';
+  position: absolute; inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  /* In Prozent gerechnet wanderte die Naht mit der Sectionhoehe: auf 390px
+     stapelt der Inhalt, die Section wird doppelt so hoch, und der USP-Absatz
+     rutschte unter die Cremezone - gemessen auf 2,42:1. Die Zonen haengen
+     deshalb an festen Abstaenden: Creme ab oben, Wald so hoch wie die
+     Knopfreihe von unten. */
+  background:
+    linear-gradient(to bottom,
+      rgba(248, 241, 226, .00) 0,
+      rgba(248, 241, 226, .86) 42px,
+      rgba(248, 241, 226, .86) calc(100% - 190px),
+      rgba( 18,  61,  54, .00) calc(100% - 132px),
+      rgba( 18,  61,  54, .55) calc(100% -  46px),
+      rgba( 18,  61,  54, .62) 100%),
+    radial-gradient(90% 70% at 50% 34%,
+      rgba(248, 241, 226, .55) 0%,
+      rgba(248, 241, 226, .00) 100%);
+  /* Zu den Seiten hin laeuft der Schleier aus: dort stehen die gemalten
+     Figuren, und dort steht kein Text. */
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 9%, #000 91%, transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0, #000 9%, #000 91%, transparent 100%);
+}
+.wk-abschluss__in { position: relative; z-index: 2; }
+
+/* Nur die Oberkante ausblenden. .wk-wash blendet beide Kanten aus - beim
+   Abschlussband soll die untere Waldflaeche bis an den Footer reichen. */
+.wk-wash--oben {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 clamp(24px, 3vw, 52px), #000 100%);
+          mask-image: linear-gradient(to bottom, transparent 0, #000 clamp(24px, 3vw, 52px), #000 100%);
+}
+
+/* Eine Stufe kraeftiger. Das helle Aquarell hat unten links einen satten
+   Korallenfleck; der rosa Link darueber kam mit dem normalen Schleier auf
+   4,10:1. Die gemalten Raender bleiben auch so noch frei. */
+.wk-band-hell--satt::after {
+  background: radial-gradient(130% 145% at 50% 50%,
+    rgba(248, 241, 226, .95) 0%,
+    rgba(248, 241, 226, .92) 62%,
+    rgba(248, 241, 226, .52) 100%);
+}
+
+/* ---------------------------------------------------------------------- *
+ * Polaroid und Klebestreifen
+ * Im Blueprint haengen die beiden Fotos leicht schief an einem Streifen
+ * Kreppband. Der Streifen ist Dekoration und traegt kein aria-Label.
+ * ---------------------------------------------------------------------- */
+.wk-foto {
+  display: block;
+  background: var(--wk-paper-card);
+  border: 8px solid var(--wk-paper-card);
+  border-bottom-width: 26px;
+  border-radius: 3px;
+  box-shadow: 0 12px 30px rgba(18, 61, 54, .22);
+}
+.wk-klebeband {
+  position: absolute;
+  top: -13px; left: 50%;
+  width: 86px; height: 26px;
+  transform: translateX(-50%) rotate(-4deg);
+  background: rgba(224, 211, 180, .82);
+  box-shadow: 0 1px 3px rgba(18, 61, 54, .18);
+  pointer-events: none;
+}
+.wk-klebeband::before, .wk-klebeband::after {
+  content: ''; position: absolute; top: 0; bottom: 0; width: 3px;
+  background: repeating-linear-gradient(to bottom,
+    rgba(255, 253, 246, .7) 0 3px, transparent 3px 6px);
+}
+.wk-klebeband::before { left: 0; }
+.wk-klebeband::after  { right: 0; }
+
+/* Der rosa Strich unter den Ueberschriften, wie im Blueprint. Er sitzt
+   unter dem Text, nicht unter der ganzen Zeile - deshalb inline-block. */
+.wk-strich { position: relative; display: inline-block; }
+.wk-strich::after {
+  content: '';
+  position: absolute; left: 0; right: 0; bottom: -.22em;
+  height: 3px; border-radius: 2px;
+  background: var(--wk-pink);
+}
+.wk-strich--hell::after { background: var(--wk-pink-on-dark); }
+
+/* ---------------------------------------------------------------------- *
+ * Bewegung
+ *
+ * Die Seite soll beim Scrollen leben, ohne dass etwas von selbst blinkt:
+ * jeder Block blendet einmal auf, wenn er ins Bild kommt, und bleibt dann
+ * stehen. Das laeuft ueber die Scroll-Timeline im Browser - kein
+ * JavaScript, kein IntersectionObserver, kein Zustand.
+ *
+ * Wo view() fehlt, greift der @supports-Block nicht und die Blöcke sind
+ * einfach sofort da. Wer Bewegung abbestellt hat, ebenso.
+ *
+ * --n staffelt Karten einer Reihe gegeneinander: gleiche Kurve, spaeterer
+ * Bereich. Ohne --n faellt der Wert auf 0 zurueck.
+ * ---------------------------------------------------------------------- */
+/* Der naheliegende Weg waere animation-timeline: view() gewesen - ganz ohne
+ * Skript. Er traegt hier nicht: view() bindet an den naechsten Scrollport,
+ * und das ist nie das Fenster. Der Seitenrahmen hat overflow-x:hidden, jede
+ * Section mit Divider overflow:hidden - beides macht sie zu Scrollports.
+ * Deren eigener Scrollbereich ist null, die Timeline damit inaktiv: gemessen
+ * standen alle 45 Bloecke von Anfang an auf ihrem Endbild, es bewegte sich
+ * nichts. Das laesst sich nicht umbiegen, view() kennt kein Ziel-Argument.
+ *
+ * Darum ein Beobachter. Die Reihenfolge ist so gewaehlt, dass jeder Ausfall
+ * zur sichtbaren Seite hin ausgeht: versteckt wird nur unter .wk-js, und die
+ * Klasse setzt das Skript selbst - erst nachdem es geprueft hat, dass es
+ * einen IntersectionObserver gibt und dass Bewegung erwuenscht ist. Ohne
+ * JavaScript, mit abbestellter Bewegung, in aelteren Browsern und im Druck
+ * steht der Inhalt schlicht da.
+ *
+ * --n staffelt Karten einer Reihe gegeneinander.
+ */
+.wk-js .wk-auf {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .55s ease-out, transform .55s cubic-bezier(.22, .7, .3, 1);
+  transition-delay: calc(var(--n, 0) * 70ms);
+  will-change: opacity, transform;
+}
+.wk-js .wk-auf.wk-sichtbar { opacity: 1; transform: none; will-change: auto; }
+
+/* Auf Papier gibt es kein Scrollen: was noch nicht beobachtet wurde, bliebe
+   sonst weiss. */
+@media print {
+  .wk-js .wk-auf { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
+
+/* Karten heben sich beim Zeigen leicht an. Die Dauer bleibt kurz genug,
+   dass der Zeiger nicht auf die Karte warten muss. */
+.wk-heb { transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease; }
+.wk-heb:hover, .wk-heb:focus-within {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 34px rgba(18, 61, 54, .17);
+}
+.wk-heb--dunkel:hover, .wk-heb--dunkel:focus-within {
+  box-shadow: 0 16px 34px rgba(6, 30, 24, .40);
+}
+.wk-knopf { transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease; }
+.wk-knopf:hover { transform: translateY(-2px); }
