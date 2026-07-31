@@ -20,6 +20,36 @@
 <script src="./vendor/react.production.min.js" defer></script>
 <script src="./vendor/react-dom.production.min.js" defer></script>
 <script src="./support.js" defer></script>
+<script>
+(function(){
+  var d=document,r=d.documentElement,gezeigt=0,geplant=0,takt;
+  var zurueck=function(){try{r.className=r.className.replace(' wk-js','');
+    clearInterval(takt);}catch(e){}};
+  try{
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    r.className+=' wk-js';
+    var pruefen=function(){
+      geplant=0;
+      // Waehrend x-dc den Baum aufbaut, steht die halbe Seite kurz oben im
+      // Bild - ohne diese Sperre blendete der Abschluss auf, bevor jemand
+      // gescrollt hat. Gemessen: die letzten vier Bloecke standen nach 600ms
+      // bei 0,21 bis 0,66 statt bei 0.
+      if(d.readyState!=='complete')return;
+      var n=d.getElementsByClassName('wk-auf'),h=innerHeight*0.9,i,e;
+      for(i=0;i<n.length;i++){e=n[i];
+        if(e.className.indexOf('wk-sichtbar')<0&&e.getBoundingClientRect().top<h){
+          e.className+=' wk-sichtbar';gezeigt++;}}
+    };
+    var anstossen=function(){if(!geplant){geplant=1;requestAnimationFrame(pruefen);}};
+    addEventListener('scroll',anstossen,{passive:true});
+    addEventListener('resize',anstossen,{passive:true});
+    takt=setInterval(anstossen,300);
+    setTimeout(function(){clearInterval(takt);},12000);
+    setTimeout(function(){if(!gezeigt)zurueck();},6000);
+    anstossen();
+  }catch(e){zurueck();}
+})();
+</script>
 </head>
 <body>
 <x-dc>
@@ -74,17 +104,17 @@
 <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
   <section id="inhalt" tabindex="-1" style="position:relative;background:var(--wk-forest-800)">
     <img loading="lazy" decoding="async" width="1600" height="900" src="assets/hero-startseite.webp" alt="Torsten Macht mit Ziege und den Waldkätzchen-Figuren" style="width:100%;display:block">
-    <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(9,40,33,.95) 0%,rgba(9,40,33,.92) 42%,rgba(9,40,33,.60) 62%,rgba(9,40,33,.05) 82%);pointer-events:none"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(9,40,33,.93) 0%,rgba(9,40,33,.88) 34%,rgba(9,40,33,.52) 55%,rgba(9,40,33,.04) 74%);pointer-events:none"></div>
     <div style="position:absolute;inset:0;display:flex;align-items:center">
       <div style="max-width:1300px;margin:0 auto;width:100%;padding:0 26px">
         <div style="max-width:min(52%,600px)">
-          <h1 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(38px,5.2vw,72px);line-height:1.02;color:var(--wk-on-dark);margin:0 0 6px;text-shadow:0 3px 18px rgba(6,30,24,.6)">Waldkätzchen</h1>
-          <div style="color:var(--wk-pink-on-dark);font-family:Alegreya,serif;font-weight:600;font-size:clamp(19px,2.1vw,27px);line-height:1.2;margin-bottom:14px;text-shadow:0 2px 14px rgba(6,30,24,.6)">Verstehen. Verbinden. Verändern.</div>
-          <p style="font-size:clamp(15.5px,1.4vw,18px);line-height:1.6;margin:0 0 14px;max-width:46ch;color:var(--wk-on-dark-soft);text-shadow:0 2px 12px rgba(6,30,24,.6)">Wenn es knirscht, schauen wir gemeinsam hin. Ich begleite Familien, Kinder, Jugendliche und Systeme bei herausfordernden Dynamiken – klar, zugewandt und alltagstauglich.</p>
-          <p style="font-family:Alegreya,serif;font-style:italic;font-size:clamp(16px,1.6vw,20px);line-height:1.4;margin:0 0 20px;max-width:40ch;color:var(--wk-yellow);text-shadow:0 2px 12px rgba(6,30,24,.7)">Nicht glätten. Nicht beschönigen.<br>Sondern verstehen, halten und verändern.</p>
-          <div style="display:flex;flex-wrap:wrap;gap:11px">
-            <a href="./Kontakt.dc.html" style="display:inline-flex;align-items:center;gap:10px;background:var(--wk-pink-600);color:#fff;border-radius:999px;padding:14px 30px;font-size:16.5px;font-weight:600;text-decoration:none;box-shadow:0 8px 22px rgba(6,30,24,.4)">Erstgespräch anfragen <span aria-hidden="true">♡</span></a>
-            <a href="./Angebot.dc.html" style="display:inline-flex;align-items:center;gap:9px;background:transparent;color:var(--wk-on-dark);border:1.5px solid rgba(245,237,224,.55);border-radius:999px;padding:14px 26px;font-size:16px;font-weight:600;text-decoration:none">Angebot ansehen <span aria-hidden="true">↗</span></a>
+          <h1 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(40px,5.6vw,80px);line-height:1.02;color:var(--wk-on-dark);margin:0 0 8px;text-shadow:0 3px 18px rgba(6,30,24,.7)">Waldkätzchen</h1>
+          <div style="color:var(--wk-pink-on-dark);font-family:Alegreya,serif;font-weight:600;font-size:clamp(20px,2.2vw,28px);line-height:1.2;margin-bottom:16px;text-shadow:0 2px 14px rgba(6,30,24,.7)">Verstehen. Verbinden. Verändern.</div>
+          <p style="font-size:clamp(16px,1.5vw,19px);line-height:1.62;margin:0 0 16px;max-width:46ch;color:var(--wk-on-dark-soft);text-shadow:0 2px 12px rgba(6,30,24,.7)">Wenn es knirscht, schauen wir gemeinsam hin. Ich begleite Familien, Kinder, Jugendliche und Systeme bei herausfordernden Dynamiken – klar, zugewandt und alltagstauglich.</p>
+          <p style="font-family:Alegreya,serif;font-style:italic;font-size:clamp(17px,1.7vw,21px);line-height:1.4;margin:0 0 26px;max-width:40ch;color:var(--wk-yellow);text-shadow:0 2px 12px rgba(6,30,24,.75)">Nicht glätten. Nicht beschönigen.<br>Sondern verstehen, halten und verändern.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:12px">
+            <a href="./Kontakt.dc.html" class="wk-knopf" style="display:inline-flex;align-items:center;gap:10px;background:var(--wk-pink-600);color:#fff;border-radius:999px;padding:16px 34px;font-size:17px;font-weight:600;text-decoration:none;box-shadow:0 8px 22px rgba(6,30,24,.4)">Erstgespräch anfragen <span aria-hidden="true">♡</span></a>
+            <a href="./Angebot.dc.html" class="wk-knopf" style="display:inline-flex;align-items:center;gap:9px;background:var(--wk-petrol-600);color:#fff;border-radius:999px;padding:16px 30px;font-size:16.5px;font-weight:600;text-decoration:none">Angebot ansehen <span aria-hidden="true">↗</span></a>
           </div>
         </div>
       </div>
@@ -95,260 +125,307 @@
   <section id="inhalt" tabindex="-1" style="position:relative;background:var(--wk-forest-800)">
     <img loading="lazy" decoding="async" width="900" height="507" src="assets/hero-startseite-sm.webp" alt="Torsten Macht mit Ziege und den Waldkätzchen-Figuren" style="width:100%;display:block">
     <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(9,40,33,.30) 0%,rgba(9,40,33,.72) 38%,rgba(9,40,33,.95) 62%,rgba(9,40,33,.96) 100%);pointer-events:none"></div>
-    <div style="position:relative;padding:0 22px 26px;margin-top:-6px">
-      <h1 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(34px,9vw,50px);line-height:1.02;color:var(--wk-on-dark);margin:0 0 6px;text-shadow:0 3px 18px rgba(6,30,24,.6)">Waldkätzchen</h1>
-          <div style="color:var(--wk-pink-on-dark);font-family:Alegreya,serif;font-weight:600;font-size:clamp(17px,5vw,23px);line-height:1.2;margin-bottom:14px;text-shadow:0 2px 14px rgba(6,30,24,.6)">Verstehen. Verbinden. Verändern.</div>
-          <p style="font-size:16px;line-height:1.6;margin:0 0 14px;max-width:46ch;color:var(--wk-on-dark-soft);text-shadow:0 2px 12px rgba(6,30,24,.6)">Wenn es knirscht, schauen wir gemeinsam hin. Ich begleite Familien, Kinder, Jugendliche und Systeme bei herausfordernden Dynamiken – klar, zugewandt und alltagstauglich.</p>
-          <p style="font-family:Alegreya,serif;font-style:italic;font-size:17px;line-height:1.4;margin:0 0 20px;max-width:40ch;color:var(--wk-yellow);text-shadow:0 2px 12px rgba(6,30,24,.7)">Nicht glätten. Nicht beschönigen.<br>Sondern verstehen, halten und verändern.</p>
-          <div style="display:flex;flex-wrap:wrap;gap:11px">
-            <a href="./Kontakt.dc.html" style="display:inline-flex;align-items:center;gap:10px;background:var(--wk-pink-600);color:#fff;border-radius:999px;padding:14px 30px;font-size:16.5px;font-weight:600;text-decoration:none;box-shadow:0 8px 22px rgba(6,30,24,.4)">Erstgespräch anfragen <span aria-hidden="true">♡</span></a>
-            <a href="./Angebot.dc.html" style="display:inline-flex;align-items:center;gap:9px;background:transparent;color:var(--wk-on-dark);border:1.5px solid rgba(245,237,224,.55);border-radius:999px;padding:14px 26px;font-size:16px;font-weight:600;text-decoration:none">Angebot ansehen <span aria-hidden="true">↗</span></a>
+    <div style="position:relative;padding:0 22px 30px;margin-top:-6px">
+      <h1 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(35px,9.2vw,52px);line-height:1.02;color:var(--wk-on-dark);margin:0 0 8px;text-shadow:0 3px 18px rgba(6,30,24,.7)">Waldkätzchen</h1>
+          <div style="color:var(--wk-pink-on-dark);font-family:Alegreya,serif;font-weight:600;font-size:clamp(17px,5vw,23px);line-height:1.2;margin-bottom:16px;text-shadow:0 2px 14px rgba(6,30,24,.7)">Verstehen. Verbinden. Verändern.</div>
+          <p style="font-size:16.5px;line-height:1.62;margin:0 0 16px;max-width:46ch;color:var(--wk-on-dark-soft);text-shadow:0 2px 12px rgba(6,30,24,.7)">Wenn es knirscht, schauen wir gemeinsam hin. Ich begleite Familien, Kinder, Jugendliche und Systeme bei herausfordernden Dynamiken – klar, zugewandt und alltagstauglich.</p>
+          <p style="font-family:Alegreya,serif;font-style:italic;font-size:17.5px;line-height:1.4;margin:0 0 26px;max-width:40ch;color:var(--wk-yellow);text-shadow:0 2px 12px rgba(6,30,24,.75)">Nicht glätten. Nicht beschönigen.<br>Sondern verstehen, halten und verändern.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:12px">
+            <a href="./Kontakt.dc.html" class="wk-knopf" style="display:inline-flex;align-items:center;gap:10px;background:var(--wk-pink-600);color:#fff;border-radius:999px;padding:16px 34px;font-size:17px;font-weight:600;text-decoration:none;box-shadow:0 8px 22px rgba(6,30,24,.4)">Erstgespräch anfragen <span aria-hidden="true">♡</span></a>
+            <a href="./Angebot.dc.html" class="wk-knopf" style="display:inline-flex;align-items:center;gap:9px;background:var(--wk-petrol-600);color:#fff;border-radius:999px;padding:16px 30px;font-size:16.5px;font-weight:600;text-decoration:none">Angebot ansehen <span aria-hidden="true">↗</span></a>
           </div>
     </div>
   </section>
 </sc-if>
-<section class="wk-sd wk-sd--organisch wk-band-hell" style="position:relative;overflow:hidden;background:var(--wk-paper);--wk-from:var(--wk-forest-800);padding:var(--wk-sd-top) 20px clamp(34px,4vw,50px)">
+<section class="wk-sd wk-sd--organisch wk-band-hell" style="position:relative;overflow:hidden;background:var(--wk-paper);--wk-from:var(--wk-forest-800);padding:calc(var(--wk-sd-top) + clamp(14px,2vw,34px)) 20px clamp(58px,6.6vw,106px)">
   <img class="wk-wash" decoding="async" width="1400" height="467" src="assets/sections/section_light.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none">
-  <img decoding="async" width="187" height="154" src="assets/side/plant3.webp" alt="" loading="lazy" style="position:absolute;left:-14px;bottom:-8px;width:clamp(80px,9vw,140px);opacity:.85;mix-blend-mode:multiply;pointer-events:none" class="wk-nur-breit">
-  <img decoding="async" width="187" height="154" src="assets/side/plant7.webp" alt="" loading="lazy" style="position:absolute;right:-10px;bottom:-8px;width:clamp(80px,9vw,140px);opacity:.85;mix-blend-mode:multiply;pointer-events:none" class="wk-nur-breit">
   <div style="max-width:1240px;margin:0 auto;position:relative;z-index:2">
-    <div style="font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--wk-pink-ink);margin-bottom:6px">Schritt 1 – wiedererkennen</div>
-    <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(25px,3.2vw,36px);line-height:1.12;color:var(--wk-ink-strong);margin:0 0 8px;text-align:center">Kommt dir das bekannt vor?</h2>
-    <p style="font-size:16px;line-height:1.6;color:var(--wk-ink-soft);margin:0 auto 22px;max-width:56ch;text-align:center">Wenn du dich in einem dieser Sätze wiederfindest, bist du hier richtig.</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:13px">
-      <div style="background:rgba(255,253,246,.62);border:1px solid var(--wk-line);border-radius:16px;padding:18px 17px;text-align:center"><img decoding="async" width="256" height="256" src="assets/icons/18_gedankenknaeuel.webp" alt="" loading="lazy" style="width:58px;height:58px;object-fit:contain;margin:0 auto 9px;display:block;mix-blend-mode:multiply"><div style="font-size:14.5px;line-height:1.5;color:var(--wk-ink-soft)">Kleine Auslöser kippen in große Eskalationen. Danach weiß niemand mehr, wie es dazu kam.</div></div>
-      <div style="background:rgba(255,253,246,.62);border:1px solid var(--wk-line);border-radius:16px;padding:18px 17px;text-align:center"><img decoding="async" width="256" height="256" src="assets/icons/10_waldhoehle.webp" alt="" loading="lazy" style="width:58px;height:58px;object-fit:contain;margin:0 auto 9px;display:block;mix-blend-mode:multiply"><div style="font-size:14.5px;line-height:1.5;color:var(--wk-ink-soft)">Rückzug, Wut oder Überforderung bestimmen den Alltag.</div></div>
-      <div style="background:rgba(255,253,246,.62);border:1px solid var(--wk-line);border-radius:16px;padding:18px 17px;text-align:center"><img decoding="async" width="256" height="256" src="assets/icons/14_schule.webp" alt="" loading="lazy" style="width:58px;height:58px;object-fit:contain;margin:0 auto 9px;display:block;mix-blend-mode:multiply"><div style="font-size:14.5px;line-height:1.5;color:var(--wk-ink-soft)">Schule, Familie und Alltag sehen jeweils etwas anderes.</div></div>
-      <div style="background:rgba(255,253,246,.62);border:1px solid var(--wk-line);border-radius:16px;padding:18px 17px;text-align:center"><img decoding="async" width="256" height="256" src="assets/icons/03_herz.webp" alt="" loading="lazy" style="width:58px;height:58px;object-fit:contain;margin:0 auto 9px;display:block;mix-blend-mode:multiply"><div style="font-size:14.5px;line-height:1.5;color:var(--wk-ink-soft)">Nach Konflikten bleiben Schuld, Scham und Erschöpfung zurück.</div></div>
-      <div style="background:rgba(255,253,246,.62);border:1px solid var(--wk-line);border-radius:16px;padding:18px 17px;text-align:center"><img decoding="async" width="256" height="256" src="assets/icons/17_uhr.webp" alt="" loading="lazy" style="width:58px;height:58px;object-fit:contain;margin:0 auto 9px;display:block;mix-blend-mode:multiply"><div style="font-size:14.5px;line-height:1.5;color:var(--wk-ink-soft)">Übergänge und Morgende kosten jeden Tag dieselbe Kraft.</div></div>
-      <div style="background:rgba(255,253,246,.62);border:1px solid var(--wk-line);border-radius:16px;padding:18px 17px;text-align:center"><img decoding="async" width="256" height="256" src="assets/icons/19_kommunikation.webp" alt="" loading="lazy" style="width:58px;height:58px;object-fit:contain;margin:0 auto 9px;display:block;mix-blend-mode:multiply"><div style="font-size:14.5px;line-height:1.5;color:var(--wk-ink-soft)">Du bist unsicher, welche Grenze gerade die richtige ist.</div></div>
+    <div class="wk-auf" style="text-align:center;margin:0 0 clamp(34px,3.8vw,54px)"><div style="font-size:13.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--wk-pink-ink);margin-bottom:10px">Schritt 1 – wiedererkennen</div><h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(28px,3.6vw,44px);line-height:1.1;color:var(--wk-ink-strong);margin:0 0 22px;text-align:center"><span class="wk-strich">Kommt dir das bekannt vor?</span></h2><p style="font-size:clamp(16.5px,1.5vw,19px);line-height:1.65;color:var(--wk-ink-soft);margin:0 auto 0;max-width:60ch;text-align:center">Wenn du dich in einem dieser Sätze wiederfindest, bist du hier richtig.</p></div>
+    <div class="wk-raster3">
+      <div class="wk-auf wk-heb" style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;text-align:center;--n:0">
+        <div style="width:112px;height:112px;margin:0 auto 14px;background:url(assets/wc/circle_blue.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center"><img decoding="async" width="256" height="256" src="assets/icons/18_gedankenknaeuel.webp" alt="" loading="lazy" style="width:73px;height:73px;object-fit:contain;display:block;mix-blend-mode:multiply"></div>
+        <div style="font-size:15.5px;line-height:1.6;color:var(--wk-ink)">Kleine Auslöser kippen in große Eskalationen. Danach weiß niemand mehr, wie es dazu kam.</div>
+      </div>
+      <div class="wk-auf wk-heb" style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;text-align:center;--n:1">
+        <div style="width:112px;height:112px;margin:0 auto 14px;background:url(assets/wc/circle_petrol.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center"><img decoding="async" width="256" height="256" src="assets/icons/10_waldhoehle.webp" alt="" loading="lazy" style="width:73px;height:73px;object-fit:contain;display:block;mix-blend-mode:multiply"></div>
+        <div style="font-size:15.5px;line-height:1.6;color:var(--wk-ink)">Rückzug, Wut oder Überforderung bestimmen den Alltag.</div>
+      </div>
+      <div class="wk-auf wk-heb" style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;text-align:center;--n:2">
+        <div style="width:112px;height:112px;margin:0 auto 14px;background:url(assets/wc/circle_yellow.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center"><img decoding="async" width="256" height="256" src="assets/icons/14_schule.webp" alt="" loading="lazy" style="width:73px;height:73px;object-fit:contain;display:block;mix-blend-mode:multiply"></div>
+        <div style="font-size:15.5px;line-height:1.6;color:var(--wk-ink)">Schule, Familie und Alltag sehen jeweils etwas anderes.</div>
+      </div>
+      <div class="wk-auf wk-heb" style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;text-align:center;--n:0">
+        <div style="width:112px;height:112px;margin:0 auto 14px;background:url(assets/wc/circle_orange.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center"><img decoding="async" width="256" height="256" src="assets/icons/03_herz.webp" alt="" loading="lazy" style="width:73px;height:73px;object-fit:contain;display:block;mix-blend-mode:multiply"></div>
+        <div style="font-size:15.5px;line-height:1.6;color:var(--wk-ink)">Nach Konflikten bleiben Schuld, Scham und Erschöpfung zurück.</div>
+      </div>
+      <div class="wk-auf wk-heb" style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;text-align:center;--n:1">
+        <div style="width:112px;height:112px;margin:0 auto 14px;background:url(assets/wc/circle_pink.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center"><img decoding="async" width="256" height="256" src="assets/icons/17_uhr.webp" alt="" loading="lazy" style="width:73px;height:73px;object-fit:contain;display:block;mix-blend-mode:multiply"></div>
+        <div style="font-size:15.5px;line-height:1.6;color:var(--wk-ink)">Übergänge und Morgende kosten jeden Tag dieselbe Kraft.</div>
+      </div>
+      <div class="wk-auf wk-heb" style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;text-align:center;--n:2">
+        <div style="width:112px;height:112px;margin:0 auto 14px;background:url(assets/wc/circle_blue.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center"><img decoding="async" width="256" height="256" src="assets/icons/19_kommunikation.webp" alt="" loading="lazy" style="width:73px;height:73px;object-fit:contain;display:block;mix-blend-mode:multiply"></div>
+        <div style="font-size:15.5px;line-height:1.6;color:var(--wk-ink)">Du bist unsicher, welche Grenze gerade die richtige ist.</div>
+      </div>
     </div>
   </div>
 </section>
-<section class="wk-sd wk-sd--organisch" style="position:relative;overflow:hidden;background:var(--wk-cyan);--wk-from:var(--wk-paper);padding:var(--wk-sd-top) 20px clamp(34px,4vw,50px)">
-  <img decoding="async" width="187" height="154" src="assets/side/plant1.webp" alt="" loading="lazy" style="position:absolute;left:-18px;bottom:-10px;width:clamp(90px,11vw,165px);opacity:.5;mix-blend-mode:multiply;pointer-events:none" class="wk-nur-breit">
-  <img decoding="async" width="187" height="154" src="assets/side/plant9.webp" alt="" loading="lazy" style="position:absolute;right:-18px;bottom:-10px;width:clamp(90px,11vw,165px);opacity:.5;mix-blend-mode:multiply;pointer-events:none" class="wk-nur-breit">
-  <div style="max-width:900px;margin:0 auto;position:relative;text-align:center">
-    <div style="font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--wk-ink-strong);margin-bottom:6px">Momente aus dem Alltag</div>
-    <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(24px,3vw,34px);line-height:1.12;color:var(--wk-ink-strong);margin:0 0 18px">Vielleicht klingt einer davon<br>wie euer letzter Dienstag.</h2>
+<section class="wk-sd wk-sd--organisch" style="position:relative;overflow:hidden;background:var(--wk-cyan);--wk-from:var(--wk-paper);padding:calc(var(--wk-sd-top) + clamp(14px,2vw,34px)) 20px clamp(58px,6.6vw,106px)">
+  <img decoding="async" width="187" height="154" src="assets/side/plant1.webp" alt="" loading="lazy" style="position:absolute;left:-18px;bottom:-10px;width:clamp(100px,12vw,190px);opacity:.5;mix-blend-mode:multiply;pointer-events:none" class="wk-nur-breit">
+  <img decoding="async" width="187" height="154" src="assets/side/plant9.webp" alt="" loading="lazy" style="position:absolute;right:-18px;bottom:-10px;width:clamp(100px,12vw,190px);opacity:.5;mix-blend-mode:multiply;pointer-events:none" class="wk-nur-breit">
+  <div class="wk-auf" style="max-width:940px;margin:0 auto;position:relative;text-align:center">
+    <div style="font-size:13.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--wk-ink-strong);margin-bottom:10px">Momente aus dem Alltag</div>
+    <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(26px,3.2vw,38px);line-height:1.12;color:var(--wk-ink-strong);margin:0 0 28px">Vielleicht klingt einer davon<br>wie euer letzter Dienstag.</h2>
     <div class="wk-wechsel">
-      <p style="--i:0;font-family:Alegreya,serif;font-style:italic;font-size:clamp(18px,2.3vw,27px);line-height:1.35;color:var(--wk-ink-strong);align-self:center">„Es war nur ein Pullover. Der falsche. Zwanzig Minuten später weinen alle – und keiner weiß mehr, warum.&#8220;</p>
-      <p style="--i:1;font-family:Alegreya,serif;font-style:italic;font-size:clamp(18px,2.3vw,27px);line-height:1.35;color:var(--wk-ink-strong);align-self:center">„In der Schule ist alles unauffällig. Zu Hause bricht ab vierzehn Uhr die Welt zusammen.&#8220;</p>
-      <p style="--i:2;font-family:Alegreya,serif;font-style:italic;font-size:clamp(18px,2.3vw,27px);line-height:1.35;color:var(--wk-ink-strong);align-self:center">„Ich habe alles versucht: streng, verständnisvoll, konsequent, geduldig. Nichts davon hält länger als drei Tage.&#8220;</p>
-      <p style="--i:3;font-family:Alegreya,serif;font-style:italic;font-size:clamp(18px,2.3vw,27px);line-height:1.35;color:var(--wk-ink-strong);align-self:center">„Wir funktionieren. Aber wir kommen einander nicht mehr nahe.&#8220;</p>
-      <p style="--i:4;font-family:Alegreya,serif;font-style:italic;font-size:clamp(18px,2.3vw,27px);line-height:1.35;color:var(--wk-ink-strong);align-self:center">„Ich weiß nicht mehr, ob ich zu viel verlange – oder zu wenig.&#8220;</p>
+      <p style="--i:0;font-family:Alegreya,serif;font-style:italic;font-size:clamp(19px,2.4vw,29px);line-height:1.35;color:var(--wk-ink-strong);align-self:center">„Es war nur ein Pullover. Der falsche. Zwanzig Minuten später weinen alle – und keiner weiß mehr, warum.&#8220;</p>
+      <p style="--i:1;font-family:Alegreya,serif;font-style:italic;font-size:clamp(19px,2.4vw,29px);line-height:1.35;color:var(--wk-ink-strong);align-self:center">„In der Schule ist alles unauffällig. Zu Hause bricht ab vierzehn Uhr die Welt zusammen.&#8220;</p>
+      <p style="--i:2;font-family:Alegreya,serif;font-style:italic;font-size:clamp(19px,2.4vw,29px);line-height:1.35;color:var(--wk-ink-strong);align-self:center">„Ich habe alles versucht: streng, verständnisvoll, konsequent, geduldig. Nichts davon hält länger als drei Tage.&#8220;</p>
+      <p style="--i:3;font-family:Alegreya,serif;font-style:italic;font-size:clamp(19px,2.4vw,29px);line-height:1.35;color:var(--wk-ink-strong);align-self:center">„Wir funktionieren. Aber wir kommen einander nicht mehr nahe.&#8220;</p>
+      <p style="--i:4;font-family:Alegreya,serif;font-style:italic;font-size:clamp(19px,2.4vw,29px);line-height:1.35;color:var(--wk-ink-strong);align-self:center">„Ich weiß nicht mehr, ob ich zu viel verlange – oder zu wenig.&#8220;</p>
       </div>
       <label class="wk-wechsel-pause" style="color:var(--wk-ink)">
         <input type="checkbox" name="momente-pause"> Wechsel anhalten
       </label>
-    <p style="font-size:15.5px;line-height:1.6;color:var(--wk-ink);margin:20px 0 0">Solche Sätze sind kein Versagen. Sie sind der Anfang eines Gesprächs.</p>
+    <p style="font-size:16.5px;line-height:1.6;color:var(--wk-ink);margin:28px 0 0">Solche Sätze sind kein Versagen. Sie sind der Anfang eines Gesprächs.</p>
   </div>
 </section>
-<section class="wk-sd wk-sd--organisch" style="background:var(--wk-paper-warm);--wk-from:var(--wk-cyan);padding:var(--wk-sd-top) 20px clamp(34px,4vw,50px)">
-  <div style="max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:30px;align-items:center">
-    <div style="flex:2 1 420px;min-width:280px">
-      <div style="font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--wk-pink-ink);margin-bottom:6px">Der Grundsatz</div>
-      <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(25px,3.2vw,36px);color:var(--wk-ink-strong);margin:0 0 4px">Wild und verbunden.</h2>
-      <p style="font-size:clamp(17px,1.9vw,21px);line-height:1.4;color:var(--wk-pink-ink);font-family:Alegreya,serif;font-weight:600;margin:0 0 14px;max-width:22ch">Ein Kind muss nicht angepasst sein,<br>um verbunden zu sein.</p>
-      <p style="font-size:15.5px;line-height:1.6;color:var(--wk-ink-soft);margin:0 0 10px;max-width:52ch">Wild sein heißt lebendig, intensiv, eigenwillig, laut, schnell, empfindsam. Verbunden sein heißt gesehen werden, sicher sein, nicht aufgegeben werden.</p>
-      <p style="font-size:15.5px;line-height:1.6;color:var(--wk-ink-soft);margin:0;max-width:52ch">Auch in Konflikten kann Beziehung bestehen bleiben. Genau daran arbeiten wir.</p>
+<section class="wk-sd wk-sd--organisch" style="background:var(--wk-paper-warm);--wk-from:var(--wk-cyan);padding:calc(var(--wk-sd-top) + clamp(14px,2vw,34px)) 20px clamp(58px,6.6vw,106px)">
+  <div style="max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:clamp(30px,4vw,60px);align-items:center">
+    <div class="wk-auf" style="flex:2 1 420px;min-width:280px">
+      <div style="font-size:13.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--wk-pink-ink);margin-bottom:10px">Der Grundsatz</div>
+      <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(28px,3.6vw,44px);line-height:1.1;color:var(--wk-ink-strong);margin:0 0 14px"><span class="wk-strich">Wild und verbunden.</span></h2>
+      <p style="font-size:clamp(19px,2.1vw,25px);line-height:1.35;color:var(--wk-pink-ink);font-family:Alegreya,serif;font-weight:600;margin:26px 0 18px;max-width:24ch">Ein Kind muss nicht angepasst sein,<br>um verbunden zu sein.</p>
+      <p style="font-size:16.5px;line-height:1.7;color:var(--wk-ink-soft);margin:0 0 12px;max-width:52ch">Wild sein heißt lebendig, intensiv, eigenwillig, laut, schnell, empfindsam. Verbunden sein heißt gesehen werden, sicher sein, nicht aufgegeben werden.</p>
+      <p style="font-size:16.5px;line-height:1.7;color:var(--wk-ink-soft);margin:0;max-width:52ch">Auch in Konflikten kann Beziehung bestehen bleiben. Genau daran arbeiten wir.</p>
     </div>
-    <div style="flex:1 1 330px;min-width:260px;display:flex;justify-content:center;gap:2px;align-items:flex-end">
-      <img decoding="async" width="512" height="512" src="assets/chars/10_wuetende_katze.webp" alt="" loading="lazy" style="width:clamp(112px,15vw,186px);mix-blend-mode:multiply">
-      <img decoding="async" width="512" height="512" src="assets/chars/17_katze_pinguin_umarmung.webp" alt="" loading="lazy" style="width:clamp(132px,18vw,222px);mix-blend-mode:multiply;margin-bottom:-6px">
-      <img decoding="async" width="512" height="512" src="assets/chars/11_schnecke_rakete.webp" alt="" loading="lazy" style="width:clamp(96px,13vw,158px);mix-blend-mode:multiply">
-    </div>
-  </div>
-</section>
-<section class="wk-sd wk-sd--organisch wk-band" style="position:relative;overflow:hidden;background:var(--wk-forest-800);--wk-from:var(--wk-paper-warm);padding:var(--wk-sd-top) 20px clamp(34px,4vw,50px)">
-  <img class="wk-wash" decoding="async" width="1400" height="467" src="assets/sections/section2_dark.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.8">
-  <div style="position:relative;z-index:2;max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:32px;align-items:start">
-    <div>
-      <div style="font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--wk-pink-on-dark);margin-bottom:6px">Meine Domäne</div>
-      <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(25px,3.2vw,36px);line-height:1.12;color:var(--wk-on-dark);margin:0 0 12px">Herausfordernde Dynamiken verstehen</h2>
-      <p style="font-size:15.5px;line-height:1.65;color:var(--wk-on-dark-soft);margin:0 0 12px;max-width:52ch">Ich begleite nicht nur bei großen Krisen. Auch das, was von außen banal wirkt, kann für Familien hochbelastend sein: Wutausbrüche, Rückzug, Eskalationen, Überforderung, Übergänge, Schule, Geschwisterdynamiken, Missverständnisse im Alltag. Genau dort setze ich an.</p>
-      <p style="font-family:Alegreya,serif;font-style:italic;font-size:clamp(17px,1.9vw,22px);line-height:1.35;color:var(--wk-yellow);margin:0 0 18px;max-width:36ch">Es darf knirschen – wir müssen nur lernen, anders hinzuschauen.</p>
-      <a href="./Mein Ansatz.dc.html" style="color:var(--wk-pink-on-dark);font-weight:600;font-size:15.5px">Wie ich arbeite <span aria-hidden="true">→</span></a>
-    </div>
-    <div>
-      <div style="font-family:Alegreya,serif;font-weight:600;font-size:20px;color:var(--wk-on-dark);margin:0 0 12px">Mit wem ich arbeite</div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:10px">
-        <div style="background:rgba(255,253,246,.10);border:1px solid rgba(245,237,224,.22);border-radius:15px;padding:15px 14px;text-align:center"><img decoding="async" width="512" height="512" src="assets/chars/04_roter_panda.webp" alt="" loading="lazy" style="width:56px;margin:0 auto 7px;display:block"><div style="font-size:13.5px;line-height:1.35;color:var(--wk-on-dark)">Eltern</div></div>
-        <div style="background:rgba(255,253,246,.10);border:1px solid rgba(245,237,224,.22);border-radius:15px;padding:15px 14px;text-align:center"><img decoding="async" width="512" height="512" src="assets/chars/05_pinguin.webp" alt="" loading="lazy" style="width:56px;margin:0 auto 7px;display:block"><div style="font-size:13.5px;line-height:1.35;color:var(--wk-on-dark)">Väter</div></div>
-        <div style="background:rgba(255,253,246,.10);border:1px solid rgba(245,237,224,.22);border-radius:15px;padding:15px 14px;text-align:center"><img decoding="async" width="512" height="512" src="assets/chars/03_leopard_krone.webp" alt="" loading="lazy" style="width:56px;margin:0 auto 7px;display:block"><div style="font-size:13.5px;line-height:1.35;color:var(--wk-on-dark)">Kinder &amp;<br>Jugendliche</div></div>
-        <div style="background:rgba(255,253,246,.10);border:1px solid rgba(245,237,224,.22);border-radius:15px;padding:15px 14px;text-align:center"><img decoding="async" width="512" height="512" src="assets/icons/14_schule.webp" alt="" loading="lazy" style="width:56px;margin:0 auto 7px;display:block"><div style="font-size:13.5px;line-height:1.35;color:var(--wk-on-dark)">Schule &amp;<br>Kita</div></div>
-        <div style="background:rgba(255,253,246,.10);border:1px solid rgba(245,237,224,.22);border-radius:15px;padding:15px 14px;text-align:center"><img decoding="async" width="512" height="512" src="assets/chars/16_pinguin_sprechblase.webp" alt="" loading="lazy" style="width:56px;margin:0 auto 7px;display:block"><div style="font-size:13.5px;line-height:1.35;color:var(--wk-on-dark)">Teams</div></div>
-        <div style="background:rgba(255,253,246,.10);border:1px solid rgba(245,237,224,.22);border-radius:15px;padding:15px 14px;text-align:center"><img decoding="async" width="512" height="512" src="assets/chars/waschbaer.webp" alt="" loading="lazy" style="width:56px;margin:0 auto 7px;display:block"><div style="font-size:13.5px;line-height:1.35;color:var(--wk-on-dark)">Helfersysteme</div></div>
-        <div style="background:rgba(255,253,246,.10);border:1px solid rgba(245,237,224,.22);border-radius:15px;padding:15px 14px;text-align:center"><img decoding="async" width="512" height="512" src="assets/chars/02_katta.webp" alt="" loading="lazy" style="width:56px;margin:0 auto 7px;display:block"><div style="font-size:13.5px;line-height:1.35;color:var(--wk-on-dark)">Geschwister</div></div>
-        <div style="background:rgba(255,253,246,.10);border:1px solid rgba(245,237,224,.22);border-radius:15px;padding:15px 14px;text-align:center"><img decoding="async" width="512" height="512" src="assets/chars/09_haende_herz.webp" alt="" loading="lazy" style="width:56px;margin:0 auto 7px;display:block"><div style="font-size:13.5px;line-height:1.35;color:var(--wk-on-dark)">Weitere<br>Beteiligte</div></div>
+    <div class="wk-auf" style="flex:1 1 330px;min-width:270px;display:flex;justify-content:center;gap:clamp(10px,1.6vw,20px);align-items:stretch;--n:1">
+      <div class="wk-heb" style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;padding:16px;text-align:center;flex:1 1 0">
+        <img decoding="async" width="512" height="512" src="assets/chars/10_wuetende_katze.webp" alt="" loading="lazy" style="width:100%;max-width:150px;margin:0 auto;display:block;mix-blend-mode:multiply">
+        <div style="font-family:Alegreya,serif;font-weight:600;font-size:17px;color:var(--wk-orange-ink);margin-top:8px">wild</div>
       </div>
-      <p style="font-size:14px;line-height:1.55;color:var(--wk-on-dark-muted);margin:12px 0 0">Ich arbeite mit allen Beteiligten, die es braucht – nicht nur mit der Person, die gerade am lautesten auffällt.</p>
+      <div class="wk-heb" style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;padding:16px;text-align:center;flex:1 1 0">
+        <img decoding="async" width="512" height="512" src="assets/chars/17_katze_pinguin_umarmung.webp" alt="" loading="lazy" style="width:100%;max-width:150px;margin:0 auto;display:block;mix-blend-mode:multiply">
+        <div style="font-family:Alegreya,serif;font-weight:600;font-size:17px;color:var(--wk-petrol-ink);margin-top:8px">verbunden</div>
+      </div>
     </div>
   </div>
 </section>
-<section class="wk-sd wk-sd--organisch" style="background:var(--wk-paper);--wk-from:var(--wk-forest-800);padding:var(--wk-sd-top) 20px clamp(34px,4vw,50px)">
-  <div style="max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:30px;align-items:center">
-    <div style="flex:2 1 400px;min-width:280px">
-      <div style="font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--wk-pink-ink);margin-bottom:6px">Wer ich bin</div>
-      <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(25px,3.2vw,36px);color:var(--wk-ink-strong);margin:0 0 12px">Aus zwei Welten – für eine gemeinsame Perspektive.</h2>
-      <p style="font-size:15.5px;line-height:1.65;color:var(--wk-ink-soft);margin:0 0 10px;max-width:52ch">Ich komme aus zwei Welten: aus der Heilpädagogik und aus vielen Jahren in der IT. Dazu kommt meine persönliche Familienerfahrung. Diese Mischung macht meinen Blick besonders: analytisch, systemisch, menschlich und alltagsnah.</p>
-      <p style="font-size:15.5px;line-height:1.65;color:var(--wk-ink-soft);margin:0 0 16px;max-width:52ch">Ich denke in Beziehungen, Mustern und konkreten Handlungsschritten – nicht in schnellen Schuldzuweisungen.</p>
-      <a href="./Ueber mich.dc.html" style="color:var(--wk-pink-ink);font-weight:600;font-size:15.5px">Meine Geschichte <span aria-hidden="true">→</span></a>
+<section class="wk-split">
+  <div class="wk-split__h wk-split__h--dunkel wk-band" style="background:var(--wk-forest-800)">
+    <img class="wk-split__bg" decoding="async" width="1400" height="467" src="assets/sections/section2_dark.webp" alt="" loading="lazy" style="object-position:left center">
+    <div class="wk-split__in wk-auf">
+      <div style="font-size:13.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--wk-yellow);margin-bottom:10px">Meine Domäne</div>
+      <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(28px,3.5vw,42px);line-height:1.08;color:var(--wk-on-dark);margin:0 0 18px">Herausfordernde<br>Dynamiken verstehen</h2>
+      <p style="font-size:16.5px;line-height:1.7;color:var(--wk-on-dark-soft);margin:0 0 20px;max-width:48ch">Ich begleite nicht nur bei großen Krisen. Auch das, was von außen banal wirkt, kann für Familien hochbelastend sein: Wutausbrüche, Rückzug, Eskalationen, Überforderung, Übergänge, Schule, Geschwisterdynamiken, Missverständnisse im Alltag. Genau dort setze ich an.</p>
+      <p style="font-family:Alegreya,serif;font-style:italic;font-size:clamp(18px,2vw,24px);line-height:1.35;color:var(--wk-yellow);margin:0 0 24px;max-width:34ch">Es darf knirschen – wir müssen nur lernen, anders hinzuschauen.</p>
+      <a href="./Mein Ansatz.dc.html" style="color:var(--wk-pink-on-dark);font-weight:600;font-size:16px">Wie ich arbeite <span aria-hidden="true">→</span></a>
     </div>
-    <div style="flex:1 1 300px;min-width:250px;display:flex;gap:12px;justify-content:center">
-      <img decoding="async" width="600" height="800" src="assets/ich/foto1.webp" alt="Torsten Macht" loading="lazy" style="width:clamp(120px,15vw,180px);height:auto;border-radius:14px;border:5px solid var(--wk-paper-card);box-shadow:0 6px 18px rgba(18,61,54,.18);transform:rotate(-2deg)">
-      <img decoding="async" width="600" height="800" src="assets/ich/foto2.webp" alt="" loading="lazy" style="width:clamp(120px,15vw,180px);height:auto;border-radius:14px;border:5px solid var(--wk-paper-card);box-shadow:0 6px 18px rgba(18,61,54,.18);transform:rotate(2deg)">
+  </div>
+  <div class="wk-split__h wk-split__h--hell wk-band-hell" style="background:var(--wk-paper)">
+    <img class="wk-split__bg" decoding="async" width="1400" height="467" src="assets/sections/section_light.webp" alt="" loading="lazy" style="object-position:right center">
+    <div class="wk-split__in">
+      <h2 class="wk-auf" style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(24px,2.8vw,32px);color:var(--wk-ink-strong);margin:0 0 20px">Mit wem ich arbeite</h2>
+      <div class="wk-raster4">
+        <div class="wk-auf wk-heb" style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;padding:15px 11px;border-radius:16px;text-align:center;--n:0"><img decoding="async" width="512" height="512" src="assets/chars/04_roter_panda.webp" alt="" loading="lazy" style="width:100%;max-width:78px;margin:0 auto 7px;display:block;mix-blend-mode:multiply"><div style="font-size:13.5px;line-height:1.3;color:var(--wk-ink-strong);font-weight:600">Eltern</div></div>
+        <div class="wk-auf wk-heb" style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;padding:15px 11px;border-radius:16px;text-align:center;--n:0"><img decoding="async" width="512" height="512" src="assets/chars/05_pinguin.webp" alt="" loading="lazy" style="width:100%;max-width:78px;margin:0 auto 7px;display:block;mix-blend-mode:multiply"><div style="font-size:13.5px;line-height:1.3;color:var(--wk-ink-strong);font-weight:600">Väter</div></div>
+        <div class="wk-auf wk-heb" style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;padding:15px 11px;border-radius:16px;text-align:center;--n:1"><img decoding="async" width="512" height="512" src="assets/chars/03_leopard_krone.webp" alt="" loading="lazy" style="width:100%;max-width:78px;margin:0 auto 7px;display:block;mix-blend-mode:multiply"><div style="font-size:13.5px;line-height:1.3;color:var(--wk-ink-strong);font-weight:600">Kinder &amp;<br>Jugendliche</div></div>
+        <div class="wk-auf wk-heb" style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;padding:15px 11px;border-radius:16px;text-align:center;--n:1"><img decoding="async" width="512" height="512" src="assets/chars/11_schnecke_rakete.webp" alt="" loading="lazy" style="width:100%;max-width:78px;margin:0 auto 7px;display:block;mix-blend-mode:multiply"><div style="font-size:13.5px;line-height:1.3;color:var(--wk-ink-strong);font-weight:600">Schule &amp;<br>Kita</div></div>
+        <div class="wk-auf wk-heb" style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;padding:15px 11px;border-radius:16px;text-align:center;--n:2"><img decoding="async" width="512" height="512" src="assets/chars/02_katta.webp" alt="" loading="lazy" style="width:100%;max-width:78px;margin:0 auto 7px;display:block;mix-blend-mode:multiply"><div style="font-size:13.5px;line-height:1.3;color:var(--wk-ink-strong);font-weight:600">Teams</div></div>
+        <div class="wk-auf wk-heb" style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;padding:15px 11px;border-radius:16px;text-align:center;--n:2"><img decoding="async" width="512" height="512" src="assets/chars/16_pinguin_sprechblase.webp" alt="" loading="lazy" style="width:100%;max-width:78px;margin:0 auto 7px;display:block;mix-blend-mode:multiply"><div style="font-size:13.5px;line-height:1.3;color:var(--wk-ink-strong);font-weight:600">Helfersysteme</div></div>
+        <div class="wk-auf wk-heb" style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;padding:15px 11px;border-radius:16px;text-align:center;--n:3"><img decoding="async" width="512" height="512" src="assets/chars/09_haende_herz.webp" alt="" loading="lazy" style="width:100%;max-width:78px;margin:0 auto 7px;display:block;mix-blend-mode:multiply"><div style="font-size:13.5px;line-height:1.3;color:var(--wk-ink-strong);font-weight:600">weitere Beteiligte,<br>wenn es sinnvoll ist</div></div>
+      </div>
+      <p style="font-size:14.5px;line-height:1.6;color:var(--wk-ink-soft);margin:20px 0 0;text-align:center">Ich arbeite mit allen Beteiligten, die notwendig sind – nicht nur mit der Person, die gerade am lautesten auffällt.</p>
+    </div>
+  </div>
+</section>
+<section class="wk-band-hell wk-band-hell--satt" style="position:relative;overflow:hidden;background:var(--wk-paper);padding:clamp(58px,6.6vw,106px) 20px clamp(58px,6.6vw,106px)">
+  <img class="wk-wash" decoding="async" width="1400" height="467" src="assets/sections/section_light.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.8;pointer-events:none">
+  <div style="max-width:1180px;margin:0 auto;position:relative;z-index:2;display:flex;flex-wrap:wrap;gap:clamp(30px,4.4vw,64px);align-items:center">
+    <div class="wk-auf" style="flex:2 1 380px;min-width:280px">
+      <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(28px,3.6vw,44px);color:var(--wk-ink-strong);margin:0 0 26px"><span class="wk-strich">Wer ich bin</span></h2>
+      <p style="font-size:16.5px;line-height:1.75;color:var(--wk-ink-soft);margin:0 0 16px;max-width:50ch">Ich komme aus zwei Welten: aus der Heilpädagogik und aus vielen Jahren in der IT. Dazu kommt meine persönliche Familienerfahrung. Diese Mischung macht meinen Blick besonders: analytisch, systemisch, menschlich und alltagsnah.</p>
+      <p style="font-size:16.5px;line-height:1.75;color:var(--wk-ink-soft);margin:0 0 22px;max-width:50ch">Ich denke in Beziehungen, Mustern und konkreten Handlungsschritten –<br>nicht in schnellen Schuldzuweisungen.</p>
+      <a href="./Ueber mich.dc.html" style="color:var(--wk-pink-ink);font-weight:600;font-size:16px">Meine Geschichte <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="wk-auf" style="flex:1 1 380px;min-width:280px;display:flex;gap:clamp(14px,2vw,26px);justify-content:center;align-items:flex-start;--n:1">
+      <div style="position:relative;transform:rotate(-2.5deg);flex:0 1 auto">
+        <img class="wk-foto" decoding="async" width="500" height="667" src="assets/ich/foto1.webp" alt="Torsten Macht" loading="lazy" style="width:100%;max-width:216px;height:auto">
+        <span class="wk-klebeband" aria-hidden="true"></span>
+      </div>
+      <div style="position:relative;transform:rotate(2.5deg);margin-top:clamp(12px,2vw,26px);flex:0 1 auto">
+        <img class="wk-foto" decoding="async" width="500" height="667" src="assets/ich/foto2.webp" alt="" loading="lazy" style="width:100%;max-width:216px;height:auto">
+        <span class="wk-klebeband" aria-hidden="true"></span>
+      </div>
     </div>
   </div>
 </section>
 <section class="wk-sd wk-sd--wald wk-band" style="position:relative;background:var(--wk-forest-800);--wk-from:var(--wk-paper);overflow:hidden">
   <img class="wk-wash" decoding="async" width="1400" height="467" src="assets/sections/section2_dark.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.85">
-  <div style="position:relative;z-index:2;max-width:900px;margin:0 auto;padding:var(--wk-sd-top) 22px clamp(40px,5vw,58px);text-align:center">
-    <div style="font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--wk-pink-on-dark);margin-bottom:6px">Meine Haltung</div>
-    <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(27px,3.8vw,46px);line-height:1.1;color:var(--wk-on-dark);margin:0 0 16px;text-shadow:0 2px 14px rgba(6,30,24,.5)">Das Kind ist nicht das Problem.</h2>
+  <div class="wk-auf" style="position:relative;z-index:2;max-width:940px;margin:0 auto;padding:calc(var(--wk-sd-top) + clamp(14px,2vw,34px)) 22px clamp(62px,7vw,110px);text-align:center">
+    <div style="font-size:13.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--wk-yellow);margin-bottom:10px">Meine Haltung</div>
+    <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(30px,4.4vw,56px);line-height:1.06;color:var(--wk-on-dark);margin:0 0 30px;text-shadow:0 2px 14px rgba(6,30,24,.5)">Das Kind ist nicht das Problem.</h2>
     <div class="wk-wechsel">
-      <p style="--i:0;font-size:clamp(16.5px,1.9vw,21px);line-height:1.5;color:var(--wk-on-dark-soft);align-self:center;text-shadow:0 2px 14px rgba(6,30,24,.55)">Das Verhalten ist ein Hinweis. Der Kontext gehört immer mit ins Bild.</p>
-      <p style="--i:1;font-size:clamp(16.5px,1.9vw,21px);line-height:1.5;color:var(--wk-on-dark-soft);align-self:center;text-shadow:0 2px 14px rgba(6,30,24,.55)">Kein Kind ist absichtlich schwierig. Es hat Gründe – auch wenn wir sie noch nicht kennen.</p>
-      <p style="--i:2;font-size:clamp(16.5px,1.9vw,21px);line-height:1.5;color:var(--wk-on-dark-soft);align-self:center;text-shadow:0 2px 14px rgba(6,30,24,.55)">Wer verstanden wird, muss sich nicht mehr wehren.</p>
-      <p style="--i:3;font-size:clamp(16.5px,1.9vw,21px);line-height:1.5;color:var(--wk-on-dark-soft);align-self:center;text-shadow:0 2px 14px rgba(6,30,24,.55)">Grenzen und Wärme sind kein Widerspruch. Sie brauchen einander.</p>
-      <p style="--i:4;font-size:clamp(16.5px,1.9vw,21px);line-height:1.5;color:var(--wk-on-dark-soft);align-self:center;text-shadow:0 2px 14px rgba(6,30,24,.55)">Veränderung beginnt nicht beim Kind. Sie beginnt beim Hinschauen.</p>
+      <p style="--i:0;font-size:clamp(18px,2.1vw,24px);line-height:1.5;color:var(--wk-on-dark-soft);align-self:center;text-shadow:0 2px 14px rgba(6,30,24,.55)">Das Verhalten ist ein Hinweis. Der Kontext gehört immer mit ins Bild.</p>
+      <p style="--i:1;font-size:clamp(18px,2.1vw,24px);line-height:1.5;color:var(--wk-on-dark-soft);align-self:center;text-shadow:0 2px 14px rgba(6,30,24,.55)">Kein Kind ist absichtlich schwierig. Es hat Gründe – auch wenn wir sie noch nicht kennen.</p>
+      <p style="--i:2;font-size:clamp(18px,2.1vw,24px);line-height:1.5;color:var(--wk-on-dark-soft);align-self:center;text-shadow:0 2px 14px rgba(6,30,24,.55)">Wer verstanden wird, muss sich nicht mehr wehren.</p>
+      <p style="--i:3;font-size:clamp(18px,2.1vw,24px);line-height:1.5;color:var(--wk-on-dark-soft);align-self:center;text-shadow:0 2px 14px rgba(6,30,24,.55)">Grenzen und Wärme sind kein Widerspruch. Sie brauchen einander.</p>
+      <p style="--i:4;font-size:clamp(18px,2.1vw,24px);line-height:1.5;color:var(--wk-on-dark-soft);align-self:center;text-shadow:0 2px 14px rgba(6,30,24,.55)">Veränderung beginnt nicht beim Kind. Sie beginnt beim Hinschauen.</p>
       </div>
       <label class="wk-wechsel-pause" style="color:var(--wk-on-dark-muted)">
         <input type="checkbox" name="haltung-pause"> Wechsel anhalten
       </label>
   </div>
 </section>
-<section class="wk-sd wk-sd--kreise" style="background:var(--wk-paper);--wk-from:var(--wk-forest-800);padding:var(--wk-sd-top) 20px clamp(34px,4vw,50px)">
+<section style="background:var(--wk-paper);padding:clamp(58px,6.6vw,106px) 20px clamp(58px,6.6vw,106px)">
   <div style="max-width:1240px;margin:0 auto">
-    <div style="font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--wk-pink-ink);margin-bottom:6px">Schritt 4 – ein konkretes Angebot</div>
-    <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(25px,3.2vw,36px);line-height:1.12;color:var(--wk-ink-strong);margin:0 0 8px;text-align:center">Angebote im Überblick</h2>
-    <p style="font-size:16px;line-height:1.6;color:var(--wk-ink-soft);margin:0 auto 22px;max-width:56ch;text-align:center">Vier Wege, je nachdem, wer gerade Unterstützung braucht.</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px">
-      <a href="./Fuer Familien.dc.html" style="background:rgba(255,253,246,.62);border:1px solid var(--wk-line);border-radius:16px;padding:18px 17px;display:block;text-decoration:none;color:inherit;text-align:center" style-hover="border-color:var(--wk-pink)">
-        <img decoding="async" width="512" height="512" src="assets/chars/04_roter_panda.webp" alt="" loading="lazy" style="width:92px;margin:0 auto 9px;display:block;mix-blend-mode:multiply">
-        <div style="font-family:Alegreya,serif;font-weight:600;font-size:19px;color:var(--wk-ink-strong);margin-bottom:5px">Familienbegleitung</div>
-        <div style="font-size:14px;line-height:1.55;color:var(--wk-ink-soft)">Gemeinsam euren Weg finden, Schritt für Schritt.</div>
-        <div style="color:var(--wk-pink-ink);font-weight:600;font-size:14px;margin-top:10px">Mehr erfahren <span aria-hidden="true">→</span></div>
+    <div class="wk-auf" style="text-align:center;margin:0 0 clamp(34px,3.8vw,54px)"><div style="font-size:13.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--wk-pink-ink);margin-bottom:10px">Schritt 4 – ein konkretes Angebot</div><h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(28px,3.6vw,44px);line-height:1.1;color:var(--wk-ink-strong);margin:0 0 22px;text-align:center"><span class="wk-strich">Angebote im Überblick</span></h2><p style="font-size:clamp(16.5px,1.5vw,19px);line-height:1.65;color:var(--wk-ink-soft);margin:0 auto 0;max-width:60ch;text-align:center">Vier Wege, je nachdem, wer gerade Unterstützung braucht.</p></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px">
+      <a href="./Fuer Familien.dc.html" class="wk-auf wk-heb" style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;display:block;text-decoration:none;color:inherit;text-align:center;border-top:4px solid var(--wk-cyan);--n:0">
+        <div style="width:132px;height:132px;margin:0 auto 14px;background:url(assets/wc/circle_blue.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center"><img decoding="async" width="256" height="256" src="assets/chars/04_roter_panda.webp" alt="" loading="lazy" style="width:87px;height:87px;object-fit:contain;display:block;mix-blend-mode:multiply"></div>
+        <div style="font-family:Alegreya,serif;font-weight:600;font-size:20.5px;color:var(--wk-ink-strong);margin-bottom:8px">Familienbegleitung</div>
+        <div style="font-size:15px;line-height:1.6;color:var(--wk-ink-soft)">Gemeinsam euren Weg finden, Schritt für Schritt.</div>
+        <div style="color:var(--wk-cyan-ink);font-weight:600;font-size:14.5px;margin-top:14px">Mehr erfahren <span aria-hidden="true">→</span></div>
       </a>
-      <a href="./Autismus.dc.html" style="background:rgba(255,253,246,.62);border:1px solid var(--wk-line);border-radius:16px;padding:18px 17px;display:block;text-decoration:none;color:inherit;text-align:center" style-hover="border-color:var(--wk-pink)">
-        <img decoding="async" width="512" height="512" src="assets/chars/13_ueberforderung.webp" alt="" loading="lazy" style="width:92px;margin:0 auto 9px;display:block;mix-blend-mode:multiply">
-        <div style="font-family:Alegreya,serif;font-weight:600;font-size:19px;color:var(--wk-ink-strong);margin-bottom:5px">Autismus &amp; PDA</div>
-        <div style="font-size:14px;line-height:1.55;color:var(--wk-ink-soft)">Mehr Verständnis, weniger Anforderungsdruck, alltagstauglich begleitet.</div>
-        <div style="color:var(--wk-pink-ink);font-weight:600;font-size:14px;margin-top:10px">Mehr erfahren <span aria-hidden="true">→</span></div>
+      <a href="./Autismus.dc.html" class="wk-auf wk-heb" style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;display:block;text-decoration:none;color:inherit;text-align:center;border-top:4px solid var(--wk-petrol);--n:1">
+        <div style="width:132px;height:132px;margin:0 auto 14px;background:url(assets/wc/circle_petrol.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center"><img decoding="async" width="256" height="256" src="assets/chars/13_ueberforderung.webp" alt="" loading="lazy" style="width:87px;height:87px;object-fit:contain;display:block;mix-blend-mode:multiply"></div>
+        <div style="font-family:Alegreya,serif;font-weight:600;font-size:20.5px;color:var(--wk-ink-strong);margin-bottom:8px">Autismus &amp; PDA</div>
+        <div style="font-size:15px;line-height:1.6;color:var(--wk-ink-soft)">Mehr Verständnis, weniger Anforderungsdruck, alltagstauglich begleitet.</div>
+        <div style="color:var(--wk-petrol-ink);font-weight:600;font-size:14.5px;margin-top:14px">Mehr erfahren <span aria-hidden="true">→</span></div>
       </a>
-      <a href="./Fuer Vaeter.dc.html" style="background:rgba(255,253,246,.62);border:1px solid var(--wk-line);border-radius:16px;padding:18px 17px;display:block;text-decoration:none;color:inherit;text-align:center" style-hover="border-color:var(--wk-pink)">
-        <img decoding="async" width="512" height="512" src="assets/chars/05_pinguin.webp" alt="" loading="lazy" style="width:92px;margin:0 auto 9px;display:block;mix-blend-mode:multiply">
-        <div style="font-family:Alegreya,serif;font-weight:600;font-size:19px;color:var(--wk-ink-strong);margin-bottom:5px">Begleitung für Väter</div>
-        <div style="font-size:14px;line-height:1.55;color:var(--wk-ink-soft)">Ein eigener Raum für Verantwortung, Wut und Nähe.</div>
-        <div style="color:var(--wk-pink-ink);font-weight:600;font-size:14px;margin-top:10px">Mehr erfahren <span aria-hidden="true">→</span></div>
+      <a href="./Fuer Vaeter.dc.html" class="wk-auf wk-heb" style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;display:block;text-decoration:none;color:inherit;text-align:center;border-top:4px solid var(--wk-yellow);--n:2">
+        <div style="width:132px;height:132px;margin:0 auto 14px;background:url(assets/wc/circle_yellow.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center"><img decoding="async" width="256" height="256" src="assets/chars/05_pinguin.webp" alt="" loading="lazy" style="width:87px;height:87px;object-fit:contain;display:block;mix-blend-mode:multiply"></div>
+        <div style="font-family:Alegreya,serif;font-weight:600;font-size:20.5px;color:var(--wk-ink-strong);margin-bottom:8px">Begleitung für Väter</div>
+        <div style="font-size:15px;line-height:1.6;color:var(--wk-ink-soft)">Ein eigener Raum für Verantwortung, Wut und Nähe.</div>
+        <div style="color:var(--wk-yellow-ink);font-weight:600;font-size:14.5px;margin-top:14px">Mehr erfahren <span aria-hidden="true">→</span></div>
       </a>
-      <a href="./Fuer Teams.dc.html" style="background:rgba(255,253,246,.62);border:1px solid var(--wk-line);border-radius:16px;padding:18px 17px;display:block;text-decoration:none;color:inherit;text-align:center" style-hover="border-color:var(--wk-pink)">
-        <img decoding="async" width="512" height="512" src="assets/chars/16_pinguin_sprechblase.webp" alt="" loading="lazy" style="width:92px;margin:0 auto 9px;display:block;mix-blend-mode:multiply">
-        <div style="font-family:Alegreya,serif;font-weight:600;font-size:19px;color:var(--wk-ink-strong);margin-bottom:5px">Fachberatung &amp; Teams</div>
-        <div style="font-size:14px;line-height:1.55;color:var(--wk-ink-soft)">Für Kitas, Schulen und Teams: eine gemeinsame Sprache für komplexe Fälle.</div>
-        <div style="color:var(--wk-pink-ink);font-weight:600;font-size:14px;margin-top:10px">Mehr erfahren <span aria-hidden="true">→</span></div>
+      <a href="./Fuer Teams.dc.html" class="wk-auf wk-heb" style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;display:block;text-decoration:none;color:inherit;text-align:center;border-top:4px solid var(--wk-orange);--n:3">
+        <div style="width:132px;height:132px;margin:0 auto 14px;background:url(assets/wc/circle_orange.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center"><img decoding="async" width="256" height="256" src="assets/chars/16_pinguin_sprechblase.webp" alt="" loading="lazy" style="width:87px;height:87px;object-fit:contain;display:block;mix-blend-mode:multiply"></div>
+        <div style="font-family:Alegreya,serif;font-weight:600;font-size:20.5px;color:var(--wk-ink-strong);margin-bottom:8px">Fachberatung &amp; Teams</div>
+        <div style="font-size:15px;line-height:1.6;color:var(--wk-ink-soft)">Für Kitas, Schulen und Teams: eine gemeinsame Sprache für komplexe Fälle.</div>
+        <div style="color:var(--wk-orange-ink);font-weight:600;font-size:14.5px;margin-top:14px">Mehr erfahren <span aria-hidden="true">→</span></div>
       </a>
     </div>
   </div>
 </section>
-<section class="wk-sd wk-sd--organisch" style="background:var(--wk-paper-warm);--wk-from:var(--wk-paper);padding:var(--wk-sd-top) 20px clamp(34px,4vw,50px)">
+<section class="wk-sd wk-sd--kreise" style="background:var(--wk-paper-warm);--wk-from:var(--wk-paper);padding:calc(var(--wk-sd-top) + clamp(14px,2vw,34px)) 20px clamp(58px,6.6vw,106px)">
   <div style="max-width:1240px;margin:0 auto">
-    <div style="font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--wk-pink-ink);margin-bottom:6px">Die Bildwelt</div>
-    <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(25px,3.2vw,36px);line-height:1.12;color:var(--wk-ink-strong);margin:0 0 8px;text-align:center">Nicht nur das Tier. Auch der Wald.</h2>
-    <p style="font-size:16px;line-height:1.6;color:var(--wk-ink-soft);margin:0 auto 22px;max-width:62ch;text-align:center">Waldkätzchen arbeitet mit einer Bildwelt aus drei Ebenen. Sie macht komplizierte Situationen besprechbar, ohne jemanden festzulegen.</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px">
-      <div style="background:rgba(255,253,246,.62);border:1px solid var(--wk-line);border-radius:16px;padding:18px 17px;text-align:center">
-        <img decoding="async" width="512" height="512" src="assets/chars/03_leopard_krone.webp" alt="" loading="lazy" style="height:100px;width:auto;margin:0 auto 10px;display:block;mix-blend-mode:multiply">
-        <div style="font-family:Alegreya,serif;font-weight:600;font-size:19px;color:var(--wk-ink-strong);margin-bottom:5px">Die Tiere zeigen Verhalten</div>
-        <div style="font-size:14px;line-height:1.55;color:var(--wk-ink-soft)">Was im Alltag sichtbar wird: laut, still, kontrollierend, klammernd, angepasst. Keine Diagnose, keine Schublade.</div>
+    <div class="wk-auf" style="text-align:center;margin:0 0 clamp(34px,3.8vw,54px)"><div style="font-size:13.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--wk-pink-ink);margin-bottom:10px">Die Bildwelt</div><h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(28px,3.6vw,44px);line-height:1.1;color:var(--wk-ink-strong);margin:0 0 22px;text-align:center"><span class="wk-strich">Nicht nur das Tier. Auch der Wald.</span></h2><p style="font-size:clamp(16.5px,1.5vw,19px);line-height:1.65;color:var(--wk-ink-soft);margin:0 auto 0;max-width:64ch;text-align:center">Waldkätzchen arbeitet mit einer Bildwelt aus drei Ebenen. Sie macht komplizierte Situationen besprechbar, ohne jemanden festzulegen.</p></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px">
+      <div class="wk-auf wk-heb" style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;text-align:center;--n:0">
+        <img decoding="async" width="512" height="512" src="assets/chars/03_leopard_krone.webp" alt="" loading="lazy" style="height:124px;width:auto;margin:0 auto 14px;display:block;mix-blend-mode:multiply">
+        <div style="font-family:Alegreya,serif;font-weight:600;font-size:20.5px;color:var(--wk-ink-strong);margin-bottom:8px">Die Tiere zeigen Verhalten</div>
+        <div style="font-size:15px;line-height:1.6;color:var(--wk-ink-soft)">Was im Alltag sichtbar wird: laut, still, kontrollierend, klammernd, angepasst. Keine Diagnose, keine Schublade.</div>
       </div>
-      <div style="background:rgba(255,253,246,.62);border:1px solid var(--wk-line);border-radius:16px;padding:18px 17px;text-align:center">
-        <img decoding="async" width="512" height="512" src="assets/chars/06_waldhoehle.webp" alt="" loading="lazy" style="height:100px;width:auto;margin:0 auto 10px;display:block;mix-blend-mode:multiply">
-        <div style="font-family:Alegreya,serif;font-weight:600;font-size:19px;color:var(--wk-ink-strong);margin-bottom:5px">Der Wald zeigt den Kontext</div>
-        <div style="font-size:14px;line-height:1.55;color:var(--wk-ink-soft)">Höhle, Echos, Bäume, Felsen und Nebel stehen für das, was im Hintergrund wirkt und selten benannt wird.</div>
+      <div class="wk-auf wk-heb" style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;text-align:center;--n:1">
+        <img decoding="async" width="512" height="512" src="assets/chars/06_waldhoehle.webp" alt="" loading="lazy" style="height:124px;width:auto;margin:0 auto 14px;display:block;mix-blend-mode:multiply">
+        <div style="font-family:Alegreya,serif;font-weight:600;font-size:20.5px;color:var(--wk-ink-strong);margin-bottom:8px">Der Wald zeigt den Kontext</div>
+        <div style="font-size:15px;line-height:1.6;color:var(--wk-ink-soft)">Höhle, Echos, Bäume, Felsen und Nebel stehen für das, was im Hintergrund wirkt und selten benannt wird.</div>
       </div>
-      <div style="background:rgba(255,253,246,.62);border:1px solid var(--wk-line);border-radius:16px;padding:18px 17px;text-align:center">
-        <img decoding="async" width="512" height="512" src="assets/cat-blue-bandana.webp" alt="" loading="lazy" style="height:100px;width:auto;margin:0 auto 10px;display:block;mix-blend-mode:multiply">
-        <div style="font-family:Alegreya,serif;font-weight:600;font-size:19px;color:var(--wk-ink-strong);margin-bottom:5px">Die Kätzchen bringen Perspektive</div>
-        <div style="font-size:14px;line-height:1.55;color:var(--wk-ink-soft)">Fünf Blickrichtungen: beobachten, spüren, vermuten, das Umfeld sehen und einen kleinen Schritt finden.</div>
-      </div>
-    </div>
-    <p style="text-align:center;margin:20px 0 0"><a href="./Mein Ansatz.dc.html" style="color:var(--wk-pink-ink);font-weight:600;font-size:15.5px">Das Konzept im Detail <span aria-hidden="true">→</span></a></p>
-  </div>
-</section>
-<section class="wk-sd wk-sd--organisch" style="position:relative;overflow:hidden;background:var(--wk-paper);--wk-from:var(--wk-paper-warm);padding:var(--wk-sd-top) 20px clamp(34px,4vw,50px)">
-  <div style="max-width:1180px;margin:0 auto;position:relative">
-    <div style="font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--wk-pink-ink);margin-bottom:6px">Schritt 5 – der erste Schritt</div>
-    <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(25px,3.2vw,36px);line-height:1.12;color:var(--wk-ink-strong);margin:0 0 8px;text-align:center">So arbeiten wir zusammen</h2>
-    <p style="font-size:16px;line-height:1.6;color:var(--wk-ink-soft);margin:0 auto 22px;max-width:56ch;text-align:center">Du musst nicht wissen, wo du anfangen sollst. Das finden wir gemeinsam heraus.</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px">
-      <div style="text-align:center">
-        <div style="position:relative;width:76px;height:76px;margin:0 auto 9px">
-          <img decoding="async" width="256" height="256" src="assets/icons/02_sprechblasen.webp" alt="" loading="lazy" style="width:76px;height:76px;object-fit:contain;display:block;mix-blend-mode:multiply">
-          <span aria-hidden="true" style="position:absolute;top:-4px;right:-6px;width:28px;height:28px;border-radius:50%;background:var(--wk-forest-700);color:#fff;font-family:Alegreya,serif;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center">1</span>
-        </div>
-        <div style="font-family:Alegreya,serif;font-weight:600;font-size:17.5px;color:var(--wk-ink-strong);margin-bottom:5px">Du meldest dich</div>
-        <div style="font-size:13.5px;line-height:1.5;color:var(--wk-ink-soft)">Ein paar Sätze reichen. Unverbindlich und kostenfrei.</div>
-      </div>
-      <div style="text-align:center">
-        <div style="position:relative;width:76px;height:76px;margin:0 auto 9px">
-          <img decoding="async" width="256" height="256" src="assets/icons/01_lupe_blatt.webp" alt="" loading="lazy" style="width:76px;height:76px;object-fit:contain;display:block;mix-blend-mode:multiply">
-          <span aria-hidden="true" style="position:absolute;top:-4px;right:-6px;width:28px;height:28px;border-radius:50%;background:var(--wk-forest-700);color:#fff;font-family:Alegreya,serif;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center">2</span>
-        </div>
-        <div style="font-family:Alegreya,serif;font-weight:600;font-size:17.5px;color:var(--wk-ink-strong);margin-bottom:5px">Wir schauen hin</div>
-        <div style="font-size:13.5px;line-height:1.5;color:var(--wk-ink-soft)">Was passiert konkret? Was wirkt im Hintergrund mit?</div>
-      </div>
-      <div style="text-align:center">
-        <div style="position:relative;width:76px;height:76px;margin:0 auto 9px">
-          <img decoding="async" width="256" height="256" src="assets/icons/11_wegweiser.webp" alt="" loading="lazy" style="width:76px;height:76px;object-fit:contain;display:block;mix-blend-mode:multiply">
-          <span aria-hidden="true" style="position:absolute;top:-4px;right:-6px;width:28px;height:28px;border-radius:50%;background:var(--wk-forest-700);color:#fff;font-family:Alegreya,serif;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center">3</span>
-        </div>
-        <div style="font-family:Alegreya,serif;font-weight:600;font-size:17.5px;color:var(--wk-ink-strong);margin-bottom:5px">Wir sortieren</div>
-        <div style="font-size:13.5px;line-height:1.5;color:var(--wk-ink-soft)">Was ist jetzt wichtig, was kann warten?</div>
-      </div>
-      <div style="text-align:center">
-        <div style="position:relative;width:76px;height:76px;margin:0 auto 9px">
-          <img decoding="async" width="256" height="256" src="assets/icons/04_keimling.webp" alt="" loading="lazy" style="width:76px;height:76px;object-fit:contain;display:block;mix-blend-mode:multiply">
-          <span aria-hidden="true" style="position:absolute;top:-4px;right:-6px;width:28px;height:28px;border-radius:50%;background:var(--wk-forest-700);color:#fff;font-family:Alegreya,serif;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center">4</span>
-        </div>
-        <div style="font-family:Alegreya,serif;font-weight:600;font-size:17.5px;color:var(--wk-ink-strong);margin-bottom:5px">Ein erster Schritt</div>
-        <div style="font-size:13.5px;line-height:1.5;color:var(--wk-ink-soft)">Klein, konkret und im Alltag wirklich machbar.</div>
+      <div class="wk-auf wk-heb" style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;text-align:center;--n:2">
+        <img decoding="async" width="512" height="512" src="assets/cat-blue-bandana.webp" alt="" loading="lazy" style="height:124px;width:auto;margin:0 auto 14px;display:block;mix-blend-mode:multiply">
+        <div style="font-family:Alegreya,serif;font-weight:600;font-size:20.5px;color:var(--wk-ink-strong);margin-bottom:8px">Die Kätzchen bringen Perspektive</div>
+        <div style="font-size:15px;line-height:1.6;color:var(--wk-ink-soft)">Fünf Blickrichtungen auf dieselbe Situation – jede mit ihrer eigenen Frage.</div>
       </div>
     </div>
 
-    <div style="font-family:Alegreya,serif;font-weight:600;font-size:22px;color:var(--wk-ink-strong);margin:30px 0 12px;text-align:center">Warum das hier anders ist</div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
-      <div style="background:var(--wk-forest-700);border-radius:15px;padding:16px 15px;text-align:center">
-        <img decoding="async" width="256" height="256" src="assets/icons/15_beziehung.webp" alt="" loading="lazy" style="width:42px;height:42px;object-fit:contain;margin:0 auto 8px;display:block">
-        <div style="font-family:Alegreya,serif;font-weight:600;font-size:16px;color:var(--wk-on-dark);margin-bottom:5px;line-height:1.25">Fachlichkeit + Lebenserfahrung</div>
-        <div style="font-size:13px;line-height:1.5;color:var(--wk-on-dark-soft)">Heilpädagogik, IT-Denken und eigene Familienerfahrung in einer Person.</div>
-      </div>
-      <div style="background:var(--wk-forest-700);border-radius:15px;padding:16px 15px;text-align:center">
-        <img decoding="async" width="256" height="256" src="assets/icons/03_herz.webp" alt="" loading="lazy" style="width:42px;height:42px;object-fit:contain;margin:0 auto 8px;display:block">
-        <div style="font-family:Alegreya,serif;font-weight:600;font-size:16px;color:var(--wk-on-dark);margin-bottom:5px;line-height:1.25">Klarheit ohne Härte</div>
-        <div style="font-size:13px;line-height:1.5;color:var(--wk-on-dark-soft)">Strukturen und Grenzen sind wichtig – aber immer mit Wertschätzung und Respekt.</div>
-      </div>
-      <div style="background:var(--wk-forest-700);border-radius:15px;padding:16px 15px;text-align:center">
-        <img decoding="async" width="256" height="256" src="assets/icons/20_pflanzengruppe.webp" alt="" loading="lazy" style="width:42px;height:42px;object-fit:contain;margin:0 auto 8px;display:block">
-        <div style="font-family:Alegreya,serif;font-weight:600;font-size:16px;color:var(--wk-on-dark);margin-bottom:5px;line-height:1.25">Systemischer Blick statt Einzelfixierung</div>
-        <div style="font-size:13px;line-height:1.5;color:var(--wk-on-dark-soft)">Nicht das Kind allein: Familie, Schule, Umfeld gehören immer dazu.</div>
-      </div>
-      <div style="background:var(--wk-forest-700);border-radius:15px;padding:16px 15px;text-align:center">
-        <img decoding="async" width="256" height="256" src="assets/icons/04_keimling.webp" alt="" loading="lazy" style="width:42px;height:42px;object-fit:contain;margin:0 auto 8px;display:block">
-        <div style="font-family:Alegreya,serif;font-weight:600;font-size:16px;color:var(--wk-on-dark);margin-bottom:5px;line-height:1.25">Alltagstauglich statt leerer Theorie</div>
-        <div style="font-size:13px;line-height:1.5;color:var(--wk-on-dark-soft)">Keine Konzepte für die Schublade, sondern Schritte für den nächsten Morgen.</div>
+    <div class="wk-auf" style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(21px,2.2vw,26px);color:var(--wk-ink-strong);margin:clamp(44px,4.8vw,72px) 0 24px;text-align:center">Die fünf Waldkätzchen</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px">
+      <div class="wk-auf wk-heb" style="text-align:center;padding:18px 12px;border-radius:20px;background:var(--wk-cyan-025);border:1px solid var(--wk-line);--n:0">
+        <img decoding="async" width="512" height="512" src="assets/cat-blue-bandana.webp" alt="Das Beobachter-Kätzchen" loading="lazy" style="height:104px;width:auto;max-width:100%;margin:0 auto 12px;display:block;mix-blend-mode:multiply">
+        <div style="font-family:Alegreya,serif;font-weight:600;font-size:16px;line-height:1.25;color:var(--wk-cyan-ink);margin-bottom:5px">Das Beobachter-Kätzchen</div>
+        <div style="font-size:13.5px;line-height:1.5;color:var(--wk-ink-soft)">beschreibt, was zu sehen ist</div>
+      </div><div class="wk-auf wk-heb" style="text-align:center;padding:18px 12px;border-radius:20px;background:var(--wk-petrol-025);border:1px solid var(--wk-line);--n:1">
+        <img decoding="async" width="512" height="512" src="assets/cat-teal.webp" alt="Das Fühl-Kätzchen" loading="lazy" style="height:104px;width:auto;max-width:100%;margin:0 auto 12px;display:block;mix-blend-mode:multiply">
+        <div style="font-family:Alegreya,serif;font-weight:600;font-size:16px;line-height:1.25;color:var(--wk-petrol-ink);margin-bottom:5px">Das Fühl-Kätzchen</div>
+        <div style="font-size:13.5px;line-height:1.5;color:var(--wk-ink-soft)">nimmt Gefühle ernst</div>
+      </div><div class="wk-auf wk-heb" style="text-align:center;padding:18px 12px;border-radius:20px;background:var(--wk-yellow-025);border:1px solid var(--wk-line);--n:2">
+        <img decoding="async" width="512" height="512" src="assets/cat-yellow.webp" alt="Das Denk-Kätzchen" loading="lazy" style="height:104px;width:auto;max-width:100%;margin:0 auto 12px;display:block;mix-blend-mode:multiply">
+        <div style="font-family:Alegreya,serif;font-weight:600;font-size:16px;line-height:1.25;color:var(--wk-yellow-ink);margin-bottom:5px">Das Denk-Kätzchen</div>
+        <div style="font-size:13.5px;line-height:1.5;color:var(--wk-ink-soft)">sucht Zusammenhänge</div>
+      </div><div class="wk-auf wk-heb" style="text-align:center;padding:18px 12px;border-radius:20px;background:var(--wk-orange-025);border:1px solid var(--wk-line);--n:3">
+        <img decoding="async" width="512" height="512" src="assets/cat-orange.webp" alt="Das System-Kätzchen" loading="lazy" style="height:104px;width:auto;max-width:100%;margin:0 auto 12px;display:block;mix-blend-mode:multiply">
+        <div style="font-family:Alegreya,serif;font-weight:600;font-size:16px;line-height:1.25;color:var(--wk-orange-ink);margin-bottom:5px">Das System-Kätzchen</div>
+        <div style="font-size:13.5px;line-height:1.5;color:var(--wk-ink-soft)">sieht das ganze Umfeld</div>
+      </div><div class="wk-auf wk-heb" style="text-align:center;padding:18px 12px;border-radius:20px;background:var(--wk-pink-025);border:1px solid var(--wk-line);--n:4">
+        <img decoding="async" width="512" height="512" src="assets/cat-pink.webp" alt="Das Macher-Kätzchen" loading="lazy" style="height:104px;width:auto;max-width:100%;margin:0 auto 12px;display:block;mix-blend-mode:multiply">
+        <div style="font-family:Alegreya,serif;font-weight:600;font-size:16px;line-height:1.25;color:var(--wk-pink-ink);margin-bottom:5px">Das Macher-Kätzchen</div>
+        <div style="font-size:13.5px;line-height:1.5;color:var(--wk-ink-soft)">findet den nächsten Schritt</div>
       </div>
     </div>
+    <p class="wk-auf" style="text-align:center;margin:34px 0 0"><a href="./Mein Ansatz.dc.html" style="color:var(--wk-pink-ink);font-weight:600;font-size:16px">Das Konzept im Detail <span aria-hidden="true">→</span></a></p>
   </div>
 </section>
-<section class="wk-sd wk-sd--organisch wk-band" style="position:relative;background:var(--wk-forest-800);--wk-from:var(--wk-paper);overflow:hidden">
+<section class="wk-sd wk-sd--organisch" style="position:relative;overflow:hidden;background:var(--wk-paper);--wk-from:var(--wk-paper-warm);padding:calc(var(--wk-sd-top) + clamp(14px,2vw,34px)) 20px clamp(58px,6.6vw,106px)">
+  <div style="max-width:1180px;margin:0 auto;position:relative">
+    <div class="wk-auf" style="text-align:center;margin:0 0 clamp(34px,3.8vw,54px)"><div style="font-size:13.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--wk-pink-ink);margin-bottom:10px">Schritt 5 – der erste Schritt</div><h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(28px,3.6vw,44px);line-height:1.1;color:var(--wk-ink-strong);margin:0 0 22px;text-align:center"><span class="wk-strich">So arbeiten wir zusammen</span></h2><p style="font-size:clamp(16.5px,1.5vw,19px);line-height:1.65;color:var(--wk-ink-soft);margin:0 auto 0;max-width:60ch;text-align:center">Du musst nicht wissen, wo du anfangen sollst. Das finden wir gemeinsam heraus.</p></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:28px">
+      <div class="wk-auf" style="text-align:center;--n:0">
+        <div style="position:relative;width:112px;height:112px;margin:0 auto 16px">
+          <div style="width:112px;height:112px;margin:0;background:url(assets/wc/circle_blue.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center"><img decoding="async" width="256" height="256" src="assets/icons/02_sprechblasen.webp" alt="" loading="lazy" style="width:73px;height:73px;object-fit:contain;display:block;mix-blend-mode:multiply"></div>
+          <span aria-hidden="true" style="position:absolute;top:-2px;right:-2px;width:34px;height:34px;border-radius:50%;background:var(--wk-cyan-600);color:#fff;font-family:Alegreya,serif;font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(18,61,54,.22)">1</span>
+        </div>
+        <div style="font-family:Alegreya,serif;font-weight:600;font-size:19px;color:var(--wk-ink-strong);margin-bottom:7px">Du meldest dich</div>
+        <div style="font-size:14.5px;line-height:1.6;color:var(--wk-ink-soft)">Ein paar Sätze reichen. Unverbindlich und kostenfrei.</div>
+      </div>
+      <div class="wk-auf" style="text-align:center;--n:1">
+        <div style="position:relative;width:112px;height:112px;margin:0 auto 16px">
+          <div style="width:112px;height:112px;margin:0;background:url(assets/wc/circle_petrol.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center"><img decoding="async" width="256" height="256" src="assets/icons/01_lupe_blatt.webp" alt="" loading="lazy" style="width:73px;height:73px;object-fit:contain;display:block;mix-blend-mode:multiply"></div>
+          <span aria-hidden="true" style="position:absolute;top:-2px;right:-2px;width:34px;height:34px;border-radius:50%;background:var(--wk-petrol-600);color:#fff;font-family:Alegreya,serif;font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(18,61,54,.22)">2</span>
+        </div>
+        <div style="font-family:Alegreya,serif;font-weight:600;font-size:19px;color:var(--wk-ink-strong);margin-bottom:7px">Wir schauen hin</div>
+        <div style="font-size:14.5px;line-height:1.6;color:var(--wk-ink-soft)">Was passiert konkret? Was wirkt im Hintergrund mit?</div>
+      </div>
+      <div class="wk-auf" style="text-align:center;--n:2">
+        <div style="position:relative;width:112px;height:112px;margin:0 auto 16px">
+          <div style="width:112px;height:112px;margin:0;background:url(assets/wc/circle_yellow.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center"><img decoding="async" width="256" height="256" src="assets/icons/11_wegweiser.webp" alt="" loading="lazy" style="width:73px;height:73px;object-fit:contain;display:block;mix-blend-mode:multiply"></div>
+          <span aria-hidden="true" style="position:absolute;top:-2px;right:-2px;width:34px;height:34px;border-radius:50%;background:var(--wk-yellow-600);color:#fff;font-family:Alegreya,serif;font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(18,61,54,.22)">3</span>
+        </div>
+        <div style="font-family:Alegreya,serif;font-weight:600;font-size:19px;color:var(--wk-ink-strong);margin-bottom:7px">Wir sortieren</div>
+        <div style="font-size:14.5px;line-height:1.6;color:var(--wk-ink-soft)">Was ist jetzt wichtig, was kann warten?</div>
+      </div>
+      <div class="wk-auf" style="text-align:center;--n:3">
+        <div style="position:relative;width:112px;height:112px;margin:0 auto 16px">
+          <div style="width:112px;height:112px;margin:0;background:url(assets/wc/circle_orange.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center"><img decoding="async" width="256" height="256" src="assets/icons/04_keimling.webp" alt="" loading="lazy" style="width:73px;height:73px;object-fit:contain;display:block;mix-blend-mode:multiply"></div>
+          <span aria-hidden="true" style="position:absolute;top:-2px;right:-2px;width:34px;height:34px;border-radius:50%;background:var(--wk-orange-600);color:#fff;font-family:Alegreya,serif;font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(18,61,54,.22)">4</span>
+        </div>
+        <div style="font-family:Alegreya,serif;font-weight:600;font-size:19px;color:var(--wk-ink-strong);margin-bottom:7px">Ein erster Schritt</div>
+        <div style="font-size:14.5px;line-height:1.6;color:var(--wk-ink-soft)">Klein, konkret und im Alltag wirklich machbar.</div>
+      </div>
+    </div>
+
+    <div class="wk-auf" style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(21px,2.2vw,26px);color:var(--wk-ink-strong);margin:clamp(48px,5.2vw,80px) 0 24px;text-align:center">Warum das hier anders ist</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(216px,1fr));gap:16px">
+      <div class="wk-auf wk-heb wk-heb--dunkel" style="background:var(--wk-forest-700);border-radius:18px;padding:22px 18px;text-align:center;--n:0">
+        <img decoding="async" width="256" height="256" src="assets/icons/tree.webp" alt="" loading="lazy" style="width:48px;height:48px;object-fit:contain;margin:0 auto 12px;display:block">
+        <div style="font-family:Alegreya,serif;font-weight:600;font-size:17px;color:var(--wk-on-dark);margin-bottom:7px;line-height:1.25">Fachlichkeit + Lebenserfahrung</div>
+        <div style="font-size:14px;line-height:1.6;color:var(--wk-on-dark-soft)">Heilpädagogik, IT-Denken und eigene Familienerfahrung in einer Person.</div>
+      </div>
+      <div class="wk-auf wk-heb wk-heb--dunkel" style="background:var(--wk-forest-700);border-radius:18px;padding:22px 18px;text-align:center;--n:1">
+        <img decoding="async" width="256" height="256" src="assets/icons/03_herz.webp" alt="" loading="lazy" style="width:48px;height:48px;object-fit:contain;margin:0 auto 12px;display:block">
+        <div style="font-family:Alegreya,serif;font-weight:600;font-size:17px;color:var(--wk-on-dark);margin-bottom:7px;line-height:1.25">Klarheit ohne Härte</div>
+        <div style="font-size:14px;line-height:1.6;color:var(--wk-on-dark-soft)">Strukturen und Grenzen sind wichtig – aber immer mit Wertschätzung und Respekt.</div>
+      </div>
+      <div class="wk-auf wk-heb wk-heb--dunkel" style="background:var(--wk-forest-700);border-radius:18px;padding:22px 18px;text-align:center;--n:2">
+        <img decoding="async" width="256" height="256" src="assets/icons/family.webp" alt="" loading="lazy" style="width:48px;height:48px;object-fit:contain;margin:0 auto 12px;display:block">
+        <div style="font-family:Alegreya,serif;font-weight:600;font-size:17px;color:var(--wk-on-dark);margin-bottom:7px;line-height:1.25">Systemischer Blick statt Einzelfixierung</div>
+        <div style="font-size:14px;line-height:1.6;color:var(--wk-on-dark-soft)">Nicht das Kind allein: Familie, Schule, Umfeld gehören immer dazu.</div>
+      </div>
+      <div class="wk-auf wk-heb wk-heb--dunkel" style="background:var(--wk-forest-700);border-radius:18px;padding:22px 18px;text-align:center;--n:3">
+        <img decoding="async" width="256" height="256" src="assets/icons/08_blattzweig.webp" alt="" loading="lazy" style="width:48px;height:48px;object-fit:contain;margin:0 auto 12px;display:block">
+        <div style="font-family:Alegreya,serif;font-weight:600;font-size:17px;color:var(--wk-on-dark);margin-bottom:7px;line-height:1.25">Alltagstauglich statt leerer Theorie</div>
+        <div style="font-size:14px;line-height:1.6;color:var(--wk-on-dark-soft)">Keine Konzepte für die Schublade, sondern Schritte für den nächsten Morgen.</div>
+      </div>
+    </div>
+    <p class="wk-auf" style="font-size:15.5px;line-height:1.7;color:var(--wk-ink-soft);margin:28px auto 0;max-width:70ch;text-align:center">Die Verbindung aus fachlicher Tiefe, persönlicher Erfahrung, systemischem Denken und einer Sprache, die Familien wirklich erreicht. <span style="color:var(--wk-pink-ink)" aria-hidden="true">♡</span></p>
+  </div>
+</section>
+<section class="wk-sd wk-sd--organisch wk-band wk-band--raender" style="position:relative;background:var(--wk-forest-800);--wk-from:var(--wk-paper);overflow:hidden">
   <img class="wk-wash" decoding="async" width="1600" height="533" src="assets/footer-bg-home.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.92">
-  <div style="position:relative;z-index:2;max-width:1240px;margin:0 auto;padding:var(--wk-sd-top) 22px clamp(40px,5vw,58px);text-align:center">
-    <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(26px,3.4vw,40px);line-height:1.12;color:var(--wk-on-dark);margin:0 0 8px;text-shadow:0 2px 14px rgba(6,30,24,.55)">Ihr müsst den nächsten Schritt<br>nicht schon kennen.</h2>
-    <p style="color:var(--wk-on-dark-soft);font-size:17px;line-height:1.5;margin:0 0 22px;text-shadow:0 2px 14px rgba(6,30,24,.55)">Ich bin da, wenn ihr bereit seid – mit Verständnis, Erfahrung und einem sicheren Rahmen.</p>
-    <div style="display:flex;flex-wrap:wrap;gap:11px;justify-content:center">
-      <a href="./Kontakt.dc.html" style="display:inline-flex;align-items:center;gap:10px;background:var(--wk-pink-600);color:#fff;border-radius:999px;padding:14px 30px;font-size:16.5px;font-weight:600;text-decoration:none;box-shadow:0 8px 20px rgba(6,30,24,.35)">Erstgespräch anfragen <span aria-hidden="true">♡</span></a>
-      <a href="./Angebot.dc.html" style="display:inline-flex;align-items:center;gap:9px;background:transparent;color:var(--wk-on-dark);border:1.5px solid rgba(245,237,224,.55);border-radius:999px;padding:14px 26px;font-size:16px;font-weight:600;text-decoration:none">Angebot ansehen <span aria-hidden="true">↗</span></a>
+  <div class="wk-auf" style="position:relative;z-index:2;max-width:1000px;margin:0 auto;padding:calc(var(--wk-sd-top) + clamp(14px,2vw,34px)) 22px clamp(58px,6.6vw,100px);text-align:center">
+    <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(28px,3.8vw,48px);line-height:1.1;color:var(--wk-on-dark);margin:0 0 14px;text-shadow:0 2px 14px rgba(6,30,24,.55)">Ihr müsst den nächsten Schritt<br>nicht schon kennen.</h2>
+    <p style="color:var(--wk-on-dark-soft);font-size:clamp(16.5px,1.6vw,19px);line-height:1.6;margin:0 auto 32px;max-width:56ch;text-shadow:0 2px 14px rgba(6,30,24,.55)">Ich bin da, wenn ihr bereit seid – mit Verständnis, Erfahrung und einem sicheren Rahmen.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:13px;justify-content:center">
+      <a href="./Kontakt.dc.html" class="wk-knopf" style="display:inline-flex;align-items:center;gap:10px;background:var(--wk-pink-600);color:#fff;border-radius:999px;padding:16px 34px;font-size:17px;font-weight:600;text-decoration:none;box-shadow:0 8px 20px rgba(6,30,24,.35)">Erstgespräch anfragen <span aria-hidden="true">♡</span></a>
+      <a href="./Angebot.dc.html" class="wk-knopf" style="display:inline-flex;align-items:center;gap:9px;background:var(--wk-petrol-600);color:#fff;border-radius:999px;padding:16px 30px;font-size:16.5px;font-weight:600;text-decoration:none;box-shadow:0 8px 20px rgba(6,30,24,.35)">Angebot ansehen <span aria-hidden="true">↗</span></a>
     </div>
   </div>
 </section><footer style="background:var(--wk-forest-900);color:var(--wk-on-dark-soft);position:relative;overflow:hidden">
