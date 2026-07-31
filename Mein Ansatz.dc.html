@@ -39,27 +39,14 @@
     </a>
     <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
       <nav style="display:flex;align-items:center;gap:18px;margin-left:auto;font-size:15.5px;color:var(--wk-on-dark-soft)">
-        <a href="./Startseite.dc.html" style="color:var(--wk-on-dark-soft)">Startseite</a>
-        <a href="./Ueber mich.dc.html" style="color:var(--wk-on-dark-soft)">Über mich</a>
-        <a href="./Mein Ansatz.dc.html" style="color:var(--wk-paper);font-weight:600;border-bottom:2px solid var(--wk-pink-ink);padding-bottom:2px">Mein Ansatz</a>
+        <a href="./Fuer Familien.dc.html" style="color:var(--wk-on-dark-soft)">Für Familien</a>
+        <a href="./Autismus.dc.html" style="color:var(--wk-on-dark-soft)">Autismus &amp; PDA</a>
+        <a href="./Mein Ansatz.dc.html" style="color:var(--wk-paper);font-weight:600;border-bottom:2px solid var(--wk-pink);padding-bottom:2px">Mein Ansatz</a>
         <a href="./Angebot.dc.html" style="color:var(--wk-on-dark-soft)">Angebot</a>
-        <span style="position:relative;display:inline-flex"><button onClick="{{ toggleFuerWen }}" aria-expanded="{{ menuFuerWen }}" style="background:none;border:none;padding:0;font-family:inherit;font-size:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:4px;color:var(--wk-paper)">Für wen <span aria-hidden="true">▾</span></button>
-          <sc-if value="{{ menuFuerWen }}" hint-placeholder-val="{{ false }}">
-            <span style="position:absolute;top:30px;left:-12px;background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:12px;box-shadow:0 10px 26px rgba(8,45,36,.3);padding:8px;display:flex;flex-direction:column;min-width:158px;z-index:70">
-              <a href="./Fuer Teams.dc.html" style="padding:8px 12px;border-radius:8px;color:var(--wk-ink)">Für Teams</a>
-              <a href="./Fuer Vaeter.dc.html" style="padding:8px 12px;border-radius:8px;color:var(--wk-ink)">Für Väter</a>
-            </span>
-          </sc-if>
-        </span>
-        <span style="position:relative;display:inline-flex"><button onClick="{{ toggleWissen }}" aria-expanded="{{ menuWissen }}" style="background:none;border:none;padding:0;font-family:inherit;font-size:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:4px;color:var(--wk-paper)">Wissen <span aria-hidden="true">▾</span></button>
-          <sc-if value="{{ menuWissen }}" hint-placeholder-val="{{ false }}">
-            <span style="position:absolute;top:30px;left:-12px;background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:12px;box-shadow:0 10px 26px rgba(8,45,36,.3);padding:8px;display:flex;flex-direction:column;min-width:186px;z-index:70">
-              <a href="./Autismus.dc.html" style="padding:8px 12px;border-radius:8px;color:var(--wk-ink)">Autismus verstehen</a>
-            </span>
-          </sc-if>
-        </span>
-        <a href="./Kontakt.dc.html" style="color:var(--wk-paper)">Kontakt</a>
-        <button onClick="{{ openContact }}" style="background:var(--wk-pink-ink);color:#fff;border:none;border-radius:999px;padding:11px 20px;font-family:'Alegreya Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:9px" style-hover="background:var(--wk-pink-700)">Kontakt aufnehmen <span aria-hidden="true">♡</span></button>
+        <a href="./Ueber mich.dc.html" style="color:var(--wk-on-dark-soft)">Über mich</a>
+        <a href="./Wissen.dc.html" style="color:var(--wk-on-dark-soft)">Wissen</a>
+        <a href="./Kontakt.dc.html" style="color:var(--wk-on-dark-soft)">Kontakt</a>
+        <a href="./Kontakt.dc.html" style="background:var(--wk-pink-600);color:#fff;border-radius:999px;padding:11px 20px;font-family:'Alegreya Sans',sans-serif;font-size:15px;font-weight:600;display:flex;align-items:center;gap:9px;text-decoration:none" style-hover="background:var(--wk-pink-700)">Erstgespräch anfragen <span aria-hidden="true">♡</span></a>
       </nav>
     </sc-if>
     <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
@@ -72,17 +59,14 @@
   </div>
   <sc-if value="{{ drawer }}" hint-placeholder-val="{{ false }}">
     <div style="background:var(--wk-forest-700);border-top:1px solid rgba(245,237,224,.16);padding:12px 20px 20px;display:flex;flex-direction:column;font-size:17px">
-      <a href="./Startseite.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Startseite</a>
-      <a href="./Ueber mich.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Über mich</a>
+      <a href="./Fuer Familien.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Für Familien</a>
+      <a href="./Autismus.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Autismus &amp; PDA</a>
       <a href="./Mein Ansatz.dc.html" style="padding:13px 6px;color:var(--wk-paper);font-weight:600">Mein Ansatz</a>
       <a href="./Angebot.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Angebot</a>
-      <div style="padding:13px 6px 6px;color:var(--wk-on-dark-muted);font-size:13.5px;letter-spacing:.08em;text-transform:uppercase">Für wen</div>
-      <a href="./Fuer Teams.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Für Teams</a>
-      <a href="./Fuer Vaeter.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Für Väter</a>
-      <div style="padding:13px 6px 6px;color:var(--wk-on-dark-muted);font-size:13.5px;letter-spacing:.08em;text-transform:uppercase">Wissen</div>
-      <a href="./Autismus.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Autismus verstehen</a>
+      <a href="./Ueber mich.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Über mich</a>
+      <a href="./Wissen.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Wissen</a>
       <a href="./Kontakt.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Kontakt</a>
-      <button onClick="{{ openContact }}" style="margin-top:14px;background:var(--wk-pink-ink);color:#fff;border:none;border-radius:999px;padding:15px;font-family:'Alegreya Sans',sans-serif;font-size:16.5px;font-weight:600;cursor:pointer">Kontakt aufnehmen <span aria-hidden="true">♡</span></button>
+      <a href="./Kontakt.dc.html" style="margin-top:14px;background:var(--wk-pink-600);color:#fff;border-radius:999px;padding:15px;font-family:'Alegreya Sans',sans-serif;font-size:16.5px;font-weight:600;text-align:center;text-decoration:none;display:block" style-hover="background:var(--wk-pink-700)">Erstgespräch anfragen <span aria-hidden="true">♡</span></a>
     </div>
   </sc-if>
 </header>
@@ -137,7 +121,7 @@
 
 <!-- Die fünf Waldkätzchen brauchen die volle Breite, damit alle fünf in einer
      Reihe stehen - im Blueprint ist das eine eigene, zentrierte Sektion. -->
-<section style="position:relative;padding:20px 20px 10px">
+<section class="wk-sd wk-sd--schraege" style="position:relative;padding:var(--wk-sd-top) 20px 10px;background:var(--wk-paper-warm);--wk-from:var(--wk-paper)">
   <div style="max-width:1240px;margin:0 auto;position:relative">
     <div style="text-align:center;margin-bottom:24px">
       <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(24px,3vw,32px);color:var(--wk-ink-strong);margin:0 0 4px">Die Waldkätzchen – <span style="color:var(--wk-pink-ink)" aria-hidden="true">♡</span></h2>
@@ -152,26 +136,26 @@
           <div style="font-size:13px;line-height:1.5;color:var(--wk-ink-muted);font-style:italic;text-align:left;margin-top:8px">„Ich sehe, dass das Kind den Raum verlässt, sobald es laut wird.“</div>
         </div>
         <div style="text-align:center">
-          <div style="width:118px;height:118px;margin:0 auto 10px;background:url(assets/wc/circle_petrol.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center"><img decoding="async" width="400" height="600" src="assets/cat-teal.webp" alt="Das Fühl-Kätzchen" loading="lazy" style="width:74px;display:block"></div>
+          <div style="width:118px;height:118px;margin:0 auto 10px;background:url(assets/wc/circle_petrol.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center"><img decoding="async" width="400" height="600" src="assets/cat-teal.webp" alt="Das Fühl-Kätzchen" loading="lazy" style="width:auto;height:86px;display:block"></div>
           <div style="font-family:Alegreya,serif;font-size:18px;font-weight:700;color:var(--wk-petrol-ink);margin-bottom:6px">Das Fühl-Kätzchen</div>
           <div style="font-size:13px;line-height:1.5;color:var(--wk-ink-soft);text-align:left">Es nimmt Gefühle und Spannungen wahr. Gefühle werden ernst genommen, ohne sie als alleinige Wahrheit zu behandeln.</div>
           <div style="font-size:13px;line-height:1.5;color:var(--wk-ink-muted);font-style:italic;text-align:left;margin-top:8px">„Ich spüre, dass in dieser Situation viel Druck und Unsicherheit vorhanden ist.“</div>
         </div>
         <div style="text-align:center">
-          <div style="width:118px;height:118px;margin:0 auto 10px;background:url(assets/wc/circle_pink.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center"><img decoding="async" width="400" height="267" src="assets/cat-pink.webp" alt="Das Denk-Kätzchen" loading="lazy" style="width:88px;display:block"></div>
-          <div style="font-family:Alegreya,serif;font-size:18px;font-weight:700;color:var(--wk-pink-ink);margin-bottom:6px">Das Denk-Kätzchen</div>
+          <div style="width:118px;height:118px;margin:0 auto 10px;background:url(assets/wc/circle_yellow.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center"><img decoding="async" width="400" height="267" src="assets/cat-yellow.webp" alt="Das Denk-Kätzchen" loading="lazy" style="width:88px;display:block"></div>
+          <div style="font-family:Alegreya,serif;font-size:18px;font-weight:700;color:var(--wk-yellow-ink);margin-bottom:6px">Das Denk-Kätzchen</div>
           <div style="font-size:13px;line-height:1.5;color:var(--wk-ink-soft);text-align:left">Es sucht nach möglichen Zusammenhängen. Nicht, um vorschnell eine Erklärung festzulegen, sondern um neue Fragen zu öffnen.</div>
           <div style="font-size:13px;line-height:1.5;color:var(--wk-ink-muted);font-style:italic;text-align:left;margin-top:8px">„Ich vermute, dass die vielen Anforderungen gleichzeitig zu viel sein könnten.“</div>
         </div>
         <div style="text-align:center">
-          <div style="width:118px;height:118px;margin:0 auto 10px;background:url(assets/wc/circle_yellow.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center"><img decoding="async" width="400" height="267" src="assets/cat-yellow.webp" alt="Das System-Kätzchen" loading="lazy" style="width:88px;display:block"></div>
-          <div style="font-family:Alegreya,serif;font-size:18px;font-weight:700;color:var(--wk-yellow-ink);margin-bottom:6px">Das System-Kätzchen</div>
+          <div style="width:118px;height:118px;margin:0 auto 10px;background:url(assets/wc/circle_orange.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center"><img decoding="async" width="400" height="267" src="assets/cat-orange.webp" alt="Das System-Kätzchen" loading="lazy" style="width:88px;display:block"></div>
+          <div style="font-family:Alegreya,serif;font-size:18px;font-weight:700;color:var(--wk-orange-ink);margin-bottom:6px">Das System-Kätzchen</div>
           <div style="font-size:13px;line-height:1.5;color:var(--wk-ink-soft);text-align:left">Es schaut auf Beziehungen, Strukturen und äußere Bedingungen. Nicht nur die einzelne Person beeinflusst die Situation – das gesamte Umfeld wirkt mit.</div>
           <div style="font-size:13px;line-height:1.5;color:var(--wk-ink-muted);font-style:italic;text-align:left;margin-top:8px">„Ich sehe im Umfeld viele wechselnde Regeln und wenig Vorhersehbarkeit.“</div>
         </div>
         <div style="text-align:center">
-          <div style="width:118px;height:118px;margin:0 auto 10px;background:url(assets/wc/circle_orange.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center"><img decoding="async" width="400" height="267" src="assets/cat-orange.webp" alt="Das Macher-Kätzchen" loading="lazy" style="width:88px;display:block"></div>
-          <div style="font-family:Alegreya,serif;font-size:18px;font-weight:700;color:var(--wk-orange-ink);margin-bottom:6px">Das Macher-Kätzchen</div>
+          <div style="width:118px;height:118px;margin:0 auto 10px;background:url(assets/wc/circle_pink.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center"><img decoding="async" width="400" height="267" src="assets/cat-pink.webp" alt="Das Macher-Kätzchen" loading="lazy" style="width:88px;display:block"></div>
+          <div style="font-family:Alegreya,serif;font-size:18px;font-weight:700;color:var(--wk-pink-ink);margin-bottom:6px">Das Macher-Kätzchen</div>
           <div style="font-size:13px;line-height:1.5;color:var(--wk-ink-soft);text-align:left">Es entwickelt einen kleinen und realistischen nächsten Schritt. Es geht nicht um perfekte Lösungen, sondern um Veränderungen, die im Alltag umsetzbar sind.</div>
           <div style="font-size:13px;line-height:1.5;color:var(--wk-ink-muted);font-style:italic;text-align:left;margin-top:8px">„Übergänge früher ankündigen und eine Rückzugsmöglichkeit vereinbaren.“</div>
         </div>
@@ -179,7 +163,7 @@
   </div>
 </section>
 
-<section style="position:relative;padding:36px 20px 10px">
+<section style="position:relative;padding:36px 20px 10px;background:var(--wk-paper-warm)">
   <div style="max-width:1240px;margin:0 auto">
     <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(24px,3vw,32px);color:var(--wk-ink-strong);margin:0 0 8px">Der Wald – was im Hintergrund wirkt.</h2>
     <p style="font-size:15px;line-height:1.6;color:var(--wk-ink-soft);margin:0 0 22px;max-width:70ch">Verhalten entsteht nie losgelöst vom Umfeld. Der Wald steht für alles, was eine Situation beeinflusst, aber nicht immer sofort sichtbar ist. Diese Bildwelt macht komplexe Situationen verständlicher, ohne Menschen auf ein bestimmtes Verhalten festzulegen.</p>
@@ -193,7 +177,7 @@
   </div>
 </section>
 
-<section style="position:relative;padding:36px 20px 10px">
+<section style="position:relative;padding:36px 20px 10px;background:var(--wk-paper-warm)">
   <img decoding="async" width="187" height="154" src="assets/side/flowerRight.webp" alt="" loading="lazy" style="position:absolute;right:-28px;top:24px;width:clamp(80px,10vw,150px);opacity:.8;pointer-events:none">
   <div style="max-width:1240px;margin:0 auto;position:relative">
     <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(24px,3vw,32px);color:var(--wk-ink-strong);margin:0 0 8px">Die Tiere – was im Alltag sichtbar wird.</h2>
@@ -217,29 +201,29 @@
 <!-- So funktioniert Waldkätzchen: die sechs Schritte der Methode. Die
      Ziffern tragen die fünf Markenfarben, damit der Ablauf visuell an die
      fünf Waldkätzchen anknüpft. -->
-<section style="position:relative;padding:36px 20px 10px">
+<section class="wk-sd wk-sd--kreise" style="position:relative;padding:var(--wk-sd-top) 20px 10px;--wk-from:var(--wk-paper-warm)">
   <div style="max-width:1240px;margin:0 auto">
     <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(24px,3vw,32px);color:var(--wk-ink-strong);margin:0 0 8px">So funktioniert Waldkätzchen</h2>
     <p style="font-size:15px;line-height:1.6;color:var(--wk-ink-soft);margin:0 0 24px;max-width:68ch">Am Anfang steht eine konkrete Situation: Ein Kind eskaliert regelmäßig im Unterricht. Ein Jugendlicher zieht sich vollständig zurück. Ein Elternteil erlebt Nähe ständig als Kampf. Ein Team weiß nicht mehr, wie es reagieren soll. Diese Situation betrachten wir Schritt für Schritt.</p>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px">
       <div style="display:flex;gap:14px;align-items:flex-start">
-        <span aria-hidden="true" style="flex:0 0 auto;width:38px;height:38px;border-radius:50%;background:var(--wk-cyan-600);color:#fff;font-family:Alegreya,serif;font-size:19px;font-weight:700;display:flex;align-items:center;justify-content:center">1</span>
+        <span aria-hidden="true" style="flex:0 0 auto;width:38px;height:38px;border-radius:50%;background:var(--wk-forest-700);color:#fff;font-family:Alegreya,serif;font-size:19px;font-weight:700;display:flex;align-items:center;justify-content:center">1</span>
         <div><div style="font-family:Alegreya,serif;font-size:19px;font-weight:700;color:var(--wk-ink-strong);margin-bottom:4px">Beobachten</div><div style="font-size:13.5px;line-height:1.55;color:var(--wk-ink-soft)">Was ist konkret passiert? Nicht „Er war wieder respektlos“, sondern: „Er wurde laut, schob den Stuhl zurück und verließ den Raum.“</div></div>
       </div>
       <div style="display:flex;gap:14px;align-items:flex-start">
-        <span aria-hidden="true" style="flex:0 0 auto;width:38px;height:38px;border-radius:50%;background:var(--wk-petrol-600);color:#fff;font-family:Alegreya,serif;font-size:19px;font-weight:700;display:flex;align-items:center;justify-content:center">2</span>
+        <span aria-hidden="true" style="flex:0 0 auto;width:38px;height:38px;border-radius:50%;background:var(--wk-forest-700);color:#fff;font-family:Alegreya,serif;font-size:19px;font-weight:700;display:flex;align-items:center;justify-content:center">2</span>
         <div><div style="font-family:Alegreya,serif;font-size:19px;font-weight:700;color:var(--wk-ink-strong);margin-bottom:4px">Verhalten erkennen</div><div style="font-size:13.5px;line-height:1.55;color:var(--wk-ink-soft)">Welches Tier zeigt sich gerade? Luis mit seiner impulsiven Energie? Etana im Rückzug? Tigi im Versuch, Kontrolle zu gewinnen? Das Tier ist eine momentane Beschreibung, kein festes Etikett.</div></div>
       </div>
       <div style="display:flex;gap:14px;align-items:flex-start">
-        <span aria-hidden="true" style="flex:0 0 auto;width:38px;height:38px;border-radius:50%;background:var(--wk-pink-600);color:#fff;font-family:Alegreya,serif;font-size:19px;font-weight:700;display:flex;align-items:center;justify-content:center">3</span>
+        <span aria-hidden="true" style="flex:0 0 auto;width:38px;height:38px;border-radius:50%;background:var(--wk-forest-700);color:#fff;font-family:Alegreya,serif;font-size:19px;font-weight:700;display:flex;align-items:center;justify-content:center">3</span>
         <div><div style="font-family:Alegreya,serif;font-size:19px;font-weight:700;color:var(--wk-ink-strong);margin-bottom:4px">Den Wald betrachten</div><div style="font-size:13.5px;line-height:1.55;color:var(--wk-ink-soft)">Was wirkt im Hintergrund? Gibt es Druck im System? Fehlt Sicherheit? Sind alte Echos aktiv? Stehen Felsen im Weg? Ist die Situation von Nebel geprägt?</div></div>
       </div>
       <div style="display:flex;gap:14px;align-items:flex-start">
-        <span aria-hidden="true" style="flex:0 0 auto;width:38px;height:38px;border-radius:50%;background:var(--wk-yellow-600);color:#fff;font-family:Alegreya,serif;font-size:19px;font-weight:700;display:flex;align-items:center;justify-content:center">4</span>
+        <span aria-hidden="true" style="flex:0 0 auto;width:38px;height:38px;border-radius:50%;background:var(--wk-forest-700);color:#fff;font-family:Alegreya,serif;font-size:19px;font-weight:700;display:flex;align-items:center;justify-content:center">4</span>
         <div><div style="font-family:Alegreya,serif;font-size:19px;font-weight:700;color:var(--wk-ink-strong);margin-bottom:4px">Perspektiven verbinden</div><div style="font-size:13.5px;line-height:1.55;color:var(--wk-ink-soft)">Die Waldkätzchen helfen dabei, Beobachtung, Gefühle, Zusammenhänge, Umfeld und Handlungsmöglichkeiten miteinander zu verbinden.</div></div>
       </div>
       <div style="display:flex;gap:14px;align-items:flex-start">
-        <span aria-hidden="true" style="flex:0 0 auto;width:38px;height:38px;border-radius:50%;background:var(--wk-orange-600);color:#fff;font-family:Alegreya,serif;font-size:19px;font-weight:700;display:flex;align-items:center;justify-content:center">5</span>
+        <span aria-hidden="true" style="flex:0 0 auto;width:38px;height:38px;border-radius:50%;background:var(--wk-forest-700);color:#fff;font-family:Alegreya,serif;font-size:19px;font-weight:700;display:flex;align-items:center;justify-content:center">5</span>
         <div><div style="font-family:Alegreya,serif;font-size:19px;font-weight:700;color:var(--wk-ink-strong);margin-bottom:4px">Einen neuen Blick entwickeln</div><div style="font-size:13.5px;line-height:1.55;color:var(--wk-ink-soft)">Aus „Das Kind will nicht“ wird die Frage: „Was macht es dem Kind gerade unmöglich, mitzumachen?“ Aus „Sie klammert“ wird: „Welche Sicherheit fehlt ihr gerade in der Beziehung?“</div></div>
       </div>
       <div style="display:flex;gap:14px;align-items:flex-start">
@@ -297,12 +281,12 @@
 </section>
 
 <div class="wk-edge" aria-hidden="true" style="--wk-from:var(--wk-paper);--wk-to:var(--wk-forest-800)"></div>
-<section style="position:relative;background:var(--wk-forest-800);overflow:hidden">
+<section class="wk-sd wk-sd--wald wk-band" style="position:relative;background:var(--wk-forest-800);overflow:hidden;--wk-from:var(--wk-paper)">
   <img class="wk-wash" decoding="async" width="1600" height="533" src="assets/footer-bg-home.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center bottom;opacity:.95">
-  <div style="position:relative;max-width:1240px;margin:0 auto;padding:48px 22px 54px;text-align:center">
+  <div style="position:relative;max-width:1240px;margin:0 auto;padding:var(--wk-sd-top) 22px 54px;text-align:center;z-index:2">
     <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(26px,3.2vw,38px);line-height:1.15;color:var(--wk-paper);margin:0 0 8px;text-shadow:0 2px 14px rgba(6,30,24,.55)">Ihr müsst den Weg nicht allein gehen.</h2>
-    <p style="color:var(--wk-pink);font-size:17.5px;margin:0 0 26px;text-shadow:0 2px 14px rgba(6,30,24,.55)">Ich schaue mit euch hin – und finde neue Wege, die zu euch passen.</p>
-    <button onClick="{{ openContact }}" style="background:var(--wk-pink-ink);color:#fff;border:none;border-radius:999px;padding:15px 34px;font-family:'Alegreya Sans',sans-serif;font-size:17px;font-weight:600;cursor:pointer;box-shadow:0 8px 20px rgba(6,30,24,.35)" style-hover="background:var(--wk-pink-700)">Kontakt aufnehmen&nbsp;&nbsp;<span aria-hidden="true">♡</span></button>
+    <p style="color:var(--wk-pink-on-dark);font-size:17.5px;margin:0 0 26px;text-shadow:0 2px 14px rgba(6,30,24,.55)">Ich schaue mit euch hin – und finde neue Wege, die zu euch passen.</p>
+    <button onClick="{{ openContact }}" style="background:var(--wk-pink-ink);color:#fff;border:none;border-radius:999px;padding:15px 34px;font-family:'Alegreya Sans',sans-serif;font-size:17px;font-weight:600;cursor:pointer;box-shadow:0 8px 20px rgba(6,30,24,.35)" style-hover="background:var(--wk-pink-700)">Erstgespräch anfragen&nbsp;&nbsp;<span aria-hidden="true">♡</span></button>
   </div>
 </section>
 
@@ -314,17 +298,17 @@
         <span style="font-family:Alegreya,serif;font-size:24px;color:var(--wk-paper)">Waldkätzchen</span>
       </div>
       <div style="font-size:13.5px;color:var(--wk-on-dark-muted);margin-bottom:10px">Verstehen. Verbinden. Verändern.</div>
-      <div style="font-size:14px;line-height:1.55">Begleitung für Kinder, Jugendliche und Familien im Autismus-Spektrum. <span style="color:var(--wk-pink)" aria-hidden="true">♡</span></div>
+      <div style="font-size:14px;line-height:1.55">Begleitung für Kinder, Jugendliche und Familien im Autismus-Spektrum. <span style="color:var(--wk-pink-on-dark)" aria-hidden="true">♡</span></div>
     </div>
     <div>
       <div style="font-family:Alegreya,serif;font-size:17px;color:var(--wk-paper);margin-bottom:10px">Navigation</div>
       <div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px">
-        <a href="./Startseite.dc.html" style="color:var(--wk-on-dark-soft)">Startseite</a>
-        <a href="./Ueber mich.dc.html" style="color:var(--wk-on-dark-soft)">Über mich</a>
+        <a href="./Fuer Familien.dc.html" style="color:var(--wk-on-dark-soft)">Für Familien</a>
+        <a href="./Autismus.dc.html" style="color:var(--wk-on-dark-soft)">Autismus &amp; PDA</a>
         <a href="./Mein Ansatz.dc.html" style="color:var(--wk-on-dark-soft)">Mein Ansatz</a>
         <a href="./Angebot.dc.html" style="color:var(--wk-on-dark-soft)">Angebot</a>
-        <a href="./Fuer Teams.dc.html" style="color:var(--wk-on-dark-soft)">Für Teams</a>
-        <a href="./Fuer Vaeter.dc.html" style="color:var(--wk-on-dark-soft)">Für Väter</a>
+        <a href="./Ueber mich.dc.html" style="color:var(--wk-on-dark-soft)">Über mich</a>
+        <a href="./Wissen.dc.html" style="color:var(--wk-on-dark-soft)">Wissen</a>
         <a href="./Kontakt.dc.html" style="color:var(--wk-on-dark-soft)">Kontakt</a>
       </div>
     </div>
@@ -341,13 +325,13 @@
     </div>
     <div>
       <div style="font-family:Alegreya,serif;font-size:17px;color:var(--wk-paper);margin-bottom:10px">Rechtliches</div>
-      <div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px"><span>Impressum</span><span>Datenschutz</span><span>AGB</span></div>
+      <div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px"><a href="./Impressum.dc.html" style="color:var(--wk-on-dark-soft)">Impressum</a><a href="./Datenschutz.dc.html" style="color:var(--wk-on-dark-soft)">Datenschutz</a></div>
     </div>
     <div>
       <div style="font-family:Alegreya,serif;font-size:17px;color:var(--wk-paper);margin-bottom:10px">Kontakt</div>
       <div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px">
-        <span>hallo@waldkaetzchen.de</span>
-        <span>+49 160 1234567</span>
+        <a href="mailto:torsten.macht@waldkaetzchen.de" style="color:var(--wk-on-dark-soft)">torsten.macht@waldkaetzchen.de</a>
+        <a href="tel:+491757157101" style="color:var(--wk-on-dark-soft)">0175 7157101</a>
         <span>Berlin &amp; Online</span>
         <span>www.waldkaetzchen.de</span>
       </div>

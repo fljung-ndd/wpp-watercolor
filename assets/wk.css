@@ -67,6 +67,10 @@
   /* Hell genug, dass es auch auf der hellsten Waldstufe (forest-700, der
      Drawer-Hintergrund) noch 4,54:1 erreicht. Nicht weiter abdunkeln. */
   --wk-on-dark-muted:  #B4C1B8;  /* 6,5 / 5,5 / 4,5:1 auf forest 900/800/700 */
+  /* Der Markenrosa #D84878 ist eine Illustrationsfarbe: auf dunklem Wald
+     kommt er nur auf 2,4:1. Gleicher Farbton, gleiche Sättigung, nur heller -
+     so bleibt der Akzent erkennbar und lesbar. */
+  --wk-pink-on-dark:   #EDABC1;  /* 6,4 / 5,5 / 4,5:1 auf forest 900/800/700 */
 
   /* ---- Typografie ---------------------------------------------------- */
   --wk-font-serif: Alegreya, Georgia, 'Times New Roman', serif;
@@ -332,6 +336,33 @@ footer, [role="dialog"] {
       #000 calc(100% - clamp(28px, 4vw, 64px)), transparent 100%);
 }
 
+/* ---------------------------------------------------------------------- *
+ * Leseschleier über den dunklen Bändern
+ *
+ * Die Aquarelle in den CTA-Bändern haben helle Stellen - Nebel, Himmel,
+ * heller Waldboden. Die Schrift darüber ist hell. Gemessen lag der Kontrast
+ * an den hellsten Stellen bei 1,02:1, die Überschrift war dort praktisch
+ * unsichtbar; der Textschatten allein trägt das nicht.
+ *
+ * Der Schleier legt sich zwischen Bild und Text, nicht über beides: in der
+ * Mitte, wo die Zeilen stehen, deckt er kräftig, zu den Rändern hin gibt er
+ * die gemalten Figuren wieder frei. Der Inhalt braucht dafür z-index 2 - der
+ * Shape-Divider liegt mit 3 darüber und bleibt sichtbar.
+ * ---------------------------------------------------------------------- */
+.wk-band { position: relative; }
+.wk-band::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(115% 130% at 50% 50%,
+      rgba(9, 40, 33, .90) 0%,
+      rgba(9, 40, 33, .86) 62%,
+      rgba(9, 40, 33, .34) 100%);
+}
+
 /* Wo mask-image fehlt (ältere Browser), bleibt der Streifen eine schlichte
    Fläche in der unteren Farbe. Das ist genau der Zustand von vorher:
    ein sauberer Farbwechsel, nur ohne Aquarellkante. */
@@ -339,4 +370,145 @@ footer, [role="dialog"] {
   .wk-edge { height: 0; }
   .wk-edge-up { display: none; }
   /* .wk-wash bleibt unmaskiert - das ist der Zustand von vorher. */
+}
+
+/* ---------------------------------------------------------------------- *
+ * Shape-Divider (ShapeDividers.com)
+ *
+ * Die Vorlage hatte den Fuellton #fbd8c2 fest in die SVG-Data-URI
+ * eingebaut. Das ist ein Pfirsichton, der nicht in der Palette vorkommt,
+ * und er laesst sich pro Uebergang nicht wechseln. Deshalb liegen die drei
+ * Formen als eigene SVG-Dateien unter assets/dividers/ und werden hier als
+ * Maske benutzt: die Form kommt aus der Datei, die Farbe aus --wk-from.
+ * Eine Datei deckt damit jedes Farbpaar ab.
+ *
+ * Groessen, Positionen und Breakpoints sind unveraendert aus der Vorlage
+ * uebernommen.
+ *
+ * Der Divider liegt als ::before ueber dem oberen Rand seiner Section und
+ * zeigt die Farbe der Section darueber. Die Section selbst braucht
+ * position:relative und overflow:hidden - beides setzt die Basisklasse.
+ * ---------------------------------------------------------------------- */
+.wk-sd {
+  overflow: hidden;
+  position: relative;
+}
+.wk-sd::before {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: -1px; right: -1px; top: -1px;
+  z-index: 3;
+  pointer-events: none;
+  background: var(--wk-from, var(--wk-paper));
+  -webkit-mask-repeat: no-repeat;          mask-repeat: no-repeat;
+  -webkit-mask-position: 50% 0%;           mask-position: 50% 0%;
+}
+
+/* --- Waldkante: feiner Baumsaum mit Blaettern und kleinen Tieren ------- */
+.wk-sd--wald::before {
+  -webkit-mask-image: url('dividers/wald.svg');  mask-image: url('dividers/wald.svg');
+  -webkit-mask-size: 371% 90px;                  mask-size: 371% 90px;
+  -webkit-mask-position: 50% 0%;                 mask-position: 50% 0%;
+}
+@media (min-width: 768px) {
+  .wk-sd--wald::before {
+    -webkit-mask-size: 362% 90px;   mask-size: 362% 90px;
+    -webkit-mask-position: 42% 0%;  mask-position: 42% 0%;
+  }
+}
+@media (min-width: 1025px) {
+  .wk-sd--wald::before {
+    bottom: -0.1vw; left: -0.1vw; right: -0.1vw; top: -0.1vw;
+    -webkit-mask-size: 199% 90px;   mask-size: 199% 90px;
+    -webkit-mask-position: 50% 0%;  mask-position: 50% 0%;
+  }
+}
+@media (min-width: 2100px) {
+  .wk-sd--wald::before {
+    -webkit-mask-size: 199% calc(2vw + 90px);  mask-size: 199% calc(2vw + 90px);
+  }
+}
+
+/* --- Kreise: verspielte Huegel mit Punkten und Waben ------------------- */
+.wk-sd--kreise::before {
+  -webkit-mask-image: url('dividers/kreise.svg'); mask-image: url('dividers/kreise.svg');
+  -webkit-mask-size: 289% 45px;                   mask-size: 289% 45px;
+  -webkit-mask-position: 33% 0%;                  mask-position: 33% 0%;
+}
+@media (min-width: 768px) {
+  /* Ab Tablet eine eigene, breitere Zeichnung - so war es in der Vorlage. */
+  .wk-sd--kreise::before {
+    -webkit-mask-image: url('dividers/kreise-wide.svg');
+            mask-image: url('dividers/kreise-wide.svg');
+    -webkit-mask-size: 283% 90px;   mask-size: 283% 90px;
+    -webkit-mask-position: 42% 0%;  mask-position: 42% 0%;
+  }
+}
+@media (min-width: 1025px) {
+  .wk-sd--kreise::before {
+    bottom: -0.1vw; left: -0.1vw; right: -0.1vw; top: -0.1vw;
+    -webkit-mask-size: 119% 95px;   mask-size: 119% 95px;
+    -webkit-mask-position: 50% 0%;  mask-position: 50% 0%;
+  }
+}
+@media (min-width: 2100px) {
+  .wk-sd--kreise::before {
+    -webkit-mask-size: 119% calc(2vw + 95px);  mask-size: 119% calc(2vw + 95px);
+  }
+}
+
+/* --- Schraege: ruhige Doppelkante, das leiseste der drei Motive -------- */
+.wk-sd--schraege::before {
+  -webkit-mask-image: url('dividers/schraege.svg'); mask-image: url('dividers/schraege.svg');
+  -webkit-mask-size: 100% 100px;                    mask-size: 100% 100px;
+  -webkit-mask-position: 50% 0%;                    mask-position: 50% 0%;
+}
+@media (min-width: 768px) {
+  .wk-sd--schraege::before {
+    -webkit-mask-size: 100% 116px;  mask-size: 100% 116px;
+  }
+}
+@media (min-width: 1025px) {
+  .wk-sd--schraege::before {
+    bottom: -0.1vw; left: -0.1vw; right: -0.1vw; top: -0.1vw;
+    -webkit-mask-size: 100% 121px;  mask-size: 100% 121px;
+  }
+}
+@media (min-width: 2100px) {
+  .wk-sd--schraege::before {
+    -webkit-mask-size: 100% calc(2vw + 121px);  mask-size: 100% calc(2vw + 121px);
+  }
+}
+
+/* --- Freiraum unter dem Divider --------------------------------------- *
+ * Der Divider liegt mit z-index 3 ueber dem Abschnitt. Ohne genug Abstand
+ * oben verschwindet die erste Ueberschrift darunter - lautlos, ohne Fehler.
+ * Der noetige Abstand haengt an der Maskenhoehe und wechselt an denselben
+ * Haltepunkten, deshalb steht er hier neben ihr und nicht als geratener
+ * clamp() im style-Attribut. Die Abschnitte schreiben nur
+ * padding: var(--wk-sd-top) ... - den Rest bestimmt der Haltepunkt.
+ * ---------------------------------------------------------------------- */
+.wk-sd--schraege { --wk-sd-top: 116px; }   /* Maske 100px */
+.wk-sd--kreise   { --wk-sd-top:  62px; }   /* Maske  45px */
+.wk-sd--wald     { --wk-sd-top: 108px; }   /* Maske  90px */
+@media (min-width: 768px) {
+  .wk-sd--schraege { --wk-sd-top: 132px; } /* Maske 116px */
+  .wk-sd--kreise   { --wk-sd-top: 106px; } /* Maske  90px */
+}
+@media (min-width: 1025px) {
+  .wk-sd--schraege { --wk-sd-top: 139px; } /* Maske 121px */
+  .wk-sd--kreise   { --wk-sd-top: 113px; } /* Maske  95px */
+}
+@media (min-width: 2100px) {
+  .wk-sd--schraege { --wk-sd-top: calc(2vw + 139px); }
+  .wk-sd--kreise   { --wk-sd-top: calc(2vw + 113px); }
+  .wk-sd--wald     { --wk-sd-top: calc(2vw + 108px); }
+}
+
+/* Ohne mask-Unterstuetzung verschwindet der Divider spurlos - die Sections
+   stossen dann sauber aneinander wie vorher. Der Freiraum oben faellt dann
+   mit weg, sonst klaffte eine Luecke ohne Anlass. */
+@supports not ((-webkit-mask-image: none) or (mask-image: none)) {
+  .wk-sd::before { display: none; }
+  .wk-sd--schraege, .wk-sd--kreise, .wk-sd--wald { --wk-sd-top: 44px; }
 }
