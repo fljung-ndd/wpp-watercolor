@@ -39,27 +39,14 @@
     </a>
     <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
       <nav style="display:flex;align-items:center;gap:18px;margin-left:auto;font-size:15.5px;color:var(--wk-on-dark-soft)">
-        <a href="./Startseite.dc.html" style="color:var(--wk-paper);font-weight:600;border-bottom:2px solid var(--wk-pink-ink);padding-bottom:2px">Startseite</a>
-        <a href="./Ueber mich.dc.html" style="color:var(--wk-on-dark-soft)">Über mich</a>
+        <a href="./Fuer Familien.dc.html" style="color:var(--wk-on-dark-soft)">Für Familien</a>
+        <a href="./Autismus.dc.html" style="color:var(--wk-on-dark-soft)">Autismus &amp; PDA</a>
         <a href="./Mein Ansatz.dc.html" style="color:var(--wk-on-dark-soft)">Mein Ansatz</a>
         <a href="./Angebot.dc.html" style="color:var(--wk-on-dark-soft)">Angebot</a>
-        <span style="position:relative;display:inline-flex"><button onClick="{{ toggleFuerWen }}" aria-expanded="{{ menuFuerWen }}" style="background:none;border:none;padding:0;font-family:inherit;font-size:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:4px;color:var(--wk-paper)">Für wen <span aria-hidden="true">▾</span></button>
-          <sc-if value="{{ menuFuerWen }}" hint-placeholder-val="{{ false }}">
-            <span style="position:absolute;top:30px;left:-12px;background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:12px;box-shadow:0 10px 26px rgba(8,45,36,.3);padding:8px;display:flex;flex-direction:column;min-width:158px;z-index:70">
-              <a href="./Fuer Teams.dc.html" style="padding:8px 12px;border-radius:8px;color:var(--wk-ink)">Für Teams</a>
-              <a href="./Fuer Vaeter.dc.html" style="padding:8px 12px;border-radius:8px;color:var(--wk-ink)">Für Väter</a>
-            </span>
-          </sc-if>
-        </span>
-        <span style="position:relative;display:inline-flex"><button onClick="{{ toggleWissen }}" aria-expanded="{{ menuWissen }}" style="background:none;border:none;padding:0;font-family:inherit;font-size:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:4px;color:var(--wk-paper)">Wissen <span aria-hidden="true">▾</span></button>
-          <sc-if value="{{ menuWissen }}" hint-placeholder-val="{{ false }}">
-            <span style="position:absolute;top:30px;left:-12px;background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:12px;box-shadow:0 10px 26px rgba(8,45,36,.3);padding:8px;display:flex;flex-direction:column;min-width:186px;z-index:70">
-              <a href="./Autismus.dc.html" style="padding:8px 12px;border-radius:8px;color:var(--wk-ink)">Autismus verstehen</a>
-            </span>
-          </sc-if>
-        </span>
-        <a href="./Kontakt.dc.html" style="color:var(--wk-paper)">Kontakt</a>
-        <button onClick="{{ openContact }}" style="background:var(--wk-pink-ink);color:#fff;border:none;border-radius:999px;padding:11px 22px;font-family:'Alegreya Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:9px" style-hover="background:var(--wk-pink-700)">Kontakt aufnehmen <span aria-hidden="true">♡</span></button>
+        <a href="./Ueber mich.dc.html" style="color:var(--wk-on-dark-soft)">Über mich</a>
+        <a href="./Wissen.dc.html" style="color:var(--wk-on-dark-soft)">Wissen</a>
+        <a href="./Kontakt.dc.html" style="color:var(--wk-on-dark-soft)">Kontakt</a>
+        <a href="./Kontakt.dc.html" style="background:var(--wk-pink-600);color:#fff;border-radius:999px;padding:11px 20px;font-family:'Alegreya Sans',sans-serif;font-size:15px;font-weight:600;display:flex;align-items:center;gap:9px;text-decoration:none" style-hover="background:var(--wk-pink-700)">Erstgespräch anfragen <span aria-hidden="true">♡</span></a>
       </nav>
     </sc-if>
     <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
@@ -72,17 +59,14 @@
   </div>
   <sc-if value="{{ drawer }}" hint-placeholder-val="{{ false }}">
     <div style="background:var(--wk-forest-700);border-top:1px solid rgba(245,237,224,.16);padding:14px 20px 20px;display:flex;flex-direction:column;gap:2px;font-size:17px">
-      <a href="./Startseite.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Startseite</a>
-      <a href="./Ueber mich.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Über mich</a>
+      <a href="./Fuer Familien.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Für Familien</a>
+      <a href="./Autismus.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Autismus &amp; PDA</a>
       <a href="./Mein Ansatz.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Mein Ansatz</a>
       <a href="./Angebot.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Angebot</a>
-      <div style="padding:13px 6px 6px;color:var(--wk-on-dark-muted);font-size:13.5px;letter-spacing:.08em;text-transform:uppercase">Für wen</div>
-      <a href="./Fuer Teams.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Für Teams</a>
-      <a href="./Fuer Vaeter.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Für Väter</a>
-      <div style="padding:13px 6px 6px;color:var(--wk-on-dark-muted);font-size:13.5px;letter-spacing:.08em;text-transform:uppercase">Wissen</div>
-      <a href="./Autismus.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Autismus verstehen</a>
+      <a href="./Ueber mich.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Über mich</a>
+      <a href="./Wissen.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Wissen</a>
       <a href="./Kontakt.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Kontakt</a>
-      <button onClick="{{ openContact }}" style="margin-top:14px;background:var(--wk-pink-ink);color:#fff;border:none;border-radius:999px;padding:15px;font-family:'Alegreya Sans',sans-serif;font-size:16.5px;font-weight:600;cursor:pointer">Kontakt aufnehmen <span aria-hidden="true">♡</span></button>
+      <a href="./Kontakt.dc.html" style="margin-top:14px;background:var(--wk-pink-600);color:#fff;border-radius:999px;padding:15px;font-family:'Alegreya Sans',sans-serif;font-size:16.5px;font-weight:600;text-align:center;text-decoration:none;display:block" style-hover="background:var(--wk-pink-700)">Erstgespräch anfragen <span aria-hidden="true">♡</span></a>
     </div>
   </sc-if>
 </header>
@@ -241,8 +225,8 @@
 <section style="position:relative;background:var(--wk-forest-800);overflow:hidden">
   <img class="wk-wash" decoding="async" width="1600" height="533" src="assets/footer-bg-home.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.92">
   <div style="position:relative;padding:44px 20px 48px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
-    <button onClick="{{ openContact }}" style="background:var(--wk-pink-ink);color:#fff;border:none;border-radius:999px;padding:15px 32px;font-family:'Alegreya Sans',sans-serif;font-size:17px;font-weight:600;cursor:pointer;box-shadow:0 8px 20px rgba(8,45,36,.3)" style-hover="background:var(--wk-pink-700)">Angebot ansehen&nbsp;&nbsp;<span aria-hidden="true">↗</span></button>
-    <button onClick="{{ openContact }}" style="background:var(--wk-petrol-600);color:#fff;border:none;border-radius:999px;padding:15px 32px;font-family:'Alegreya Sans',sans-serif;font-size:17px;font-weight:600;cursor:pointer;box-shadow:0 8px 20px rgba(8,45,36,.3)" style-hover="background:var(--wk-petrol-ink)">Kontakt aufnehmen&nbsp;&nbsp;<span aria-hidden="true">♡</span></button>
+    <button onClick="{{ openContact }}" style="background:var(--wk-pink-ink);color:#fff;border:none;border-radius:999px;padding:15px 32px;font-family:'Alegreya Sans',sans-serif;font-size:17px;font-weight:600;cursor:pointer;box-shadow:0 8px 20px rgba(8,45,36,.3)" style-hover="background:var(--wk-pink-700)">Erstgespräch anfragen&nbsp;&nbsp;<span aria-hidden="true">↗</span></button>
+    <button onClick="{{ openContact }}" style="background:var(--wk-petrol-600);color:#fff;border:none;border-radius:999px;padding:15px 32px;font-family:'Alegreya Sans',sans-serif;font-size:17px;font-weight:600;cursor:pointer;box-shadow:0 8px 20px rgba(8,45,36,.3)" style-hover="background:var(--wk-petrol-ink)">Erstgespräch anfragen&nbsp;&nbsp;<span aria-hidden="true">♡</span></button>
   </div>
 </section>
 
@@ -259,12 +243,12 @@
     <div>
       <div style="font-family:Alegreya,serif;font-size:17px;color:var(--wk-paper);margin-bottom:10px">Navigation</div>
       <div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px">
-        <a href="./Startseite.dc.html" style="color:var(--wk-on-dark-soft)">Startseite</a>
-        <a href="./Ueber mich.dc.html" style="color:var(--wk-on-dark-soft)">Über mich</a>
+        <a href="./Fuer Familien.dc.html" style="color:var(--wk-on-dark-soft)">Für Familien</a>
+        <a href="./Autismus.dc.html" style="color:var(--wk-on-dark-soft)">Autismus &amp; PDA</a>
         <a href="./Mein Ansatz.dc.html" style="color:var(--wk-on-dark-soft)">Mein Ansatz</a>
         <a href="./Angebot.dc.html" style="color:var(--wk-on-dark-soft)">Angebot</a>
-        <a href="./Fuer Teams.dc.html" style="color:var(--wk-on-dark-soft)">Für Teams</a>
-        <a href="./Fuer Vaeter.dc.html" style="color:var(--wk-on-dark-soft)">Für Väter</a>
+        <a href="./Ueber mich.dc.html" style="color:var(--wk-on-dark-soft)">Über mich</a>
+        <a href="./Wissen.dc.html" style="color:var(--wk-on-dark-soft)">Wissen</a>
         <a href="./Kontakt.dc.html" style="color:var(--wk-on-dark-soft)">Kontakt</a>
       </div>
     </div>
@@ -281,13 +265,13 @@
     </div>
     <div>
       <div style="font-family:Alegreya,serif;font-size:17px;color:var(--wk-paper);margin-bottom:10px">Rechtliches</div>
-      <div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px"><span>Impressum</span><span>Datenschutz</span><span>AGB</span></div>
+      <div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px"><a href="./Impressum.dc.html" style="color:var(--wk-on-dark-soft)">Impressum</a><a href="./Datenschutz.dc.html" style="color:var(--wk-on-dark-soft)">Datenschutz</a></div>
     </div>
     <div>
       <div style="font-family:Alegreya,serif;font-size:17px;color:var(--wk-paper);margin-bottom:10px">Kontakt</div>
       <div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px">
-        <span>hallo@waldkaetzchen.de</span>
-        <span>+49 160 1234567</span>
+        <a href="mailto:torsten.macht@waldkaetzchen.de" style="color:var(--wk-on-dark-soft)">torsten.macht@waldkaetzchen.de</a>
+        <a href="tel:+491757157101" style="color:var(--wk-on-dark-soft)">0175 7157101</a>
         <span>Berlin &amp; Online</span>
         <span>www.waldkaetzchen.de</span>
       </div>
