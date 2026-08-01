@@ -1,0 +1,135 @@
+/* Schlanke Dot-Navigation für index_n.html.
+ * Die bestehende Story-Logik bleibt erhalten; nur die Darstellung wird reduziert.
+ */
+.n-story-rail {
+  right: max(8px, env(safe-area-inset-right));
+  width: 26px;
+  padding: 8px 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  color: inherit;
+  opacity: .58;
+  transition: opacity .2s ease;
+}
+.n-story-rail:hover,
+.n-story-rail:focus-within { opacity: 1; }
+
+.n-story-rail__title,
+.n-story-rail__current { display: none; }
+
+.n-story-rail__line {
+  left: 50%;
+  top: 18px;
+  bottom: 18px;
+  width: 1px;
+  overflow: hidden;
+  background: rgba(18, 61, 54, .22);
+  box-shadow: 0 0 0 1px rgba(255, 253, 246, .32);
+  transform: translateX(-50%);
+}
+.n-story-rail__line span {
+  background: linear-gradient(var(--wk-petrol-600), var(--wk-pink-600));
+}
+
+.n-story-rail nav {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 2px;
+}
+.n-story-rail a {
+  position: relative;
+  min-width: 26px;
+  min-height: 25px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  color: inherit;
+  text-decoration: none;
+  transform: none;
+}
+.n-story-rail a:hover,
+.n-story-rail a:focus-visible {
+  color: inherit;
+  text-decoration: none;
+  transform: none;
+}
+.n-story-rail a i {
+  position: relative;
+  z-index: 2;
+  width: 6px;
+  height: 6px;
+  margin: 0;
+  border: 1px solid rgba(255, 253, 246, .88);
+  border-radius: 50%;
+  background: rgba(18, 61, 54, .72);
+  box-shadow: 0 0 0 1px rgba(18, 61, 54, .32);
+  transition: width .18s ease, height .18s ease, background-color .18s ease, box-shadow .18s ease;
+}
+.n-story-rail a.is-current i {
+  width: 9px;
+  height: 9px;
+  border-color: var(--wk-paper-card);
+  background: var(--wk-pink-600);
+  box-shadow: 0 0 0 3px rgba(216, 72, 120, .16);
+  transform: none;
+}
+
+/* Die vorhandenen Kapitelnamen dienen nur noch als unaufdringliche Tooltips. */
+.n-story-rail a span {
+  position: absolute;
+  right: calc(100% + 7px);
+  top: 50%;
+  width: max-content;
+  max-width: 180px;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: rgba(18, 61, 54, .9);
+  color: var(--wk-paper);
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.15;
+  white-space: nowrap;
+  box-shadow: 0 5px 16px rgba(8, 37, 31, .16);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(4px, -50%);
+  transition: opacity .16s ease, transform .16s ease;
+}
+.n-story-rail a:hover span,
+.n-story-rail a:focus-visible span {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+
+@media (max-width: 680px) {
+  .n-story-rail {
+    right: max(2px, env(safe-area-inset-right));
+    width: 22px;
+    padding: 5px 0;
+    opacity: .48;
+  }
+  .n-story-rail a {
+    min-width: 22px;
+    min-height: 22px;
+  }
+  .n-story-rail a i {
+    width: 5px;
+    height: 5px;
+  }
+  .n-story-rail a.is-current i {
+    width: 8px;
+    height: 8px;
+  }
+  .n-story-rail a span { display: none; }
+  .n-story-rail__line { top: 15px; bottom: 15px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .n-story-rail,
+  .n-story-rail a i,
+  .n-story-rail a span { transition: none; }
+}
