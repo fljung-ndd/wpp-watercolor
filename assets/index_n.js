@@ -1,4 +1,65 @@
 (() => {
+  const dotStylesheet = document.createElement('link');
+  dotStylesheet.rel = 'stylesheet';
+  dotStylesheet.href = 'assets/index_n_dots.css';
+  document.head.append(dotStylesheet);
+
+  const knowledgeSection = document.querySelector('#wissen');
+  if (knowledgeSection && !document.querySelector('#fragen')) {
+    knowledgeSection.insertAdjacentHTML('beforebegin', `
+      <section class="n-section n-faq" id="fragen" data-story-step data-story-label="Fragen">
+        <div class="n-shell n-faq__grid">
+          <div class="n-faq__intro n-reveal">
+            <p class="n-eyebrow n-eyebrow--petrol">Vielleicht fragst du dich</p>
+            <h2>Häufige Fragen</h2>
+            <p>Du musst vor einer Anfrage noch nicht alles sortiert haben. Diese Antworten geben dir eine erste Orientierung.</p>
+            <img src="assets/chars/16_pinguin_sprechblase.webp" alt="" width="512" height="512" loading="lazy">
+          </div>
+          <div class="n-faq__list n-reveal">
+            <details>
+              <summary>Für wen ist das hier geeignet?</summary>
+              <p>Für Familien, Väter, Kinder und Jugendliche – und für Fachkräfte in Kitas, Schulen und Teams. Immer dann, wenn Verhalten, Beziehungen und Anforderungen so ineinandergreifen, dass einfache Lösungen nicht mehr passen.</p>
+            </details>
+            <details>
+              <summary>Und wofür bin ich nicht die richtige Adresse?</summary>
+              <p>Ich mache keine Diagnostik, keine Psychotherapie und keine akute Krisenintervention. Wenn es unmittelbar um Sicherheit geht, gehört das in andere Hände – und ich sage das offen, statt etwas zu übernehmen, das einen anderen Rahmen braucht.</p>
+            </details>
+            <details>
+              <summary>Online oder vor Ort?</summary>
+              <p>Beides. Vieles lässt sich online erstaunlich nah und konkret bearbeiten. Für die direkte Arbeit mit Kindern, Teamtage und bestimmte gemeinsame Situationen komme ich auch vor Ort.</p>
+            </details>
+            <details>
+              <summary>Muss mein Kind mitkommen?</summary>
+              <p>Nein. Oft beginnen wir allein mit den Eltern oder einer beteiligten Fachperson. Wer wann dazukommt, entscheiden wir gemeinsam – nicht nach einem festen Schema.</p>
+            </details>
+            <details>
+              <summary>Wie schnell kann es losgehen?</summary>
+              <p>Ich antworte in der Regel innerhalb von 24 bis 48 Stunden. Einen Termin für ein erstes Gespräch finden wir meistens innerhalb von ein bis zwei Wochen.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+    `);
+  }
+
+  const knowledgeStoryLink = document.querySelector('[data-story-link="wissen"]');
+  if (knowledgeStoryLink && !document.querySelector('[data-story-link="fragen"]')) {
+    knowledgeStoryLink.insertAdjacentHTML(
+      'beforebegin',
+      '<a href="#fragen" data-story-link="fragen"><i></i><span>Fragen</span></a>'
+    );
+  }
+
+  const faqItems = [...document.querySelectorAll('.n-faq details')];
+  faqItems.forEach(item => {
+    item.addEventListener('toggle', () => {
+      if (!item.open) return;
+      faqItems.forEach(other => {
+        if (other !== item) other.open = false;
+      });
+    });
+  });
+
   const header = document.querySelector('[data-header]');
   const menuButton = document.querySelector('.n-menu-button');
   const navigation = document.querySelector('.n-navigation');
