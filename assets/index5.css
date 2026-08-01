@@ -181,8 +181,10 @@
 .ix-gegen ul { margin: 0; padding-left: 20px; font-size: 15.5px; line-height: 1.7; }
 .ix-gegen li + li { margin-top: 7px; }
 .ix-gegen--nicht { background: rgba(255, 253, 246, .10); border: 1px solid rgba(245, 237, 224, .22); }
-.ix-gegen--nicht h3 { color: var(--wk-on-dark-muted); }
-.ix-gegen--nicht ul { color: var(--wk-on-dark-muted); }
+.ix-gegen--nicht h3 { color: var(--wk-on-dark-soft); }
+/* Nicht -muted: auf der um 10% aufgehellten Kartenflaeche kam der Ton
+   gemessen auf 4,18:1. -soft traegt dort 5,0:1. */
+.ix-gegen--nicht ul { color: var(--wk-on-dark-soft); }
 .ix-gegen--so { background: var(--wk-paper-card); }
 .ix-gegen--so h3 { color: var(--wk-petrol-ink); }
 .ix-gegen--so ul { color: var(--wk-ink); }
