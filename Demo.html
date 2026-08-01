@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Waldkätzchen – Musterbogen</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Alle Bausteine der Waldkätzchen-Seite, einzeln und beschriftet.">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="stylesheet" href="assets/wk.css">
+<style>
+/* Der Musterbogen hat eigenes Rahmenwerk. Alles hier ist mit d- benannt,
+   damit sich nichts mit den wk-Klassen der Seite mischt. */
+body { background: #EFE7D8; }
+
+.d-kopf {
+  background: var(--wk-forest-900); color: var(--wk-on-dark-soft);
+  padding: 40px 22px 30px;
+}
+.d-kopf__innen { max-width: 1100px; margin: 0 auto; }
+.d-kopf h1 {
+  font-family: var(--wk-font-serif); font-weight: 600;
+  font-size: clamp(30px, 4vw, 46px); color: var(--wk-paper);
+  margin: 0 0 10px;
+}
+.d-kopf p { font-size: 16.5px; line-height: 1.7; margin: 0 0 8px; max-width: 74ch; }
+.d-kopf code { color: var(--wk-yellow); }
+
+.d-legende { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+
+.d-verzeichnis {
+  position: sticky; top: 0; z-index: 40;
+  background: var(--wk-forest-800);
+  border-bottom: 1px solid rgba(245,237,224,.16);
+  display: flex; gap: 4px; overflow-x: auto;
+  padding: 8px 14px;
+  scrollbar-width: thin;
+}
+.d-verzeichnis a {
+  flex: 0 0 auto; color: var(--wk-on-dark-soft);
+  font-size: 14px; padding: 7px 12px; border-radius: 999px; white-space: nowrap;
+}
+.d-verzeichnis a:hover { background: rgba(245,237,224,.12); color: var(--wk-paper); text-decoration: none; }
+
+.d-kap { max-width: 1100px; margin: 0 auto; padding: 54px 22px 10px; }
+.d-kap__kopf { margin-bottom: 26px; }
+.d-kap__kopf h2 {
+  font-family: var(--wk-font-serif); font-weight: 600;
+  font-size: clamp(24px, 3vw, 34px); color: var(--wk-ink-strong); margin: 0 0 8px;
+}
+.d-kap__kopf p { font-size: 16px; line-height: 1.7; color: var(--wk-ink-soft); margin: 0; max-width: 78ch; }
+.d-unter {
+  font-family: var(--wk-font-serif); font-weight: 600; font-size: 21px;
+  color: var(--wk-ink-strong); margin: 34px 0 14px;
+}
+
+.d-probe {
+  margin: 0 0 26px;
+  background: var(--wk-paper);
+  border: 1px solid var(--wk-line);
+  border-radius: 18px;
+  overflow: hidden;
+}
+.d-probe__kopf {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 12px;
+  padding: 13px 18px;
+  background: var(--wk-paper-warm);
+  border-bottom: 1px solid var(--wk-line);
+}
+.d-probe__name { font-family: var(--wk-font-serif); font-weight: 600; font-size: 18px; color: var(--wk-ink-strong); }
+.d-probe__meta { font-size: 13px; color: var(--wk-ink-muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.d-probe__buehne { padding: 26px 20px; }
+.d-probe__buehne--randlos { padding: 0; }
+.d-probe__buehne--breit { overflow-x: auto; }
+.d-breit { min-width: 960px; }
+.d-probe__notiz {
+  margin: 0; padding: 13px 18px;
+  border-top: 1px dashed var(--wk-line);
+  font-size: 14.5px; line-height: 1.65; color: var(--wk-ink-soft);
+  background: var(--wk-paper-warm);
+}
+.d-probe__notiz code, .d-kap__kopf code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .92em;
+  background: rgba(18,61,54,.07); padding: 1px 5px; border-radius: 5px;
+}
+
+.d-stand { font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 999px; white-space: nowrap; }
+.d-stand--da { background: var(--wk-petrol-025); color: var(--wk-petrol-ink); }
+.d-stand--bp { background: var(--wk-orange-025); color: var(--wk-orange-ink); }
+.d-stand--un { background: var(--wk-line); color: var(--wk-ink-soft); }
+
+/* --- Schieber ------------------------------------------------------- */
+.d-schieber { margin-bottom: 26px; }
+.d-schieber__leiste { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.d-schieber__knopf {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid var(--wk-line); background: var(--wk-paper-card);
+  color: var(--wk-ink-strong); font-size: 20px; line-height: 1; cursor: pointer;
+  transition: background .15s;
+}
+.d-schieber__knopf:hover { background: var(--wk-paper-warm); }
+.d-schieber__stand { font-size: 14px; color: var(--wk-ink-soft); font-variant-numeric: tabular-nums; }
+.d-schieber__spur {
+  display: grid; grid-auto-flow: column; grid-auto-columns: 100%;
+  gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory;
+  scroll-behavior: smooth; padding-bottom: 6px;
+  align-items: start;
+  transition: height .2s ease;
+  /* Ohne Skript bleibt die Spur mit Finger und Tastatur bedienbar. */
+}
+.d-folie { scroll-snap-align: start; min-width: 0; }
+.d-folie .d-probe { margin: 0; }
+
+/* --- Farbtafel ------------------------------------------------------ */
+.d-farbreihe { margin-bottom: 26px; }
+.d-farbreihe h3 { font-family: var(--wk-font-serif); font-weight: 600; font-size: 19px; color: var(--wk-ink-strong); margin: 0 0 10px; }
+.d-farben { display: grid; grid-template-columns: repeat(auto-fit, minmax(148px, 1fr)); gap: 10px; }
+.d-farbe { background: var(--wk-paper); border: 1px solid var(--wk-line); border-radius: 14px; padding: 10px; }
+.d-farbe__feld { display: block; height: 46px; border-radius: 9px; border: 1px solid rgba(18,61,54,.12); margin-bottom: 8px; }
+.d-farbe code { display: block; font-size: 12.5px; color: var(--wk-ink-strong); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.d-farbe small { display: block; font-size: 12px; color: var(--wk-ink-muted); margin-top: 2px; }
+
+/* --- Bildkacheln ---------------------------------------------------- */
+.d-kacheln { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+.d-kachel { margin: 0; background: var(--wk-paper); border: 1px solid var(--wk-line); border-radius: 14px; overflow: hidden; }
+.d-kachel img { width: 100%; height: 104px; object-fit: cover; display: block; }
+.d-kachel figcaption { padding: 8px 10px; font-size: 12.5px; color: var(--wk-ink-muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.d-kachel--klein { width: 128px; }
+.d-kachel--klein img { height: 84px; object-fit: contain; background: var(--wk-paper-card); }
+
+/* --- Etappen (Blueprint) -------------------------------------------- */
+.d-etappen { position: relative; display: flex; flex-wrap: wrap; gap: 14px; padding: 10px 0 0; }
+.d-etappen__linie {
+  position: absolute; left: 6%; right: 6%; top: 28px; height: 2px;
+  background: repeating-linear-gradient(to right, var(--wk-line) 0 8px, transparent 8px 16px);
+}
+.d-etappe { position: relative; flex: 1 1 150px; text-align: center; margin-top: var(--hoch, 0); }
+.d-etappe__punkt {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; border-radius: 50%; color: #fff;
+  font-family: var(--wk-font-serif); font-weight: 700; font-size: 18px;
+  box-shadow: 0 3px 10px rgba(18,61,54,.22);
+}
+
+/* --- Aufklapper ----------------------------------------------------- */
+.d-aufklapp { background: var(--wk-paper-card); border: 1px solid var(--wk-line); border-radius: 12px; margin-bottom: 8px; }
+.d-aufklapp summary { padding: 14px 16px; cursor: pointer; font-size: 15.5px; color: var(--wk-ink-strong); }
+.d-aufklapp p { margin: 0; padding: 0 16px 14px; font-size: 14.5px; line-height: 1.65; color: var(--wk-ink-soft); }
+
+/* --- Tabelle -------------------------------------------------------- */
+.d-tabelle { overflow-x: auto; border: 1px solid var(--wk-line); border-radius: 14px; background: var(--wk-paper); }
+.d-tabelle table { border-collapse: collapse; width: 100%; min-width: 760px; }
+.d-tabelle th, .d-tabelle td { text-align: left; vertical-align: top; padding: 12px 14px; border-bottom: 1px solid var(--wk-line); font-size: 14.5px; line-height: 1.6; }
+.d-tabelle th { background: var(--wk-paper-warm); color: var(--wk-ink-strong); font-weight: 600; }
+.d-tabelle tr:last-child td { border-bottom: 0; }
+.d-tabelle code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; }
+
+.d-fuss { max-width: 1100px; margin: 0 auto; padding: 40px 22px 70px; font-size: 14.5px; color: var(--wk-ink-muted); }
+</style>
+</head>
+<body>
+
+<div class="d-kopf">
+  <div class="d-kopf__innen">
+    <h1>Musterbogen</h1>
+    <p>Jeder Baustein der Waldkätzchen-Seite, einzeln und beschriftet. Wo es für eine Stelle
+       mehrere Varianten gibt, stehen sie in einem Schieber nebeneinander – mit den Pfeilen
+       blättern oder die Spur seitlich schieben.</p>
+    <p>Gedacht zum Durchgehen und Anstreichen: was passt, was fehlt, was soll anders aussehen.
+       Die Beschriftung nennt jeweils die Klasse oder Datei, damit die Rückmeldung eindeutig
+       zuzuordnen ist.</p>
+    <div class="d-legende">
+      <span class="d-stand d-stand--da">steht auf der Seite</span>
+      <span class="d-stand d-stand--bp">nur im Blueprint</span>
+      <span class="d-stand d-stand--un">vorhanden, ungenutzt</span>
+    </div>
+  </div>
+</div>
+
+<nav class="d-verzeichnis" aria-label="Kapitel"><a href="#farben">1 · Farben</a><a href="#typo">2 · Typografie</a><a href="#kopf">3 · Kopfzeile</a><a href="#hero">4 · Heroes</a><a href="#divider">5 · Divider und Kanten</a><a href="#flaechen">6 · Flächen</a><a href="#karten">7 · Karten</a><a href="#kaesten">8 · Kästen und Papier</a><a href="#knoepfe">9 · Knöpfe und Links</a><a href="#listen">10 · Listen und Abläufe</a><a href="#wechsel">11 · Textwechsel</a><a href="#formular">12 · Formular</a><a href="#fuss">13 · Fußzeile</a><a href="#bewegung">14 · Bewegung</a><a href="#abgleich">15 · Blueprint-Abgleich</a></nav>
+
+
+<section class="d-kap" id="farben">
+  <header class="d-kap__kopf">
+    <h2>1 · Farben</h2>
+    <p>Fünf Markenfarben mit je fünf Rollen, dazu Wald, Papier und die Textfarben. Die Marke selbst ist eine Illustrationsfarbe – als Schrift auf Creme erreicht keine der fünf 4,5:1. Dafür gibt es die abgedunkelten Rollen.</p>
+  </header>
+  <div class="d-farbreihe"><h3>Cyan – Beobachter-Kätzchen</h3><div class="d-farben"><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-cyan)"></span><code>--wk-cyan</code><small>Marke, Fläche, Ring</small></div><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-cyan-ink)"></span><code>--wk-cyan-ink</code><small>Text auf Creme, ≥4,5:1</small></div><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-cyan-600)"></span><code>--wk-cyan-600</code><small>Knopf, Text auf Weiß</small></div><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-cyan-050)"></span><code>--wk-cyan-050</code><small>Wash, Kartenfläche</small></div><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-cyan-025)"></span><code>--wk-cyan-025</code><small>halber Wash, trägt -ink</small></div></div></div><div class="d-farbreihe"><h3>Petrol – Fühl-Kätzchen</h3><div class="d-farben"><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-petrol)"></span><code>--wk-petrol</code><small>Marke, Fläche, Ring</small></div><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-petrol-ink)"></span><code>--wk-petrol-ink</code><small>Text auf Creme, ≥4,5:1</small></div><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-petrol-600)"></span><code>--wk-petrol-600</code><small>Knopf, Text auf Weiß</small></div><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-petrol-050)"></span><code>--wk-petrol-050</code><small>Wash, Kartenfläche</small></div><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-petrol-025)"></span><code>--wk-petrol-025</code><small>halber Wash, trägt -ink</small></div></div></div><div class="d-farbreihe"><h3>Yellow – Denk-Kätzchen</h3><div class="d-farben"><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-yellow)"></span><code>--wk-yellow</code><small>Marke, Fläche, Ring</small></div><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-yellow-ink)"></span><code>--wk-yellow-ink</code><small>Text auf Creme, ≥4,5:1</small></div><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-yellow-600)"></span><code>--wk-yellow-600</code><small>Knopf, Text auf Weiß</small></div><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-yellow-050)"></span><code>--wk-yellow-050</code><small>Wash, Kartenfläche</small></div><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-yellow-025)"></span><code>--wk-yellow-025</code><small>halber Wash, trägt -ink</small></div></div></div><div class="d-farbreihe"><h3>Orange – System-Kätzchen</h3><div class="d-farben"><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-orange)"></span><code>--wk-orange</code><small>Marke, Fläche, Ring</small></div><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-orange-ink)"></span><code>--wk-orange-ink</code><small>Text auf Creme, ≥4,5:1</small></div><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-orange-600)"></span><code>--wk-orange-600</code><small>Knopf, Text auf Weiß</small></div><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-orange-050)"></span><code>--wk-orange-050</code><small>Wash, Kartenfläche</small></div><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-orange-025)"></span><code>--wk-orange-025</code><small>halber Wash, trägt -ink</small></div></div></div><div class="d-farbreihe"><h3>Pink – Macher-Kätzchen</h3><div class="d-farben"><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-pink)"></span><code>--wk-pink</code><small>Marke, Fläche, Ring</small></div><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-pink-ink)"></span><code>--wk-pink-ink</code><small>Text auf Creme, ≥4,5:1</small></div><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-pink-600)"></span><code>--wk-pink-600</code><small>Knopf, Text auf Weiß</small></div><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-pink-050)"></span><code>--wk-pink-050</code><small>Wash, Kartenfläche</small></div><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-pink-025)"></span><code>--wk-pink-025</code><small>halber Wash, trägt -ink</small></div></div></div><div class="d-farbreihe"><h3>Wald</h3><div class="d-farben"><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-forest-900)"></span><code>--wk-forest-900</code><small>Fußzeile</small></div><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-forest-800)"></span><code>--wk-forest-800</code><small>Kopf, dunkle Sections</small></div><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-forest-700)"></span><code>--wk-forest-700</code><small>Karten auf dunkel</small></div></div></div><div class="d-farbreihe"><h3>Papier</h3><div class="d-farben"><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-paper)"></span><code>--wk-paper</code><small>Grundton</small></div><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-paper-warm)"></span><code>--wk-paper-warm</code><small>zweite Fläche</small></div><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-paper-card)"></span><code>--wk-paper-card</code><small>Karten, Polaroid</small></div><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-line)"></span><code>--wk-line</code><small>Kartenrahmen</small></div></div></div><div class="d-farbreihe"><h3>Tinte auf Creme</h3><div class="d-farben"><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-ink)"></span><code>--wk-ink</code><small>Fließtext 9,5:1</small></div><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-ink-strong)"></span><code>--wk-ink-strong</code><small>Überschrift 10,7:1</small></div><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-ink-soft)"></span><code>--wk-ink-soft</code><small>Sekundär 6,3:1</small></div><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-ink-muted)"></span><code>--wk-ink-muted</code><small>Bildunterschrift 4,8:1</small></div></div></div><div class="d-farbreihe"><h3>Schrift auf Wald</h3><div class="d-farben"><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-on-dark)"></span><code>--wk-on-dark</code><small>10,3:1</small></div><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-on-dark-soft)"></span><code>--wk-on-dark-soft</code><small>6,9:1</small></div><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-on-dark-muted)"></span><code>--wk-on-dark-muted</code><small>4,5:1 auf 700</small></div><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-pink-on-dark)"></span><code>--wk-pink-on-dark</code><small>4,5:1 auf 700</small></div><div class="d-farbe"><span class="d-farbe__feld" style="background:var(--wk-yellow)"></span><code>--wk-yellow</code><small>Claim auf dunkel</small></div></div></div>
+</section>
+<section class="d-kap" id="typo">
+  <header class="d-kap__kopf">
+    <h2>2 · Typografie</h2>
+    <p>Alegreya für Überschriften, Alegreya Sans für alles andere. Beide selbst gehostet.</p>
+  </header>
+  <figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Seitentitel (H1)</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">Alegreya 600 · clamp(40px,5.6vw,80px)</span>
+  </figcaption>
+  <div class="d-probe__buehne"><h1 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(40px,5.6vw,80px);line-height:1.02;color:var(--wk-ink-strong);margin:0">Waldkätzchen</h1></div>
+  <p class="d-probe__notiz">Steht nur im Hero, einmal je Seite.</p>
+</figure>
+<figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Abschnittstitel (H2)</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">clamp(28px,3.6vw,44px)</span>
+  </figcaption>
+  <div class="d-probe__buehne"><h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(28px,3.6vw,44px);line-height:1.1;color:var(--wk-ink-strong);margin:0">Angebote im Überblick</h2></div>
+  
+</figure>
+<figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Abschnittstitel mit Strich</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">.wk-strich</span>
+  </figcaption>
+  <div class="d-probe__buehne"><h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(28px,3.6vw,44px);line-height:1.1;color:var(--wk-ink-strong);margin:0"><span class="wk-strich">Wer ich bin</span></h2></div>
+  <p class="d-probe__notiz">Der rosa Strich sitzt unter dem Text, nicht unter der ganzen Zeile.</p>
+</figure>
+<figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Kartentitel</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">Alegreya 600 · 20,5px</span>
+  </figcaption>
+  <div class="d-probe__buehne"><div style="font-family:Alegreya,serif;font-weight:600;font-size:20.5px;color:var(--wk-ink-strong)">Familienbegleitung</div></div>
+  
+</figure>
+<figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Kicker</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">13,5px · 0,13em Sperrung · Versalien</span>
+  </figcaption>
+  <div class="d-probe__buehne"><div style="font-size:13.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--wk-pink-ink)">Schritt 1 – wiedererkennen</div></div>
+  
+</figure>
+<figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Vorspann</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">clamp(16,5px,1.5vw,19px)</span>
+  </figcaption>
+  <div class="d-probe__buehne"><p style="font-size:clamp(16.5px,1.5vw,19px);line-height:1.65;color:var(--wk-ink-soft);max-width:60ch;margin:0">Wenn du dich in einem dieser Sätze wiederfindest, bist du hier richtig.</p></div>
+  
+</figure>
+<figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Fließtext</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">16,5px · Zeilenhöhe 1,7</span>
+  </figcaption>
+  <div class="d-probe__buehne"><p style="font-size:16.5px;line-height:1.7;color:var(--wk-ink-soft);max-width:52ch;margin:0">Ich komme aus zwei Welten: aus der Heilpädagogik und aus vielen Jahren in der IT. Dazu kommt meine persönliche Familienerfahrung.</p></div>
+  
+</figure>
+<figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Claim auf Creme</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">Alegreya kursiv · pink-ink</span>
+  </figcaption>
+  <div class="d-probe__buehne"><p style="font-size:clamp(19px,2.1vw,25px);line-height:1.35;color:var(--wk-pink-ink);font-family:Alegreya,serif;font-weight:600;margin:0;max-width:24ch">Ein Kind muss nicht angepasst sein,<br>um verbunden zu sein.</p></div>
+  
+</figure>
+<figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Zitat</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">Alegreya kursiv · 29px</span>
+  </figcaption>
+  <div class="d-probe__buehne"><p style="font-family:Alegreya,serif;font-style:italic;font-size:clamp(19px,2.4vw,29px);line-height:1.35;color:var(--wk-ink-strong);margin:0">„Wir funktionieren. Aber wir kommen einander nicht mehr nahe.&#8220;</p></div>
+  
+</figure>
+<figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Textlink mit Pfeil</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">pink-ink · 600</span>
+  </figcaption>
+  <div class="d-probe__buehne"><a href="#" style="color:var(--wk-pink-ink);font-weight:600;font-size:16px">Meine Geschichte <span aria-hidden="true">→</span></a></div>
+  
+</figure>
+</section>
+<section class="d-kap" id="kopf">
+  <header class="d-kap__kopf">
+    <h2>3 · Kopfzeile</h2>
+    <p>Breit, schmal, ausgeklappt – und zwei Dinge aus den Blueprints.</p>
+  </header>
+  <div class="d-schieber" data-schieber id="s-kopf">
+  <div class="d-schieber__leiste">
+    <button type="button" class="d-schieber__knopf" data-zurueck aria-label="vorherige Variante">‹</button>
+    <span class="d-schieber__stand" data-stand>1 / 5</span>
+    <button type="button" class="d-schieber__knopf" data-vor aria-label="nächste Variante">›</button>
+  </div>
+  <div class="d-schieber__spur" tabindex="0" data-spur>
+    <div class="d-folie" role="group" aria-roledescription="Folie" aria-label="1 von 5"><figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Kopfzeile breit</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">sticky · forest-800 · ab 900px</span>
+  </figcaption>
+  <div class="d-probe__buehne d-probe__buehne--randlos d-probe__buehne--breit"><div class="d-breit"><header style="background:var(--wk-forest-800);box-shadow:0 2px 14px rgba(8,45,36,.25)">
+  <div style="max-width:1300px;margin:0 auto;display:flex;align-items:center;gap:18px;padding:9px 20px">
+    <a href="#" style="display:flex;align-items:center;gap:11px;flex:0 0 auto"><span style="width:46px;height:46px;border-radius:50%;background:var(--wk-paper);display:flex;align-items:flex-end;justify-content:center;overflow:hidden;border:2px solid rgba(245,237,224,.4)"><img decoding="async" width="96" height="144" src="assets/cat-teal-logo.webp" alt="" style="width:34px;display:block"></span><span style="font-family:Alegreya,serif;font-size:28px;font-weight:600;color:var(--wk-paper)">Waldkätzchen</span></a>
+    <nav style="display:flex;align-items:center;gap:18px;margin-left:auto;font-size:15.5px">
+      <a href="#" style="color:var(--wk-on-dark-soft)">Für Familien</a><a href="#" style="color:var(--wk-on-dark-soft)">Autismus &amp; PDA</a><a href="#" style="color:var(--wk-paper);font-weight:600;border-bottom:2px solid var(--wk-pink);padding-bottom:2px">Mein Ansatz</a>
+      <a href="#" style="color:var(--wk-on-dark-soft)">Angebot</a><a href="#" style="color:var(--wk-on-dark-soft)">Über mich</a><a href="#" style="color:var(--wk-on-dark-soft)">Wissen</a><a href="#" style="color:var(--wk-on-dark-soft)">Kontakt</a>
+      <a href="#" style="background:var(--wk-pink-600);color:#fff;border-radius:999px;padding:11px 20px;
+         font-size:15px;font-weight:600;display:flex;align-items:center;gap:9px">Erstgespräch anfragen
+         <span aria-hidden="true">♡</span></a>
+    </nav>
+  </div>
+</header></div></div>
+  <p class="d-probe__notiz">Sieben Punkte plus CTA. Der aktive Punkt trägt einen rosa Unterstrich.</p>
+</figure></div>
+<div class="d-folie" role="group" aria-roledescription="Folie" aria-label="2 von 5"><figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Kopfzeile schmal</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">unter 900px · Menüknopf 48×48</span>
+  </figcaption>
+  <div class="d-probe__buehne d-probe__buehne--randlos"><header style="background:var(--wk-forest-800);max-width:420px">
+  <div style="display:flex;align-items:center;gap:18px;padding:9px 20px">
+    <a href="#" style="display:flex;align-items:center;gap:11px;flex:0 0 auto"><span style="width:46px;height:46px;border-radius:50%;background:var(--wk-paper);display:flex;align-items:flex-end;justify-content:center;overflow:hidden;border:2px solid rgba(245,237,224,.4)"><img decoding="async" width="96" height="144" src="assets/cat-teal-logo.webp" alt="" style="width:34px;display:block"></span><span style="font-family:Alegreya,serif;font-size:28px;font-weight:600;color:var(--wk-paper)">Waldkätzchen</span></a>
+    <span style="margin-left:auto;width:48px;height:48px;background:rgba(245,237,224,.12);
+      border:1px solid rgba(245,237,224,.3);border-radius:12px;display:flex;flex-direction:column;
+      align-items:center;justify-content:center;gap:5px">
+      <span style="width:22px;height:2px;background:var(--wk-paper);display:block"></span>
+      <span style="width:22px;height:2px;background:var(--wk-paper);display:block"></span>
+      <span style="width:22px;height:2px;background:var(--wk-paper);display:block"></span>
+    </span>
+  </div>
+</header></div>
+  <p class="d-probe__notiz">48×48 ist die kleinste sichere Tippfläche.</p>
+</figure></div>
+<div class="d-folie" role="group" aria-roledescription="Folie" aria-label="3 von 5"><figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Menü ausgeklappt</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">forest-700</span>
+  </figcaption>
+  <div class="d-probe__buehne d-probe__buehne--randlos"><header style="background:var(--wk-forest-800);max-width:420px">
+  <div style="display:flex;align-items:center;gap:18px;padding:9px 20px">
+    <a href="#" style="display:flex;align-items:center;gap:11px;flex:0 0 auto"><span style="width:46px;height:46px;border-radius:50%;background:var(--wk-paper);display:flex;align-items:flex-end;justify-content:center;overflow:hidden;border:2px solid rgba(245,237,224,.4)"><img decoding="async" width="96" height="144" src="assets/cat-teal-logo.webp" alt="" style="width:34px;display:block"></span><span style="font-family:Alegreya,serif;font-size:28px;font-weight:600;color:var(--wk-paper)">Waldkätzchen</span></a>
+    <span style="margin-left:auto;width:48px;height:48px;background:rgba(245,237,224,.12);
+      border:1px solid rgba(245,237,224,.3);border-radius:12px;display:flex;flex-direction:column;
+      align-items:center;justify-content:center;gap:5px">
+      <span style="width:22px;height:2px;background:var(--wk-paper);display:block"></span>
+      <span style="width:22px;height:2px;background:var(--wk-paper);display:block"></span>
+      <span style="width:22px;height:2px;background:var(--wk-paper);display:block"></span>
+    </span>
+  </div>
+
+  <div style="background:var(--wk-forest-700);border-top:1px solid rgba(245,237,224,.16);
+    padding:12px 20px 20px;display:flex;flex-direction:column;font-size:17px;max-width:420px">
+    <a href="#" style="padding:13px 6px;color:var(--wk-paper)">Für Familien</a>
+    <a href="#" style="padding:13px 6px;color:var(--wk-paper)">Autismus &amp; PDA</a>
+    <a href="#" style="padding:13px 6px;color:var(--wk-paper)">Mein Ansatz</a>
+    <a href="#" style="margin-top:14px;background:var(--wk-pink-600);color:#fff;border-radius:999px;
+      padding:15px;font-size:16.5px;font-weight:600;text-align:center;display:block">
+      Erstgespräch anfragen <span aria-hidden="true">♡</span></a>
+  </div></header></div>
+  
+</figure></div>
+<div class="d-folie" role="group" aria-roledescription="Folie" aria-label="4 von 5"><figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Brotkrümel</span>
+    <span class="d-stand d-stand--bp">nur im Blueprint</span>
+    <span class="d-probe__meta">Startseite › Themen › Autismus</span>
+  </figcaption>
+  <div class="d-probe__buehne d-probe__buehne--randlos"><div style="background:var(--wk-paper);padding:14px 20px;font-size:14.5px;color:var(--wk-ink-soft)">
+  <a href="#" style="color:var(--wk-ink-soft)">Startseite</a>
+  <span aria-hidden="true" style="margin:0 8px;color:var(--wk-line)">›</span>
+  <a href="#" style="color:var(--wk-ink-soft)">Themen</a>
+  <span aria-hidden="true" style="margin:0 8px;color:var(--wk-line)">›</span>
+  <span style="color:var(--wk-pink-ink)">Autismus</span>
+</div></div>
+  <p class="d-probe__notiz">Zeigen <em>Über mich</em> und <em>Autismus verstehen</em> im Blueprint. Auf der Seite gibt es keine Brotkrümel.</p>
+</figure></div>
+<div class="d-folie" role="group" aria-roledescription="Folie" aria-label="5 von 5"><figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Menü mit Unterpunkten</span>
+    <span class="d-stand d-stand--bp">nur im Blueprint</span>
+    <span class="d-probe__meta">„Themen ⌄“</span>
+  </figcaption>
+  <div class="d-probe__buehne d-probe__buehne--randlos d-probe__buehne--breit"><div class="d-breit"><div style="background:var(--wk-forest-800);padding:14px 20px;display:flex;gap:18px;font-size:15.5px"><a href="#" style="color:var(--wk-on-dark-soft)">Startseite</a><span style="color:var(--wk-paper);font-weight:600">Themen <span aria-hidden="true">⌄</span></span><a href="#" style="color:var(--wk-on-dark-soft)">Autismus</a><a href="#" style="color:var(--wk-on-dark-soft)">Über mich</a></div></div></div>
+  <p class="d-probe__notiz">Der Blueprint <em>Über mich</em> hat ein Aufklappmenü. Die Seite hat nur flache Punkte.</p>
+</figure></div>
+  </div>
+</div>
+</section>
+<section class="d-kap" id="hero">
+  <header class="d-kap__kopf">
+    <h2>4 · Heroes</h2>
+    <p>Vier Bauarten. Der Unterschied zwischen dunkel und hell unterlegt ist der größte offene Punkt gegenüber den Blueprints.</p>
+  </header>
+  <div class="d-schieber" data-schieber id="s-hero">
+  <div class="d-schieber__leiste">
+    <button type="button" class="d-schieber__knopf" data-zurueck aria-label="vorherige Variante">‹</button>
+    <span class="d-schieber__stand" data-stand>1 / 4</span>
+    <button type="button" class="d-schieber__knopf" data-vor aria-label="nächste Variante">›</button>
+  </div>
+  <div class="d-schieber__spur" tabindex="0" data-spur>
+    <div class="d-folie" role="group" aria-roledescription="Folie" aria-label="1 von 4"><figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Foto-Hero, dunkel unterlegt</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">Startseite · Verlauf 90°, links .93 bis rechts .04</span>
+  </figcaption>
+  <div class="d-probe__buehne d-probe__buehne--randlos d-probe__buehne--breit"><div class="d-breit"><section style="position:relative;background:var(--wk-forest-800)">
+  <img decoding="async" width="1600" height="900" src="assets/hero-startseite.webp" alt="" loading="lazy" style="width:100%;display:block">
+  <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(9,40,33,.93) 0%,rgba(9,40,33,.88) 34%,rgba(9,40,33,.52) 55%,rgba(9,40,33,.04) 74%)"></div>
+  <div style="position:absolute;inset:0;display:flex;align-items:center">
+    <div style="max-width:1300px;margin:0 auto;width:100%;padding:0 26px">
+      <div style="max-width:min(52%,600px)">
+        <h1 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(28px,4.4vw,64px);line-height:1.02;color:var(--wk-on-dark);margin:0 0 8px;text-shadow:0 3px 18px rgba(6,30,24,.7)">Waldkätzchen</h1>
+        <div style="color:var(--wk-pink-on-dark);font-family:Alegreya,serif;font-weight:600;font-size:clamp(15px,1.8vw,24px);margin-bottom:14px;text-shadow:0 2px 14px rgba(6,30,24,.7)">Verstehen. Verbinden. Verändern.</div>
+        <p style="font-size:clamp(13px,1.2vw,17px);line-height:1.6;margin:0 0 18px;max-width:46ch;color:var(--wk-on-dark-soft);text-shadow:0 2px 12px rgba(6,30,24,.7)">Wenn es knirscht, schauen wir gemeinsam hin.</p>
+        <span style="display:inline-flex;align-items:center;gap:10px;background:var(--wk-pink-600);color:#fff;border-radius:999px;padding:16px 34px;font-size:17px;font-weight:600;text-decoration:none;padding:12px 24px;font-size:15px">Erstgespräch anfragen <span aria-hidden="true">♡</span></span>
+      </div>
+    </div>
+  </div>
+</section></div></div>
+  <p class="d-probe__notiz">Der Verlauf liegt nur links, wo die Zeilen stehen. Rechts bleibt das Foto offen. Unter 900px nimmt die Seite eine eigene Variante mit senkrechtem Verlauf.</p>
+</figure></div>
+<div class="d-folie" role="group" aria-roledescription="Folie" aria-label="2 von 4"><figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Foto-Hero, hell unterlegt</span>
+    <span class="d-stand d-stand--bp">nur im Blueprint</span>
+    <span class="d-probe__meta">Creme-Verlauf, Schrift in Tinte</span>
+  </figcaption>
+  <div class="d-probe__buehne d-probe__buehne--randlos d-probe__buehne--breit"><div class="d-breit"><section style="position:relative;background:var(--wk-paper)">
+  <img decoding="async" width="1600" height="900" src="assets/hero-meinansatz.webp" alt="" loading="lazy" style="width:100%;display:block">
+  <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(248,241,226,.94) 0%,rgba(248,241,226,.88) 38%,rgba(248,241,226,.35) 60%,rgba(248,241,226,0) 78%)"></div>
+  <div style="position:absolute;inset:0;display:flex;align-items:center">
+    <div style="max-width:1300px;margin:0 auto;width:100%;padding:0 26px">
+      <div style="max-width:min(54%,620px)">
+        <h1 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(24px,3.8vw,56px);line-height:1.05;color:var(--wk-ink-strong);margin:0">Mein Ansatz –</h1>
+        <h1 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(24px,3.8vw,56px);line-height:1.05;color:var(--wk-pink-ink);margin:0 0 14px">Verstehen. Verbinden. Verändern.</h1>
+        <p style="font-size:clamp(13px,1.2vw,17px);line-height:1.6;margin:0 0 14px;max-width:48ch;color:var(--wk-ink-soft)">Verhalten hat immer einen Sinn. Familien brauchen Verständnis statt schneller Urteile.</p>
+        <p style="font-family:Alegreya,serif;font-style:italic;font-size:clamp(14px,1.4vw,19px);color:var(--wk-pink-ink);margin:0">
+          <span aria-hidden="true">♡</span> Ich schaue hin. Ich gehe mit. Ich helfe, neue Wege zu finden.</p>
+      </div>
+    </div>
+  </div>
+</section></div></div>
+  <p class="d-probe__notiz">So zeigen es <em>Mein Ansatz</em>, <em>Angebote</em>, <em>Kontakt</em> und <em>Autismus verstehen</em>: zweizeilige Überschrift, die zweite Zeile in Rosa. Gebaut ist überall die dunkle Variante.</p>
+</figure></div>
+<div class="d-folie" role="group" aria-roledescription="Folie" aria-label="3 von 4"><figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Foto mit Aquarellkante</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">.wk-edge-up</span>
+  </figcaption>
+  <div class="d-probe__buehne d-probe__buehne--randlos"><div style="position:relative;background:var(--wk-forest-800)">
+  <img decoding="async" width="1600" height="900" src="assets/hero-uebermich.webp" alt="" loading="lazy" style="width:100%;display:block">
+  <div class="wk-edge-up" style="--wk-to:var(--wk-paper)"></div>
+</div>
+<div style="background:var(--wk-paper);padding:26px 22px;text-align:center;color:var(--wk-ink-soft);font-size:15px">
+  Der Aquarellstreifen blutet ins Foto hinein, statt es hart abzuschneiden.
+</div></div>
+  
+</figure></div>
+<div class="d-folie" role="group" aria-roledescription="Folie" aria-label="4 von 4"><figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Text-Hero ohne Foto</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">Impressum, Datenschutz, Wissen</span>
+  </figcaption>
+  <div class="d-probe__buehne d-probe__buehne--randlos"><section style="background:var(--wk-paper);padding:52px 22px">
+  <div style="max-width:820px;margin:0 auto">
+    <h1 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(32px,4.6vw,46px);color:var(--wk-ink-strong);margin:0 0 10px">Impressum</h1>
+    <p style="font-size:16.5px;line-height:1.7;color:var(--wk-ink-soft);margin:0">Angaben gemäß § 5 TMG.</p>
+  </div>
+</section></div>
+  
+</figure></div>
+  </div>
+</div><h3 class="d-unter">Vorhandene Hero-Fotos</h3><div class="d-kacheln"><figure class="d-kachel"><img loading="lazy" decoding="async" src="assets/hero-startseite.webp" alt=""><figcaption>hero-startseite</figcaption></figure><figure class="d-kachel"><img loading="lazy" decoding="async" src="assets/hero-meinansatz.webp" alt=""><figcaption>hero-meinansatz</figcaption></figure><figure class="d-kachel"><img loading="lazy" decoding="async" src="assets/hero-uebermich.webp" alt=""><figcaption>hero-uebermich</figcaption></figure><figure class="d-kachel"><img loading="lazy" decoding="async" src="assets/hero-kontakt.webp" alt=""><figcaption>hero-kontakt</figcaption></figure><figure class="d-kachel"><img loading="lazy" decoding="async" src="assets/hero-autismus.webp" alt=""><figcaption>hero-autismus</figcaption></figure><figure class="d-kachel"><img loading="lazy" decoding="async" src="assets/hero-vaeter.webp" alt=""><figcaption>hero-vaeter</figcaption></figure><figure class="d-kachel"><img loading="lazy" decoding="async" src="assets/hero-vaeter2.webp" alt=""><figcaption>hero-vaeter2</figcaption></figure><figure class="d-kachel"><img loading="lazy" decoding="async" src="assets/hero-teams.webp" alt=""><figcaption>hero-teams</figcaption></figure><figure class="d-kachel"><img loading="lazy" decoding="async" src="assets/hero-teams2.webp" alt=""><figcaption>hero-teams2</figcaption></figure><figure class="d-kachel"><img loading="lazy" decoding="async" src="assets/hero-home.webp" alt=""><figcaption>hero-home</figcaption></figure></div>
+</section>
+<section class="d-kap" id="divider">
+  <header class="d-kap__kopf">
+    <h2>5 · Divider und Kanten</h2>
+    <p>Vier Shape-Divider, zwei Aquarellkanten, eine gerade Naht. Die Form kommt aus der SVG-Datei, die Farbe aus <code>--wk-from</code> – eine Datei deckt jedes Farbpaar ab.</p>
+  </header>
+  <div class="d-schieber" data-schieber id="s-divider">
+  <div class="d-schieber__leiste">
+    <button type="button" class="d-schieber__knopf" data-zurueck aria-label="vorherige Variante">‹</button>
+    <span class="d-schieber__stand" data-stand>1 / 7</span>
+    <button type="button" class="d-schieber__knopf" data-vor aria-label="nächste Variante">›</button>
+  </div>
+  <div class="d-schieber__spur" tabindex="0" data-spur>
+    <div class="d-folie" role="group" aria-roledescription="Folie" aria-label="1 von 7"><figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Organisch</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">dividers/organisch.svg · Maske 74–104px</span>
+  </figcaption>
+  <div class="d-probe__buehne d-probe__buehne--randlos"><div style="background:var(--wk-forest-800);height:70px"></div>
+<section class="wk-sd wk-sd--organisch" style="background:var(--wk-paper);--wk-from:var(--wk-forest-800);
+  padding:var(--wk-sd-top) 20px 34px;text-align:center">
+  <p style="margin:0;font-size:15px;color:var(--wk-ink-soft)">Drei überlagerte Wellen mit abgelösten Tropfen. Die flachste der vier Formen.</p>
+</section></div>
+  <p class="d-probe__notiz">Die anderen drei Formen sind geometrisch, diese ist gewachsen.</p>
+</figure></div>
+<div class="d-folie" role="group" aria-roledescription="Folie" aria-label="2 von 7"><figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Waldsaum</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">dividers/wald.svg · Maske 90px</span>
+  </figcaption>
+  <div class="d-probe__buehne d-probe__buehne--randlos"><div style="background:var(--wk-forest-800);height:70px"></div>
+<section class="wk-sd wk-sd--wald" style="background:var(--wk-paper);--wk-from:var(--wk-forest-800);
+  padding:var(--wk-sd-top) 20px 34px;text-align:center">
+  <p style="margin:0;font-size:15px;color:var(--wk-ink-soft)">Baumsaum mit Blättern und kleinen Tieren.</p>
+</section></div>
+  <p class="d-probe__notiz">Steht über dem Haltungsband.</p>
+</figure></div>
+<div class="d-folie" role="group" aria-roledescription="Folie" aria-label="3 von 7"><figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Kreise</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">dividers/kreise.svg, ab 768px kreise-wide.svg</span>
+  </figcaption>
+  <div class="d-probe__buehne d-probe__buehne--randlos"><div style="background:var(--wk-forest-800);height:70px"></div>
+<section class="wk-sd wk-sd--kreise" style="background:var(--wk-paper);--wk-from:var(--wk-forest-800);
+  padding:var(--wk-sd-top) 20px 34px;text-align:center">
+  <p style="margin:0;font-size:15px;color:var(--wk-ink-soft)">Verspielte Hügel mit Punkten und Waben. Ab Tablet eine eigene, breitere Zeichnung.</p>
+</section></div>
+  
+</figure></div>
+<div class="d-folie" role="group" aria-roledescription="Folie" aria-label="4 von 7"><figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Schräge</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">dividers/schraege.svg · Maske 100–121px</span>
+  </figcaption>
+  <div class="d-probe__buehne d-probe__buehne--randlos"><div style="background:var(--wk-forest-800);height:70px"></div>
+<section class="wk-sd wk-sd--schraege" style="background:var(--wk-paper);--wk-from:var(--wk-forest-800);
+  padding:var(--wk-sd-top) 20px 34px;text-align:center">
+  <p style="margin:0;font-size:15px;color:var(--wk-ink-soft)">Ruhige Doppelkante – das leiseste der vier Motive.</p>
+</section></div>
+  
+</figure></div>
+<div class="d-folie" role="group" aria-roledescription="Folie" aria-label="5 von 7"><figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Aquarellkante</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">.wk-edge · edge-wash.webp</span>
+  </figcaption>
+  <div class="d-probe__buehne d-probe__buehne--randlos"><div style="background:var(--wk-forest-800);height:70px"></div>
+<div class="wk-edge" style="--wk-from:var(--wk-forest-800);--wk-to:var(--wk-paper)"></div>
+<div style="background:var(--wk-paper);height:44px"></div></div>
+  <p class="d-probe__notiz">Kein gezeichneter Bogen, sondern der echte Pinselrand aus den Aquarell-Blobs. Die Farben kommen aus <code>--wk-from</code> und <code>--wk-to</code>.</p>
+</figure></div>
+<div class="d-folie" role="group" aria-roledescription="Folie" aria-label="6 von 7"><figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Aquarellkante, leise</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">.wk-edge--soft</span>
+  </figcaption>
+  <div class="d-probe__buehne d-probe__buehne--randlos"><div style="background:var(--wk-forest-800);height:70px"></div>
+<div class="wk-edge wk-edge--soft" style="--wk-from:var(--wk-forest-800);--wk-to:var(--wk-paper)"></div>
+<div style="background:var(--wk-paper);height:44px"></div></div>
+  <p class="d-probe__notiz">Flacher, breiteres Ausbluten. Für den Wechsel Creme → Warmcreme.</p>
+</figure></div>
+<div class="d-folie" role="group" aria-roledescription="Folie" aria-label="7 von 7"><figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Gerade Naht</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">kein Divider</span>
+  </figcaption>
+  <div class="d-probe__buehne d-probe__buehne--randlos"><div style="background:var(--wk-forest-800);height:70px"></div><div style="background:var(--wk-paper);height:70px;display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--wk-ink-soft)">Unter dem Haltungsband und um den Schnitt herum.</div></div>
+  
+</figure></div>
+  </div>
+</div>
+</section>
+<section class="d-kap" id="flaechen">
+  <header class="d-kap__kopf">
+    <h2>6 · Flächen</h2>
+    <p>Die Gründe, auf denen alles andere steht.</p>
+  </header>
+  <figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Creme, Warmcreme, Kartenpapier</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">--wk-paper · --wk-paper-warm · --wk-paper-card</span>
+  </figcaption>
+  <div class="d-probe__buehne d-probe__buehne--randlos"><div style="display:flex;min-height:110px"><div style="flex:1;background:var(--wk-paper);display:flex;align-items:center;justify-content:center;font-size:14px">paper</div><div style="flex:1;background:var(--wk-paper-warm);display:flex;align-items:center;justify-content:center;font-size:14px">paper-warm</div><div style="flex:1;background:var(--wk-paper-card);display:flex;align-items:center;justify-content:center;font-size:14px">paper-card</div></div></div>
+  
+</figure>
+<figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Türkises Band</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">--wk-cyan · Schrift in Tinte</span>
+  </figcaption>
+  <div class="d-probe__buehne d-probe__buehne--randlos"><section style="background:var(--wk-cyan);padding:44px 22px;text-align:center"><h3 style="font-family:Alegreya,serif;font-weight:600;font-size:26px;color:var(--wk-ink-strong);margin:0">Momente aus dem Alltag</h3></section></div>
+  <p class="d-probe__notiz">Türkis ist die einzige der fünf Farben, die als Fläche noch dunkle Schrift trägt.</p>
+</figure>
+<figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Zweispaltiger Schnitt</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">.wk-split</span>
+  </figcaption>
+  <div class="d-probe__buehne d-probe__buehne--randlos"><div class="wk-split">
+  <div class="wk-split__h wk-split__h--dunkel wk-band" style="background:var(--wk-forest-800)">
+    <img class="wk-split__bg" decoding="async" src="assets/sections/section2_dark.webp" alt="" loading="lazy" style="object-position:left center">
+    <div class="wk-split__in">
+      <div style="font-size:13.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--wk-yellow);margin-bottom:10px">Meine Domäne</div>
+      <h3 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(22px,2.6vw,32px);line-height:1.1;color:var(--wk-on-dark);margin:0 0 12px">Herausfordernde<br>Dynamiken verstehen</h3>
+      <p style="font-size:15.5px;line-height:1.65;color:var(--wk-on-dark-soft);margin:0;max-width:44ch">Die linke Hälfte zeigt ihre linke Bildkante, die rechte ihre rechte – sonst schneidet <code>object-fit:cover</code> den gemalten Rand weg.</p>
+    </div>
+  </div>
+  <div class="wk-split__h wk-split__h--hell wk-band-hell" style="background:var(--wk-paper)">
+    <img class="wk-split__bg" decoding="async" src="assets/sections/section_light.webp" alt="" loading="lazy" style="object-position:right center">
+    <div class="wk-split__in">
+      <h3 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(20px,2.2vw,26px);color:var(--wk-ink-strong);margin:0 0 14px">Mit wem ich arbeite</h3>
+      <div class="wk-raster4">
+        <div style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;padding:14px 10px;border-radius:16px;text-align:center"><img decoding="async" src="assets/chars/04_roter_panda.webp" alt="" loading="lazy" style="width:100%;max-width:66px;margin:0 auto 6px;display:block;mix-blend-mode:multiply"><div style="font-size:13px;font-weight:600;color:var(--wk-ink-strong)">Eltern</div></div>
+        <div style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;padding:14px 10px;border-radius:16px;text-align:center"><img decoding="async" src="assets/chars/05_pinguin.webp" alt="" loading="lazy" style="width:100%;max-width:66px;margin:0 auto 6px;display:block;mix-blend-mode:multiply"><div style="font-size:13px;font-weight:600;color:var(--wk-ink-strong)">Väter</div></div>
+        <div style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;padding:14px 10px;border-radius:16px;text-align:center"><img decoding="async" src="assets/chars/02_katta.webp" alt="" loading="lazy" style="width:100%;max-width:66px;margin:0 auto 6px;display:block;mix-blend-mode:multiply"><div style="font-size:13px;font-weight:600;color:var(--wk-ink-strong)">Teams</div></div>
+        <div style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;padding:14px 10px;border-radius:16px;text-align:center"><img decoding="async" src="assets/chars/09_haende_herz.webp" alt="" loading="lazy" style="width:100%;max-width:66px;margin:0 auto 6px;display:block;mix-blend-mode:multiply"><div style="font-size:13px;font-weight:600;color:var(--wk-ink-strong)">weitere</div></div>
+      </div>
+    </div>
+  </div>
+</div></div>
+  <p class="d-probe__notiz">Unter 900px stapeln die Hälften: erst dunkel, dann hell.</p>
+</figure>
+<figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Helle Lavur mit Leseschleier</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">sections/section_light.webp + .wk-band-hell</span>
+  </figcaption>
+  <div class="d-probe__buehne d-probe__buehne--randlos"><section class="wk-band-hell" style="position:relative;overflow:hidden;background:var(--wk-paper);padding:44px 22px">
+  <img class="wk-wash" decoding="async" src="assets/sections/section_light.webp" alt="" loading="lazy"
+       style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+  <p style="position:relative;z-index:2;margin:0;text-align:center;font-family:Alegreya,serif;font-weight:600;font-size:24px;color:var(--wk-ink-strong)">
+    section_light.webp</p>
+</section></div>
+  <p class="d-probe__notiz">Ohne Schleier fällt Text über den kräftigen Stellen unter 4,5:1 – gemessen bis 1,64:1.</p>
+</figure>
+<figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Dunkle Lavur mit Leseschleier</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">sections/section2_dark.webp + .wk-band</span>
+  </figcaption>
+  <div class="d-probe__buehne d-probe__buehne--randlos"><section class="wk-band" style="position:relative;overflow:hidden;background:var(--wk-forest-800);padding:44px 22px">
+  <img class="wk-wash" decoding="async" src="assets/sections/section2_dark.webp" alt="" loading="lazy"
+       style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+  <p style="position:relative;z-index:2;margin:0;text-align:center;font-family:Alegreya,serif;font-weight:600;font-size:24px;color:var(--wk-on-dark)">
+    section2_dark.webp</p>
+</section></div>
+  
+</figure>
+<figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Holz-Lavur</span>
+    <span class="d-stand d-stand--un">vorhanden, ungenutzt</span>
+    <span class="d-probe__meta">sections/section_wood.webp</span>
+  </figcaption>
+  <div class="d-probe__buehne d-probe__buehne--randlos"><section class="wk-band-hell" style="position:relative;overflow:hidden;background:var(--wk-paper);padding:44px 22px">
+  <img class="wk-wash" decoding="async" src="assets/sections/section_wood.webp" alt="" loading="lazy"
+       style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+  <p style="position:relative;z-index:2;margin:0;text-align:center;font-family:Alegreya,serif;font-weight:600;font-size:24px;color:var(--wk-ink-strong)">
+    section_wood.webp</p>
+</section></div>
+  <p class="d-probe__notiz">Liegt im Projekt, wird auf keiner Seite verwendet.</p>
+</figure>
+<figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Abschlussband hell/dunkel</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">footer-bg-home.webp</span>
+  </figcaption>
+  <div class="d-probe__buehne d-probe__buehne--randlos"><section class="wk-band" style="position:relative;overflow:hidden;background:var(--wk-forest-800);padding:44px 22px">
+  <img class="wk-wash" decoding="async" src="assets/footer-bg-home.webp" alt="" loading="lazy"
+       style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+  <p style="position:relative;z-index:2;margin:0;text-align:center;font-family:Alegreya,serif;font-weight:600;font-size:24px;color:var(--wk-on-dark)">
+    footer-bg-home.webp</p>
+</section></div>
+  <p class="d-probe__notiz">Trägt den Farbwechsel selbst: Creme oben, Wald unten, Figuren an den Rändern.</p>
+</figure>
+<figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Bänder der Unterseiten</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">footer-band · footer-band-autismus · footer2</span>
+  </figcaption>
+  <div class="d-probe__buehne d-probe__buehne--randlos"><div style="display:grid;gap:10px"><section class="wk-band" style="position:relative;overflow:hidden;background:var(--wk-forest-800);padding:44px 22px">
+  <img class="wk-wash" decoding="async" src="assets/footer-band.webp" alt="" loading="lazy"
+       style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+  <p style="position:relative;z-index:2;margin:0;text-align:center;font-family:Alegreya,serif;font-weight:600;font-size:24px;color:var(--wk-on-dark)">
+    footer-band.webp</p>
+</section><section class="wk-band" style="position:relative;overflow:hidden;background:var(--wk-forest-800);padding:44px 22px">
+  <img class="wk-wash" decoding="async" src="assets/footer-band-autismus.webp" alt="" loading="lazy"
+       style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+  <p style="position:relative;z-index:2;margin:0;text-align:center;font-family:Alegreya,serif;font-weight:600;font-size:24px;color:var(--wk-on-dark)">
+    footer-band-autismus.webp</p>
+</section><section class="wk-band" style="position:relative;overflow:hidden;background:var(--wk-forest-800);padding:44px 22px">
+  <img class="wk-wash" decoding="async" src="assets/footer2.webp" alt="" loading="lazy"
+       style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+  <p style="position:relative;z-index:2;margin:0;text-align:center;font-family:Alegreya,serif;font-weight:600;font-size:24px;color:var(--wk-on-dark)">
+    footer2.webp</p>
+</section></div></div>
+  
+</figure>
+</section>
+<section class="d-kap" id="karten">
+  <header class="d-kap__kopf">
+    <h2>7 · Karten</h2>
+    <p>Sieben Bauarten sind gebaut, drei liegen nur im Blueprint.</p>
+  </header>
+  <div class="d-schieber" data-schieber id="s-karten">
+  <div class="d-schieber__leiste">
+    <button type="button" class="d-schieber__knopf" data-zurueck aria-label="vorherige Variante">‹</button>
+    <span class="d-schieber__stand" data-stand>1 / 10</span>
+    <button type="button" class="d-schieber__knopf" data-vor aria-label="nächste Variante">›</button>
+  </div>
+  <div class="d-schieber__spur" tabindex="0" data-spur>
+    <div class="d-folie" role="group" aria-roledescription="Folie" aria-label="1 von 10"><figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Sorgen-Karte mit Ring</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">Startseite, „Kommt dir das bekannt vor?“</span>
+  </figcaption>
+  <div class="d-probe__buehne"><div class="wk-heb" style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;text-align:center;max-width:330px">
+  <div style="width:112px;height:112px;margin:0 auto 14px;background:url(assets/wc/circle_blue.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center"><img decoding="async" src="assets/icons/18_gedankenknaeuel.webp" alt="" loading="lazy" style="width:73px;height:73px;object-fit:contain;display:block;mix-blend-mode:multiply"></div>
+  <div style="font-size:15.5px;line-height:1.6;color:var(--wk-ink)">Kleine Auslöser kippen in große Eskalationen. Danach weiß niemand mehr, wie es dazu kam.</div>
+</div></div>
+  <p class="d-probe__notiz">Icon auf dem Aquarellring seiner Farbe. Sechs Stück, drei und drei.</p>
+</figure></div>
+<div class="d-folie" role="group" aria-roledescription="Folie" aria-label="2 von 10"><figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Angebots-Karte</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">farbige Oberkante, Link in derselben Farbe</span>
+  </figcaption>
+  <div class="d-probe__buehne"><a href="#" class="wk-heb" style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;display:block;text-decoration:none;color:inherit;
+  text-align:center;border-top:4px solid var(--wk-petrol);max-width:300px">
+  <div style="width:132px;height:132px;margin:0 auto 14px;background:url(assets/wc/circle_petrol.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center"><img decoding="async" src="assets/chars/13_ueberforderung.webp" alt="" loading="lazy" style="width:87px;height:87px;object-fit:contain;display:block;mix-blend-mode:multiply"></div>
+  <div style="font-family:Alegreya,serif;font-weight:600;font-size:20.5px;color:var(--wk-ink-strong);margin-bottom:8px">Autismus &amp; PDA</div>
+  <div style="font-size:15px;line-height:1.6;color:var(--wk-ink-soft)">Mehr Verständnis, weniger Anforderungsdruck.</div>
+  <div style="color:var(--wk-petrol-ink);font-weight:600;font-size:14.5px;margin-top:14px">Mehr erfahren <span aria-hidden="true">→</span></div>
+</a></div>
+  
+</figure></div>
+<div class="d-folie" role="group" aria-roledescription="Folie" aria-label="3 von 10"><figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Ebenen-Karte</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">Bild ohne Ring, 124px hoch</span>
+  </figcaption>
+  <div class="d-probe__buehne"><div class="wk-heb" style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;text-align:center;max-width:330px">
+  <img decoding="async" src="assets/chars/03_leopard_krone.webp" alt="" loading="lazy" style="height:124px;width:auto;margin:0 auto 14px;display:block;mix-blend-mode:multiply">
+  <div style="font-family:Alegreya,serif;font-weight:600;font-size:20.5px;color:var(--wk-ink-strong);margin-bottom:8px">Die Tiere zeigen Verhalten</div>
+  <div style="font-size:15px;line-height:1.6;color:var(--wk-ink-soft)">Was im Alltag sichtbar wird. Keine Diagnose, keine Schublade.</div>
+</div></div>
+  
+</figure></div>
+<div class="d-folie" role="group" aria-roledescription="Folie" aria-label="4 von 10"><figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Beteiligten-Karte, klein</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">im hellen Halbschnitt</span>
+  </figcaption>
+  <div class="d-probe__buehne"><div class="wk-heb" style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;padding:15px 11px;border-radius:16px;text-align:center;max-width:150px">
+  <img decoding="async" src="assets/chars/03_leopard_krone.webp" alt="" loading="lazy" style="width:100%;max-width:78px;margin:0 auto 7px;display:block;mix-blend-mode:multiply">
+  <div style="font-size:13.5px;line-height:1.3;color:var(--wk-ink-strong);font-weight:600">Kinder &amp;<br>Jugendliche</div>
+</div></div>
+  
+</figure></div>
+<div class="d-folie" role="group" aria-roledescription="Folie" aria-label="5 von 10"><figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Kätzchen-Karte</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">-025-Wash, Name in -ink</span>
+  </figcaption>
+  <div class="d-probe__buehne"><div class="wk-heb" style="text-align:center;padding:18px 12px;border-radius:20px;
+  background:var(--wk-yellow-025);border:1px solid var(--wk-line);max-width:210px">
+  <img decoding="async" src="assets/cat-yellow.webp" alt="" loading="lazy" style="height:104px;width:auto;margin:0 auto 12px;display:block;mix-blend-mode:multiply">
+  <div style="font-family:Alegreya,serif;font-weight:600;font-size:16px;line-height:1.25;color:var(--wk-yellow-ink);margin-bottom:5px">Das Denk-Kätzchen</div>
+  <div style="font-size:13.5px;line-height:1.5;color:var(--wk-ink-soft)">sucht Zusammenhänge</div>
+</div></div>
+  <p class="d-probe__notiz">Auf dem vollen -050-Wash kam der Name nur auf 4,13–4,47:1.</p>
+</figure></div>
+<div class="d-folie" role="group" aria-roledescription="Folie" aria-label="6 von 10"><figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Karte auf dunklem Grund</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">forest-700 · .wk-heb--dunkel</span>
+  </figcaption>
+  <div class="d-probe__buehne d-probe__buehne--randlos"><div style="background:var(--wk-forest-800);padding:24px">
+  <div class="wk-heb wk-heb--dunkel" style="background:var(--wk-forest-700);border-radius:18px;padding:22px 18px;text-align:center;max-width:280px">
+    <img decoding="async" src="assets/icons/tree.webp" alt="" loading="lazy" style="width:48px;height:48px;object-fit:contain;margin:0 auto 12px;display:block">
+    <div style="font-family:Alegreya,serif;font-weight:600;font-size:17px;color:var(--wk-on-dark);margin-bottom:7px;line-height:1.25">Fachlichkeit + Lebenserfahrung</div>
+    <div style="font-size:14px;line-height:1.6;color:var(--wk-on-dark-soft)">Heilpädagogik, IT-Denken und eigene Familienerfahrung in einer Person.</div>
+  </div>
+</div></div>
+  
+</figure></div>
+<div class="d-folie" role="group" aria-roledescription="Folie" aria-label="7 von 10"><figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Karte mit Aquarell-Quadrat</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">assets/wc/sq-*.webp</span>
+  </figcaption>
+  <div class="d-probe__buehne"><div class="wk-heb" style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;text-align:center;max-width:300px">
+  <div style="width:132px;height:132px;margin:0 auto 12px;background:url(assets/wc/sq-pink.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center">
+    <img decoding="async" src="assets/chars/05_pinguin.webp" alt="" loading="lazy" style="width:86px;height:86px;object-fit:contain;mix-blend-mode:multiply">
+  </div>
+  <div style="font-family:Alegreya,serif;font-weight:600;font-size:19px;color:var(--wk-ink-strong)">Aquarell-Quadrat</div>
+</div></div>
+  <p class="d-probe__notiz">Auf acht Unterseiten liegt dieses Quadrat als <em>Kartenfläche</em> hinter dunklem Text – dort stammen die 64 offenen Kontrastprobleme her.</p>
+</figure></div>
+<div class="d-folie" role="group" aria-roledescription="Folie" aria-label="8 von 10"><figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Karte quer, Icon links</span>
+    <span class="d-stand d-stand--bp">nur im Blueprint</span>
+    <span class="d-probe__meta">„Was mich prägt“</span>
+  </figcaption>
+  <div class="d-probe__buehne"><div class="wk-heb" style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;display:flex;gap:18px;align-items:flex-start;max-width:520px">
+  <img decoding="async" src="assets/icons/03_herz.webp" alt="" loading="lazy" style="width:58px;height:58px;object-fit:contain;flex:0 0 auto;mix-blend-mode:multiply">
+  <div>
+    <div style="font-family:Alegreya,serif;font-weight:600;font-size:19px;color:var(--wk-ink-strong);margin-bottom:5px">Bedürfnisorientierung</div>
+    <div style="font-size:15px;line-height:1.6;color:var(--wk-ink-soft)">Ich sehe das Verhalten hinter dem Verhalten und begleite, was wirklich gebraucht wird.</div>
+  </div>
+</div></div>
+  <p class="d-probe__notiz">Zeigt der Blueprint <em>Über mich</em>. Auf der Seite gibt es nur Karten mit Bild oben.</p>
+</figure></div>
+<div class="d-folie" role="group" aria-roledescription="Folie" aria-label="9 von 10"><figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Breite Angebotskarte mit Liste</span>
+    <span class="d-stand d-stand--bp">nur im Blueprint</span>
+    <span class="d-probe__meta">getönte Fläche, Bild seitlich, Aufzählung</span>
+  </figcaption>
+  <div class="d-probe__buehne"><div class="wk-heb" style="background:var(--wk-petrol-025);border:1px solid var(--wk-line);
+  border-radius:20px;padding:24px;display:flex;gap:22px;align-items:flex-start;max-width:620px">
+  <img decoding="async" src="assets/chars/05_pinguin.webp" alt="" loading="lazy" style="width:110px;flex:0 0 auto;mix-blend-mode:multiply">
+  <div>
+    <div style="font-family:Alegreya,serif;font-weight:600;font-size:21px;color:var(--wk-petrol-ink);margin-bottom:8px">Einzel- und Familienbegleitung</div>
+    <p style="font-size:14.5px;line-height:1.6;color:var(--wk-ink-soft);margin:0 0 10px">Gemeinsam schauen wir auf das, was gerade wichtig ist.</p>
+    <ul style="margin:0;padding-left:18px;font-size:14.5px;line-height:1.75;color:var(--wk-ink-soft)">
+      <li>Systemische Begleitung und Gespräche</li>
+      <li>Stärkung von Beziehung und Bindung</li>
+      <li>Ressourcen entdecken und nutzen</li>
+    </ul>
+  </div>
+</div></div>
+  <p class="d-probe__notiz">So zeigt der Blueprint <em>Angebote</em> die sieben Angebote – abwechselnd Bild links und rechts.</p>
+</figure></div>
+<div class="d-folie" role="group" aria-roledescription="Folie" aria-label="10 von 10"><figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Farbkachel</span>
+    <span class="d-stand d-stand--bp">nur im Blueprint</span>
+    <span class="d-probe__meta">„Typische Themen“</span>
+  </figcaption>
+  <div class="d-probe__buehne"><div style="display:flex;gap:12px;flex-wrap:wrap"><div class="wk-heb" style="background:var(--wk-petrol-050);border-radius:18px;padding:16px 14px;text-align:center;width:118px"><img decoding="async" src="assets/icons/20_pflanzengruppe.webp" alt="" loading="lazy" style="width:46px;height:46px;object-fit:contain;margin:0 auto 8px;display:block;mix-blend-mode:multiply"><div style="font-size:13.5px;font-weight:600;color:var(--wk-petrol-ink)">Masking</div></div><div class="wk-heb" style="background:var(--wk-pink-050);border-radius:18px;padding:16px 14px;text-align:center;width:118px"><img decoding="async" src="assets/icons/18_gedankenknaeuel.webp" alt="" loading="lazy" style="width:46px;height:46px;object-fit:contain;margin:0 auto 8px;display:block;mix-blend-mode:multiply"><div style="font-size:13.5px;font-weight:600;color:var(--wk-pink-ink)">Überforderung</div></div><div class="wk-heb" style="background:var(--wk-orange-050);border-radius:18px;padding:16px 14px;text-align:center;width:118px"><img decoding="async" src="assets/icons/19_kommunikation.webp" alt="" loading="lazy" style="width:46px;height:46px;object-fit:contain;margin:0 auto 8px;display:block;mix-blend-mode:multiply"><div style="font-size:13.5px;font-weight:600;color:var(--wk-orange-ink)">Kommunikation</div></div><div class="wk-heb" style="background:var(--wk-cyan-050);border-radius:18px;padding:16px 14px;text-align:center;width:118px"><img decoding="async" src="assets/icons/17_uhr.webp" alt="" loading="lazy" style="width:46px;height:46px;object-fit:contain;margin:0 auto 8px;display:block;mix-blend-mode:multiply"><div style="font-size:13.5px;font-weight:600;color:var(--wk-cyan-ink)">Alltag</div></div><div class="wk-heb" style="background:var(--wk-yellow-050);border-radius:18px;padding:16px 14px;text-align:center;width:118px"><img decoding="async" src="assets/icons/16_haende_herz.webp" alt="" loading="lazy" style="width:46px;height:46px;object-fit:contain;margin:0 auto 8px;display:block;mix-blend-mode:multiply"><div style="font-size:13.5px;font-weight:600;color:var(--wk-yellow-ink)">Grenzen</div></div></div></div>
+  <p class="d-probe__notiz">Zeigt der Blueprint <em>Autismus verstehen</em>: sieben Kacheln in den Markenfarben.</p>
+</figure></div>
+  </div>
+</div>
+</section>
+<section class="d-kap" id="kaesten">
+  <header class="d-kap__kopf">
+    <h2>8 · Kästen und Papier</h2>
+    <p>Alles, was nach Papier aussieht.</p>
+  </header>
+  <figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Polaroid mit Klebeband</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">.wk-foto · .wk-klebeband</span>
+  </figcaption>
+  <div class="d-probe__buehne"><div style="display:flex;gap:26px;justify-content:center;padding:14px">
+  <div style="position:relative;transform:rotate(-2.5deg)">
+    <img class="wk-foto" decoding="async" src="assets/ich/foto1.webp" alt="" loading="lazy" style="width:180px;height:auto">
+    <span class="wk-klebeband" aria-hidden="true"></span>
+  </div>
+  <div style="position:relative;transform:rotate(2.5deg);margin-top:20px">
+    <img class="wk-foto" decoding="async" src="assets/ich/foto2.webp" alt="" loading="lazy" style="width:180px;height:auto">
+    <span class="wk-klebeband" aria-hidden="true"></span>
+  </div>
+</div></div>
+  
+</figure>
+<figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Notizzettel mit Klebeband</span>
+    <span class="d-stand d-stand--bp">nur im Blueprint</span>
+    <span class="d-probe__meta">Kraftpapier, kein eigener Baustein</span>
+  </figcaption>
+  <div class="d-probe__buehne"><div style="position:relative;background:#F3E9D2;border:1px solid var(--wk-line);
+  border-radius:3px;padding:26px 24px;max-width:330px;box-shadow:0 8px 20px rgba(18,61,54,.14)">
+  <span class="wk-klebeband" aria-hidden="true"></span>
+  <div style="font-family:Alegreya,serif;font-weight:600;font-size:18px;color:var(--wk-ink-strong);margin-bottom:8px">Nimm dir die Zeit, die du brauchst.</div>
+  <p style="font-size:14.5px;line-height:1.7;color:var(--wk-ink-soft);margin:0">Es geht nicht darum, sofort zu entscheiden. Es geht darum, dir die Tür zu öffnen – wenn du bereit bist.
+  <span style="color:var(--wk-pink-ink)" aria-hidden="true">♡</span></p>
+</div></div>
+  <p class="d-probe__notiz">Zeigen die Blueprints <em>Kontakt</em> und <em>Mein Ansatz</em> als Randnotiz.</p>
+</figure>
+<figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Hinweiskasten</span>
+    <span class="d-stand d-stand--bp">nur im Blueprint</span>
+    <span class="d-probe__meta">farbige Kante links</span>
+  </figcaption>
+  <div class="d-probe__buehne"><div style="background:var(--wk-petrol-025);border-left:4px solid var(--wk-petrol);
+  border-radius:0 14px 14px 0;padding:18px 20px;max-width:440px">
+  <p style="margin:0;font-size:15px;line-height:1.7;color:var(--wk-ink-soft)">Wenn es dir schwerfällt, mir zu schreiben, ist auch eine kurze Nachricht völlig in Ordnung. Ein paar Zeilen reichen.
+  <span style="color:var(--wk-pink-ink)" aria-hidden="true">♡</span></p>
+</div></div>
+  <p class="d-probe__notiz">Im Blueprint <em>Kontakt</em> steht so der Zuspruch neben dem Formular.</p>
+</figure>
+<figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Aquarell-Ringe</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">assets/wc/circle_*.webp</span>
+  </figcaption>
+  <div class="d-probe__buehne"><div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center"><figure class="d-kachel d-kachel--klein"><img loading="lazy" decoding="async" src="assets/wc/circle_blue.webp" alt=""><figcaption>circle_blue.webp</figcaption></figure><figure class="d-kachel d-kachel--klein"><img loading="lazy" decoding="async" src="assets/wc/circle_petrol.webp" alt=""><figcaption>circle_petrol.webp</figcaption></figure><figure class="d-kachel d-kachel--klein"><img loading="lazy" decoding="async" src="assets/wc/circle_yellow.webp" alt=""><figcaption>circle_yellow.webp</figcaption></figure><figure class="d-kachel d-kachel--klein"><img loading="lazy" decoding="async" src="assets/wc/circle_orange.webp" alt=""><figcaption>circle_orange.webp</figcaption></figure><figure class="d-kachel d-kachel--klein"><img loading="lazy" decoding="async" src="assets/wc/circle_pink.webp" alt=""><figcaption>circle_pink.webp</figcaption></figure></div></div>
+  
+</figure>
+<figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Aquarell-Quadrate</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">assets/wc/sq-*.webp</span>
+  </figcaption>
+  <div class="d-probe__buehne"><div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center"><figure class="d-kachel d-kachel--klein"><img loading="lazy" decoding="async" src="assets/wc/sq-blue.webp" alt=""><figcaption>sq-blue.webp</figcaption></figure><figure class="d-kachel d-kachel--klein"><img loading="lazy" decoding="async" src="assets/wc/sq-petrol.webp" alt=""><figcaption>sq-petrol.webp</figcaption></figure><figure class="d-kachel d-kachel--klein"><img loading="lazy" decoding="async" src="assets/wc/sq-yellow.webp" alt=""><figcaption>sq-yellow.webp</figcaption></figure><figure class="d-kachel d-kachel--klein"><img loading="lazy" decoding="async" src="assets/wc/sq-orange.webp" alt=""><figcaption>sq-orange.webp</figcaption></figure><figure class="d-kachel d-kachel--klein"><img loading="lazy" decoding="async" src="assets/wc/sq-pink.webp" alt=""><figcaption>sq-pink.webp</figcaption></figure></div></div>
+  
+</figure>
+</section>
+<section class="d-kap" id="knoepfe">
+  <header class="d-kap__kopf">
+    <h2>9 · Knöpfe und Links</h2>
+    <p>Zwei Knöpfe im Einsatz, einer aus gutem Grund abgelöst.</p>
+  </header>
+  <figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Hauptknopf</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">pink-600 · weiße Schrift 4,9:1</span>
+  </figcaption>
+  <div class="d-probe__buehne"><a href="#" class="wk-knopf" style="display:inline-flex;align-items:center;gap:10px;background:var(--wk-pink-600);color:#fff;border-radius:999px;padding:16px 34px;font-size:17px;font-weight:600;text-decoration:none">Erstgespräch anfragen <span aria-hidden="true">♡</span></a></div>
+  
+</figure>
+<figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Zweiter Knopf</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">petrol-600 · weiße Schrift 4,7:1</span>
+  </figcaption>
+  <div class="d-probe__buehne"><a href="#" class="wk-knopf" style="display:inline-flex;align-items:center;gap:9px;background:var(--wk-petrol-600);color:#fff;border-radius:999px;padding:16px 30px;font-size:16.5px;font-weight:600;text-decoration:none">Angebot ansehen <span aria-hidden="true">↗</span></a></div>
+  
+</figure>
+<figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Umrissknopf</span>
+    <span class="d-stand d-stand--un">vorhanden, ungenutzt</span>
+    <span class="d-probe__meta">1,5px Creme auf Wald</span>
+  </figcaption>
+  <div class="d-probe__buehne d-probe__buehne--randlos"><div style="background:var(--wk-forest-800);padding:24px"><a href="#" style="display:inline-flex;align-items:center;gap:9px;background:transparent;color:var(--wk-on-dark);border:1.5px solid rgba(245,237,224,.55);border-radius:999px;padding:14px 26px;font-size:16px;font-weight:600">Angebot ansehen <span aria-hidden="true">↗</span></a></div></div>
+  <p class="d-probe__notiz">Gemessen 2,34:1 auf dem Waldgrund. Ersetzt durch den gefüllten Petrol-Knopf.</p>
+</figure>
+<figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Knopf in der Kopfzeile</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">kleiner, 11px/20px</span>
+  </figcaption>
+  <div class="d-probe__buehne d-probe__buehne--randlos"><div style="background:var(--wk-forest-800);padding:20px"><a href="#" style="background:var(--wk-pink-600);color:#fff;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;display:inline-flex;align-items:center;gap:9px">Erstgespräch anfragen <span aria-hidden="true">♡</span></a></div></div>
+  
+</figure>
+<figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Sprunglink</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">.wk-skip · erst beim Tabben sichtbar</span>
+  </figcaption>
+  <div class="d-probe__buehne"><span style="background:var(--wk-paper-card);color:var(--wk-ink-strong);font-size:15px;font-weight:600;padding:12px 18px;border-radius:999px;box-shadow:var(--wk-shadow);display:inline-block">Zum Inhalt springen</span></div>
+  <p class="d-probe__notiz">Erste Tabstation jeder Seite.</p>
+</figure>
+</section>
+<section class="d-kap" id="listen">
+  <header class="d-kap__kopf">
+    <h2>10 · Listen und Abläufe</h2>
+    <p>Wie Schritte, Etappen und Aufzählungen aussehen.</p>
+  </header>
+  <div class="d-schieber" data-schieber id="s-listen">
+  <div class="d-schieber__leiste">
+    <button type="button" class="d-schieber__knopf" data-zurueck aria-label="vorherige Variante">‹</button>
+    <span class="d-schieber__stand" data-stand>1 / 5</span>
+    <button type="button" class="d-schieber__knopf" data-vor aria-label="nächste Variante">›</button>
+  </div>
+  <div class="d-schieber__spur" tabindex="0" data-spur>
+    <div class="d-folie" role="group" aria-roledescription="Folie" aria-label="1 von 5"><figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Nummerierte Schritte</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">Startseite, „So arbeiten wir zusammen“</span>
+  </figcaption>
+  <div class="d-probe__buehne"><div style="display:flex;flex-wrap:wrap;gap:26px"><div style="text-align:center;flex:1 1 190px">
+  <div style="position:relative;width:112px;height:112px;margin:0 auto 16px">
+    <div style="width:112px;height:112px;margin:0;background:url(assets/wc/circle_blue.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center"><img decoding="async" src="assets/icons/02_sprechblasen.webp" alt="" loading="lazy" style="width:73px;height:73px;object-fit:contain;display:block;mix-blend-mode:multiply"></div>
+    <span aria-hidden="true" style="position:absolute;top:-2px;right:-2px;width:34px;height:34px;
+      border-radius:50%;background:var(--wk-cyan-600);color:#fff;font-family:Alegreya,serif;
+      font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center;
+      box-shadow:0 3px 10px rgba(18,61,54,.22)">1</span>
+  </div>
+  <div style="font-family:Alegreya,serif;font-weight:600;font-size:19px;color:var(--wk-ink-strong);margin-bottom:7px">Du meldest dich</div>
+  <div style="font-size:14.5px;line-height:1.6;color:var(--wk-ink-soft)">Ein paar Sätze reichen.</div>
+</div><div style="text-align:center;flex:1 1 190px">
+  <div style="position:relative;width:112px;height:112px;margin:0 auto 16px">
+    <div style="width:112px;height:112px;margin:0;background:url(assets/wc/circle_petrol.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center"><img decoding="async" src="assets/icons/01_lupe_blatt.webp" alt="" loading="lazy" style="width:73px;height:73px;object-fit:contain;display:block;mix-blend-mode:multiply"></div>
+    <span aria-hidden="true" style="position:absolute;top:-2px;right:-2px;width:34px;height:34px;
+      border-radius:50%;background:var(--wk-petrol-600);color:#fff;font-family:Alegreya,serif;
+      font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center;
+      box-shadow:0 3px 10px rgba(18,61,54,.22)">2</span>
+  </div>
+  <div style="font-family:Alegreya,serif;font-weight:600;font-size:19px;color:var(--wk-ink-strong);margin-bottom:7px">Wir schauen hin</div>
+  <div style="font-size:14.5px;line-height:1.6;color:var(--wk-ink-soft)">Was passiert konkret?</div>
+</div><div style="text-align:center;flex:1 1 190px">
+  <div style="position:relative;width:112px;height:112px;margin:0 auto 16px">
+    <div style="width:112px;height:112px;margin:0;background:url(assets/wc/circle_yellow.webp) center/contain no-repeat;display:flex;align-items:center;justify-content:center"><img decoding="async" src="assets/icons/11_wegweiser.webp" alt="" loading="lazy" style="width:73px;height:73px;object-fit:contain;display:block;mix-blend-mode:multiply"></div>
+    <span aria-hidden="true" style="position:absolute;top:-2px;right:-2px;width:34px;height:34px;
+      border-radius:50%;background:var(--wk-yellow-600);color:#fff;font-family:Alegreya,serif;
+      font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center;
+      box-shadow:0 3px 10px rgba(18,61,54,.22)">3</span>
+  </div>
+  <div style="font-family:Alegreya,serif;font-weight:600;font-size:19px;color:var(--wk-ink-strong);margin-bottom:7px">Wir sortieren</div>
+  <div style="font-size:14.5px;line-height:1.6;color:var(--wk-ink-soft)">Was ist jetzt wichtig?</div>
+</div></div></div>
+  <p class="d-probe__notiz">Jede Ziffer in ihrer Farbe, das Icon auf dem passenden Ring.</p>
+</figure></div>
+<div class="d-folie" role="group" aria-roledescription="Folie" aria-label="2 von 5"><figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Etappen mit gestrichelter Linie</span>
+    <span class="d-stand d-stand--bp">nur im Blueprint</span>
+    <span class="d-probe__meta">versetzt, Punkte auf einer Kurve</span>
+  </figcaption>
+  <div class="d-probe__buehne"><div class="d-etappen">
+  <div class="d-etappen__linie" aria-hidden="true"></div>
+  <div class="d-etappe" style="--hoch:0px">
+    <span class="d-etappe__punkt" style="background:var(--wk-cyan-600)">1</span>
+    <div style="font-family:Alegreya,serif;font-weight:600;font-size:17px;color:var(--wk-ink-strong);margin-top:10px">Hören</div>
+    <div style="font-size:13.5px;line-height:1.5;color:var(--wk-ink-soft)">Ich höre hin – mit Herz und offenen Ohren.</div>
+  </div><div class="d-etappe" style="--hoch:22px">
+    <span class="d-etappe__punkt" style="background:var(--wk-pink-600)">2</span>
+    <div style="font-family:Alegreya,serif;font-weight:600;font-size:17px;color:var(--wk-ink-strong);margin-top:10px">Verstehen</div>
+    <div style="font-size:13.5px;line-height:1.5;color:var(--wk-ink-soft)">Ich verstehe Muster, Gefühle und Bedürfnisse.</div>
+  </div><div class="d-etappe" style="--hoch:0px">
+    <span class="d-etappe__punkt" style="background:var(--wk-yellow-600)">3</span>
+    <div style="font-family:Alegreya,serif;font-weight:600;font-size:17px;color:var(--wk-ink-strong);margin-top:10px">Entwickeln</div>
+    <div style="font-size:13.5px;line-height:1.5;color:var(--wk-ink-soft)">Wir entwickeln gemeinsam neue Wege.</div>
+  </div><div class="d-etappe" style="--hoch:22px">
+    <span class="d-etappe__punkt" style="background:var(--wk-petrol-600)">4</span>
+    <div style="font-family:Alegreya,serif;font-weight:600;font-size:17px;color:var(--wk-ink-strong);margin-top:10px">Begleiten</div>
+    <div style="font-size:13.5px;line-height:1.5;color:var(--wk-ink-soft)">Ich begleite euch verlässlich.</div>
+  </div><div class="d-etappe" style="--hoch:0px">
+    <span class="d-etappe__punkt" style="background:var(--wk-orange-600)">5</span>
+    <div style="font-family:Alegreya,serif;font-weight:600;font-size:17px;color:var(--wk-ink-strong);margin-top:10px">Wachsen</div>
+    <div style="font-size:13.5px;line-height:1.5;color:var(--wk-ink-soft)">Entwicklung darf leicht sein.</div>
+  </div>
+</div></div>
+  <p class="d-probe__notiz">Zeigen die Blueprints <em>Über mich</em> und <em>Kontakt</em>.</p>
+</figure></div>
+<div class="d-folie" role="group" aria-roledescription="Folie" aria-label="3 von 5"><figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Reihe mit Pfeilen</span>
+    <span class="d-stand d-stand--bp">nur im Blueprint</span>
+    <span class="d-probe__meta">Schritt → Schritt → Schritt</span>
+  </figcaption>
+  <div class="d-probe__buehne"><div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px"><div style="text-align:center;flex:1 1 130px"><img decoding="async" src="assets/icons/03_herz.webp" alt="" loading="lazy" style="width:64px;height:64px;object-fit:contain;margin:0 auto 8px;display:block;mix-blend-mode:multiply"><div style="font-family:Alegreya,serif;font-weight:600;font-size:15.5px;color:var(--wk-ink-strong)">Aus Erfahrung</div></div><span aria-hidden="true" style="color:var(--wk-ink-muted);font-size:20px">→</span> <div style="text-align:center;flex:1 1 130px"><img decoding="async" src="assets/icons/01_lupe_blatt.webp" alt="" loading="lazy" style="width:64px;height:64px;object-fit:contain;margin:0 auto 8px;display:block;mix-blend-mode:multiply"><div style="font-family:Alegreya,serif;font-weight:600;font-size:15.5px;color:var(--wk-ink-strong)">Durch Beobachtung</div></div><span aria-hidden="true" style="color:var(--wk-ink-muted);font-size:20px">→</span> <div style="text-align:center;flex:1 1 130px"><img decoding="async" src="assets/icons/16_haende_herz.webp" alt="" loading="lazy" style="width:64px;height:64px;object-fit:contain;margin:0 auto 8px;display:block;mix-blend-mode:multiply"><div style="font-family:Alegreya,serif;font-weight:600;font-size:15.5px;color:var(--wk-ink-strong)">Durch Beziehung</div></div></div></div>
+  <p class="d-probe__notiz">Zeigt der Blueprint <em>Über mich</em> unter „Meine Geschichte“.</p>
+</figure></div>
+<div class="d-folie" role="group" aria-roledescription="Folie" aria-label="4 von 5"><figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Aufzählung mit Icon-Zeilen</span>
+    <span class="d-stand d-stand--bp">nur im Blueprint</span>
+    <span class="d-probe__meta">Icon links, Fettzeile, Text</span>
+  </figcaption>
+  <div class="d-probe__buehne"><div style="display:flex;gap:14px;align-items:flex-start;margin-bottom:16px"><img decoding="async" src="assets/icons/03_herz.webp" alt="" loading="lazy" style="width:34px;height:34px;object-fit:contain;flex:0 0 auto;mix-blend-mode:multiply"><div><div style="font-family:Alegreya,serif;font-weight:600;font-size:16.5px;color:var(--wk-ink-strong)">Verhalten hat einen Sinn.</div><div style="font-size:14.5px;line-height:1.6;color:var(--wk-ink-soft)">Auch herausforderndes Verhalten ist ein Versuch.</div></div></div><div style="display:flex;gap:14px;align-items:flex-start;margin-bottom:16px"><img decoding="async" src="assets/icons/20_pflanzengruppe.webp" alt="" loading="lazy" style="width:34px;height:34px;object-fit:contain;flex:0 0 auto;mix-blend-mode:multiply"><div><div style="font-family:Alegreya,serif;font-weight:600;font-size:16.5px;color:var(--wk-ink-strong)">Konflikte brauchen Verbindung.</div><div style="font-size:14.5px;line-height:1.6;color:var(--wk-ink-soft)">Heilung entsteht, wenn Verletzungen gesehen werden.</div></div></div><div style="display:flex;gap:14px;align-items:flex-start;margin-bottom:16px"><img decoding="async" src="assets/icons/family.webp" alt="" loading="lazy" style="width:34px;height:34px;object-fit:contain;flex:0 0 auto;mix-blend-mode:multiply"><div><div style="font-family:Alegreya,serif;font-weight:600;font-size:16.5px;color:var(--wk-ink-strong)">Das ganze System zählt.</div><div style="font-size:14.5px;line-height:1.6;color:var(--wk-ink-soft)">Familien sind Beziehungsnetze.</div></div></div></div>
+  <p class="d-probe__notiz">Zeigt der Blueprint <em>Über mich</em> unter „Mein Blick auf Familien“.</p>
+</figure></div>
+<div class="d-folie" role="group" aria-roledescription="Folie" aria-label="5 von 5"><figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Aufklappbare Fragen</span>
+    <span class="d-stand d-stand--bp">nur im Blueprint</span>
+    <span class="d-probe__meta">&lt;details&gt;</span>
+  </figcaption>
+  <div class="d-probe__buehne"><details class="d-aufklapp"><summary>Für wen ist die Begleitung geeignet?</summary><p>Für Familien, Kinder, Jugendliche und Fachkräfte.</p></details><details class="d-aufklapp"><summary>Findet die Begleitung online oder in Präsenz statt?</summary><p>Beides ist möglich.</p></details><details class="d-aufklapp"><summary>Wie schnell kann es losgehen?</summary><p>In der Regel innerhalb weniger Wochen.</p></details></div>
+  <p class="d-probe__notiz">Der Blueprint <em>Kontakt</em> hat fünf Fragen zum Aufklappen. Auf der Seite gibt es keine.</p>
+</figure></div>
+  </div>
+</div>
+</section>
+<section class="d-kap" id="wechsel">
+  <header class="d-kap__kopf">
+    <h2>11 · Textwechsel</h2>
+    <p>Der einzige Baustein, der von selbst läuft.</p>
+  </header>
+  <figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Textwechsel mit Pause</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">.wk-wechsel · genau fünf Einträge · 25s</span>
+  </figcaption>
+  <div class="d-probe__buehne d-probe__buehne--randlos"><section style="background:var(--wk-cyan);padding:40px 22px;text-align:center">
+  <div style="max-width:820px;margin:0 auto">
+    <div class="wk-wechsel">
+      <p style="--i:0;font-family:Alegreya,serif;font-style:italic;font-size:clamp(18px,2.2vw,26px);line-height:1.35;color:var(--wk-ink-strong);align-self:center">„Es war nur ein Pullover. Der falsche.&#8220;</p><p style="--i:1;font-family:Alegreya,serif;font-style:italic;font-size:clamp(18px,2.2vw,26px);line-height:1.35;color:var(--wk-ink-strong);align-self:center">„In der Schule ist alles unauffällig.&#8220;</p><p style="--i:2;font-family:Alegreya,serif;font-style:italic;font-size:clamp(18px,2.2vw,26px);line-height:1.35;color:var(--wk-ink-strong);align-self:center">„Ich habe alles versucht.&#8220;</p><p style="--i:3;font-family:Alegreya,serif;font-style:italic;font-size:clamp(18px,2.2vw,26px);line-height:1.35;color:var(--wk-ink-strong);align-self:center">„Wir funktionieren. Aber wir kommen einander nicht mehr nahe.&#8220;</p><p style="--i:4;font-family:Alegreya,serif;font-style:italic;font-size:clamp(18px,2.2vw,26px);line-height:1.35;color:var(--wk-ink-strong);align-self:center">„Ich weiß nicht mehr, ob ich zu viel verlange – oder zu wenig.&#8220;</p>
+    </div>
+    <label class="wk-wechsel-pause" style="color:var(--wk-ink)">
+      <input type="checkbox" name="demo-pause"> Wechsel anhalten
+    </label>
+  </div>
+</section></div>
+  <p class="d-probe__notiz">WCAG 2.2.2 verlangt für automatisch laufende Bewegung eine Möglichkeit, sie anzuhalten. Wer Bewegung abbestellt hat, bekommt alle fünf Sätze untereinander.</p>
+</figure>
+</section>
+<section class="d-kap" id="formular">
+  <header class="d-kap__kopf">
+    <h2>12 · Formular</h2>
+    <p>Felder, Auswahl, Textfeld, Knopf.</p>
+  </header>
+  <figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Kontaktformular</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">Kontakt.dc.html</span>
+  </figcaption>
+  <div class="d-probe__buehne"><div style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;max-width:520px">
+  <div style="font-family:Alegreya,serif;font-weight:600;font-size:22px;color:var(--wk-ink-strong);margin-bottom:16px">Schreib mir eine Nachricht</div>
+  <div style="display:grid;gap:12px">
+    <input style="width:100%;padding:14px 16px;border:1px solid var(--wk-line-soft);border-radius:12px;background:var(--wk-paper-card);font-family:var(--wk-font-sans);font-size:15.5px;color:var(--wk-ink)" placeholder="Name" aria-label="Name">
+    <input style="width:100%;padding:14px 16px;border:1px solid var(--wk-line-soft);border-radius:12px;background:var(--wk-paper-card);font-family:var(--wk-font-sans);font-size:15.5px;color:var(--wk-ink)" placeholder="E-Mail" aria-label="E-Mail">
+    <select style="width:100%;padding:14px 16px;border:1px solid var(--wk-line-soft);border-radius:12px;background:var(--wk-paper-card);font-family:var(--wk-font-sans);font-size:15.5px;color:var(--wk-ink)" aria-label="Thema"><option>Thema – bitte wählen …</option></select>
+    <textarea style="width:100%;padding:14px 16px;border:1px solid var(--wk-line-soft);border-radius:12px;background:var(--wk-paper-card);font-family:var(--wk-font-sans);font-size:15.5px;color:var(--wk-ink);min-height:110px;resize:vertical" placeholder="Erzähl mir, was dich bewegt." aria-label="Nachricht"></textarea>
+    <button type="button" class="wk-knopf" style="display:inline-flex;align-items:center;gap:10px;background:var(--wk-pink-600);color:#fff;border-radius:999px;padding:16px 34px;font-size:17px;font-weight:600;text-decoration:none;justify-content:center;border:0;cursor:pointer;font-family:var(--wk-font-sans)">Nachricht senden <span aria-hidden="true">→</span></button>
+    <p style="margin:0;font-size:13px;color:var(--wk-ink-muted);text-align:center">🔒 Deine Daten werden vertraulich behandelt.</p>
+  </div>
+</div></div>
+  <p class="d-probe__notiz">Offen: das Formular bestätigt „Danke für Ihre Nachricht“, ohne zu versenden.</p>
+</figure>
+</section>
+<section class="d-kap" id="fuss">
+  <header class="d-kap__kopf">
+    <h2>13 · Fußzeile</h2>
+    <p>Vier Spalten – im Blueprint sind es fünf.</p>
+  </header>
+  <div class="d-schieber" data-schieber id="s-fuss">
+  <div class="d-schieber__leiste">
+    <button type="button" class="d-schieber__knopf" data-zurueck aria-label="vorherige Variante">‹</button>
+    <span class="d-schieber__stand" data-stand>1 / 2</span>
+    <button type="button" class="d-schieber__knopf" data-vor aria-label="nächste Variante">›</button>
+  </div>
+  <div class="d-schieber__spur" tabindex="0" data-spur>
+    <div class="d-folie" role="group" aria-roledescription="Folie" aria-label="1 von 2"><figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Fußzeile</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">vier Spalten, Rechtliches verlinkt</span>
+  </figcaption>
+  <div class="d-probe__buehne d-probe__buehne--randlos"><footer style="background:var(--wk-forest-900);color:var(--wk-on-dark-soft);position:relative;overflow:hidden">
+  <img decoding="async" src="assets/side/flowerRight.webp" alt="" loading="lazy" style="position:absolute;right:-20px;bottom:0;width:clamp(90px,10vw,160px);opacity:.35">
+  <div style="position:relative;max-width:1240px;margin:0 auto;padding:36px 22px 22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:26px">
+    <div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+        <span style="width:42px;height:42px;border-radius:50%;background:var(--wk-paper);display:flex;align-items:flex-end;justify-content:center;overflow:hidden"><img decoding="async" src="assets/cat-teal-logo.webp" alt="" style="width:31px;display:block"></span>
+        <span style="font-family:Alegreya,serif;font-size:24px;color:var(--wk-paper)">Waldkätzchen</span>
+      </div>
+      <div style="font-size:14px;line-height:1.6">Verstehen. Verbinden. Verändern.<br>Für Kinder, Eltern und Familien. <span style="color:var(--wk-pink-on-dark)" aria-hidden="true">♡</span></div>
+    </div>
+    <div><div style="font-family:Alegreya,serif;font-size:17px;color:var(--wk-paper);margin-bottom:10px">Navigation</div><div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px"><a href="#" style="color:var(--wk-on-dark-soft)">Für Familien</a><a href="#" style="color:var(--wk-on-dark-soft)">Mein Ansatz</a><a href="#" style="color:var(--wk-on-dark-soft)">Angebot</a><a href="#" style="color:var(--wk-on-dark-soft)">Über mich</a><a href="#" style="color:var(--wk-on-dark-soft)">Kontakt</a></div></div>
+    <div><div style="font-family:Alegreya,serif;font-size:17px;color:var(--wk-paper);margin-bottom:10px">Angebot</div><div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px"><a href="#" style="color:var(--wk-on-dark-soft)">Familienbegleitung</a><a href="#" style="color:var(--wk-on-dark-soft)">Elternbegleitung</a><a href="#" style="color:var(--wk-on-dark-soft)">Einzelberatung</a></div></div>
+    <div><div style="font-family:Alegreya,serif;font-size:17px;color:var(--wk-paper);margin-bottom:10px">Rechtliches</div><div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px"><a href="#" style="color:var(--wk-on-dark-soft)">Impressum</a><a href="#" style="color:var(--wk-on-dark-soft)">Datenschutz</a></div></div>
+  </div>
+  <div style="border-top:1px solid rgba(245,237,224,.14);padding:14px 22px;text-align:center;font-size:13px">© 2026 Waldkätzchen – Alle Rechte vorbehalten</div>
+</footer></div>
+  
+</figure></div>
+<div class="d-folie" role="group" aria-roledescription="Folie" aria-label="2 von 2"><figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Fußzeile mit Sozial-Icons</span>
+    <span class="d-stand d-stand--bp">nur im Blueprint</span>
+    <span class="d-probe__meta">fünfte Spalte „Folge mir“</span>
+  </figcaption>
+  <div class="d-probe__buehne d-probe__buehne--randlos"><footer style="background:var(--wk-forest-900);color:var(--wk-on-dark-soft);position:relative;overflow:hidden">
+  <img decoding="async" src="assets/side/flowerRight.webp" alt="" loading="lazy" style="position:absolute;right:-20px;bottom:0;width:clamp(90px,10vw,160px);opacity:.35">
+  <div style="position:relative;max-width:1240px;margin:0 auto;padding:36px 22px 22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:26px">
+    <div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+        <span style="width:42px;height:42px;border-radius:50%;background:var(--wk-paper);display:flex;align-items:flex-end;justify-content:center;overflow:hidden"><img decoding="async" src="assets/cat-teal-logo.webp" alt="" style="width:31px;display:block"></span>
+        <span style="font-family:Alegreya,serif;font-size:24px;color:var(--wk-paper)">Waldkätzchen</span>
+      </div>
+      <div style="font-size:14px;line-height:1.6">Verstehen. Verbinden. Verändern.<br>Für Kinder, Eltern und Familien. <span style="color:var(--wk-pink-on-dark)" aria-hidden="true">♡</span></div>
+    </div>
+    <div><div style="font-family:Alegreya,serif;font-size:17px;color:var(--wk-paper);margin-bottom:10px">Navigation</div><div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px"><a href="#" style="color:var(--wk-on-dark-soft)">Für Familien</a><a href="#" style="color:var(--wk-on-dark-soft)">Mein Ansatz</a><a href="#" style="color:var(--wk-on-dark-soft)">Angebot</a><a href="#" style="color:var(--wk-on-dark-soft)">Über mich</a><a href="#" style="color:var(--wk-on-dark-soft)">Kontakt</a></div></div>
+    <div><div style="font-family:Alegreya,serif;font-size:17px;color:var(--wk-paper);margin-bottom:10px">Angebot</div><div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px"><a href="#" style="color:var(--wk-on-dark-soft)">Familienbegleitung</a><a href="#" style="color:var(--wk-on-dark-soft)">Elternbegleitung</a><a href="#" style="color:var(--wk-on-dark-soft)">Einzelberatung</a></div></div>
+    <div><div style="font-family:Alegreya,serif;font-size:17px;color:var(--wk-paper);margin-bottom:10px">Rechtliches</div><div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px"><a href="#" style="color:var(--wk-on-dark-soft)">Impressum</a><a href="#" style="color:var(--wk-on-dark-soft)">Datenschutz</a><a href="#" style="color:var(--wk-on-dark-soft)">AGB</a></div></div><div><div style="font-family:Alegreya,serif;font-size:17px;color:var(--wk-paper);margin-bottom:10px">Folge mir</div><div style="display:flex;gap:10px"><span style="width:38px;height:38px;border-radius:11px;border:1px solid rgba(245,237,224,.3);display:flex;align-items:center;justify-content:center;font-size:16px" aria-hidden="true">◎</span><span style="width:38px;height:38px;border-radius:11px;border:1px solid rgba(245,237,224,.3);display:flex;align-items:center;justify-content:center;font-size:16px" aria-hidden="true">f</span><span style="width:38px;height:38px;border-radius:11px;border:1px solid rgba(245,237,224,.3);display:flex;align-items:center;justify-content:center;font-size:16px" aria-hidden="true">▶</span><span style="width:38px;height:38px;border-radius:11px;border:1px solid rgba(245,237,224,.3);display:flex;align-items:center;justify-content:center;font-size:16px" aria-hidden="true">✉</span></div></div>
+  </div>
+  <div style="border-top:1px solid rgba(245,237,224,.14);padding:14px 22px;text-align:center;font-size:13px">© 2026 Waldkätzchen – Alle Rechte vorbehalten</div>
+</footer></div>
+  <p class="d-probe__notiz">Zeigt der Blueprint <em>Über mich</em>. Auf der Seite gibt es keine Sozial-Links – und keine hinterlegten Profile.</p>
+</figure></div>
+  </div>
+</div>
+</section>
+<section class="d-kap" id="bewegung">
+  <header class="d-kap__kopf">
+    <h2>14 · Bewegung</h2>
+    <p>Zwei Regungen: aufblenden und heben.</p>
+  </header>
+  <figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Aufblenden beim Scrollen</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">.wk-auf → .wk-sichtbar · 0,55s</span>
+  </figcaption>
+  <div class="d-probe__buehne"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px"><div class="wk-auf wk-heb" style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;padding:18px;text-align:center;--n:0"><div style="font-family:Alegreya,serif;font-weight:600;font-size:17px;color:var(--wk-ink-strong)">Block 1</div><div style="font-size:13.5px;color:var(--wk-ink-soft)">Verzögerung 0 ms</div></div><div class="wk-auf wk-heb" style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;padding:18px;text-align:center;--n:1"><div style="font-family:Alegreya,serif;font-weight:600;font-size:17px;color:var(--wk-ink-strong)">Block 2</div><div style="font-size:13.5px;color:var(--wk-ink-soft)">Verzögerung 70 ms</div></div><div class="wk-auf wk-heb" style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;padding:18px;text-align:center;--n:2"><div style="font-family:Alegreya,serif;font-weight:600;font-size:17px;color:var(--wk-ink-strong)">Block 3</div><div style="font-size:13.5px;color:var(--wk-ink-soft)">Verzögerung 140 ms</div></div><div class="wk-auf wk-heb" style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;padding:18px;text-align:center;--n:3"><div style="font-family:Alegreya,serif;font-weight:600;font-size:17px;color:var(--wk-ink-strong)">Block 4</div><div style="font-size:13.5px;color:var(--wk-ink-soft)">Verzögerung 210 ms</div></div></div></div>
+  <p class="d-probe__notiz">Beim Scrollen blendet jeder Block einmal auf. Karten einer Reihe sind über <code>--n</code> gestaffelt. Ohne JavaScript, mit abbestellter Bewegung und im Druck steht alles sofort da.</p>
+</figure>
+<figure class="d-probe">
+  <figcaption class="d-probe__kopf">
+    <span class="d-probe__name">Heben beim Zeigen</span>
+    <span class="d-stand d-stand--da">steht auf der Seite</span>
+    <span class="d-probe__meta">.wk-heb · translateY(-4px)</span>
+  </figcaption>
+  <div class="d-probe__buehne"><div class="wk-heb" style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:20px;padding:24px 22px;max-width:260px;text-align:center"><div style="font-family:Alegreya,serif;font-weight:600;font-size:17px;color:var(--wk-ink-strong)">Zeig mit der Maus darauf</div></div></div>
+  
+</figure>
+</section>
+<section class="d-kap" id="abgleich">
+  <header class="d-kap__kopf">
+    <h2>15 · Blueprint-Abgleich</h2>
+    <p>Was in <code>uploads/blueprints</code> liegt und wie weit die Seite ist.</p>
+  </header>
+  <div class="d-tabelle"><table><thead><tr><th>Blueprint</th><th>Seite</th><th>Was er zeigt</th><th>Stand</th></tr></thead><tbody><tr><td><code>Startseite.png</code></td><td>Startseite</td><td>Hero, sechs Sorgen-Karten, türkises Band, Wild und verbunden, Schnitt dunkel/hell, Wer ich bin, Haltungsband, Angebote, Bildwelt, Ablauf + „Warum das hier anders ist“, CTA</td><td>gebaut – die Reihenfolge stimmt</td></tr><tr><td><code>MeinAnsatz.png / MeinAnsatz2 / meinAnsatz3</code></td><td>Mein Ansatz</td><td>Heller Foto-Hero; „Die 5 Blicke“ als Panel; „Die symbolische Welt“ mit Wald, Höhle, Felsen, Echos; „Stereotypen-Tiere“ mit fünf Tieren; „Wie ich arbeite“ als fünf Etappen mit gestrichelter Linie</td><td>Seite existiert, aber mit dunklem Hero und ohne Etappen-Linie. Achtung: der Blueprint nennt die fünf Blicke <em>Selbstblick, Emotionsblick, Bedürfnisblick, Umweltblick, Zukunftsblick</em> – die Seite nennt sie <em>Beobachter, Fühl, Denk, System, Macher</em>.</td></tr><tr><td><code>Angebote.png / Angebote2 / Angebot</code></td><td>Angebot</td><td>Heller Foto-Hero; sieben breite Angebotskarten in getönten Flächen mit Aufzählung, Bild abwechselnd links und rechts; drei Spalten „Wie Begleitung aussehen kann“, „Typische Anliegen“ (acht Icons), „Für wen ich da bin“</td><td>Seite existiert mit schmalen Karten ohne Aufzählung. Preise fehlen weiterhin.</td></tr><tr><td><code>UeberMich.png / ueberMich2 / überMich</code></td><td>Über mich</td><td>Brotkrümel; Menü mit Unterpunkten; heller Hero mit Illustration; Reihe mit Pfeilen; Querkarten „Was mich prägt“; „Mein Weg – in Etappen“; Icon-Zeilen „Mein Blick auf Familien“; gerundetes CTA-Band; Fußzeile mit Sozial-Icons</td><td>Seite existiert, aber ohne Brotkrümel, ohne Etappen, ohne Sozial-Icons.</td></tr><tr><td><code>Kontakt.png / kontakt2</code></td><td>Kontakt</td><td>Heller Hero; drei Spalten aus Kontaktdaten mit Icon-Badges, Formular und Zuspruchkasten; vier Etappen mit gestrichelter Linie; fünf Fragen zum Aufklappen; dunkles CTA-Band</td><td>Formular und Kontaktdaten stehen. Etappen und aufklappbare Fragen fehlen.</td></tr><tr><td><code>AutismusVerstehen.png</code></td><td>Autismus &amp; PDA</td><td>Brotkrümel; heller Hero mit zweifarbiger Überschrift; fünf Karten „Worauf wir schauen“; zwei helle Kästen neben einem dunklen Panel; sieben Farbkacheln „Typische Themen“; CTA-Band mit zwei Knöpfen</td><td>Seite existiert. Farbkacheln und das dunkle Panel im hellen Abschnitt fehlen.</td></tr><tr><td><code>MeinAnsatzAndAngebotAndUeberMich.png</code></td><td>vier Seiten nebeneinander</td><td>Übersicht über Mein Ansatz, Angebot, Über mich und Kontakt in einem Bild – getönte Panels, farbige Katzen-Zeilen, gelber Notizzettel</td><td>Dient als Gesamtblick, keine eigene Seite.</td></tr></tbody></table></div>
+</section>
+
+<div class="d-fuss">
+  <p>Die Blöcke mit der Marke <em>nur im Blueprint</em> sind hier nachgebaut, damit man sie
+     ansehen kann. Auf keiner echten Seite sind sie in Gebrauch.</p>
+  <p>Erzeugt aus den echten Bausteinen und <code>assets/wk.css</code> – was sich hier ändert,
+     ändert sich auf der Seite mit.</p>
+</div>
+
+<script>
+// Schieber: die Knoepfe scrollen die Spur um eine Folie. Der Stand kommt aus
+// der Scrollposition, damit auch Wischen und Tastatur mitzaehlen.
+document.querySelectorAll('[data-schieber]').forEach(function (s) {
+  var spur = s.querySelector('[data-spur]');
+  var stand = s.querySelector('[data-stand]');
+  var folien = spur.querySelectorAll('.d-folie');
+  var schritt = function () { return spur.clientWidth + 18; };
+  s.querySelector('[data-zurueck]').addEventListener('click', function () {
+    spur.scrollBy({ left: -schritt(), behavior: 'smooth' });
+  });
+  s.querySelector('[data-vor]').addEventListener('click', function () {
+    spur.scrollBy({ left: schritt(), behavior: 'smooth' });
+  });
+  // Bilder in den Folien 2..n liegen waagerecht ausserhalb des Bildes. Faul
+  // geladen holt der Browser sie dort nicht - beim Blaettern erschiene erst
+  // eine Luecke. Sobald der Schieber senkrecht ins Bild kommt, werden sie
+  // deshalb scharf gestellt.
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      if (!es[0].isIntersecting) return;
+      spur.querySelectorAll('img[loading="lazy"]').forEach(function (i) { i.loading = 'eager'; });
+      io.disconnect();
+    }, { rootMargin: '300px 0px' });
+    io.observe(s);
+  }
+  var zeigen = function () {
+    var i = Math.min(Math.max(Math.round(spur.scrollLeft / schritt()), 0), folien.length - 1);
+    stand.textContent = (i + 1) + ' / ' + folien.length;
+    // Die Spur ist so hoch wie ihre hoechste Folie. Steht eine kurze im Bild,
+    // klaffte darunter Leere - deshalb faehrt die Hoehe der sichtbaren nach.
+    var h = folien[i].getBoundingClientRect().height;
+    if (h) spur.style.height = h + 'px';
+  };
+  addEventListener('resize', function () { spur.style.height = ''; setTimeout(zeigen, 60); });
+  spur.addEventListener('scroll', function () {
+    clearTimeout(s.__t); s.__t = setTimeout(zeigen, 90);
+  }, { passive: true });
+  zeigen();
+});
+
+// Aufblenden beim Scrollen - dieselbe Mechanik wie auf der Startseite, nur
+// ohne den x-dc-Umbau: hier reicht es, .wk-js zu setzen und beim Scrollen
+// nachzusehen, welche Bloecke im Bild stehen.
+(function () {
+  var d = document, r = d.documentElement, geplant = 0;
+  try {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    r.className += ' wk-js';
+    var pruefen = function () {
+      geplant = 0;
+      var n = d.getElementsByClassName('wk-auf'), h = innerHeight * 0.92, i, e;
+      for (i = 0; i < n.length; i++) {
+        e = n[i];
+        if (e.className.indexOf('wk-sichtbar') < 0 && e.getBoundingClientRect().top < h) {
+          e.className += ' wk-sichtbar';
+        }
+      }
+    };
+    var anstossen = function () { if (!geplant) { geplant = 1; requestAnimationFrame(pruefen); } };
+    addEventListener('scroll', anstossen, { passive: true });
+    addEventListener('resize', anstossen, { passive: true });
+    anstossen();
+  } catch (e) { r.className = r.className.replace(' wk-js', ''); }
+})();
+</script>
+</body>
+</html>
