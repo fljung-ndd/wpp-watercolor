@@ -50,6 +50,16 @@
     );
   }
 
+  const faqItems = [...document.querySelectorAll('.n-faq details')];
+  faqItems.forEach(item => {
+    item.addEventListener('toggle', () => {
+      if (!item.open) return;
+      faqItems.forEach(other => {
+        if (other !== item) other.open = false;
+      });
+    });
+  });
+
   const header = document.querySelector('[data-header]');
   const menuButton = document.querySelector('.n-menu-button');
   const navigation = document.querySelector('.n-navigation');
