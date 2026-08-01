@@ -32,7 +32,8 @@
   --wk-cyan-600:    #2B808D;
   --wk-petrol-600:  #288475;
   --wk-pink-600:    #D53A6D;
-  --wk-pink-700:    #B32F5B;  /* Hover                                   */
+  --wk-pink-700:    #B32F5B;  /* Hover, Vollflaeche: weiss 6,1:1         */
+  --wk-petrol-700:  #1F7365;  /* Vollflaeche: weiss 5,7:1                */
   --wk-yellow-600:  #8D7210;
   --wk-orange-600:  #C05815;
 
@@ -866,3 +867,123 @@ footer, [role="dialog"] {
 }
 .wk-knopf { transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease; }
 .wk-knopf:hover { transform: translateY(-2px); }
+
+/* ---------------------------------------------------------------------- *
+ * Querstrecke: vier vollflaechige Tafeln, die seitlich laufen
+ *
+ * Die Grundform ist eine waagerechte Schnappspur - die funktioniert ohne
+ * JavaScript, mit Finger, Mausrad und Tastatur. Ab Tablet legt sich das
+ * Skript darueber: die Strecke bleibt am Bild kleben, waehrend die Seite
+ * scrollt, und der Fortschritt der Seite wird zur Position der Spur. Danach
+ * geht es normal weiter nach unten.
+ *
+ * Ohne Skript, mit abbestellter Bewegung und auf schmalen Schirmen bleibt es
+ * bei der Schnappspur. Verloren geht dabei nichts, nur das Ankleben.
+ *
+ * Die vier Farben sind gesetzt. Pink und Petrol stehen in ihrem dunkleren
+ * Ton, weil der Markenwert als Flaeche weisse Schrift nur mit 4,1 bzw.
+ * 4,14:1 traegt; Orange und Gelb tragen dunkle Tinte.
+ * ---------------------------------------------------------------------- */
+.wk-quer { position: relative; }
+
+.wk-quer__spur {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.wk-quer__spur::-webkit-scrollbar { display: none; }
+
+.wk-quer__tafel {
+  flex: 0 0 100%;
+  min-width: 100%;
+  scroll-snap-align: start;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: clamp(46px, 6vw, 92px) clamp(22px, 5vw, 76px);
+}
+.wk-quer__innen { position: relative; z-index: 2; max-width: 1080px; margin: 0 auto; width: 100%; }
+
+/* Zaehlwerk unter der Strecke: zeigt, dass es hier vier Tafeln gibt, und
+   bleibt der Anker fuer die Tastatur. */
+.wk-quer__leiste {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 16px 20px;
+  background: var(--wk-forest-800);
+}
+.wk-quer__punkt {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: rgba(245, 237, 224, .34);
+  transition: background .2s, transform .2s;
+}
+.wk-quer__punkt[data-an] { background: var(--wk-paper); transform: scale(1.35); }
+.wk-quer__text { color: var(--wk-on-dark-soft); font-size: 13.5px; margin-left: 8px; }
+
+/* --- Angeklebte Fassung ----------------------------------------------- *
+ * Nur mit Skript, ab 900px Breite und ab 820px Hoehe. Die hoechste Tafel
+ * braucht gemessen 762px; unter 820px Fensterhoehe bliebe davon etwas
+ * verdeckt, und ein angeklebter Abschnitt, aus dem man Inhalt herausscrollen
+ * muss, ist schlimmer als gar kein Ankleben. Darunter bleibt es bei der
+ * Schnappspur zum Wischen.
+ * ---------------------------------------------------------------------- */
+@media (min-width: 900px) and (min-height: 820px) {
+  .wk-quer-an .wk-quer { height: var(--wk-quer-hoehe, 400vh); }
+  .wk-quer-an .wk-quer__klebe {
+    position: sticky; top: 0;
+    height: 100vh;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+  .wk-quer-an .wk-quer__spur {
+    flex: 1 1 auto;
+    scroll-snap-type: none;      /* die Position kommt vom Seitenscroll */
+    overflow: hidden;
+  }
+  /* Netz fuer den Fall, dass eine Tafel doch einmal hoeher wird als das
+     Fenster - dann bleibt ihr Inhalt wenigstens erreichbar. */
+  .wk-quer-an .wk-quer__tafel { align-items: center; overflow-y: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Kein Ankleben: die vier Tafeln stehen dann schlicht untereinander. */
+  .wk-quer-an .wk-quer { height: auto !important; }
+  .wk-quer-an .wk-quer__klebe { position: static; height: auto; }
+  .wk-quer-an .wk-quer__spur { display: block; overflow: visible; }
+  .wk-quer-an .wk-quer__tafel { min-width: 0; }
+}
+
+/* ---------------------------------------------------------------------- *
+ * Abschlussband
+ *
+ * Das Bild traegt den Farbwechsel selbst: Creme oben, Wald unten, Figuren an
+ * den Raendern. Deshalb steht darueber und darunter kein Divider, und es
+ * liegt kein Schleier darauf - das war ausdruecklich so gewuenscht.
+ *
+ * background-size: 100% auto statt cover: das Bild behaelt sein
+ * Seitenverhaeltnis, nichts wird angeschnitten, und die Figuren stehen immer
+ * da, wo sie gemalt wurden. Was unter dem Bild bleibt, fuellt forest-800 -
+ * derselbe Ton wie die Unterkante des Bildes, die Naht ist unsichtbar.
+ *
+ * Der Textblock beginnt bei 32% der Breite. Das Bild ist 33,3% der Breite
+ * hoch; ausgemessen wird es erst ab 92% seiner Hoehe wirklich dunkel (bei
+ * 80% liegt der Grund noch bei #557967, bei 70% bei Creme). 32% der Breite
+ * sind 96% der Bildhoehe - dort steht der Text sicher dunkel und laeuft
+ * danach auf die Vollfarbe weiter. Beide Werte haengen an der Breite, das
+ * Verhaeltnis stimmt deshalb auf jedem Schirm.
+ *
+ * Zwei Anlaeufe davor lagen daneben: bei 15% stand die Ueberschrift mitten
+ * auf der Cremezone (gemessen 1,04:1), bei 25% genau auf dem Uebergang.
+ * ---------------------------------------------------------------------- */
+.wk-abschlussband {
+  position: relative;
+  /* Genau der Ton des Bildfusses (ausgemessen #083F3E), nicht forest-800 -
+     sonst zeichnet sich an der Bildunterkante eine Linie ab. */
+  background-color: #083F3E;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 100% auto;
+  padding: 32% 22px clamp(46px, 5vw, 78px);
+}

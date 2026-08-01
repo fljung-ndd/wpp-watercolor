@@ -28,7 +28,7 @@
 <title>Mein Ansatz – Waldkätzchen</title>
 </helmet>
 
-<div style="background:var(--wk-paper);overflow-x:hidden">
+<div style="background:var(--wk-paper);overflow-x:hidden;overflow-x:clip">
 
 <a class="wk-skip" href="#inhalt">Zum Inhalt springen</a>
 <header style="position:sticky;top:0;z-index:60;background:var(--wk-forest-800);box-shadow:0 2px 14px rgba(8,45,36,.25)">
@@ -281,11 +281,10 @@
 </section>
 
 <div class="wk-edge" aria-hidden="true" style="--wk-from:var(--wk-paper);--wk-to:var(--wk-forest-800)"></div>
-<section class="wk-sd wk-sd--wald wk-band" style="position:relative;background:var(--wk-forest-800);overflow:hidden;--wk-from:var(--wk-paper)">
-  <img class="wk-wash" decoding="async" width="1600" height="533" src="assets/footer-bg-home.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center bottom;opacity:.95">
-  <div style="position:relative;max-width:1240px;margin:0 auto;padding:var(--wk-sd-top) 22px 54px;text-align:center;z-index:2">
-    <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(26px,3.2vw,38px);line-height:1.15;color:var(--wk-paper);margin:0 0 8px;text-shadow:0 2px 14px rgba(6,30,24,.55)">Ihr müsst den Weg nicht allein gehen.</h2>
-    <p style="color:var(--wk-pink-on-dark);font-size:17.5px;margin:0 0 26px;text-shadow:0 2px 14px rgba(6,30,24,.55)">Ich schaue mit euch hin – und finde neue Wege, die zu euch passen.</p>
+<section class="wk-abschlussband" style="background-image:url(assets/footer-band2.webp);background-color:#073936">
+  <div style="position:relative;max-width:1240px;margin:0 auto;padding:0 0 54px;text-align:center;z-index:2">
+    <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(26px,3.2vw,38px);line-height:1.15;color:var(--wk-paper);margin:0 0 8px">Ihr müsst den Weg nicht allein gehen.</h2>
+    <p style="color:var(--wk-pink-on-dark);font-size:17.5px;margin:0 0 26px">Ich schaue mit euch hin – und finde neue Wege, die zu euch passen.</p>
     <button onClick="{{ openContact }}" style="background:var(--wk-pink-ink);color:#fff;border:none;border-radius:999px;padding:15px 34px;font-family:'Alegreya Sans',sans-serif;font-size:17px;font-weight:600;cursor:pointer;box-shadow:0 8px 20px rgba(6,30,24,.35)" style-hover="background:var(--wk-pink-700)">Erstgespräch anfragen&nbsp;&nbsp;<span aria-hidden="true">♡</span></button>
   </div>
 </section>
