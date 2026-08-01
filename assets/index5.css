@@ -1,0 +1,266 @@
+/* Waldkätzchen – Einseiter „Der Wald als sicherer Ort"
+ * ---------------------------------------------------------------------------
+ * Baut auf wk.css auf: Farben, Schriften, Querstrecke, Abschlussband und das
+ * Aufblenden kommen von dort. Hier steht nur, was diese eine Seite ausmacht.
+ *
+ * Die Seite ist ein Weg in den Wald hinein und wieder heraus. Sie wird nach
+ * unten dunkler und zum Schluss wieder hell:
+ *
+ *   Waldrand    Foto           die Szene
+ *   Lichtung    Creme          wo es anfängt
+ *   Unterholz   Türkis         der Wald als Landkarte
+ *   Farbtafeln  vier Farben    die Haltung, seitlich
+ *   Dickicht    Wald 800       die Abgrenzung
+ *   Höhle       Wald 900       das Persönliche
+ *   Lichtung    Creme          das Angebot
+ *   Waldrand    Bild           der nächste Schritt
+ *
+ * Das ist kein Schmuck: „sicherer Ort" laesst sich schlecht behaupten und
+ * gut erfahren. Wer die Seite herunterscrollt, geht den Weg mit.
+ */
+
+/* ---------------------------------------------------------------------- *
+ * Grundgeruest
+ * ---------------------------------------------------------------------- */
+.ix-kopf {
+  position: sticky; top: 0; z-index: 60;
+  background: var(--wk-forest-800);
+  box-shadow: 0 2px 14px rgba(8, 45, 36, .25);
+}
+.ix-kopf__in {
+  max-width: 1300px; margin: 0 auto;
+  display: flex; align-items: center; gap: 18px;
+  padding: 9px 20px;
+}
+.ix-marke { display: flex; align-items: center; gap: 11px; flex: 0 0 auto; }
+.ix-marke img { width: 34px; display: block; }
+.ix-marke span {
+  font-family: var(--wk-font-serif); font-size: 26px; font-weight: 600;
+  color: var(--wk-paper);
+}
+.ix-marke__kreis {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--wk-paper);
+  display: flex; align-items: flex-end; justify-content: center;
+  overflow: hidden; border: 2px solid rgba(245, 237, 224, .4);
+}
+.ix-nav { display: flex; align-items: center; gap: 16px; margin-left: auto; font-size: 15px; }
+.ix-nav a { color: var(--wk-on-dark-soft); }
+.ix-nav a:hover { color: var(--wk-paper); }
+.ix-nav .ix-knopf { color: #fff; }
+@media (max-width: 899px) { .ix-nav a:not(.ix-knopf) { display: none; } }
+
+.ix-knopf {
+  display: inline-flex; align-items: center; gap: 9px;
+  background: var(--wk-pink-600); color: #fff;
+  border-radius: 999px; padding: 12px 22px;
+  font-size: 15.5px; font-weight: 600; text-decoration: none;
+  transition: transform .18s ease, background-color .18s ease;
+}
+.ix-knopf:hover { transform: translateY(-2px); background: var(--wk-pink-700); text-decoration: none; color: #fff; }
+.ix-knopf--gross { padding: 16px 34px; font-size: 17px; }
+.ix-knopf--zweit { background: var(--wk-petrol-600); }
+.ix-knopf--zweit:hover { background: var(--wk-petrol-700); }
+
+.ix-bahn { max-width: 1180px; margin: 0 auto; padding-inline: 22px; }
+.ix-bahn--schmal { max-width: 860px; }
+
+.ix-abschnitt { padding: clamp(58px, 6.6vw, 108px) 0; }
+.ix-abschnitt--creme { background: var(--wk-paper); }
+.ix-abschnitt--warm  { background: var(--wk-paper-warm); }
+.ix-abschnitt--tuerkis { background: var(--wk-cyan); }
+.ix-abschnitt--dickicht { background: var(--wk-forest-800); }
+.ix-abschnitt--hoehle { background: var(--wk-forest-900); }
+
+/* ---------------------------------------------------------------------- *
+ * Typografie der Seite
+ * ---------------------------------------------------------------------- */
+.ix-kicker {
+  font-size: 13.5px; font-weight: 600; letter-spacing: .13em;
+  text-transform: uppercase; margin: 0 0 12px;
+  color: var(--wk-pink-ink);
+}
+.ix-kicker--hell { color: var(--wk-yellow); }
+.ix-kicker--tinte { color: var(--wk-ink-strong); }
+
+.ix-titel {
+  font-family: var(--wk-font-serif); font-weight: 600;
+  font-size: clamp(30px, 4.2vw, 54px); line-height: 1.06;
+  color: var(--wk-ink-strong); margin: 0 0 20px;
+}
+.ix-titel--hell { color: var(--wk-on-dark); }
+
+.ix-gross {
+  font-family: var(--wk-font-serif); font-weight: 600; font-style: italic;
+  font-size: clamp(21px, 2.6vw, 34px); line-height: 1.3;
+  color: var(--wk-pink-ink); margin: 0 0 20px; max-width: 24ch;
+}
+.ix-gross--hell { color: var(--wk-yellow); }
+
+.ix-text { font-size: clamp(16.5px, 1.5vw, 19px); line-height: 1.75; color: var(--wk-ink-soft); margin: 0 0 16px; max-width: 62ch; }
+.ix-text--hell { color: var(--wk-paper); }
+.ix-text:last-child { margin-bottom: 0; }
+.ix-text strong { color: var(--wk-ink-strong); }
+.ix-text--hell strong { color: var(--wk-on-dark); }
+
+/* ---------------------------------------------------------------------- *
+ * Hero
+ * ---------------------------------------------------------------------- */
+.ix-hero { position: relative; background: var(--wk-forest-800); }
+.ix-hero__bild { width: 100%; display: block; }
+.ix-hero__schleier {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(90deg,
+    rgba(9, 40, 33, .93) 0%, rgba(9, 40, 33, .88) 34%,
+    rgba(9, 40, 33, .52) 55%, rgba(9, 40, 33, .04) 74%);
+}
+.ix-hero__in { position: absolute; inset: 0; display: flex; align-items: center; }
+.ix-hero__text { max-width: min(54%, 640px); }
+@media (max-width: 900px) {
+  .ix-hero__schleier {
+    background: linear-gradient(180deg,
+      rgba(9, 40, 33, .30) 0%, rgba(9, 40, 33, .74) 40%,
+      rgba(9, 40, 33, .95) 66%, rgba(9, 40, 33, .96) 100%);
+  }
+  .ix-hero__in { position: static; display: block; }
+  .ix-hero__text { max-width: none; padding: 0 22px 30px; margin-top: -8px; position: relative; }
+}
+
+/* Handschriftliche Randnotizen. Sie sind die persoenlichste Stelle der Seite
+   und deshalb bewusst nicht in der Hausschrift gesetzt. Erst ab 1100px: auf
+   schmalen Schirmen legten sie sich ueber das Gesicht im Foto. */
+.ix-notiz { display: none; }
+@media (min-width: 1100px) {
+  .ix-notiz {
+    display: block; position: absolute; z-index: 3;
+    font-family: 'Segoe Print', 'Bradley Hand', 'Comic Sans MS', cursive;
+    font-size: clamp(15px, 1.2vw, 19px); line-height: 1.3;
+    max-width: 230px; padding: 13px 17px;
+    color: var(--wk-ink-strong); background: rgba(255, 253, 246, .94);
+    border-radius: 20px 20px 20px 4px;
+    box-shadow: 0 10px 26px rgba(6, 30, 24, .3);
+  }
+  .ix-notiz--eins { right: 6%; top: 20%; transform: rotate(-6deg); }
+  .ix-notiz--zwei { right: 13%; bottom: 13%; transform: rotate(4deg); }
+}
+
+/* ---------------------------------------------------------------------- *
+ * Szenen: was Familien erzaehlen
+ * ---------------------------------------------------------------------- */
+.ix-paar { display: grid; gap: clamp(28px, 4vw, 60px); }
+@media (min-width: 900px) { .ix-paar { grid-template-columns: 1.05fr .95fr; align-items: start; } }
+.ix-paar--mitte { align-items: center; }
+
+.ix-szene {
+  background: var(--wk-paper-card); border: 1px solid var(--wk-line);
+  border-radius: 18px; padding: 18px 20px;
+  font-size: 15.5px; line-height: 1.65; color: var(--wk-ink);
+  margin-bottom: 12px;
+}
+.ix-szene::before { content: '„'; color: var(--wk-pink); font-family: var(--wk-font-serif); font-size: 26px; line-height: 0; }
+
+/* ---------------------------------------------------------------------- *
+ * Der Wald als Landkarte
+ * ---------------------------------------------------------------------- */
+.ix-karte-wald { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
+.ix-waldteil {
+  background: var(--wk-paper-card); border-radius: 20px; padding: 22px 18px;
+  text-align: center; box-shadow: 0 10px 26px rgba(6, 30, 24, .12);
+}
+.ix-waldteil img { height: 86px; width: auto; margin: 0 auto 12px; display: block; mix-blend-mode: multiply; }
+.ix-waldteil h3 { font-family: var(--wk-font-serif); font-weight: 600; font-size: 19px; color: var(--wk-ink-strong); margin: 0 0 6px; }
+.ix-waldteil p { font-size: 14.5px; line-height: 1.6; color: var(--wk-ink-soft); margin: 0; }
+
+/* ---------------------------------------------------------------------- *
+ * Nicht so / Sondern so
+ * ---------------------------------------------------------------------- */
+.ix-gegen { display: grid; gap: 16px; margin-top: 30px; }
+@media (min-width: 760px) { .ix-gegen { grid-template-columns: 1fr 1fr; } }
+.ix-gegen article { border-radius: 20px; padding: 24px 22px; }
+.ix-gegen h3 { font-family: var(--wk-font-serif); font-weight: 600; font-size: 19px; margin: 0 0 12px; }
+.ix-gegen ul { margin: 0; padding-left: 20px; font-size: 15.5px; line-height: 1.7; }
+.ix-gegen li + li { margin-top: 7px; }
+.ix-gegen--nicht { background: rgba(255, 253, 246, .10); border: 1px solid rgba(245, 237, 224, .22); }
+.ix-gegen--nicht h3 { color: var(--wk-on-dark-muted); }
+.ix-gegen--nicht ul { color: var(--wk-on-dark-muted); }
+.ix-gegen--so { background: var(--wk-paper-card); }
+.ix-gegen--so h3 { color: var(--wk-petrol-ink); }
+.ix-gegen--so ul { color: var(--wk-ink); }
+
+/* ---------------------------------------------------------------------- *
+ * Angebot
+ * ---------------------------------------------------------------------- */
+.ix-angebote { display: grid; grid-template-columns: repeat(auto-fit, minmax(266px, 1fr)); gap: 18px; }
+.ix-angebot {
+  background: var(--wk-paper-card); border: 1px solid var(--wk-line);
+  border-radius: 22px; padding: 26px 24px; display: flex; flex-direction: column;
+  border-top: 4px solid var(--wk-cyan);
+  transition: transform .22s ease, box-shadow .22s ease;
+}
+.ix-angebot:hover { transform: translateY(-4px); box-shadow: 0 16px 34px rgba(18, 61, 54, .17); }
+.ix-angebot img { height: 96px; width: auto; margin: 0 auto 14px; display: block; mix-blend-mode: multiply; }
+.ix-angebot h3 { font-family: var(--wk-font-serif); font-weight: 600; font-size: 21px; color: var(--wk-ink-strong); margin: 0 0 8px; }
+.ix-angebot p { font-size: 15px; line-height: 1.65; color: var(--wk-ink-soft); margin: 0 0 14px; }
+.ix-angebot__rahmen {
+  margin-top: auto; padding-top: 14px; border-top: 1px dashed var(--wk-line);
+  font-size: 13.5px; line-height: 1.6; color: var(--wk-ink-muted);
+}
+.ix-angebot__rahmen b { color: var(--wk-ink-strong); font-weight: 600; }
+
+/* ---------------------------------------------------------------------- *
+ * Ablauf
+ * ---------------------------------------------------------------------- */
+.ix-schritte { display: grid; grid-template-columns: repeat(auto-fit, minmax(206px, 1fr)); gap: 26px; }
+.ix-schritt { text-align: center; }
+.ix-schritt__ring { position: relative; width: 108px; height: 108px; margin: 0 auto 14px; display: flex; align-items: center; justify-content: center; }
+.ix-schritt__ring img { width: 70px; height: 70px; object-fit: contain; mix-blend-mode: multiply; }
+.ix-schritt__nr {
+  position: absolute; top: -2px; right: -2px; width: 34px; height: 34px;
+  border-radius: 50%; color: #fff;
+  font-family: var(--wk-font-serif); font-weight: 700; font-size: 17px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 3px 10px rgba(18, 61, 54, .22);
+}
+.ix-schritt h3 { font-family: var(--wk-font-serif); font-weight: 600; font-size: 19px; color: var(--wk-ink-strong); margin: 0 0 6px; }
+.ix-schritt p { font-size: 14.5px; line-height: 1.6; color: var(--wk-ink-soft); margin: 0; }
+
+/* ---------------------------------------------------------------------- *
+ * Fuer wen, und fuer wen nicht
+ * ---------------------------------------------------------------------- */
+.ix-wer { display: grid; grid-template-columns: repeat(auto-fit, minmax(132px, 1fr)); gap: 12px; }
+.ix-wer__karte {
+  background: var(--wk-paper-card); border: 1px solid var(--wk-line);
+  border-radius: 16px; padding: 16px 12px; text-align: center;
+}
+.ix-wer__karte img { width: 100%; max-width: 74px; margin: 0 auto 8px; display: block; mix-blend-mode: multiply; }
+.ix-wer__karte b { font-size: 13.5px; line-height: 1.3; color: var(--wk-ink-strong); }
+
+/* ---------------------------------------------------------------------- *
+ * Fragen
+ * ---------------------------------------------------------------------- */
+.ix-frage {
+  background: var(--wk-paper-card); border: 1px solid var(--wk-line);
+  border-radius: 14px; margin-bottom: 10px;
+}
+.ix-frage summary {
+  padding: 16px 20px; cursor: pointer; list-style: none;
+  font-family: var(--wk-font-serif); font-weight: 600; font-size: 17.5px;
+  color: var(--wk-ink-strong);
+  display: flex; justify-content: space-between; gap: 14px;
+}
+.ix-frage summary::-webkit-details-marker { display: none; }
+.ix-frage summary::after { content: '+'; color: var(--wk-pink-ink); font-size: 22px; line-height: 1; }
+.ix-frage[open] summary::after { content: '–'; }
+.ix-frage p { margin: 0; padding: 0 20px 18px; font-size: 15.5px; line-height: 1.7; color: var(--wk-ink-soft); }
+
+/* ---------------------------------------------------------------------- *
+ * Fusszeile
+ * ---------------------------------------------------------------------- */
+.ix-fuss { background: var(--wk-forest-900); color: var(--wk-on-dark-soft); }
+.ix-fuss__in {
+  max-width: 1180px; margin: 0 auto; padding: 34px 22px;
+  display: flex; flex-wrap: wrap; gap: 18px 34px; align-items: center; justify-content: space-between;
+  font-size: 14.5px;
+}
+.ix-fuss a { color: var(--wk-on-dark-soft); text-decoration: underline; }
+.ix-fuss a:hover { color: var(--wk-paper); }
