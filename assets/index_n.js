@@ -1,4 +1,9 @@
 (() => {
+  const dotStylesheet = document.createElement('link');
+  dotStylesheet.rel = 'stylesheet';
+  dotStylesheet.href = 'assets/index_n_dots.css';
+  document.head.append(dotStylesheet);
+
   const header = document.querySelector('[data-header]');
   const menuButton = document.querySelector('.n-menu-button');
   const navigation = document.querySelector('.n-navigation');
