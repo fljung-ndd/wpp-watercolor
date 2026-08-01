@@ -176,6 +176,11 @@
   transform: translateY(-50%);
   transition: transform .18s ease, background-color .18s ease;
 }
+.n-faq summary:focus-visible {
+  outline: 3px solid var(--wk-pink);
+  outline-offset: -3px;
+  border-radius: 16px;
+}
 .n-faq details[open] summary::after {
   background: var(--wk-pink-050);
   color: var(--wk-pink-ink);
