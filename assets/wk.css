@@ -712,60 +712,64 @@ footer, [role="dialog"] {
 /* ---------------------------------------------------------------------- *
  * Abschlussband
  *
- * Das Hintergrundbild (uploads/footer/background_footer2.png, optimiert als
- * assets/footer-bg-home.webp) traegt den Farbwechsel selbst: oben Creme,
- * unten Wald, an den Raendern die Figuren. Deshalb steht hier kein Divider -
- * das Bild ist der Uebergang.
+ * Das Bild traegt den Farbwechsel selbst: Creme oben, Wald unten, Figuren an
+ * den Raendern. Deshalb steht darueber und darunter kein Divider, und es
+ * liegt kein Schleier darauf - das war ausdruecklich so gewuenscht.
  *
- * Wo genau die Kante im Bild landet, haengt am Zuschnitt und damit an der
- * Fensterbreite. Darauf darf die Lesbarkeit nicht beruhen: der Schleier
- * legt oben Creme und unten Wald fest, unabhaengig vom Zuschnitt. Die
- * Figuren an den Raendern bleiben frei.
+ * Bild und Inhalt liegen im selben Rasterfeld uebereinander. Die Zeile ist
+ * damit so hoch wie das Hoehere von beiden: das Bild behaelt sein
+ * Seitenverhaeltnis (nichts wird angeschnitten, die Figuren stehen, wo sie
+ * gemalt wurden), und der Inhalt steht mittig in seinem freien Feld. Als
+ * Hintergrundbild ging das nicht: ein Hintergrund traegt keine Hoehe bei,
+ * die Section schrumpfte auf die Texthoehe und schnitt das Bild ab.
+ *
+ * Was unter dem Bild bleibt, fuellt der ausgemessene Ton seines Fusses -
+ * die Naht zum Footer ist damit unsichtbar.
+ *
+ * Schmal ist das Bild nur noch ein flacher Streifen. Dort stehen die Zeilen
+ * darunter statt darin, sonst deckten sie ihn ganz zu.
  * ---------------------------------------------------------------------- */
-.wk-abschluss { position: relative; overflow: hidden; background: var(--wk-forest-800); }
-.wk-abschluss::after {
-  content: '';
-  position: absolute; inset: 0;
-  z-index: 1;
+.wk-abschlussband { display: grid; position: relative; }
+.wk-abschlussband > * { grid-area: 1 / 1; min-width: 0; }
+
+.wk-abschlussband__bild {
+  width: 100%; height: auto; display: block;
+  align-self: start;
   pointer-events: none;
-  /* In Prozent gerechnet wanderte die Naht mit der Sectionhoehe: auf 390px
-     stapelt der Inhalt, die Section wird doppelt so hoch, und der USP-Absatz
-     rutschte unter die Cremezone - gemessen auf 2,42:1. Die Zonen haengen
-     deshalb an festen Abstaenden: Creme ab oben, Wald so hoch wie die
-     Knopfreihe von unten. */
-  background:
-    linear-gradient(to bottom,
-      rgba(248, 241, 226, .00) 0,
-      rgba(248, 241, 226, .86) 42px,
-      rgba(248, 241, 226, .86) calc(100% - 190px),
-      rgba( 18,  61,  54, .00) calc(100% - 132px),
-      rgba( 18,  61,  54, .55) calc(100% -  46px),
-      rgba( 18,  61,  54, .62) 100%),
-    radial-gradient(90% 70% at 50% 34%,
-      rgba(248, 241, 226, .55) 0%,
-      rgba(248, 241, 226, .00) 100%);
-  /* Zu den Seiten hin laeuft der Schleier aus: dort stehen die gemalten
-     Figuren, und dort steht kein Text. */
-  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 9%, #000 91%, transparent 100%);
-          mask-image: linear-gradient(to right, transparent 0, #000 9%, #000 91%, transparent 100%);
 }
-.wk-abschluss__in { position: relative; z-index: 2; }
-
-/* Nur die Oberkante ausblenden. .wk-wash blendet beide Kanten aus - beim
-   Abschlussband soll die untere Waldflaeche bis an den Footer reichen. */
-.wk-wash--oben {
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 clamp(24px, 3vw, 52px), #000 100%);
-          mask-image: linear-gradient(to bottom, transparent 0, #000 clamp(24px, 3vw, 52px), #000 100%);
+.wk-abschlussband__in {
+  align-self: center;
+  z-index: 2;
+  padding: clamp(30px, 4vw, 64px) 22px;
 }
 
-/* Eine Stufe kraeftiger. Das helle Aquarell hat unten links einen satten
-   Korallenfleck; der rosa Link darueber kam mit dem normalen Schleier auf
-   4,10:1. Die gemalten Raender bleiben auch so noch frei. */
-.wk-band-hell--satt::after {
-  background: radial-gradient(130% 145% at 50% 50%,
-    rgba(248, 241, 226, .95) 0%,
-    rgba(248, 241, 226, .92) 62%,
-    rgba(248, 241, 226, .52) 100%);
+/* Wo im Bild Platz ist, entscheidet das Bild. footer-band3 hat Figuren links
+   und rechts und eine freie Mitte; footer-band1 und 2 haben ihre Figuren
+   rechts und sind links frei. Der Textblock haelt sich davon fern, statt
+   ueber den gemalten Tieren zu liegen. */
+@media (min-width: 700px) {
+  .wk-abschlussband--mitte .wk-abschlussband__in > * { max-width: min(760px, 52%); margin-inline: auto; }
+  .wk-abschlussband--links .wk-abschlussband__in { justify-self: start; padding-left: clamp(26px, 5vw, 92px); }
+  .wk-abschlussband--links .wk-abschlussband__in > * { max-width: min(660px, 50vw); text-align: left; margin-inline: 0; }
+  .wk-abschlussband--links .wk-abschluss__kasten { text-align: left; }
+  .wk-abschlussband--links .wk-abschlussband__in [style*="justify-content:center"] { justify-content: flex-start; }
+}
+
+/* Ruhige Flaeche hinter den Zeilen. Nur so breit wie der Text, mit Rundung -
+   damit bleibt sie ein Kasten im Bild und wird nicht zum Schleier ueber dem
+   Band: die gemalten Figuren an den Raendern bleiben frei. */
+.wk-abschluss__kasten {
+  display: inline-block;
+  background: rgba(9, 40, 33, .82);
+  border-radius: 24px;
+  padding: clamp(20px, 2.6vw, 36px) clamp(24px, 3.4vw, 52px);
+  margin-bottom: clamp(22px, 2.8vw, 38px);
+}
+
+@media (max-width: 699px) {
+  .wk-abschlussband { display: block; }
+  .wk-abschlussband__in { padding: clamp(26px, 6vw, 40px) 22px clamp(34px, 7vw, 52px); }
+  .wk-abschluss__kasten { padding: 20px 22px; border-radius: 20px; }
 }
 
 /* ---------------------------------------------------------------------- *
@@ -955,35 +959,4 @@ footer, [role="dialog"] {
   .wk-quer-an .wk-quer__tafel { min-width: 0; }
 }
 
-/* ---------------------------------------------------------------------- *
- * Abschlussband
- *
- * Das Bild traegt den Farbwechsel selbst: Creme oben, Wald unten, Figuren an
- * den Raendern. Deshalb steht darueber und darunter kein Divider, und es
- * liegt kein Schleier darauf - das war ausdruecklich so gewuenscht.
- *
- * background-size: 100% auto statt cover: das Bild behaelt sein
- * Seitenverhaeltnis, nichts wird angeschnitten, und die Figuren stehen immer
- * da, wo sie gemalt wurden. Was unter dem Bild bleibt, fuellt forest-800 -
- * derselbe Ton wie die Unterkante des Bildes, die Naht ist unsichtbar.
- *
- * Der Textblock beginnt bei 32% der Breite. Das Bild ist 33,3% der Breite
- * hoch; ausgemessen wird es erst ab 92% seiner Hoehe wirklich dunkel (bei
- * 80% liegt der Grund noch bei #557967, bei 70% bei Creme). 32% der Breite
- * sind 96% der Bildhoehe - dort steht der Text sicher dunkel und laeuft
- * danach auf die Vollfarbe weiter. Beide Werte haengen an der Breite, das
- * Verhaeltnis stimmt deshalb auf jedem Schirm.
- *
- * Zwei Anlaeufe davor lagen daneben: bei 15% stand die Ueberschrift mitten
- * auf der Cremezone (gemessen 1,04:1), bei 25% genau auf dem Uebergang.
- * ---------------------------------------------------------------------- */
-.wk-abschlussband {
-  position: relative;
-  /* Genau der Ton des Bildfusses (ausgemessen #083F3E), nicht forest-800 -
-     sonst zeichnet sich an der Bildunterkante eine Linie ab. */
-  background-color: #083F3E;
-  background-repeat: no-repeat;
-  background-position: center top;
-  background-size: 100% auto;
-  padding: 32% 22px clamp(46px, 5vw, 78px);
-}
+

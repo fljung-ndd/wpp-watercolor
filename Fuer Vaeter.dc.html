@@ -194,15 +194,18 @@
 </sc-if>
 
 <div class="wk-edge" aria-hidden="true" style="--wk-from:var(--wk-paper);--wk-to:var(--wk-forest-800)"></div>
-<section class="wk-abschlussband" style="background-image:url(assets/footer-band3.webp);background-color:#0B3A31">
+<section class="wk-abschlussband wk-abschlussband--links" style="background-color:#0D403A">
+  <img class="wk-abschlussband__bild" decoding="async" width="1600" height="533" src="assets/footer-band1.webp" alt="" loading="lazy">
+  <div class="wk-abschlussband__in">
   <div style="position:relative;max-width:1240px;margin:0 auto;padding:0 0 58px;z-index:2">
     <div style="max-width:540px">
-      <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(27px,3.4vw,40px);line-height:1.15;color:var(--wk-paper);margin:0 0 24px">Du musst nicht erst explodieren, damit Hilfe sinnvoll ist.</h2>
+      <div class="wk-abschluss__kasten"><h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(27px,3.4vw,40px);line-height:1.15;color:var(--wk-paper);margin:0 0 24px">Du musst nicht erst explodieren, damit Hilfe sinnvoll ist.</h2></div>
       <div style="display:flex;gap:14px;flex-wrap:wrap">
         <button onClick="{{ openContact }}" style="background:var(--wk-pink-ink);color:#fff;border:none;border-radius:999px;padding:14px 28px;font-family:'Alegreya Sans',sans-serif;font-size:16px;font-weight:600;cursor:pointer;box-shadow:0 8px 20px rgba(6,30,24,.35)" style-hover="background:var(--wk-pink-700)">Erstgespräch anfragen&nbsp;&nbsp;<span aria-hidden="true">↗</span></button>
         <button onClick="{{ openContact }}" style="background:var(--wk-petrol-600);color:#fff;border:none;border-radius:999px;padding:14px 28px;font-family:'Alegreya Sans',sans-serif;font-size:16px;font-weight:600;cursor:pointer;box-shadow:0 8px 20px rgba(6,30,24,.35)" style-hover="background:var(--wk-petrol-ink)">Erstgespräch anfragen&nbsp;&nbsp;<span aria-hidden="true">♡</span></button>
       </div>
     </div>
+  </div>
   </div>
 </section>
 
