@@ -1,0 +1,69 @@
+/* Sichtbare Shape-Divider für index_n.html.
+ * Technisch identisch zur Demo: Die Form kommt aus dividers/schraege.svg,
+ * der obere Farbton aus --wk-from. Die benachbarten Flächen sind bewusst
+ * etwas deutlicher voneinander abgesetzt, damit die Maske tatsächlich
+ * erkennbar ist und nicht zwischen zwei nahezu gleichen Cremetönen verschwindet.
+ */
+
+/* Waldkätzchen-Weg -> Grundsatz */
+.n-path {
+  background-color: var(--wk-orange-025);
+}
+.n-principle.wk-sd {
+  --wk-from: var(--wk-orange-025);
+  background-color: var(--wk-paper);
+  padding-top: calc(var(--wk-sd-top) + clamp(30px, 4vw, 62px));
+}
+
+/* Warum Waldkätzchen entstanden ist -> Was ich anbiete */
+.n-about {
+  background-color: var(--wk-paper);
+}
+.n-offers.wk-sd {
+  --wk-from: var(--wk-paper);
+  background-color: var(--wk-pink-025);
+  padding-top: calc(var(--wk-sd-top) + clamp(30px, 4vw, 62px));
+}
+
+/* Exakte Maskenwerte aus Demo.html / wk.css. Die explizite Regel stellt
+ * sicher, dass die Form auch in der eigenständigen index_n-Komposition
+ * eindeutig gesetzt ist. */
+.n-principle.wk-sd::before,
+.n-offers.wk-sd::before {
+  -webkit-mask-image: url('dividers/schraege.svg');
+          mask-image: url('dividers/schraege.svg');
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100px;
+          mask-size: 100% 100px;
+  -webkit-mask-position: 50% 0%;
+          mask-position: 50% 0%;
+}
+
+@media (min-width: 768px) {
+  .n-principle.wk-sd::before,
+  .n-offers.wk-sd::before {
+    -webkit-mask-size: 100% 116px;
+            mask-size: 100% 116px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .n-principle.wk-sd::before,
+  .n-offers.wk-sd::before {
+    bottom: -0.1vw;
+    left: -0.1vw;
+    right: -0.1vw;
+    top: -0.1vw;
+    -webkit-mask-size: 100% 121px;
+            mask-size: 100% 121px;
+  }
+}
+
+@media (min-width: 2100px) {
+  .n-principle.wk-sd::before,
+  .n-offers.wk-sd::before {
+    -webkit-mask-size: 100% calc(2vw + 121px);
+            mask-size: 100% calc(2vw + 121px);
+  }
+}
