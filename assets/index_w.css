@@ -11,7 +11,8 @@
  * um den ganzseitigen Bildschnitt herum und vor/nach dem Abschlussband.
  * Ebenfalls ohne Divider: der geteilte Block Domäne/Zielgruppen – zwei
  * halbbreite Schrägen nebeneinander ergäben eine Zickzack-Naht – sowie die
- * Übergänge Wiedererkennen -> letzter Dienstag und Grundsatz -> Haltungsband.
+ * Übergänge Wiedererkennen -> letzter Dienstag, Grundsatz -> Haltungsband
+ * und Haltungsband -> Hellblau.
  *
  * Lädt nach index_n.css und index_n_experience.css. Mit
  * assets/index_n_dividers.css (wird von index_n.js nachgeladen) gibt es
@@ -29,13 +30,6 @@
    den Waldkätzchen-Weg aus. Das ist die Kante, die vorher am härtesten stand. */
 .n-path.wk-sd {
   --wk-from: var(--wk-forest-800);
-  padding-top: calc(var(--wk-sd-top) + clamp(30px, 4vw, 62px));
-}
-
-/* Haltungsband -> Hellblau: der dunkle Block läuft in „Verstehen heißt nicht
-   entschuldigen“ aus. */
-.n-boundary.wk-sd {
-  --wk-from: var(--wk-forest-900);
   padding-top: calc(var(--wk-sd-top) + clamp(30px, 4vw, 62px));
 }
 
@@ -80,4 +74,65 @@
 }
 @media (prefers-reduced-motion: no-preference) and (max-width: 680px) {
   .n-horizontal__progress { bottom: 15px; height: 4px; }
+}
+
+/* --------------------------------------------------------------------------
+ * Mobil: Hero und Porträt ganz zeigen
+ *
+ * Beide Fotos liegen quer (Hero 16:9, Porträt 1,3:1) und füllten als
+ * object-fit:cover eine hochkant stehende Fläche. Übrig blieb vom Hero rund
+ * ein Viertel, beim Porträt stand Torsten ganz links im Bild und war komplett
+ * weggeschnitten – zu sehen war nur die Mauer.
+ *
+ * Statt an object-position zu drehen, laufen die Bilder auf schmalen Fenstern
+ * im Fluss mit: volle Breite, eigene Höhe, kein Beschnitt.
+ * -------------------------------------------------------------------------- */
+@media (max-width: 999px) {
+  /* Bild oben, Text unten, der Rest bleibt als Luft dazwischen. Die volle
+     Fensterhöhe aber nur, solange sie sich auch füllt: Bildhöhe (bei 16:9
+     56,25vw) plus Textblock. Auf hohen, breiten Fenstern stünde sonst ein
+     großes leeres Feld zwischen Foto und Überschrift. */
+  .n-hero {
+    min-height: min(100svh, 56.25vw + 540px);
+    align-content: space-between;
+  }
+  .n-hero picture {
+    position: relative;
+    z-index: 0;
+    inset: auto;
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .n-hero__image {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+  }
+  /* Der große Verlauf war der Textgrund über dem beschnittenen Bild. Jetzt
+     steht der Text auf dem Waldgrün des Abschnitts, und nur die Unterkante
+     des Fotos wird weich hineingeblendet. Die Tageszeit-Stimmung bleibt über
+     den Filter auf dem Bild erhalten. */
+  .n-hero__overlay { display: none; }
+  .n-hero picture::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -1px;
+    left: 0;
+    height: clamp(46px, 14vw, 92px);
+    background: linear-gradient(180deg, rgba(22, 72, 63, 0), var(--wk-forest-800));
+  }
+  .n-hero__content { padding: clamp(20px, 5vw, 34px) 0 clamp(40px, 9vw, 58px); }
+
+  /* Ganzseitiger Bildschnitt: so hoch wie das Foto, statt 100svh mit
+     Beschnitt. Der Verlauf darüber (::after) deckt weiter die ganze Fläche. */
+  .n-full-portrait { min-height: 0; }
+  .n-full-portrait img {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+  }
 }
