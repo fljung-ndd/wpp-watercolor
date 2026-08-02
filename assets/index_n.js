@@ -1,8 +1,10 @@
 (() => {
-  const dotStylesheet = document.createElement('link');
-  dotStylesheet.rel = 'stylesheet';
-  dotStylesheet.href = 'assets/index_n_dots.css';
-  document.head.append(dotStylesheet);
+  ['assets/index_n_dots.css', 'assets/index_n_dividers.css'].forEach(href => {
+    const stylesheet = document.createElement('link');
+    stylesheet.rel = 'stylesheet';
+    stylesheet.href = href;
+    document.head.append(stylesheet);
+  });
 
   const knowledgeSection = document.querySelector('#wissen');
   if (knowledgeSection && !document.querySelector('#fragen')) {
