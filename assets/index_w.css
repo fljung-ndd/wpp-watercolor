@@ -5,25 +5,19 @@
  * (.wk-sd--schraege, Form aus assets/dividers/schraege.svg). Regel für jede
  * Stelle: die Maske trägt immer die Farbe des Abschnitts darüber und sitzt
  * damit am Ende dieses Abschnitts – technisch hängt sie im Folgeabschnitt,
- * gelesen wird sie als auslaufende Unterkante des vorherigen. Einzige
- * Ausnahme ist das Haltungsband, das einen eigenen Streifen bekommt (s. u.).
+ * gelesen wird sie als auslaufende Unterkante des vorherigen.
  *
  * Gerade Naht bleibt bewusst dort, wo die Demo sie vorsieht: unter dem Hero,
- * um den ganzseitigen Bildschnitt herum und vor/nach dem Abschlussband. Der
- * geteilte Block Domäne/Zielgruppen bleibt ebenfalls ohne Divider – zwei
- * halbbreite Schrägen nebeneinander ergäben eine Zickzack-Naht.
+ * um den ganzseitigen Bildschnitt herum und vor/nach dem Abschlussband.
+ * Ebenfalls ohne Divider: der geteilte Block Domäne/Zielgruppen – zwei
+ * halbbreite Schrägen nebeneinander ergäben eine Zickzack-Naht – sowie die
+ * Übergänge Wiedererkennen -> letzter Dienstag und Grundsatz -> Haltungsband.
  *
  * Lädt nach index_n.css und index_n_experience.css. Mit
  * assets/index_n_dividers.css (wird von index_n.js nachgeladen) gibt es
  * keine Überschneidung: die beiden bereits vorhandenen Übergänge
  * (.n-principle, .n-offers) bleiben unverändert.
  * -------------------------------------------------------------------------- */
-
-/* Papier -> Türkis: „Kommt dir das bekannt vor?“ läuft ins türkise Band aus. */
-.n-story.wk-sd {
-  --wk-from: var(--wk-paper);
-  padding-top: calc(var(--wk-sd-top) + clamp(30px, 4vw, 62px));
-}
 
 /* Türkis -> Waldgrün: das türkise Band läuft in den dunklen Abschnitt aus. */
 .n-no-coaching.wk-sd {
@@ -36,23 +30,6 @@
 .n-path.wk-sd {
   --wk-from: var(--wk-forest-800);
   padding-top: calc(var(--wk-sd-top) + clamp(30px, 4vw, 62px));
-}
-
-/* Papier -> Haltungsband.
-   Einziger Übergang, der die Kante nicht im Folgeabschnitt trägt, sondern als
-   eigenen Streifen davor. Zwei Gründe: .wk-sd würde dem Haltungsband
-   overflow:hidden geben und damit aus ihm einen Scroll-Container machen – die
-   sticky Bühne der seitlich laufenden Panels wäre tot. Und die Maske liefe
-   über die Überschrift des ersten Panels, dessen Inhalt mittig sitzt und auf
-   niedrigen Fenstern bis dicht an die Oberkante reicht.
-   Der Streifen trägt schon die Farbe des Haltungsbandes, die Naht darunter
-   ist damit unsichtbar. */
-.n-seam {
-  height: var(--wk-sd-top);
-}
-.n-seam--haltung {
-  --wk-from: var(--wk-paper);
-  background: var(--wk-forest-900);
 }
 
 /* Haltungsband -> Hellblau: der dunkle Block läuft in „Verstehen heißt nicht
@@ -76,19 +53,31 @@
 }
 
 /* --------------------------------------------------------------------------
- * Haltungsband ohne Hinweiszeile
+ * Haltungsband: Scrollbereich in der Farbe der Kachel darüber
  *
- * Die Zeile „Nach unten scrollen · die Haltung bewegt sich zur Seite“ ist
- * entfallen. Der dafür reservierte Streifen unter den Panels schrumpft mit,
- * sonst bliebe unter dem Fortschrittsbalken eine tote dunkle Fläche stehen.
- * Nur außerhalb von prefers-reduced-motion, weil dort die Panels ohnehin
- * untereinander stehen und die Höhe auto ist.
+ * Vorher lief unter den Panels ein reservierter Streifen mit, der immer das
+ * dunkle Petrol des Abschnitts zeigte – erst mit der Hinweiszeile
+ * „Nach unten scrollen · die Haltung bewegt sich zur Seite“, nach deren
+ * Wegfall als tote Fläche. Statt diesen Streifen umzufärben, läuft die Spur
+ * jetzt über die volle Höhe: der Scrollbereich ist die Kachel darüber und
+ * trägt damit immer deren Farbe – auch währenddessen zwei Kacheln
+ * nebeneinander durchlaufen. Der Fortschrittsbalken liegt darauf.
+ *
+ * Nur außerhalb von prefers-reduced-motion: dort stehen die Panels
+ * untereinander, die Spur ist auto hoch und der Balken ausgeblendet.
  * -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: no-preference) {
-  .n-horizontal__track { height: calc(100% - 34px); }
-  .n-horizontal__progress { bottom: 15px; }
+  .n-horizontal__track { height: 100%; }
+  /* Eigene halbdunkle Bahn, damit der helle Balken auf allen vier Kacheln
+     ablesbar bleibt – auf Gelb und Orange reichte die nackte Fläche nicht. */
+  .n-horizontal__progress {
+    bottom: 20px;
+    height: 5px;
+    border-radius: 99px;
+    background: rgba(8, 37, 31, 0.28);
+  }
+  .n-horizontal__progress span { border-radius: inherit; }
 }
 @media (prefers-reduced-motion: no-preference) and (max-width: 680px) {
-  .n-horizontal__track { height: calc(100% - 28px); }
-  .n-horizontal__progress { bottom: 12px; }
+  .n-horizontal__progress { bottom: 15px; height: 4px; }
 }
