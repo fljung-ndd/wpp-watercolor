@@ -1,0 +1,196 @@
+/* --------------------------------------------------------------------------
+ * Unterseiten im Design von index_w
+ *
+ * Baut auf index_n.css, index_n_experience.css, index_ws.css und konzept.css
+ * auf. Hier stehen nur die Bausteine, die eine Unterseite zusätzlich braucht:
+ * der kompakte Bildkopf, wiederkehrende Karten- und Schrittraster und der
+ * Abschlussbereich.
+ *
+ * Wie auf der Startseite gilt: Querformat-Fotos werden auf schmalen Fenstern
+ * nicht beschnitten, sondern laufen im Fluss mit.
+ * -------------------------------------------------------------------------- */
+
+.s-body { padding-top: var(--n-header-height); }
+.s-header { transform: translateY(0); }
+
+/* --- Bildkopf ------------------------------------------------------------ */
+.s-hero {
+  position: relative;
+  display: grid;
+  align-items: end;
+  min-height: min(72svh, 640px);
+  overflow: hidden;
+  background: var(--wk-forest-800);
+  color: var(--wk-paper);
+}
+.s-hero picture, .s-hero__image, .s-hero__veil { position: absolute; inset: 0; width: 100%; height: 100%; }
+.s-hero__image { object-fit: cover; object-position: center 38%; }
+.s-hero__veil {
+  background: linear-gradient(90deg, rgba(9, 40, 33, 0.94) 0%, rgba(9, 40, 33, 0.86) 34%, rgba(9, 40, 33, 0.48) 60%, rgba(9, 40, 33, 0.08) 82%);
+}
+.s-hero__content { position: relative; z-index: 2; padding-block: clamp(46px, 6vw, 84px); }
+.s-hero__content > * { max-width: 42ch; }
+.s-hero h1 {
+  margin: 0 0 10px;
+  color: var(--wk-on-dark);
+  font-family: var(--wk-font-serif);
+  font-size: clamp(36px, 5.4vw, 68px);
+  font-weight: 600;
+  line-height: 1.03;
+  text-shadow: 0 3px 18px rgba(6, 30, 24, 0.6);
+}
+.s-hero__claim {
+  margin: 0 0 15px;
+  color: var(--wk-yellow);
+  font-family: var(--wk-font-serif);
+  font-size: clamp(19px, 2.2vw, 28px);
+  font-weight: 600;
+  line-height: 1.25;
+}
+.s-hero__lead { margin: 0 0 24px; color: var(--wk-on-dark-soft); font-size: clamp(16.5px, 1.5vw, 19px); line-height: 1.65; }
+.s-hero .n-actions > * { max-width: none; }
+
+/* Ohne Foto: die Aquarellfläche trägt den Kopf. */
+.s-hero--wash { min-height: 0; align-items: center; }
+.s-hero--wash .s-hero__image { opacity: 0.45; }
+.s-hero--wash .s-hero__veil { background: linear-gradient(180deg, rgba(9, 40, 33, 0.72), rgba(9, 40, 33, 0.9)); }
+
+/* --- Wiederkehrende Raster ----------------------------------------------- */
+.s-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 19px; }
+.s-cards--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.s-cards--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.s-card {
+  padding: 26px 25px 24px;
+  border-radius: var(--n-radius);
+  background: var(--wk-paper-card);
+  box-shadow: var(--n-shadow);
+}
+.s-card img { width: 92px; height: 92px; margin-bottom: 13px; object-fit: contain; mix-blend-mode: multiply; }
+.s-card h3 { margin: 0 0 8px; color: var(--wk-ink-strong); font-family: var(--wk-font-serif); font-size: 23px; line-height: 1.2; }
+.s-card p { margin: 0; color: var(--wk-ink-soft); font-size: 15.5px; line-height: 1.6; }
+.s-card p + p { margin-top: 10px; }
+.n-section--forest .s-card { background: rgba(255, 255, 255, 0.1); }
+.n-section--forest .s-card h3 { color: var(--wk-on-dark); }
+.n-section--forest .s-card p { color: var(--wk-on-dark-soft); }
+
+/* Kleine Kacheln, nur Bild und Bezeichnung. */
+.s-tiles { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; }
+.s-tiles span {
+  padding: 15px 9px;
+  display: grid;
+  justify-items: center;
+  gap: 7px;
+  border: 1px solid var(--wk-line);
+  border-radius: 18px;
+  background: var(--wk-paper-card);
+  color: var(--wk-ink-strong);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.25;
+}
+.s-tiles img { height: 74px; width: auto; object-fit: contain; mix-blend-mode: multiply; }
+.n-section--forest .s-tiles span { border-color: rgba(245, 237, 224, 0.2); background: rgba(255, 255, 255, 0.1); color: var(--wk-on-dark); }
+
+/* Nummerierte Schritte. */
+.s-steps { margin: 0; padding: 0; display: grid; gap: 13px; list-style: none; counter-reset: none; }
+.s-steps li {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 19px;
+  align-items: start;
+  padding: 19px 22px;
+  border-radius: 20px;
+  background: var(--wk-paper-card);
+  box-shadow: var(--n-shadow);
+}
+.s-steps b {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--wk-petrol);
+  color: #fff;
+  font-family: var(--wk-font-serif);
+  font-size: 19px;
+}
+.s-steps h3 { margin: 0 0 4px; color: var(--wk-ink-strong); font-family: var(--wk-font-serif); font-size: 22px; }
+.s-steps p { margin: 0; color: var(--wk-ink-soft); font-size: 15.5px; line-height: 1.6; }
+
+/* Aussagesatz, der allein steht. */
+.s-claim {
+  max-width: 26ch;
+  margin: 0 auto;
+  color: var(--wk-on-dark);
+  font-family: var(--wk-font-serif);
+  font-size: clamp(28px, 4vw, 52px) !important;
+  font-weight: 600;
+  line-height: 1.14 !important;
+  text-align: center;
+}
+.s-claim + .s-claim--sub { max-width: 46ch; margin-top: 18px; color: var(--wk-yellow); font-size: clamp(18px, 2vw, 25px) !important; }
+
+/* Zwei Spalten Fließtext mit Bild. */
+.s-split { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(30px, 5vw, 72px); align-items: center; }
+.s-split--narrow { grid-template-columns: 0.9fr 1.1fr; }
+.s-split img { width: min(420px, 100%); margin-inline: auto; object-fit: contain; }
+.s-split h3 { margin: 0 0 12px; color: var(--wk-ink-strong); font-family: var(--wk-font-serif); font-size: clamp(23px, 2.4vw, 31px); line-height: 1.2; }
+.s-split p { margin: 0 0 14px; line-height: 1.68; }
+.n-section--forest .s-split h3 { color: var(--wk-on-dark); }
+
+/* Aufzählung mit Häkchen-Punkt. */
+.s-marks { margin: 0; padding: 0; display: grid; gap: 12px; list-style: none; }
+.s-marks li { position: relative; padding-left: 27px; line-height: 1.62; }
+.s-marks li::before { content: '♡'; position: absolute; left: 0; top: 1px; color: var(--wk-pink-ink); font-size: 15px; }
+.n-section--forest .s-marks li::before { color: var(--wk-yellow); }
+.s-marks b { color: var(--wk-ink-strong); }
+.n-section--forest .s-marks b { color: var(--wk-paper); }
+
+/* --- Schmalere Fenster --------------------------------------------------- */
+@media (max-width: 1080px) {
+  .s-cards, .s-cards--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .s-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 999px) {
+  /* Wie im Hero der Startseite: Querformat-Fotos werden nicht beschnitten. */
+  .s-hero { min-height: 0; align-content: space-between; }
+  .s-hero picture, .s-hero__image { position: relative; inset: auto; width: 100%; height: auto; display: block; }
+  .s-hero picture { z-index: 0; }
+  .s-hero__veil { display: none; }
+  .s-hero picture::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -1px;
+    left: 0;
+    height: clamp(46px, 14vw, 92px);
+    background: linear-gradient(180deg, rgba(22, 72, 63, 0), var(--wk-forest-800));
+  }
+  .s-hero__content { padding-block: clamp(18px, 4vw, 30px) clamp(34px, 7vw, 52px); }
+  .s-hero__content > * { max-width: none; }
+  .s-split, .s-split--narrow { grid-template-columns: 1fr; gap: 24px; }
+}
+@media (max-width: 680px) {
+  .s-cards, .s-cards--2, .s-cards--4 { grid-template-columns: 1fr; }
+  .s-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .s-steps li { grid-template-columns: 38px 1fr; gap: 14px; padding: 16px 17px; }
+  .s-steps b { width: 32px; height: 32px; font-size: 16px; }
+}
+
+/* Das Auswahlfeld im Kontaktformular sieht sonst nach Systemvorgabe aus,
+   während daneben gestaltete Eingabefelder stehen. */
+.n-contact-form select {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid rgba(18, 61, 54, 0.22);
+  border-radius: 13px;
+  background: #fff;
+  color: var(--wk-ink);
+  font: inherit;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--wk-ink-soft) 50%), linear-gradient(135deg, var(--wk-ink-soft) 50%, transparent 50%);
+  background-position: calc(100% - 20px) calc(50% + 2px), calc(100% - 14px) calc(50% + 2px);
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+}

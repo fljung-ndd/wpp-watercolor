@@ -1,333 +1,207 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Autismus verstehen – Waldkätzchen</title>
-<meta name="theme-color" content="#F5EDE0">
-<link rel="icon" href="favicon.ico" sizes="any">
-<link rel="icon" href="favicon.png" type="image/png" sizes="256x256">
-<link rel="apple-touch-icon" href="favicon.png">
-<meta name="description" content="Autismus verstehen, Sicherheit aufbauen: Begleitung bei Reizüberflutung, Rückzug, Meltdowns und Anforderungsdruck.">
-<link rel="stylesheet" href="assets/wk.css">
-<link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/alegreya-latin-600-normal.woff2">
-<link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/alegreya-sans-latin-400-normal.woff2">
-<link rel="preload" as="image" href="assets/hero-autismus.webp" media="(min-width:1000px)" fetchpriority="high">
-<link rel="preload" as="image" href="assets/hero-autismus-sm.webp" media="(max-width:999px)" fetchpriority="high">
-<!-- React lokal statt von unpkg.com: spart DNS + TLS + Roundtrip zu einem
-     fremden Host im kritischen Pfad. support.js erkennt window.React und
-     überspringt den CDN-Fallback. -->
-<script src="./vendor/react.production.min.js" defer></script>
-<script src="./vendor/react-dom.production.min.js" defer></script>
-<script src="./support.js" defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Autismus &amp; PDA – Waldkätzchen</title>
+  <meta name="theme-color" content="#123D36">
+  <meta name="description" content="Begleitung bei Autismus, PDA und Masking: Reizverarbeitung, Anforderungsdruck, Übergänge und Ko-Regulation. Beziehung vor Druck, Sicherheit vor Eskalation.">
+
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" href="favicon.png" type="image/png" sizes="256x256">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <link rel="stylesheet" href="assets/wk.css">
+  <link rel="stylesheet" href="assets/index_n.css">
+  <link rel="stylesheet" href="assets/index_n_experience.css">
+  <link rel="stylesheet" href="assets/index_ws.css">
+  <link rel="stylesheet" href="assets/konzept.css">
+  <link rel="stylesheet" href="assets/seite.css">
+
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/alegreya-latin-600-normal.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/alegreya-sans-latin-400-normal.woff2">
+  <script src="assets/seite.js" defer></script>
 </head>
-<body>
-<x-dc>
-<helmet>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Autismus verstehen – Waldkätzchen</title>
-</helmet>
+<body class="s-body">
+  <a class="wk-skip" href="#inhalt">Zum Inhalt springen</a>
 
-<div style="background:var(--wk-paper);overflow-x:hidden;overflow-x:clip">
-
-<a class="wk-skip" href="#inhalt">Zum Inhalt springen</a>
-<header style="position:sticky;top:0;z-index:60;background:var(--wk-forest-800);box-shadow:0 2px 14px rgba(8,45,36,.25)">
-  <div style="max-width:1300px;margin:0 auto;display:flex;align-items:center;gap:18px;padding:9px 20px">
-    <a href="./Startseite.dc.html" style="display:flex;align-items:center;gap:11px;flex:0 0 auto">
-      <span style="width:46px;height:46px;border-radius:50%;background:var(--wk-paper);display:flex;align-items:flex-end;justify-content:center;overflow:hidden;border:2px solid rgba(245,237,224,.4)"><img decoding="async" width="96" height="144" src="assets/cat-teal-logo.webp" alt="" style="width:34px;display:block"></span>
-      <span style="font-family:Alegreya,serif;font-size:28px;font-weight:600;color:var(--wk-paper)">Waldkätzchen</span>
-    </a>
-    <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
-      <nav style="display:flex;align-items:center;gap:18px;margin-left:auto;font-size:15.5px;color:var(--wk-on-dark-soft)">
-        <a href="./Fuer Familien.dc.html" style="color:var(--wk-on-dark-soft)">Für Familien</a>
-        <a href="./Autismus.dc.html" style="color:var(--wk-paper);font-weight:600;border-bottom:2px solid var(--wk-pink);padding-bottom:2px">Autismus &amp; PDA</a>
-        <a href="./Mein Ansatz.dc.html" style="color:var(--wk-on-dark-soft)">Mein Ansatz</a>
-        <a href="./Angebot.dc.html" style="color:var(--wk-on-dark-soft)">Angebot</a>
-        <a href="./Ueber mich.dc.html" style="color:var(--wk-on-dark-soft)">Über mich</a>
-        <a href="./Wissen.dc.html" style="color:var(--wk-on-dark-soft)">Wissen</a>
-        <a href="./Kontakt.dc.html" style="color:var(--wk-on-dark-soft)">Kontakt</a>
-        <a href="./Kontakt.dc.html" style="background:var(--wk-pink-600);color:#fff;border-radius:999px;padding:11px 20px;font-family:'Alegreya Sans',sans-serif;font-size:15px;font-weight:600;display:flex;align-items:center;gap:9px;text-decoration:none" style-hover="background:var(--wk-pink-700)">Erstgespräch anfragen <span aria-hidden="true">♡</span></a>
-      </nav>
-    </sc-if>
-    <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
-      <button onClick="{{ toggleDrawer }}" aria-label="Menü" aria-expanded="{{ drawer }}" style="margin-left:auto;width:48px;height:48px;background:rgba(245,237,224,.12);border:1px solid rgba(245,237,224,.3);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer">
-        <span style="width:22px;height:2px;background:var(--wk-paper);display:block"></span>
-        <span style="width:22px;height:2px;background:var(--wk-paper);display:block"></span>
-        <span style="width:22px;height:2px;background:var(--wk-paper);display:block"></span>
+  <header class="n-header s-header" data-header>
+    <div class="n-shell n-header__inner">
+      <a class="n-brand" href="./index_ws.html" aria-label="Waldkätzchen – zur Startseite">
+        <span class="n-brand__mark"><img src="assets/cat-teal-logo.webp" alt="" width="96" height="144"></span>
+        <span>Waldkätzchen</span>
+      </a>
+      <button class="n-menu-button" type="button" aria-expanded="false" aria-controls="n-navigation">
+        <span></span><span></span><span></span>
+        <span class="n-visually-hidden">Menü öffnen</span>
       </button>
-    </sc-if>
-  </div>
-  <sc-if value="{{ drawer }}" hint-placeholder-val="{{ false }}">
-    <div style="background:var(--wk-forest-700);border-top:1px solid rgba(245,237,224,.16);padding:14px 20px 20px;display:flex;flex-direction:column;gap:2px;font-size:17px">
-      <a href="./Fuer Familien.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Für Familien</a>
-      <a href="./Autismus.dc.html" style="padding:13px 6px;color:var(--wk-paper);font-weight:600">Autismus &amp; PDA</a>
-      <a href="./Mein Ansatz.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Mein Ansatz</a>
-      <a href="./Angebot.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Angebot</a>
-      <a href="./Ueber mich.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Über mich</a>
-      <a href="./Wissen.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Wissen</a>
-      <a href="./Kontakt.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Kontakt</a>
-      <a href="./Kontakt.dc.html" style="margin-top:14px;background:var(--wk-pink-600);color:#fff;border-radius:999px;padding:15px;font-family:'Alegreya Sans',sans-serif;font-size:16.5px;font-weight:600;text-align:center;text-decoration:none;display:block" style-hover="background:var(--wk-pink-700)">Erstgespräch anfragen <span aria-hidden="true">♡</span></a>
+      <nav class="n-navigation" id="n-navigation" aria-label="Hauptnavigation">
+        <a href="./Fuer Familien.dc.html">Für Familien</a>
+        <a href="./Autismus.dc.html" aria-current="page">Autismus &amp; PDA</a>
+        <a href="./Mein Ansatz.dc.html">Mein Ansatz</a>
+        <a href="./Konzept.dc.html">Konzept</a>
+        <a href="./Angebot.dc.html">Angebot</a>
+        <a href="./Ueber mich.dc.html">Über mich</a>
+        <a href="./Wissen.dc.html">Wissen</a>
+        <a class="n-button n-button--pink n-button--small" href="./Kontakt.dc.html">Erst einmal erzählen <span aria-hidden="true">♡</span></a>
+      </nav>
     </div>
-  </sc-if>
-</header>
+  </header>
 
-
-
-<sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
-  <section id="inhalt" tabindex="-1" style="position:relative;background:var(--wk-paper)">
-    <img loading="lazy" decoding="async" width="1600" height="979" src="assets/hero-autismus.webp" alt="Portrait mit Ziege und Waldkätzchen-Figuren" style="width:100%;display:block">
-    <div class="wk-edge-up wk-edge-up--flow" aria-hidden="true" style="--wk-to:var(--wk-paper)"></div>
-    <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(245,237,224,.94) 24%, rgba(245,237,224,.66) 46%, rgba(245,237,224,0) 70%);pointer-events:none"></div>
-    <div style="position:absolute;inset:0;display:flex;align-items:center">
-      <div style="max-width:1300px;margin:0 auto;width:100%;padding:0 26px">
-        <div style="max-width:min(48%,560px)">
-          <div style="font-size:14.5px;color:var(--wk-ink-muted);margin-bottom:12px"><a href="./Startseite.dc.html" style="color:var(--wk-ink-muted)">Startseite</a> &nbsp;›&nbsp; <span style="color:var(--wk-pink-ink);font-weight:600">Autismus</span></div>
-          <h1 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(30px,3.9vw,54px);line-height:1.06;margin:0 0 16px"><span style="color:var(--wk-ink-strong)">Autismus verstehen.</span><br><span style="color:var(--wk-pink-ink)">Sicherheit aufbauen.</span></h1>
-          <p style="font-size:clamp(16px,1.5vw,19px);font-weight:600;line-height:1.4;margin:0 0 14px;max-width:36ch">Weniger Kampf, mehr Verstehen – für Kinder, Jugendliche, Eltern und das Umfeld.</p>
-          <p style="font-size:clamp(14.5px,1.3vw,16.5px);line-height:1.55;margin:0 0 16px;max-width:44ch">Ich begleite Familien und Systeme, wenn Reizüberflutung, Rückzug, Meltdowns, Anforderungsdruck, Übergänge oder Missverständnisse den Alltag bestimmen. Nicht jedes Nein ist Trotz. Nicht jede Eskalation ist Wille.</p>
-          <p style="color:var(--wk-pink-ink);font-size:16px;font-weight:600;margin:0">Beziehung vor Druck. Sicherheit vor Eskalation.</p>
+  <main id="inhalt">
+    <section class="s-hero" aria-labelledby="seiten-titel">
+      <picture>
+        <source media="(max-width:999px)" srcset="assets/hero-autismus-sm.webp">
+        <img class="s-hero__image" src="assets/hero-autismus.webp" alt="" width="1600" height="900" fetchpriority="high">
+      </picture>
+      <div class="s-hero__veil"></div>
+      <div class="n-shell s-hero__content">
+        <p class="n-eyebrow n-eyebrow--light">Autismus &amp; PDA</p>
+        <h1 id="seiten-titel">Autismus verstehen.<br>Sicherheit aufbauen.</h1>
+        <p class="s-hero__claim">Beziehung vor Druck. Sicherheit vor Eskalation.</p>
+        <p class="s-hero__lead">Ich begleite Familien und Systeme, wenn Reizüberflutung, Rückzug, Meltdowns, Anforderungsdruck, Übergänge oder Missverständnisse den Alltag bestimmen. Nicht jedes Nein ist Trotz. Nicht jede Eskalation ist Wille.</p>
+        <div class="n-actions">
+          <a class="n-button n-button--pink" href="./Kontakt.dc.html">Erstgespräch anfragen <span aria-hidden="true">♡</span></a>
         </div>
       </div>
-    </div>
-  </section>
-</sc-if>
-<sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
-  <section style="background:var(--wk-paper)">
-    <img loading="lazy" decoding="async" width="900" height="550" src="assets/hero-autismus-sm.webp" alt="Portrait mit Ziege und Waldkätzchen-Figuren" style="width:100%;display:block">
-    <div class="wk-edge-up wk-edge-up--flow" aria-hidden="true" style="--wk-to:var(--wk-paper)"></div>
-    <div style="padding:16px 22px 32px">
-      <div style="font-size:14px;color:var(--wk-ink-muted);margin-bottom:10px"><a href="./Startseite.dc.html" style="color:var(--wk-ink-muted)">Startseite</a> &nbsp;›&nbsp; <span style="color:var(--wk-pink-ink);font-weight:600">Autismus</span></div>
-      <h1 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(30px,7.5vw,44px);line-height:1.08;margin:0 0 14px"><span style="color:var(--wk-ink-strong)">Autismus verstehen.</span><br><span style="color:var(--wk-pink-ink)">Sicherheit aufbauen.</span></h1>
-      <p style="font-size:18px;font-weight:600;line-height:1.4;margin:0 0 14px">Weniger Kampf, mehr Verstehen – für Kinder, Jugendliche, Eltern und das Umfeld.</p>
-      <p style="font-size:16px;line-height:1.55;margin:0 0 14px">Ich begleite Familien und Systeme, wenn Reizüberflutung, Rückzug, Meltdowns, Anforderungsdruck, Übergänge oder Missverständnisse den Alltag bestimmen. Nicht jedes Nein ist Trotz. Nicht jede Eskalation ist Wille.</p>
-      <p style="color:var(--wk-pink-ink);font-size:16px;font-weight:600;margin:0">Beziehung vor Druck. Sicherheit vor Eskalation.</p>
-    </div>
-  </section>
-</sc-if>
-
-<section style="overflow:hidden;position:relative;padding:10px 20px 44px">
-  <img class="wk-wash" decoding="async" width="1400" height="467" src="assets/sections/section_light.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none">
-  <img decoding="async" width="173" height="175" src="assets/side/flowerLeft.webp" alt="" loading="lazy" style="position:absolute;left:-30px;bottom:-10px;width:clamp(90px,11vw,165px);opacity:.85;pointer-events:none">
-  <div style="max-width:1200px;margin:0 auto;position:relative">
-    <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(28px,3.6vw,38px);color:var(--wk-ink-strong);margin:0 0 4px">Worauf ich schaue</h2>
-    <div style="width:150px;height:3px;background:var(--wk-pink-ink);border-radius:2px;opacity:.75;margin-bottom:26px"></div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px">
-      <div style="background:rgba(255,253,246,.4);border:1px solid var(--wk-line);border-radius:16px;padding:20px 16px 22px;text-align:center;display:flex;flex-direction:column;gap:10px">
-        <img decoding="async" width="512" height="512" src="assets/chars/08_pflanzenkreis.webp" alt="" loading="lazy" style="width:118px;margin:0 auto;border-radius:50%;mix-blend-mode:multiply">
-        <div style="font-family:Alegreya,serif;font-size:20px;font-weight:700;color:var(--wk-ink-strong)">Reizverarbeitung</div>
-        <div style="font-size:14.5px;line-height:1.5;color:var(--wk-ink-soft);margin-top:auto">Wie Reize ankommen, verarbeitet werden und was entlastet.</div>
-      </div>
-      <div style="background:rgba(255,253,246,.4);border:1px solid var(--wk-line);border-radius:16px;padding:20px 16px 22px;text-align:center;display:flex;flex-direction:column;gap:10px">
-        <img decoding="async" width="512" height="512" src="assets/chars/07_ziel_fahne.webp" alt="" loading="lazy" style="width:118px;margin:0 auto;border-radius:50%;mix-blend-mode:multiply">
-        <div style="font-family:Alegreya,serif;font-size:20px;font-weight:700;color:var(--wk-ink-strong)">Anforderungsdruck</div>
-        <div style="font-size:14.5px;line-height:1.5;color:var(--wk-ink-soft);margin-top:auto">Erwartungen, Druck und ständige Anpassung besser verstehen.</div>
-      </div>
-      <div style="background:rgba(255,253,246,.4);border:1px solid var(--wk-line);border-radius:16px;padding:20px 16px 22px;text-align:center;display:flex;flex-direction:column;gap:10px">
-        <img decoding="async" width="512" height="512" src="assets/chars/06_waldhoehle.webp" alt="" loading="lazy" style="width:118px;margin:0 auto;border-radius:50%;mix-blend-mode:multiply">
-        <div style="font-family:Alegreya,serif;font-size:20px;font-weight:700;color:var(--wk-ink-strong)">Rückzug &amp; Erschöpfung</div>
-        <div style="font-size:14.5px;line-height:1.5;color:var(--wk-ink-soft);margin-top:auto">Warnzeichen erkennen, Pausen ermöglichen, Kraftquellen stärken.</div>
-      </div>
-      <div style="background:rgba(255,253,246,.4);border:1px solid var(--wk-line);border-radius:16px;padding:20px 16px 22px;text-align:center;display:flex;flex-direction:column;gap:10px">
-        <img decoding="async" width="512" height="512" src="assets/chars/01_wegweiser.webp" alt="" loading="lazy" style="width:118px;margin:0 auto;border-radius:50%;mix-blend-mode:multiply">
-        <div style="font-family:Alegreya,serif;font-size:20px;font-weight:700;color:var(--wk-ink-strong)">Übergänge &amp; Schule</div>
-        <div style="font-size:14.5px;line-height:1.5;color:var(--wk-ink-soft);margin-top:auto">Wechsel, Pläne und Schule so gestalten, dass Sicherheit wächst.</div>
-      </div>
-      <div style="background:rgba(255,253,246,.4);border:1px solid var(--wk-line);border-radius:16px;padding:20px 16px 22px;text-align:center;display:flex;flex-direction:column;gap:10px">
-        <img decoding="async" width="512" height="512" src="assets/chars/09_haende_herz.webp" alt="" loading="lazy" style="width:118px;margin:0 auto;border-radius:50%;mix-blend-mode:multiply">
-        <div style="font-family:Alegreya,serif;font-size:20px;font-weight:700;color:var(--wk-ink-strong)">Co&#8209;Regulation &amp; Sicherheit</div>
-        <div style="font-size:14.5px;line-height:1.5;color:var(--wk-ink-soft);margin-top:auto">Gemeinsam regulieren, verbinden und Halt geben.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="wk-sd wk-sd--schraege" style="position:relative;padding:var(--wk-sd-top) 20px 42px;background:var(--wk-paper-warm);--wk-from:var(--wk-paper)">
-  <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px;align-items:stretch">
-    <div style="background:rgba(255,253,246,.4);border:1px solid var(--wk-line);border-radius:16px;padding:26px 24px;position:relative;overflow:hidden">
-      <h3 style="font-family:Alegreya,serif;font-size:24px;font-weight:700;color:var(--wk-ink-strong);margin:0 0 14px">Was Familien oft brauchen</h3>
-      <div style="font-size:15.5px;line-height:1.8;max-width:32ch;color:var(--wk-ink-soft)">Entlastung statt Dauerkampf.<br>Ein besseres Verstehen von Verhalten.<br>Gemeinsame Sprache im Umfeld.<br>Praktische Ideen, die im Alltag wirklich tragen.</div>
-      <img decoding="async" width="512" height="512" src="assets/chars/05_pinguin.webp" alt="" loading="lazy" style="display:block;width:120px;margin:10px 0 0 auto;mix-blend-mode:multiply">
-    </div>
-    <div style="background:rgba(255,253,246,.4);border:1px solid var(--wk-line);border-radius:16px;padding:26px 24px">
-      <h3 style="font-family:Alegreya,serif;font-size:24px;font-weight:700;color:var(--wk-ink-strong);margin:0 0 14px">Mein Blick</h3>
-      <p style="font-size:15.5px;line-height:1.65;margin:0 0 12px;color:var(--wk-ink-soft)">Ich schaue auf Muster, Auslöser, Überforderung und Beziehung.</p>
-      <p style="font-size:15.5px;line-height:1.65;margin:0;color:var(--wk-ink-soft)">Ich suche nicht nach schnellen Korrekturen, sondern nach Wegen, die die Eigenart des Kindes achten und das System entlasten.</p>
-    </div>
-    <div style="position:relative;border-radius:16px;overflow:hidden;background:var(--wk-forest-800);padding:26px 22px">
-      <img decoding="async" width="1400" height="467" src="assets/sections/section2_dark.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.9">
-      <div style="position:relative">
-        <h3 style="font-family:Alegreya,serif;font-size:24px;font-weight:700;margin:0 0 16px;color:var(--wk-paper);text-shadow:0 2px 12px rgba(6,30,24,.5)">Mit wem ich arbeite</h3>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;text-align:center">
-          <div><div style="border-radius:12px;overflow:hidden;background:var(--wk-paper);margin-bottom:6px"><img decoding="async" width="512" height="512" src="assets/chars/04_roter_panda.webp" alt="" loading="lazy" style="width:100%;display:block"></div><div style="font-size:13px;font-weight:600;color:var(--wk-paper-warm)">Eltern</div></div>
-          <div><div style="border-radius:12px;overflow:hidden;background:var(--wk-paper);margin-bottom:6px"><img decoding="async" width="512" height="512" src="assets/chars/05_pinguin.webp" alt="" loading="lazy" style="width:100%;display:block"></div><div style="font-size:13px;font-weight:600;color:var(--wk-paper-warm)">Väter</div></div>
-          <div><div style="border-radius:12px;overflow:hidden;background:var(--wk-paper);margin-bottom:6px"><img decoding="async" width="512" height="512" src="assets/chars/03_leopard_krone.webp" alt="" loading="lazy" style="width:100%;display:block"></div><div style="font-size:13px;font-weight:600;color:var(--wk-paper-warm)">Geschwister</div></div>
-          <div><div style="border-radius:12px;overflow:hidden;background:var(--wk-paper);margin-bottom:6px"><img decoding="async" width="512" height="512" src="assets/chars/02_katta.webp" alt="" loading="lazy" style="width:100%;display:block"></div><div style="font-size:13px;font-weight:600;color:var(--wk-paper-warm)">Schule &amp; Kita</div></div>
-          <div><div style="border-radius:12px;overflow:hidden;background:var(--wk-paper);margin-bottom:6px"><img decoding="async" width="512" height="512" src="assets/chars/11_schnecke_rakete.webp" alt="" loading="lazy" style="width:100%;display:block"></div><div style="font-size:13px;font-weight:600;color:var(--wk-paper-warm)">Teams</div></div>
-          <div><div style="border-radius:12px;overflow:hidden;background:var(--wk-paper);margin-bottom:6px"><img decoding="async" width="512" height="512" src="assets/chars/16_pinguin_sprechblase.webp" alt="" loading="lazy" style="width:100%;display:block"></div><div style="font-size:13px;font-weight:600;color:var(--wk-paper-warm)">weitere Helfersysteme</div></div>
+    </section>
+    <section class="n-section n-section--paper k-section s-section">
+      <img class="n-wash" src="assets/sections/section_light.webp" alt="" width="1400" height="467" loading="lazy">
+      <div class="n-shell n-layer">
+        <header class="n-section-heading n-reveal">
+          <p class="n-eyebrow n-eyebrow--petrol">Worauf ich schaue</p>
+          <h2>Fünf Felder, die im Alltag den Unterschied machen</h2>
+        </header>
+        <div class="s-cards">
+          <article class="s-card n-reveal">
+            <img src="assets/chars/08_pflanzenkreis.webp" alt="" width="512" height="512" loading="lazy">
+            <h3>Reizverarbeitung</h3>
+            <p>Wie Reize ankommen, verarbeitet werden – und was entlastet, bevor es zu viel wird.</p>
+          </article>
+          <article class="s-card n-reveal">
+            <img src="assets/chars/07_ziel_fahne.webp" alt="" width="512" height="512" loading="lazy">
+            <h3>Anforderungsdruck</h3>
+            <p>Erwartungen, Druck und ständige Anpassung besser verstehen. Eine Aufforderung, die in Ruhe gelingt, kann in hoher Anspannung scheitern.</p>
+          </article>
+          <article class="s-card n-reveal">
+            <img src="assets/chars/06_waldhoehle.webp" alt="" width="512" height="512" loading="lazy">
+            <h3>Rückzug &amp; Erschöpfung</h3>
+            <p>Warnzeichen erkennen, Pausen ermöglichen, Kraftquellen stärken – ohne Rückzug pauschal zu romantisieren.</p>
+          </article>
+          <article class="s-card n-reveal">
+            <img src="assets/chars/01_wegweiser.webp" alt="" width="512" height="512" loading="lazy">
+            <h3>Übergänge &amp; Schule</h3>
+            <p>Wechsel, Pläne und Schultage so gestalten, dass Vorhersehbarkeit und Sicherheit wachsen.</p>
+          </article>
+          <article class="s-card n-reveal">
+            <img src="assets/chars/09_haende_herz.webp" alt="" width="512" height="512" loading="lazy">
+            <h3>Ko-Regulation</h3>
+            <p>Gemeinsam regulieren, verbinden und Halt geben. Selbststeuerung lässt sich nicht dort erwarten, wo sie gerade unmöglich ist.</p>
+          </article>
+          <article class="s-card n-reveal">
+            <img src="assets/chars/12_masking.webp" alt="" width="512" height="512" loading="lazy">
+            <h3>Masking</h3>
+            <p>Ruhiges Verhalten ist kein sicherer Beleg für Wohlbefinden. Anpassung wird belohnt und deshalb übersehen.</p>
+          </article>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section class="wk-sd wk-sd--kreise" style="position:relative;padding:var(--wk-sd-top) 20px 46px;--wk-from:var(--wk-paper-warm)">
-  <img decoding="async" width="187" height="154" src="assets/side/flowerRight.webp" alt="" loading="lazy" style="position:absolute;right:-28px;bottom:0;width:clamp(80px,10vw,150px);opacity:.8;pointer-events:none">
-  <div style="max-width:1100px;margin:0 auto;position:relative">
-    <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(26px,3.4vw,34px);color:var(--wk-ink-strong);margin:0 0 22px;text-align:center">Typische Themen</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:14px;text-align:center">
-      <img decoding="async" width="512" height="512" src="assets/chars/12_masking.webp" alt="Masking" loading="lazy" style="width:100%;border-radius:20px;mix-blend-mode:multiply">
-      <img decoding="async" width="512" height="512" src="assets/chars/13_ueberforderung.webp" alt="Überforderung" loading="lazy" style="width:100%;border-radius:20px;mix-blend-mode:multiply">
-      <div style="background:var(--wk-orange-050);border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:14px 8px"><img decoding="async" width="179" height="165" src="assets/icons2/10_sprechblasen.webp" alt="" loading="lazy" style="width:56px;border-radius:12px;mix-blend-mode:multiply"><div style="font-size:14.5px;font-weight:600;color:var(--wk-ink)">Kommunikation</div></div>
-      <img decoding="async" width="512" height="512" src="assets/chars/15_alltag.webp" alt="Alltag" loading="lazy" style="width:100%;border-radius:20px;mix-blend-mode:multiply">
-      <img decoding="async" width="512" height="512" src="assets/chars/19_grenzen.webp" alt="Grenzen" loading="lazy" style="width:100%;border-radius:20px;mix-blend-mode:multiply">
-      <img decoding="async" width="512" height="512" src="assets/chars/20_selbstregulation.webp" alt="Selbstregulation" loading="lazy" style="width:100%;border-radius:20px;mix-blend-mode:multiply">
-      <div style="background:var(--wk-pink-050);border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:14px 8px"><img decoding="async" width="256" height="256" src="assets/icons/16_haende_herz.webp" alt="" loading="lazy" style="width:56px;border-radius:12px;mix-blend-mode:multiply"><div style="font-size:14.5px;font-weight:600;color:var(--wk-ink)">Bindung</div></div>
-    </div>
-  </div>
-</section>
-
-<div class="wk-edge" aria-hidden="true" style="--wk-from:var(--wk-paper);--wk-to:var(--wk-forest-800)"></div>
-<section class="wk-abschlussband wk-abschlussband--links" style="background-color:#073936">
-  <img class="wk-abschlussband__bild" decoding="async" width="1600" height="533" src="assets/footer-band2.webp" alt="" loading="lazy">
-  <div class="wk-abschlussband__in">
-  <div style="position:relative;max-width:1240px;margin:0 auto;padding:0 0 58px;z-index:2">
-    <div style="max-width:560px">
-      <div class="wk-abschluss__kasten"><h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(27px,3.4vw,40px);line-height:1.15;color:var(--wk-paper);margin:0 0 8px">Es geht nicht darum, dein Kind passend zu machen.</h2>
-      <p style="color:var(--wk-pink-on-dark);font-family:Alegreya,serif;font-size:clamp(19px,2.4vw,25px);margin:0 0 26px">Es geht darum, passende Wege zu finden.</p></div>
-      <div style="display:flex;gap:14px;flex-wrap:wrap">
-        <button onClick="{{ openContact }}" style="background:var(--wk-pink-ink);color:#fff;border:none;border-radius:999px;padding:14px 28px;font-family:'Alegreya Sans',sans-serif;font-size:16px;font-weight:600;cursor:pointer;box-shadow:0 8px 20px rgba(6,30,24,.35)" style-hover="background:var(--wk-pink-700)">Erstgespräch anfragen&nbsp;&nbsp;<span aria-hidden="true">↗</span></button>
-        <button onClick="{{ openContact }}" style="background:var(--wk-petrol-600);color:#fff;border:none;border-radius:999px;padding:14px 28px;font-family:'Alegreya Sans',sans-serif;font-size:16px;font-weight:600;cursor:pointer;box-shadow:0 8px 20px rgba(6,30,24,.35)" style-hover="background:var(--wk-petrol-ink)">Erstgespräch anfragen&nbsp;&nbsp;<span aria-hidden="true">♡</span></button>
-      </div>
-    </div>
-  </div>
-  </div>
-</section>
-
-<footer style="background:var(--wk-forest-900);color:var(--wk-on-dark-soft)">
-  <div style="max-width:1240px;margin:0 auto;padding:36px 22px 22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:26px">
-    <div>
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
-        <span style="width:42px;height:42px;border-radius:50%;background:var(--wk-paper);display:flex;align-items:flex-end;justify-content:center;overflow:hidden"><img decoding="async" width="96" height="144" src="assets/cat-teal-logo.webp" alt="" style="width:31px;display:block"></span>
-        <span style="font-family:Alegreya,serif;font-size:24px;color:var(--wk-paper)">Waldkätzchen</span>
-      </div>
-      <div style="font-size:13.5px;color:var(--wk-on-dark-muted);margin-bottom:10px">Verstehen. Verbinden. Verändern.</div>
-      <div style="font-size:14px;line-height:1.55">Begleitung für Kinder, Jugendliche und Familien im Autismus-Spektrum. <span style="color:var(--wk-pink-on-dark)" aria-hidden="true">♡</span></div>
-    </div>
-    <div>
-      <div style="font-family:Alegreya,serif;font-size:17px;color:var(--wk-paper);margin-bottom:10px">Navigation</div>
-      <div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px">
-        <a href="./Fuer Familien.dc.html" style="color:var(--wk-on-dark-soft)">Für Familien</a>
-        <a href="./Autismus.dc.html" style="color:var(--wk-on-dark-soft)">Autismus &amp; PDA</a>
-        <a href="./Mein Ansatz.dc.html" style="color:var(--wk-on-dark-soft)">Mein Ansatz</a>
-        <a href="./Angebot.dc.html" style="color:var(--wk-on-dark-soft)">Angebot</a>
-        <a href="./Ueber mich.dc.html" style="color:var(--wk-on-dark-soft)">Über mich</a>
-        <a href="./Wissen.dc.html" style="color:var(--wk-on-dark-soft)">Wissen</a>
-        <a href="./Kontakt.dc.html" style="color:var(--wk-on-dark-soft)">Kontakt</a>
-      </div>
-    </div>
-    <div>
-      <div style="font-family:Alegreya,serif;font-size:17px;color:var(--wk-paper);margin-bottom:10px">Themen</div>
-      <div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px">
-        <a href="./Autismus.dc.html" style="color:var(--wk-on-dark-soft)">Autismus verstehen</a>
-        <span>PDA im Alltag</span>
-        <span>Herausforderndes Verhalten</span>
-        <span>Familienalltag</span>
-        <span>Rituale &amp; Impulse</span>
-        <span>Selbstfürsorge</span>
-      </div>
-    </div>
-    <div>
-      <div style="font-family:Alegreya,serif;font-size:17px;color:var(--wk-paper);margin-bottom:10px">Rechtliches</div>
-      <div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px"><a href="./Impressum.dc.html" style="color:var(--wk-on-dark-soft)">Impressum</a><a href="./Datenschutz.dc.html" style="color:var(--wk-on-dark-soft)">Datenschutz</a></div>
-    </div>
-    <div>
-      <div style="font-family:Alegreya,serif;font-size:17px;color:var(--wk-paper);margin-bottom:10px">Kontakt</div>
-      <div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px">
-        <a href="mailto:torsten.macht@waldkaetzchen.de" style="color:var(--wk-on-dark-soft)">torsten.macht@waldkaetzchen.de</a>
-        <a href="tel:+491757157101" style="color:var(--wk-on-dark-soft)">0175 7157101</a>
-        <span>Berlin &amp; Online</span>
-        <span>www.waldkaetzchen.de</span>
-      </div>
-    </div>
-  </div>
-  <div style="border-top:1px solid rgba(245,237,224,.13);padding:14px 22px;text-align:center;font-size:13px;color:var(--wk-on-dark-muted)">© 2026 Waldkätzchen – Alle Rechte vorbehalten</div>
-</footer>
-
-<sc-if value="{{ contactOpen }}" hint-placeholder-val="{{ false }}">
-  <div onClick="{{ closeContact }}" style="position:fixed;inset:0;background:rgba(8,35,28,.6);z-index:100;display:flex;align-items:center;justify-content:center;padding:18px">
-    <div onClick="{{ stop }}" role="dialog" aria-modal="true" aria-label="Kontakt aufnehmen" style="background:var(--wk-paper-warm);border-radius:20px;max-width:460px;width:100%;padding:30px 26px;box-shadow:0 22px 60px rgba(0,0,0,.4);position:relative">
-      <button onClick="{{ closeContact }}" aria-label="Schließen" style="position:absolute;top:12px;right:14px;width:44px;height:44px;background:none;border:none;font-size:24px;color:var(--wk-ink-muted);cursor:pointer"><span aria-hidden="true">×</span></button>
-      <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
-        <h3 style="font-family:Alegreya,serif;font-size:27px;color:var(--wk-ink-strong);margin:0 0 6px">Kontakt aufnehmen</h3>
-        <p style="font-size:15px;margin:0 0 18px;color:var(--wk-ink-soft)">Schreiben Sie mir – ich melde mich zeitnah zurück.</p>
-        <div style="display:flex;flex-direction:column;gap:12px">
-          <input type="text" name="name" autocomplete="name" aria-label="Ihr Name" placeholder="Ihr Name" style="border:1px solid var(--wk-line-soft);border-radius:11px;padding:14px;font-family:'Alegreya Sans',sans-serif;font-size:15.5px;background:var(--wk-paper-card);color:var(--wk-ink)">
-          <input type="email" name="email" autocomplete="email" aria-label="E-Mail-Adresse" spellcheck="false" placeholder="E-Mail-Adresse" style="border:1px solid var(--wk-line-soft);border-radius:11px;padding:14px;font-family:'Alegreya Sans',sans-serif;font-size:15.5px;background:var(--wk-paper-card);color:var(--wk-ink)">
-          <textarea name="nachricht" aria-label="Ihre Nachricht" placeholder="Ihre Nachricht …" rows="4" style="border:1px solid var(--wk-line-soft);border-radius:11px;padding:14px;font-family:'Alegreya Sans',sans-serif;font-size:15.5px;background:var(--wk-paper-card);color:var(--wk-ink);resize:vertical"></textarea>
-          <button onClick="{{ send }}" style="background:var(--wk-pink-ink);color:#fff;border:none;border-radius:999px;padding:15px;font-family:'Alegreya Sans',sans-serif;font-size:16.5px;font-weight:600;cursor:pointer" style-hover="background:var(--wk-pink-700)">Nachricht senden <span aria-hidden="true">♡</span></button>
+    <section class="n-section n-section--forest k-section s-section">
+      <div class="n-shell">
+        <div class="s-split n-reveal">
+          <div>
+            <h3>Mein Blick</h3>
+            <p>Ich schaue auf Muster, Auslöser, Belastung und Beziehung. Ich suche nicht nach schnellen Korrekturen, sondern nach Wegen, die die Eigenart des Kindes achten und das System entlasten.</p>
+            <p>Dabei gilt: Verständigungsprobleme entstehen wechselseitig, nicht nur auf einer Seite. Und reale Unterstützungsbedarfe werden nicht wegromantisiert.</p>
+            <p><a class="n-text-link" href="./Konzept.dc.html">Worauf das fachlich beruht <span aria-hidden="true">→</span></a></p>
+          </div>
+          <div>
+            <h3>Was Familien oft brauchen</h3>
+        <ul class="s-marks n-reveal">
+          <li>Entlastung statt Dauerkampf.</li>
+          <li>Ein besseres Verstehen von Verhalten – auch des eigenen.</li>
+          <li>Eine gemeinsame Sprache im Umfeld.</li>
+          <li>Praktische Ideen, die im Alltag wirklich tragen.</li>
+          <li>Klare Grenzen, die niemanden beschämen.</li>
+        </ul>
+          </div>
         </div>
-      </sc-if>
-      <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
-        <div role="status" aria-live="polite" style="text-align:center;padding:16px 0">
-          <img loading="lazy" decoding="async" width="512" height="512" src="assets/chars/09_haende_herz.webp" alt="" style="width:130px;mix-blend-mode:multiply">
-          <h3 style="font-family:Alegreya,serif;font-size:27px;color:var(--wk-ink-strong);margin:12px 0 6px">Danke für Ihre Nachricht!</h3>
-          <p style="font-size:15px;color:var(--wk-ink-soft);margin:0">Ich melde mich so bald wie möglich.<br>(Demo – es wurde noch nichts versendet.)</p>
+      </div>
+    </section>
+
+    <section class="n-section n-section--cream k-section s-section">
+      <div class="n-shell">
+        <header class="n-section-heading n-reveal">
+          <p class="n-eyebrow n-eyebrow--orange">Mit wem ich arbeite</p>
+          <h2>Nicht nur mit dem Kind</h2>
+          <p>Veränderung braucht die Menschen, die im Alltag wirklich vorkommen.</p>
+        </header>
+        <div class="s-tiles n-reveal">
+          <span><img src="assets/chars/04_roter_panda.webp" alt="" loading="lazy">Eltern</span>
+          <span><img src="assets/chars/05_pinguin.webp" alt="" loading="lazy">Väter</span>
+          <span><img src="assets/chars/03_leopard_krone.webp" alt="" loading="lazy">Geschwister</span>
+          <span><img src="assets/chars/02_katta.webp" alt="" loading="lazy">Schule &amp; Kita</span>
+          <span><img src="assets/chars/11_schnecke_rakete.webp" alt="" loading="lazy">Teams</span>
+          <span><img src="assets/chars/16_pinguin_sprechblase.webp" alt="" loading="lazy">Helfersysteme</span>
         </div>
-      </sc-if>
+      </div>
+    </section>
+
+    <section class="wk-abschlussband wk-abschlussband--mitte n-closing-band">
+      <img class="wk-abschlussband__bild" src="assets/footer-band2.webp" alt="" width="1600" height="533" loading="lazy">
+      <div class="wk-abschlussband__in">
+        <div class="n-closing-band__content">
+          <div class="wk-abschluss__kasten">
+            <h2>Es geht nicht darum, dein Kind<br>passend zu machen.</h2>
+            <p>Es geht darum, passende Wege zu finden – und Bedingungen, unter denen sie halten.</p>
+          </div>
+          <div class="n-actions n-actions--center">
+            <a class="n-button n-button--pink" href="./Kontakt.dc.html">Erstgespräch anfragen <span aria-hidden="true">♡</span></a>
+            <a class="n-button n-button--petrol" href="./Konzept.dc.html">Das Konzept lesen <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="n-footer">
+    <img class="n-footer__flower" src="assets/side/flowerRight.webp" alt="" width="187" height="154" loading="lazy">
+    <div class="n-shell n-footer__grid">
+      <section>
+        <div class="n-footer__brand"><span><img src="assets/cat-teal-logo.webp" alt="" width="96" height="144"></span><strong>Waldkätzchen</strong></div>
+        <p>Verstehen. Verbinden. Verändern.<br>Für Kinder, Eltern und Familien. <span aria-hidden="true">♡</span></p>
+      </section>
+      <section>
+        <h2>Navigation</h2>
+        <a href="./index_ws.html">Startseite</a>
+        <a href="./index_ws.html#haltung">Haltung</a>
+        <a href="./Konzept.dc.html">Konzept</a>
+        <a href="./Angebot.dc.html">Angebot</a>
+        <a href="./Wissen.dc.html">Wissen</a>
+        <a href="./Kontakt.dc.html">Kontakt</a>
+      </section>
+      <section>
+        <h2>Vertiefen</h2>
+        <a href="./Fuer Familien.dc.html">Für Familien</a>
+        <a href="./Fuer Vaeter.dc.html">Für Väter</a>
+        <a href="./Fuer Teams.dc.html">Für Teams</a>
+        <a href="./Mein Ansatz.dc.html">Mein Ansatz</a>
+        <a href="./Konzept.dc.html">Das Konzept &amp; die Quellen</a>
+      </section>
+      <section>
+        <h2>Kontakt</h2>
+        <a href="mailto:torsten.macht@waldkaetzchen.de">torsten.macht@waldkaetzchen.de</a>
+        <a href="tel:+491757157101">0175 7157101</a>
+        <span>Königswinter / Bonn &amp; Online</span>
+        <a href="./Kontakt.dc.html">Kontaktformular</a>
+      </section>
+      <section>
+        <h2>Rechtliches</h2>
+        <a href="./Impressum.dc.html">Impressum</a>
+        <a href="./Datenschutz.dc.html">Datenschutz</a>
+      </section>
     </div>
-  </div>
-</sc-if>
-</div>
-</x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;figuren&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Illustrationen&quot;}}">
-class Component extends DCLogic {
-  state = { w: typeof window !== 'undefined' ? window.innerWidth : 1400, menuFuerWen: false, menuWissen: false, drawer: false, contactOpen: false, sent: false };
-  componentDidMount() {
-    this._onResize = () => this.setState({ w: window.innerWidth });
-    window.addEventListener('resize', this._onResize);
-    this._onResize();
-  }
-  componentWillUnmount() { window.removeEventListener('resize', this._onResize); }
-  componentDidUpdate() {
-    // Nach dem Absenden ersetzt die Bestaetigung das Formular. Der Button, auf
-    // dem der Fokus lag, verschwindet dabei - ohne Zutun fiel der Fokus auf
-    // <body>, und eine erst jetzt eingefuegte Live-Region wird von
-    // Screenreadern nicht zuverlaessig vorgelesen. Ein Fokuswechsel auf die
-    // Meldung loest beides.
-    // Das Runtime uebergibt componentDidUpdate nur prevProps, keinen
-    // prevState - die Flanke wird darum selbst gemerkt.
-    if (this.state.sent && !this._sentFocused) {
-      this._sentFocused = true;
-      requestAnimationFrame(() => {
-        const el = document.querySelector('[role="status"]');
-        if (el) { el.setAttribute('tabindex', '-1'); el.focus(); }
-      });
-    } else if (!this.state.sent) {
-      this._sentFocused = false;
-    }
-  }
-  renderVals() {
-    const narrow = this.state.w < 1000;
-    return {
-      figuren: this.props.figuren ?? true,
-      wide: !narrow,
-      narrow,
-      drawer: narrow && this.state.drawer,
-      menuFuerWen: this.state.menuFuerWen,
-      menuWissen: this.state.menuWissen,
-      contactOpen: this.state.contactOpen,
-      sent: this.state.sent,
-      notSent: !this.state.sent,
-      toggleDrawer: () => this.setState(s => ({ drawer: !s.drawer })),
-      toggleFuerWen: () => this.setState(s => ({ menuFuerWen: !s.menuFuerWen, menuWissen: false })),
-      toggleWissen: () => this.setState(s => ({ menuWissen: !s.menuWissen, menuFuerWen: false })),
-      openContact: () => this.setState({ contactOpen: true, sent: false, drawer: false, menuFuerWen: false, menuWissen: false }),
-      closeContact: () => this.setState({ contactOpen: false }),
-      send: () => this.setState({ sent: true }),
-      stop: (e) => e.stopPropagation(),
-    };
-  }
-}
-</script>
+    <div class="n-footer__bottom">© 2026 Waldkätzchen – Alle Rechte vorbehalten</div>
+  </footer>
 </body>
 </html>

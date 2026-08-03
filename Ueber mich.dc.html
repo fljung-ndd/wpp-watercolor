@@ -1,355 +1,199 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Über mich – Waldkätzchen</title>
-<meta name="theme-color" content="#F5EDE0">
-<link rel="icon" href="favicon.ico" sizes="any">
-<link rel="icon" href="favicon.png" type="image/png" sizes="256x256">
-<link rel="apple-touch-icon" href="favicon.png">
-<meta name="description" content="Heilpädagogik, viele Jahre IT und eigene Familienerfahrung – warum Waldkätzchen entstanden ist.">
-<link rel="stylesheet" href="assets/wk.css">
-<link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/alegreya-latin-600-normal.woff2">
-<link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/alegreya-sans-latin-400-normal.woff2">
-<!-- React lokal statt von unpkg.com: spart DNS + TLS + Roundtrip zu einem
-     fremden Host im kritischen Pfad. support.js erkennt window.React und
-     überspringt den CDN-Fallback. -->
-<script src="./vendor/react.production.min.js" defer></script>
-<script src="./vendor/react-dom.production.min.js" defer></script>
-<script src="./support.js" defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Über mich – Waldkätzchen</title>
+  <meta name="theme-color" content="#123D36">
+  <meta name="description" content="Heilpädagogik, viele Jahre IT und eigene Familienerfahrung – warum Waldkätzchen entstanden ist und woran ich mich halte.">
+
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" href="favicon.png" type="image/png" sizes="256x256">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <link rel="stylesheet" href="assets/wk.css">
+  <link rel="stylesheet" href="assets/index_n.css">
+  <link rel="stylesheet" href="assets/index_n_experience.css">
+  <link rel="stylesheet" href="assets/index_ws.css">
+  <link rel="stylesheet" href="assets/konzept.css">
+  <link rel="stylesheet" href="assets/seite.css">
+
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/alegreya-latin-600-normal.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/alegreya-sans-latin-400-normal.woff2">
+  <script src="assets/seite.js" defer></script>
 </head>
-<body>
-<x-dc>
-<helmet>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Über mich – Waldkätzchen</title>
-</helmet>
+<body class="s-body">
+  <a class="wk-skip" href="#inhalt">Zum Inhalt springen</a>
 
-<div style="background:var(--wk-paper);overflow-x:hidden;overflow-x:clip">
-
-<a class="wk-skip" href="#inhalt">Zum Inhalt springen</a>
-<header style="position:sticky;top:0;z-index:60;background:var(--wk-forest-800);box-shadow:0 2px 14px rgba(8,45,36,.25)">
-  <div style="max-width:1300px;margin:0 auto;display:flex;align-items:center;gap:18px;padding:9px 20px">
-    <a href="./Startseite.dc.html" style="display:flex;align-items:center;gap:11px;flex:0 0 auto">
-      <span style="width:46px;height:46px;border-radius:50%;background:var(--wk-paper);display:flex;align-items:flex-end;justify-content:center;overflow:hidden;border:2px solid rgba(245,237,224,.4)"><img decoding="async" width="96" height="144" src="assets/cat-teal-logo.webp" alt="" style="width:34px;display:block"></span>
-      <span style="font-family:Alegreya,serif;font-size:28px;font-weight:600;color:var(--wk-paper)">Waldkätzchen</span>
-    </a>
-    <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
-      <nav style="display:flex;align-items:center;gap:18px;margin-left:auto;font-size:15.5px;color:var(--wk-on-dark-soft)">
-        <a href="./Fuer Familien.dc.html" style="color:var(--wk-on-dark-soft)">Für Familien</a>
-        <a href="./Autismus.dc.html" style="color:var(--wk-on-dark-soft)">Autismus &amp; PDA</a>
-        <a href="./Mein Ansatz.dc.html" style="color:var(--wk-on-dark-soft)">Mein Ansatz</a>
-        <a href="./Angebot.dc.html" style="color:var(--wk-on-dark-soft)">Angebot</a>
-        <a href="./Ueber mich.dc.html" style="color:var(--wk-paper);font-weight:600;border-bottom:2px solid var(--wk-pink);padding-bottom:2px">Über mich</a>
-        <a href="./Wissen.dc.html" style="color:var(--wk-on-dark-soft)">Wissen</a>
-        <a href="./Kontakt.dc.html" style="color:var(--wk-on-dark-soft)">Kontakt</a>
-        <a href="./Kontakt.dc.html" style="background:var(--wk-pink-600);color:#fff;border-radius:999px;padding:11px 20px;font-family:'Alegreya Sans',sans-serif;font-size:15px;font-weight:600;display:flex;align-items:center;gap:9px;text-decoration:none" style-hover="background:var(--wk-pink-700)">Erstgespräch anfragen <span aria-hidden="true">♡</span></a>
-      </nav>
-    </sc-if>
-    <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
-      <button onClick="{{ toggleDrawer }}" aria-label="Menü" aria-expanded="{{ drawer }}" style="margin-left:auto;width:48px;height:48px;background:rgba(245,237,224,.12);border:1px solid rgba(245,237,224,.3);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer">
-        <span style="width:22px;height:2px;background:var(--wk-paper);display:block"></span>
-        <span style="width:22px;height:2px;background:var(--wk-paper);display:block"></span>
-        <span style="width:22px;height:2px;background:var(--wk-paper);display:block"></span>
+  <header class="n-header s-header" data-header>
+    <div class="n-shell n-header__inner">
+      <a class="n-brand" href="./index_ws.html" aria-label="Waldkätzchen – zur Startseite">
+        <span class="n-brand__mark"><img src="assets/cat-teal-logo.webp" alt="" width="96" height="144"></span>
+        <span>Waldkätzchen</span>
+      </a>
+      <button class="n-menu-button" type="button" aria-expanded="false" aria-controls="n-navigation">
+        <span></span><span></span><span></span>
+        <span class="n-visually-hidden">Menü öffnen</span>
       </button>
-    </sc-if>
-  </div>
-  <sc-if value="{{ drawer }}" hint-placeholder-val="{{ false }}">
-    <div style="background:var(--wk-forest-700);border-top:1px solid rgba(245,237,224,.16);padding:12px 20px 20px;display:flex;flex-direction:column;font-size:17px">
-      <a href="./Fuer Familien.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Für Familien</a>
-      <a href="./Autismus.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Autismus &amp; PDA</a>
-      <a href="./Mein Ansatz.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Mein Ansatz</a>
-      <a href="./Angebot.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Angebot</a>
-      <a href="./Ueber mich.dc.html" style="padding:13px 6px;color:var(--wk-paper);font-weight:600">Über mich</a>
-      <a href="./Wissen.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Wissen</a>
-      <a href="./Kontakt.dc.html" style="padding:13px 6px;color:var(--wk-paper)">Kontakt</a>
-      <a href="./Kontakt.dc.html" style="margin-top:14px;background:var(--wk-pink-600);color:#fff;border-radius:999px;padding:15px;font-family:'Alegreya Sans',sans-serif;font-size:16.5px;font-weight:600;text-align:center;text-decoration:none;display:block" style-hover="background:var(--wk-pink-700)">Erstgespräch anfragen <span aria-hidden="true">♡</span></a>
+      <nav class="n-navigation" id="n-navigation" aria-label="Hauptnavigation">
+        <a href="./Fuer Familien.dc.html">Für Familien</a>
+        <a href="./Autismus.dc.html">Autismus &amp; PDA</a>
+        <a href="./Mein Ansatz.dc.html">Mein Ansatz</a>
+        <a href="./Konzept.dc.html">Konzept</a>
+        <a href="./Angebot.dc.html">Angebot</a>
+        <a href="./Ueber mich.dc.html" aria-current="page">Über mich</a>
+        <a href="./Wissen.dc.html">Wissen</a>
+        <a class="n-button n-button--pink n-button--small" href="./Kontakt.dc.html">Erst einmal erzählen <span aria-hidden="true">♡</span></a>
+      </nav>
     </div>
-  </sc-if>
-</header>
+  </header>
 
-<div class="wk-edge" aria-hidden="true" style="--wk-from:var(--wk-forest-800);--wk-to:var(--wk-paper)"></div>
-<section id="inhalt" tabindex="-1" style="position:relative;background:var(--wk-paper);overflow:hidden">
-  <img class="wk-wash" loading="lazy" decoding="async" width="1400" height="467" src="assets/sections/section_light.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;-webkit-mask-image:linear-gradient(180deg,#000 72%,transparent);mask-image:linear-gradient(180deg,#000 72%,transparent)">
-  <div style="position:relative;max-width:1300px;margin:0 auto;padding:34px 24px 24px;display:flex;flex-wrap:wrap;gap:30px;align-items:center">
-    <div style="flex:1 1 400px;min-width:290px">
-      <h1 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(32px,4.4vw,54px);line-height:1.06;margin:0 0 12px;color:var(--wk-ink-strong)">Über mich –<br>warum Waldkätzchen entstanden ist.</h1>
-      <div style="color:var(--wk-yellow-ink);font-family:Alegreya,serif;font-size:clamp(18px,2vw,24px);margin-bottom:20px">Aus zwei Welten. Für eine gemeinsame Perspektive.</div>
-      <p style="font-size:16px;line-height:1.6;margin:0 0 14px;max-width:46ch">Ich bin Torsten – Heilpädagoge, IT-ler, Familienmensch. Und jemand, der gelernt hat: Verstehen verändert mehr als schnelle Lösungen.</p>
-      <p style="font-size:16px;line-height:1.6;margin:0 0 14px;max-width:46ch">Waldkätzchen ist aus meinem eigenen Weg entstanden – aus Erfahrungen mit Krisen, mit Überforderung, aber vor allem aus dem Wunsch, Kinder, Eltern und Familien wirklich zu begleiten.</p>
-      <p style="font-size:16px;line-height:1.6;margin:0;max-width:46ch">Hier findest du meine Geschichte, meine Überzeugungen und das, was mir wichtig ist – beruflich und im Leben. <span style="color:var(--wk-pink-ink)" aria-hidden="true">♡</span></p>
-    </div>
-    <div style="flex:1 1 380px;min-width:290px;position:relative">
-      <div style="position:relative;width:100%;max-width:520px;margin:0 auto">
-        <img loading="lazy" decoding="async" width="620" height="827" src="assets/ich/foto4.webp" alt="Torsten" style="width:100%;display:block;border-radius:24px;-webkit-mask-image:radial-gradient(ellipse 74% 74% at 50% 46%, #000 62%, transparent 100%);mask-image:radial-gradient(ellipse 74% 74% at 50% 46%, #000 62%, transparent 100%)">
-        <img decoding="async" width="512" height="512" src="assets/chars/05_pinguin.webp" alt="" loading="lazy" style="position:absolute;left:2%;bottom:-6%;width:32%;mix-blend-mode:multiply">
-        <img decoding="async" width="512" height="512" src="assets/chars/11_schnecke_rakete.webp" alt="" loading="lazy" style="position:absolute;right:2%;bottom:-4%;width:32%;mix-blend-mode:multiply">
-      </div>
-    </div>
-  </div>
-</section>
-
-<section style="position:relative;padding:26px 20px 26px">
-  <div style="max-width:1200px;margin:0 auto">
-    <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(25px,3.2vw,34px);color:var(--wk-ink-strong);margin:0 0 4px"><span style="border-bottom:3px solid var(--wk-pink-ink);padding-bottom:3px">Mein Weg</span> – wie Waldkätzchen gewachsen ist</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(186px,1fr));gap:18px;margin-top:26px">
-      <div style="text-align:center"><div style="color:var(--wk-pink-ink);font-size:20px;margin-bottom:10px" aria-hidden="true">♡</div><p style="font-size:14.5px;line-height:1.6;color:var(--wk-ink-soft);margin:0">Ich komme aus zwei Welten: aus der Heilpädagogik – mit dem Blick für den Menschen und das Miteinander – und aus vielen Jahren in der IT. Zwei scheinbar verschiedene Bereiche, die mir heute eine besondere Stärke geben: analytisch denken und zugleich menschlich fühlen.</p></div>
-      <div style="text-align:center"><div style="color:var(--wk-pink-ink);font-size:20px;margin-bottom:10px" aria-hidden="true">♡</div><p style="font-size:14.5px;line-height:1.6;color:var(--wk-ink-soft);margin:0">Dann kam das, was viele Familien kennen: persönliche Krisen, Unsicherheit, Wutausbrüche, Rückzug, Eskalationen. Ich habe miterlebt, wie schnell der Alltag kippen kann – und wie leicht man als Familie das Gefühl bekommt, allein damit zu sein.</p></div>
-      <div style="text-align:center"><div style="color:var(--wk-pink-ink);font-size:20px;margin-bottom:10px" aria-hidden="true">♡</div><p style="font-size:14.5px;line-height:1.6;color:var(--wk-ink-soft);margin:0">Ich habe gelernt: Verhalten ist nie „einfach nur schwierig“. Es hat Gründe. Es will verstanden werden. Und oft braucht es nicht mehr Druck – sondern mehr Sicherheit, Verbindung und verständnisvolle Begleitung.</p></div>
-      <div style="text-align:center"><div style="color:var(--wk-pink-ink);font-size:20px;margin-bottom:10px" aria-hidden="true">♡</div><p style="font-size:14.5px;line-height:1.6;color:var(--wk-ink-soft);margin:0">Aus all dem ist Waldkätzchen entstanden: ein Ort für Kinder, Eltern und Familien, an dem ich mit euch hinschaue, verstehe und verändere – mit Herz, Fachwissen und ganz viel Alltagsnähe.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="wk-sd wk-sd--schraege" style="position:relative;padding:var(--wk-sd-top) 20px 30px;overflow:hidden;background:var(--wk-paper-warm);--wk-from:var(--wk-paper)">
-  <img class="wk-wash" decoding="async" width="1400" height="467" src="assets/sections/section_light.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;-webkit-mask-image:linear-gradient(180deg,transparent,#000 16%,#000 84%,transparent);mask-image:linear-gradient(180deg,transparent,#000 16%,#000 84%,transparent)">
-  <div style="position:relative;max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:26px;align-items:center">
-    <div style="flex:0 1 250px;min-width:190px;text-align:center">
-      <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(25px,3.2vw,34px);color:var(--wk-ink-strong);margin:0 0 14px;text-align:left">Was mich prägt</h2>
-      <img decoding="async" width="512" height="512" src="assets/chars/04_roter_panda.webp" alt="" loading="lazy" style="width:100%;max-width:230px;mix-blend-mode:multiply">
-    </div>
-    <div style="flex:1 1 520px;min-width:280px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px">
-      <div style="background:url(assets/wc/sq-petrol.webp) center/100% 100% no-repeat;border-radius:18px;padding:20px 22px"><div style="display:flex;gap:8px;align-items:center;margin-bottom:6px"><span style="width:38px;height:38px;flex:0 0 auto;background:url(assets/wc/circle_pink.webp) center/contain no-repeat;display:inline-flex;align-items:center;justify-content:center;color:var(--wk-pink-ink);font-size:17px" aria-hidden="true">♡</span><span style="font-family:Alegreya,serif;font-size:18px;font-weight:700;color:var(--wk-ink-strong)">Bedürfnisorientierung</span></div><div style="font-size:13.5px;line-height:1.5;color:var(--wk-ink-soft)">Ich glaube daran, dass jedes Verhalten einen Sinn hat. Wenn wir Bedürfnisse verstehen, wird echte Veränderung möglich.</div></div>
-      <div style="background:url(assets/wc/sq-pink.webp) center/100% 100% no-repeat;border-radius:18px;padding:20px 22px"><div style="display:flex;gap:8px;align-items:center;margin-bottom:6px"><span style="width:38px;height:38px;flex:0 0 auto;background:url(assets/wc/circle_pink.webp) center/contain no-repeat;display:inline-flex;align-items:center;justify-content:center;color:var(--wk-pink-ink);font-size:17px" aria-hidden="true">♡</span><span style="font-family:Alegreya,serif;font-size:18px;font-weight:700;color:var(--wk-ink-strong)">Verstehen statt Bewerten</span></div><div style="font-size:13.5px;line-height:1.5;color:var(--wk-ink-soft)">Mich interessieren die Geschichten hinter dem Verhalten – nicht das Etikett. Empathie und Neugier sind meine wichtigsten Werkzeuge.</div></div>
-      <div style="background:url(assets/wc/sq-yellow.webp) center/100% 100% no-repeat;border-radius:18px;padding:20px 22px"><div style="display:flex;gap:8px;align-items:center;margin-bottom:6px"><span style="width:38px;height:38px;flex:0 0 auto;background:url(assets/wc/circle_yellow.webp) center/contain no-repeat;display:inline-flex;align-items:center;justify-content:center;color:var(--wk-yellow-ink);font-size:17px">☀</span><span style="font-family:Alegreya,serif;font-size:18px;font-weight:700;color:var(--wk-ink-strong)">Klarheit ohne Härte</span></div><div style="font-size:13.5px;line-height:1.5;color:var(--wk-ink-soft)">Strukturen und Grenzen sind wichtig – aber immer mit Wertschätzung und Respekt.</div></div>
-      <div style="background:url(assets/wc/sq-orange.webp) center/100% 100% no-repeat;border-radius:18px;padding:20px 22px"><div style="display:flex;gap:8px;align-items:center;margin-bottom:6px"><span style="width:38px;height:38px;flex:0 0 auto;background:url(assets/wc/circle_orange.webp) center/contain no-repeat;display:inline-flex;align-items:center;justify-content:center;color:var(--wk-orange-ink);font-size:17px">✦</span><span style="font-family:Alegreya,serif;font-size:18px;font-weight:700;color:var(--wk-ink-strong)">Systemischer Blick</span></div><div style="font-size:13.5px;line-height:1.5;color:var(--wk-ink-soft)">Ich schaue nicht nur auf das Kind, sondern auf das ganze System. Beziehungen, Umwelt und Alltag gehören immer dazu.</div></div>
-      <div style="background:url(assets/wc/sq-blue.webp) center/100% 100% no-repeat;border-radius:18px;padding:20px 22px"><div style="display:flex;gap:8px;align-items:center;margin-bottom:6px"><span style="width:38px;height:38px;flex:0 0 auto;background:url(assets/wc/circle_blue.webp) center/contain no-repeat;display:inline-flex;align-items:center;justify-content:center;color:var(--wk-cyan-ink);font-size:17px">❧</span><span style="font-family:Alegreya,serif;font-size:18px;font-weight:700;color:var(--wk-ink-strong)">Alltagsnahe Begleitung</span></div><div style="font-size:13.5px;line-height:1.5;color:var(--wk-ink-soft)">Ich arbeite praxisnah und umsetzbar – mit Ideen, die im echten Leben funktionieren, nicht nur in der Theorie.</div></div>
-      <div style="background:url(assets/wc/sq-petrol.webp) center/100% 100% no-repeat;border-radius:18px;padding:20px 22px"><div style="display:flex;gap:8px;align-items:center;margin-bottom:6px"><span style="width:38px;height:38px;flex:0 0 auto;background:url(assets/wc/circle_petrol.webp) center/contain no-repeat;display:inline-flex;align-items:center;justify-content:center;color:var(--wk-forest-700);font-size:17px">∞</span><span style="font-family:Alegreya,serif;font-size:18px;font-weight:700;color:var(--wk-ink-strong)">Neurodivergenz&shy;sensibilität</span></div><div style="font-size:13.5px;line-height:1.5;color:var(--wk-ink-soft)">Ich habe ein besonderes Verständnis für neurodivergente Kinder und ihre Familien. Vielfalt ist für mich selbstverständlich.</div></div>
-    </div>
-  </div>
-</section>
-
-<section style="position:relative;padding:34px 20px 24px;background:var(--wk-paper-warm)">
-  <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:28px;align-items:center">
-    <div style="flex:1 1 320px;min-width:280px">
-      <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(25px,3.2vw,34px);color:var(--wk-ink-strong);margin:0 0 20px"><span style="border-bottom:3px solid var(--wk-pink-ink);padding-bottom:3px">Wer ich bin</span> – was ich mitbringe</h2>
-      <div style="display:flex;flex-direction:column;gap:14px;font-size:14.5px">
-        <div style="display:flex;gap:11px"><span style="color:var(--wk-pink-ink)" aria-hidden="true">♡</span><div><strong>Heilpädagoge</strong> mit Herz und Erfahrung im Umgang mit Kindern, Jugendlichen und Familien.</div></div>
-        <div style="display:flex;gap:11px"><span style="color:var(--wk-pink-ink)" aria-hidden="true">♡</span><div><strong>Viele Jahre IT</strong> – mit analytischem Denken, Struktur und Lösungsorientierung.</div></div>
-        <div style="display:flex;gap:11px"><span style="color:var(--wk-pink-ink)" aria-hidden="true">♡</span><div><strong>Eigene Familienerfahrung</strong> – ich weiß, wie es sich anfühlt, wenn der Alltag schwer wird.</div></div>
-        <div style="display:flex;gap:11px"><span style="color:var(--wk-pink-ink)" aria-hidden="true">♡</span><div><strong>Praktische Nähe</strong> – ich bin nicht nur Berater, sondern Begleiter im echten Leben.</div></div>
-      </div>
-    </div>
-    <div style="flex:1 1 440px;min-width:280px">
-      <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center">
-        <div style="position:relative;background:var(--wk-paper-card);padding:9px 9px 28px;box-shadow:0 12px 26px rgba(20,45,35,.2);transform:rotate(-3deg)">
-          <span style="position:absolute;top:-10px;left:50%;transform:translateX(-50%) rotate(-4deg);width:66px;height:20px;background:rgba(224,196,140,.7);border:1px solid rgba(170,140,85,.3)"></span>
-          <img decoding="async" width="620" height="827" src="assets/ich/foto1.webp" alt="Portrait" loading="lazy" style="width:min(180px,44vw);height:214px;object-fit:cover;display:block">
-        </div>
-        <div style="position:relative;background:var(--wk-paper-card);padding:9px 9px 28px;box-shadow:0 12px 26px rgba(20,45,35,.2);transform:rotate(1.5deg)">
-          <span style="position:absolute;top:-10px;left:50%;transform:translateX(-50%) rotate(3deg);width:66px;height:20px;background:rgba(224,196,140,.7);border:1px solid rgba(170,140,85,.3)"></span>
-          <img decoding="async" width="620" height="827" src="assets/ich/foto2.webp" alt="Portrait" loading="lazy" style="width:min(180px,44vw);height:214px;object-fit:cover;display:block;filter:grayscale(.9) sepia(.12)">
-        </div>
-        <div style="position:relative;background:var(--wk-paper-card);padding:9px 9px 28px;box-shadow:0 12px 26px rgba(20,45,35,.2);transform:rotate(3deg)">
-          <span style="position:absolute;top:-10px;left:50%;transform:translateX(-50%) rotate(-2deg);width:66px;height:20px;background:rgba(224,196,140,.7);border:1px solid rgba(170,140,85,.3)"></span>
-          <img decoding="async" width="620" height="827" src="assets/ich/foto3.webp" alt="Portrait mit Esel" loading="lazy" style="width:min(180px,44vw);height:214px;object-fit:cover;display:block">
+  <main id="inhalt">
+    <section class="s-hero" aria-labelledby="seiten-titel">
+      <picture>
+        <source media="(max-width:999px)" srcset="assets/hero-uebermich-sm.webp">
+        <img class="s-hero__image" src="assets/hero-uebermich.webp" alt="" width="1600" height="900" fetchpriority="high">
+      </picture>
+      <div class="s-hero__veil"></div>
+      <div class="n-shell s-hero__content">
+        <p class="n-eyebrow n-eyebrow--light">Über mich</p>
+        <h1 id="seiten-titel">Aus zwei Welten.<br>Für eine gemeinsame Perspektive.</h1>
+        <p class="s-hero__claim">Waldkätzchen ist das, was ich selbst gebraucht hätte.</p>
+        <p class="s-hero__lead">Ich war oft da. Aber ich wusste nicht, wie ich ankommen sollte. Nicht weil ich nicht wollte – sondern weil mir niemand gezeigt hatte, wie das geht: echte Verbindung, im Alltag, ohne die richtigen Worte parat zu haben.</p>
+        <div class="n-actions">
+          <a class="n-button n-button--pink" href="./Kontakt.dc.html">Erst einmal erzählen <span aria-hidden="true">♡</span></a>
         </div>
       </div>
-      <div style="text-align:center;color:var(--wk-pink-ink);font-family:Alegreya,serif;font-style:italic;font-size:20px;margin-top:14px">Menschlich. Engagiert. Ehrlich. <span aria-hidden="true">♡</span></div>
-    </div>
-  </div>
-</section>
+    </section>
+    <section class="n-section n-section--paper k-section s-section">
+      <img class="n-wash" src="assets/sections/section_light.webp" alt="" width="1400" height="467" loading="lazy">
+      <div class="n-shell n-layer">
+        <div class="s-split s-split--narrow n-reveal">
+          <div>
+            <h3>Wer ich bin – was ich mitbringe</h3>
+        <ul class="s-marks n-reveal">
+          <li><b>Heilpädagoge</b> mit Herz und Erfahrung im Umgang mit Kindern, Jugendlichen und Familien.</li>
+          <li><b>Viele Jahre IT</b> – mit analytischem Denken, Struktur und Lösungsorientierung.</li>
+          <li><b>Eigene Familienerfahrung</b> – ich weiß, wie es sich anfühlt, wenn der Alltag schwer wird.</li>
+          <li><b>Praktische Nähe</b> – ich bin nicht nur Berater, sondern Begleiter im echten Leben.</li>
+        </ul>
+            <p style="margin-top:18px">Jahrelang war ich erfolgreich. Ich habe Verantwortung übernommen und Dinge aufgebaut – und hatte trotzdem das Gefühl, nicht wirklich anzukommen. Ich kannte den Nebel. Ich kannte die Höhle. Nur hatte ich damals noch keine Namen dafür.</p>
+            <p>In der IT und in der Heilpädagogik geht es um dasselbe: Muster erkennen. Im einen Fall in Systemen, im anderen in Beziehungen.</p>
+          </div>
+          <div>
+            <img src="assets/ich/foto2.webp" alt="Torsten Macht" width="500" height="667" loading="lazy" style="border-radius:22px">
+          </div>
+        </div>
+      </div>
+    </section>
 
-<section class="wk-sd wk-sd--kreise" style="position:relative;padding:var(--wk-sd-top) 20px 20px;--wk-from:var(--wk-paper-warm)">
-  <div style="max-width:980px;margin:0 auto;background:url(assets/box/card-green.webp) center/100% 100% no-repeat;padding:clamp(26px,4vw,44px) clamp(24px,5vw,56px)">
-    <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(24px,3vw,32px);color:var(--wk-ink-strong);margin:0 0 4px">Mein Weg zu den Waldkätzchen</h2>
-    <div style="color:var(--wk-yellow-ink);font-size:16px;margin-bottom:18px">Persönlich erzählt.</div>
-    <p style="font-size:15.5px;line-height:1.68;margin:0 0 12px;color:var(--wk-ink-soft)">Ich bin Torsten. Papa von drei wunderbaren Kindern. Partner. Heilpädagoge. Informatiker. Und vor allem: ein Mensch, der selbst lange lernen durfte, hinzusehen, zu fühlen und wirklich zuzuhören.</p>
-    <p style="font-size:15.5px;line-height:1.68;margin:0 0 12px;color:var(--wk-ink-soft)">Mein ältestes Kind ist hochbegabt, mein Sohn im Autismus-Spektrum. Beide haben mir gezeigt, wie komplex, wie intensiv – aber auch wie wunderbar das Leben als Familie sein kann. Und wie oft wir als Eltern an unsere Grenzen stoßen.</p>
-    <p style="font-size:15.5px;line-height:1.68;margin:0 0 12px;color:var(--wk-ink-soft)">Ich kenne die Nächte voller Sorgen. Die Tage voller Wut, Tränen und Zweifel. Die Momente, in denen nichts mehr geht – und die Suche nach Antworten, die wirklich helfen.</p>
-    <p style="font-size:15.5px;line-height:1.68;margin:0 0 12px;color:var(--wk-ink-soft)">Meine eigene Kindheit war nicht immer leicht. Ich habe früh gelernt, stark zu sein. Funktionieren. Durchhalten. Gefühle? Nicht so wichtig. Heute weiß ich: Genau das hat mich geprägt – und genau das möchte ich für meine Kinder anders machen.</p>
-    <p style="font-size:15.5px;line-height:1.68;margin:0 0 12px;color:var(--wk-ink-soft)">Ich habe Heilpädagogik studiert, weil ich verstehen wollte. Verstehen, was hinter Verhalten steckt. Verstehen, wie Entwicklung wirklich gelingt. Und weil ich glaube: Jedes Kind verdient es, gesehen und verstanden zu werden.</p>
-    <p style="font-size:15.5px;line-height:1.68;margin:0 0 14px;color:var(--wk-ink-soft)">Vor meiner pädagogischen Arbeit war ich viele Jahre in der IT und in der Teamleitung unterwegs. Ich weiß, wie Systeme funktionieren. Wie wichtig Struktur ist. Und wie schnell Menschen darin vergessen werden.</p>
-    <p style="font-family:Alegreya,serif;font-size:19px;line-height:1.5;margin:0;color:var(--wk-forest-600)">Die Waldkätzchen sind aus all dem entstanden:<br>Aus meinem Leben. Aus meiner Arbeit. Aus meinem Herzen. <span style="color:var(--wk-pink-ink)" aria-hidden="true">♡</span></p>
-  </div>
-</section>
+    <section class="n-section n-section--forest k-section s-section">
+      <div class="n-shell">
+        <header class="n-section-heading n-reveal">
+          <p class="n-eyebrow n-eyebrow--yellow">Was mich prägt</p>
+          <h2>Woran ich mich halte, auch wenn es schwierig wird.</h2>
+        </header>
+        <div class="s-cards">
+          <article class="s-card n-reveal">
+            <h3>Beziehung</h3>
+            <p>Verbindung ist kein Lohn für Wohlverhalten. „Dieses Verhalten stoppe ich. Du bleibst Teil unserer Beziehung.“</p>
+          </article>
+          <article class="s-card n-reveal">
+            <h3>Selbstbestimmung</h3>
+            <p>Wahl, Einfluss, Information und Nein-Räume. Auch wo nichts verhandelbar ist, bleibt das Wie gestaltbar – ohne Scheinwahl.</p>
+          </article>
+          <article class="s-card n-reveal">
+            <h3>Ko-Regulation</h3>
+            <p>Ich erwarte Selbststeuerung nicht dort, wo Anspannung oder Erschöpfung sie gerade unmöglich machen.</p>
+          </article>
+          <article class="s-card n-reveal">
+            <h3>Verstehen statt Bewerten</h3>
+            <p>Mich interessieren die Geschichten hinter dem Verhalten – nicht das Etikett. Und ich behandle meine Vermutungen als Vermutungen.</p>
+          </article>
+          <article class="s-card n-reveal">
+            <h3>Klarheit ohne Härte</h3>
+            <p>Klarheit benennt, was gilt, ohne den anderen kleinzumachen. In hoher Anspannung sind kurze Sätze hilfreicher als lange Erklärungen.</p>
+          </article>
+          <article class="s-card n-reveal">
+            <h3>Wechselseitiges Verstehen</h3>
+            <p>Verständigungsprobleme entstehen zwischen Menschen, nicht in einem von ihnen. Reale Unterstützungsbedarfe verharmlose ich trotzdem nicht.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-<section style="position:relative;padding:clamp(40px,5vw,72px) 20px clamp(30px,4vw,52px);background:var(--wk-paper)">
-  <div style="max-width:980px;margin:0 auto">
-    <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(25px,3.2vw,36px);color:var(--wk-ink-strong);margin:0 0 8px"><span class="wk-strich">Ich wollte dem Druck etwas entgegensetzen</span></h2>
-    <p style="font-family:Alegreya,serif;font-style:italic;font-size:clamp(19px,2.1vw,25px);line-height:1.45;color:var(--wk-pink-ink);margin:22px 0 22px;max-width:28ch">Ich war oft da.<br>Aber ich wusste nicht,<br>wie ich ankommen sollte.</p>
-    <div style="display:flex;flex-wrap:wrap;gap:clamp(24px,3.4vw,52px)">
-      <div style="flex:1 1 380px;min-width:280px">
-        <p style="font-size:16px;line-height:1.75;margin:0 0 14px;color:var(--wk-ink-soft)">Nicht weil ich nicht wollte. Sondern weil mir niemand gezeigt hatte, wie das geht – echte Verbindung, im Alltag, ohne die richtigen Worte parat zu haben.</p>
-        <p style="font-size:16px;line-height:1.75;margin:0 0 14px;color:var(--wk-ink-soft)">Waldkätzchen ist aus vielen Jahren entstanden, in denen ich funktioniert habe. Ich habe Verantwortung übernommen, Dinge aufgebaut, war erfolgreich – und mich dabei trotzdem oft nicht wirklich verbunden gefühlt. Nicht mit anderen. Manchmal auch nicht mit mir selbst.</p>
-        <p style="font-size:16px;line-height:1.75;margin:0 0 14px;color:var(--wk-ink-soft)">Alte Stimmen, Erwartungen und negative Glaubenssätze können laut werden. Sie können verletzen, klein machen und Rückzug scheinbar sicherer wirken lassen als Begegnung. Ich kenne dieses Gefühl. Und ich kenne den Wunsch, nicht immer kämpfen zu müssen, sondern wieder Raum für Verbindung zu finden.</p>
+    <section class="n-section n-section--cream k-section s-section">
+      <div class="n-shell">
+        <div class="s-split s-split--narrow n-reveal">
+          <div>
+            <img src="assets/chars/17_katze_pinguin_umarmung.webp" alt="" width="512" height="512" loading="lazy">
+          </div>
+          <div>
+            <h3>Warum Kuscheltiere</h3>
+            <p>Eigentlich sollten es Ziegen sein – ich darf nur keine halten. Kuscheltiere und Handpuppen legen das Schwierige neben uns auf den Tisch, statt es in eine Person zu legen. Statt „du bist aggressiv“ heißt es „gerade zeigt sich viel von Luis“.</p>
+            <p>Genau das braucht es in Momenten hoher Anspannung: Da sinkt bei allen die Fähigkeit, differenziert über Absichten und Gefühle nachzudenken. Ein Tier auf dem Tisch senkt den Druck weit genug, dass Denken wieder möglich wird.</p>
+            <p><b>Tigi kam zuerst. Ich kam danach.</b></p>
+            <p><a class="n-text-link" href="./Konzept.dc.html">Alle acht Tiere und die Quellen dahinter <span aria-hidden="true">→</span></a></p>
+          </div>
+        </div>
       </div>
-      <div style="flex:1 1 380px;min-width:280px">
-        <p style="font-size:16px;line-height:1.75;margin:0 0 14px;color:var(--wk-ink-soft)">Gleichzeitig erlebe ich in meinem Leben und in meiner heilpädagogischen Arbeit, wie schnell Verhalten bewertet wird – besonders dann, wenn Kinder, Familien oder Menschen mit besonderen Wahrnehmungen eigentlich etwas ganz anderes brauchen: Verständnis, Orientierung, einen sicheren Umweg ins Gespräch.</p>
-        <p style="font-size:16px;line-height:1.75;margin:0 0 14px;color:var(--wk-ink-soft)">Viele Sätze, die ich früh gehört hatte, haben sich festgesetzt. Ich kannte den Nebel. Ich kannte die Höhle. Nur hatte ich damals noch keine Namen dafür.</p>
-        <p style="font-size:16px;line-height:1.75;margin:0 0 14px;color:var(--wk-ink-soft)">Darum gibt es Waldkätzchen: um Situationen nicht vorschnell zu bewerten, sondern gemeinsam hinzuschauen – auf Gefühle, auf das, was mitwirkt, und auf kleine Wege zurück in Verbindung.</p>
-        <p style="font-family:Alegreya,serif;font-family:Alegreya,serif;font-weight:600;font-size:clamp(19px,2vw,24px);line-height:1.4;color:var(--wk-ink-strong);margin:22px 0 0;max-width:32ch">Waldkätzchen ist das, was ich selbst gebraucht hätte.</p>
-      </div>
-    </div>
-    <p style="font-size:16px;line-height:1.75;margin:0 0 14px;color:var(--wk-ink-soft);margin-top:22px;max-width:76ch">Waldkätzchen ist mein Herzensprojekt. Lange gelebt, jetzt weiterentwickelt, damit diese Perspektive für mehr Menschen zugänglich wird: für Familien, für Väter, für Kinder – und für alle, die sich und andere besser verstehen möchten.</p>
-  </div>
-</section>
+    </section>
 
-<section class="wk-sd wk-sd--organisch" style="position:relative;padding:var(--wk-sd-top) 20px clamp(40px,5vw,72px);background:var(--wk-paper-warm);--wk-from:var(--wk-paper);overflow:hidden">
-  <div style="max-width:980px;margin:0 auto">
-    <p style="font-family:Alegreya,serif;font-style:italic;font-size:clamp(20px,2.3vw,28px);line-height:1.4;color:var(--wk-ink-strong);margin:0 0 6px;max-width:26ch">„Muss der da sein?<br>Der stört doch nur den Frieden.&#8220;</p>
-    <div style="color:var(--wk-petrol-ink);font-size:20px;margin-bottom:26px" aria-hidden="true">&#127807;</div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-bottom:26px">
-      <div style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:18px;padding:22px 20px">
-        <div style="font-family:Alegreya,serif;font-weight:600;font-size:19px;color:var(--wk-ink-strong);margin-bottom:8px">Der Junge</div>
-        <p style="font-size:15px;line-height:1.7;margin:0;color:var(--wk-ink-soft)">Ich habe einen Jungen gekannt, bei dem viele so dachten. Er war unberechenbar, impulsiv – jüngere Kinder hatten Angst vor ihm. Für viele war er schlicht zu anstrengend.</p>
+    <section class="wk-abschlussband wk-abschlussband--mitte n-closing-band">
+      <img class="wk-abschlussband__bild" src="assets/footer-band1.webp" alt="" width="1600" height="533" loading="lazy">
+      <div class="wk-abschlussband__in">
+        <div class="n-closing-band__content">
+          <div class="wk-abschluss__kasten">
+            <h2>Waldkätzchen ist das,<br>was ich selbst gebraucht hätte.</h2>
+            <p>Wenn dir das bekannt vorkommt, erzähl mir davon. Ein paar Sätze reichen.</p>
+          </div>
+          <div class="n-actions n-actions--center">
+            <a class="n-button n-button--pink" href="./Kontakt.dc.html">Erstgespräch anfragen <span aria-hidden="true">♡</span></a>
+            <a class="n-button n-button--petrol" href="./Mein Ansatz.dc.html">Wie ich arbeite <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
       </div>
-      <div style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:18px;padding:22px 20px">
-        <div style="font-family:Alegreya,serif;font-weight:600;font-size:19px;color:var(--wk-ink-strong);margin-bottom:8px">Die Begegnung</div>
-        <p style="font-size:15px;line-height:1.7;margin:0;color:var(--wk-ink-soft)">Ich habe gerne Zeit mit ihm verbracht. Nicht weil ich naiv war. Sondern weil ich in ihm nicht das Problem gesehen habe – sondern einen Menschen, dem noch niemand erklärt hatte, dass er kein Fehler ist.</p>
-      </div>
-      <div style="background:var(--wk-paper-card);border:1px solid var(--wk-line);border-radius:18px;padding:22px 20px">
-        <div style="font-family:Alegreya,serif;font-weight:600;font-size:19px;color:var(--wk-ink-strong);margin-bottom:8px">Die Erkenntnis</div>
-        <p style="font-size:15px;line-height:1.7;margin:0;color:var(--wk-ink-soft)">Kein Kind verhält sich schwierig ohne Grund. Verhalten ist eine Sprache. Man muss nur lernen, sie zu lesen.</p>
-      </div>
-    </div>
+    </section>
+  </main>
 
-    <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(25px,3.2vw,36px);color:var(--wk-ink-strong);margin:clamp(30px,4vw,52px) 0 8px"><span class="wk-strich">Tigi kam zuerst. Ich kam danach.</span></h2>
-    <div style="display:flex;flex-wrap:wrap;gap:clamp(24px,3.4vw,52px);margin-top:22px">
-      <div style="flex:1 1 380px;min-width:280px">
-        <p style="font-size:16px;line-height:1.75;margin:0 0 14px;color:var(--wk-ink-soft)">Wenn ich in einen Raum komme, in dem Spannung liegt, kommt Tigi zuerst. Er ist klein, frech, und braucht Zuneigung, um zu wissen, dass er willkommen ist. Er stupst an. Zuckt zurück. Bleibt.</p>
-        <p style="font-size:16px;line-height:1.75;margin:0 0 14px;color:var(--wk-ink-soft)">Das Kind kommt aus dem Ausnahmezustand zurück. Und ich bin plötzlich nicht mehr der Gegner. Sondern derjenige, der auch zuschaut – gemeinsam mit dem Kind.</p>
-      </div>
-      <div style="flex:1 1 300px;min-width:260px">
-        <p style="font-family:Alegreya,serif;font-family:Alegreya,serif;font-weight:600;font-size:clamp(18px,1.9vw,23px);line-height:1.45;color:var(--wk-ink-strong);margin:0 0 10px">Figuren und Handpuppen schaffen einen Abstand, der Verbindung erst möglich macht.</p>
-        <p style="font-family:Alegreya,serif;font-style:italic;font-size:clamp(17px,1.8vw,21px);line-height:1.4;color:var(--wk-pink-ink);margin:0">Kein Trick. Eine Haltung.</p>
-      </div>
+  <footer class="n-footer">
+    <img class="n-footer__flower" src="assets/side/flowerRight.webp" alt="" width="187" height="154" loading="lazy">
+    <div class="n-shell n-footer__grid">
+      <section>
+        <div class="n-footer__brand"><span><img src="assets/cat-teal-logo.webp" alt="" width="96" height="144"></span><strong>Waldkätzchen</strong></div>
+        <p>Verstehen. Verbinden. Verändern.<br>Für Kinder, Eltern und Familien. <span aria-hidden="true">♡</span></p>
+      </section>
+      <section>
+        <h2>Navigation</h2>
+        <a href="./index_ws.html">Startseite</a>
+        <a href="./index_ws.html#haltung">Haltung</a>
+        <a href="./Konzept.dc.html">Konzept</a>
+        <a href="./Angebot.dc.html">Angebot</a>
+        <a href="./Wissen.dc.html">Wissen</a>
+        <a href="./Kontakt.dc.html">Kontakt</a>
+      </section>
+      <section>
+        <h2>Vertiefen</h2>
+        <a href="./Fuer Familien.dc.html">Für Familien</a>
+        <a href="./Autismus.dc.html">Autismus &amp; PDA</a>
+        <a href="./Fuer Vaeter.dc.html">Für Väter</a>
+        <a href="./Fuer Teams.dc.html">Für Teams</a>
+        <a href="./Mein Ansatz.dc.html">Mein Ansatz</a>
+        <a href="./Konzept.dc.html">Das Konzept &amp; die Quellen</a>
+      </section>
+      <section>
+        <h2>Kontakt</h2>
+        <a href="mailto:torsten.macht@waldkaetzchen.de">torsten.macht@waldkaetzchen.de</a>
+        <a href="tel:+491757157101">0175 7157101</a>
+        <span>Königswinter / Bonn &amp; Online</span>
+        <a href="./Kontakt.dc.html">Kontaktformular</a>
+      </section>
+      <section>
+        <h2>Rechtliches</h2>
+        <a href="./Impressum.dc.html">Impressum</a>
+        <a href="./Datenschutz.dc.html">Datenschutz</a>
+      </section>
     </div>
-  </div>
-</section>
-
-<div style="max-width:1100px;margin:0 auto;padding:6px 20px 0"><img decoding="async" width="350" height="61" src="assets/side/separator.webp" alt="" loading="lazy" style="width:100%;display:block;opacity:.75"></div>
-<section style="position:relative;padding:10px 20px 30px;overflow:hidden">
-  <img class="wk-wash" decoding="async" width="1400" height="467" src="assets/sections/section_light.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;-webkit-mask-image:linear-gradient(180deg,transparent,#000 16%,#000 84%,transparent);mask-image:linear-gradient(180deg,transparent,#000 16%,#000 84%,transparent)">
-  <div style="position:relative;max-width:1200px;margin:0 auto">
-    <h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(25px,3.2vw,34px);color:var(--wk-ink-strong);margin:0 0 22px">Warum das hier anders ist</h2>
-    <div style="display:flex;flex-wrap:wrap;gap:18px;align-items:flex-start">
-      <img decoding="async" width="512" height="512" src="assets/chars/03_leopard_krone.webp" alt="" loading="lazy" style="width:clamp(80px,9vw,130px);flex:0 0 auto;mix-blend-mode:multiply;align-self:flex-end">
-      <div style="flex:1 1 560px;min-width:280px;display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px">
-        <div style="background:url(assets/wc/sq-pink.webp) center/100% 100% no-repeat;border-radius:18px;padding:20px 22px"><div style="display:flex;gap:8px;align-items:center;margin-bottom:6px"><span style="width:38px;height:38px;flex:0 0 auto;background:url(assets/wc/circle_pink.webp) center/contain no-repeat;display:inline-flex;align-items:center;justify-content:center;color:var(--wk-pink-ink);font-size:17px" aria-hidden="true">♡</span><span style="font-family:Alegreya,serif;font-size:17.5px;font-weight:700;color:var(--wk-ink-strong)">Fachlichkeit + Lebenserfahrung</span></div><div style="font-size:13.5px;line-height:1.5;color:var(--wk-ink-soft)">Ich verbinde fundiertes Wissen aus der Heilpädagogik mit echter Familienerfahrung und vielen Jahren im Lösen komplexer Probleme.</div></div>
-        <div style="background:url(assets/wc/sq-petrol.webp) center/100% 100% no-repeat;border-radius:18px;padding:20px 22px"><div style="display:flex;gap:8px;align-items:center;margin-bottom:6px"><span style="width:38px;height:38px;flex:0 0 auto;background:url(assets/wc/circle_petrol.webp) center/contain no-repeat;display:inline-flex;align-items:center;justify-content:center;color:var(--wk-forest-700);font-size:17px">✦</span><span style="font-family:Alegreya,serif;font-size:17.5px;font-weight:700;color:var(--wk-ink-strong)">Klarheit ohne Härte</span></div><div style="font-size:13.5px;line-height:1.5;color:var(--wk-ink-soft)">Ich gebe Orientierung, setze Grenzen – aber immer mit Respekt, Verständnis und Wertschätzung.</div></div>
-        <div style="background:url(assets/wc/sq-yellow.webp) center/100% 100% no-repeat;border-radius:18px;padding:20px 22px"><div style="display:flex;gap:8px;align-items:center;margin-bottom:6px"><span style="color:var(--wk-yellow-ink)">❧</span><span style="font-family:Alegreya,serif;font-size:17.5px;font-weight:700;color:var(--wk-ink-strong)">Systemischer Blick statt Einzelfixierung</span></div><div style="font-size:13.5px;line-height:1.5;color:var(--wk-ink-soft)">Ich schaue auf das gesamte System – Familie, Schule, Umfeld – und arbeite an Veränderungen, die bleiben.</div></div>
-        <div style="background:url(assets/wc/sq-blue.webp) center/100% 100% no-repeat;border-radius:18px;padding:20px 22px"><div style="display:flex;gap:8px;align-items:center;margin-bottom:6px"><span style="width:38px;height:38px;flex:0 0 auto;background:url(assets/wc/circle_blue.webp) center/contain no-repeat;display:inline-flex;align-items:center;justify-content:center;color:var(--wk-cyan-ink);font-size:17px">❧</span><span style="font-family:Alegreya,serif;font-size:17.5px;font-weight:700;color:var(--wk-ink-strong)">Alltagstaugliche Begleitung statt leerer Theorie</span></div><div style="font-size:13.5px;line-height:1.5;color:var(--wk-ink-soft)">Du bekommst keine komplizierten Konzepte, sondern praxiserprobte Wege, die wirklich in euren Alltag passen.</div></div>
-      </div>
-      <img decoding="async" width="512" height="512" src="assets/chars/02_katta.webp" alt="" loading="lazy" style="width:clamp(80px,9vw,130px);flex:0 0 auto;mix-blend-mode:multiply;align-self:flex-end">
-    </div>
-    <p style="font-size:15px;line-height:1.6;color:var(--wk-ink-soft);margin:22px auto 0;max-width:80ch;text-align:center">Mein USP liegt in der Verbindung aus professioneller Fachlichkeit, persönlicher Erfahrung, systemischem Denken, Naturverbundenheit und einer Sprache, die Familien wirklich erreicht. Ich begleite euch so, wie ich es mir selbst gewünscht hätte: echt, verständlich, wertschätzend – und mit einem klaren Blick auf das, was wirklich wichtig ist. <span style="color:var(--wk-pink-ink)" aria-hidden="true">♡</span></p>
-  </div>
-</section>
-
-<div style="display:flex;justify-content:center;align-items:flex-end;gap:clamp(4px,2vw,22px);padding:8px 12px 0;background:var(--wk-paper);overflow:hidden">
-  <img decoding="async" width="512" height="512" src="assets/chars/05_pinguin.webp" alt="" loading="lazy" style="width:clamp(56px,9vw,110px);mix-blend-mode:multiply">
-  <img decoding="async" width="512" height="512" src="assets/chars/11_schnecke_rakete.webp" alt="" loading="lazy" style="width:clamp(60px,10vw,120px);mix-blend-mode:multiply">
-  <img decoding="async" width="512" height="512" src="assets/chars/04_roter_panda.webp" alt="" loading="lazy" style="width:clamp(60px,10vw,120px);mix-blend-mode:multiply">
-  <img decoding="async" width="512" height="512" src="assets/chars/17_katze_pinguin_umarmung.webp" alt="" loading="lazy" style="width:clamp(60px,10vw,120px);mix-blend-mode:multiply">
-</div>
-
-<div class="wk-edge" aria-hidden="true" style="--wk-from:var(--wk-paper);--wk-to:var(--wk-forest-800)"></div>
-<section class="wk-abschlussband wk-abschlussband--links" style="background-color:#0D403A">
-  <img class="wk-abschlussband__bild" decoding="async" width="1600" height="533" src="assets/footer-band1.webp" alt="" loading="lazy">
-  <div class="wk-abschlussband__in">
-  <div style="position:relative;max-width:1240px;margin:0 auto;padding:0 0 54px;display:flex;flex-wrap:wrap;gap:26px;align-items:center;justify-content:space-between;z-index:2">
-    <div style="flex:1 1 420px;max-width:620px;text-shadow:0 2px 14px rgba(6,30,24,.6)">
-      <div class="wk-abschluss__kasten"><h2 style="font-family:Alegreya,serif;font-weight:600;font-size:clamp(26px,3.2vw,38px);line-height:1.15;color:var(--wk-paper);margin:0 0 10px">Lass uns hinschauen – und Wege finden, die zu euch passen.</h2>
-      <p style="color:var(--wk-paper-warm);font-size:17px;margin:0">Ich freue mich darauf, euch und eure Geschichte kennenzulernen.</p></div>
-    </div>
-    <a href="./Kontakt.dc.html" style="flex:0 0 auto;background:var(--wk-pink-ink);color:#fff;border-radius:999px;padding:15px 32px;font-size:17px;font-weight:600;box-shadow:0 8px 20px rgba(6,30,24,.35)" style-hover="background:var(--wk-pink-700)">Erstgespräch anfragen&nbsp;&nbsp;<span aria-hidden="true">♡</span></a>
-  </div>
-  </div>
-</section>
-
-<footer style="background:var(--wk-forest-900);color:var(--wk-on-dark-soft)">
-  <div style="max-width:1240px;margin:0 auto;padding:36px 22px 22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:26px">
-    <div>
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
-        <span style="width:42px;height:42px;border-radius:50%;background:var(--wk-paper);display:flex;align-items:flex-end;justify-content:center;overflow:hidden"><img decoding="async" width="96" height="144" src="assets/cat-teal-logo.webp" alt="" style="width:31px;display:block"></span>
-        <span style="font-family:Alegreya,serif;font-size:24px;color:var(--wk-paper)">Waldkätzchen</span>
-      </div>
-      <div style="font-size:13.5px;color:var(--wk-on-dark-muted);margin-bottom:10px">Verstehen. Verbinden. Verändern.</div>
-      <div style="font-size:14px;line-height:1.55">Für Kinder, Eltern und Familien. <span style="color:var(--wk-pink-on-dark)" aria-hidden="true">♡</span></div>
-    </div>
-    <div>
-      <div style="font-family:Alegreya,serif;font-size:17px;color:var(--wk-paper);margin-bottom:10px">Navigation</div>
-      <div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px">
-        <a href="./Fuer Familien.dc.html" style="color:var(--wk-on-dark-soft)">Für Familien</a>
-        <a href="./Autismus.dc.html" style="color:var(--wk-on-dark-soft)">Autismus &amp; PDA</a>
-        <a href="./Mein Ansatz.dc.html" style="color:var(--wk-on-dark-soft)">Mein Ansatz</a>
-        <a href="./Angebot.dc.html" style="color:var(--wk-on-dark-soft)">Angebot</a>
-        <a href="./Ueber mich.dc.html" style="color:var(--wk-on-dark-soft)">Über mich</a>
-        <a href="./Wissen.dc.html" style="color:var(--wk-on-dark-soft)">Wissen</a>
-        <a href="./Kontakt.dc.html" style="color:var(--wk-on-dark-soft)">Kontakt</a>
-      </div>
-    </div>
-    <div>
-      <div style="font-family:Alegreya,serif;font-size:17px;color:var(--wk-paper);margin-bottom:10px">Angebot</div>
-      <div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px">
-        <a href="./Angebot.dc.html" style="color:var(--wk-on-dark-soft)">Familienbegleitung</a>
-        <a href="./Angebot.dc.html" style="color:var(--wk-on-dark-soft)">Einzelberatung</a>
-        <a href="./Angebot.dc.html" style="color:var(--wk-on-dark-soft)">Elternberatung</a>
-        <a href="./Angebot.dc.html" style="color:var(--wk-on-dark-soft)">Workshops &amp; Vorträge</a>
-        <a href="./Fuer Teams.dc.html" style="color:var(--wk-on-dark-soft)">Schulen &amp; Kitas</a>
-      </div>
-    </div>
-    <div>
-      <div style="font-family:Alegreya,serif;font-size:17px;color:var(--wk-paper);margin-bottom:10px">Rechtliches</div>
-      <div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px"><a href="./Impressum.dc.html" style="color:var(--wk-on-dark-soft)">Impressum</a><a href="./Datenschutz.dc.html" style="color:var(--wk-on-dark-soft)">Datenschutz</a></div>
-    </div>
-    <div>
-      <div style="font-family:Alegreya,serif;font-size:17px;color:var(--wk-paper);margin-bottom:10px">Kontakt</div>
-      <div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px">
-        <a href="mailto:torsten.macht@waldkaetzchen.de" style="color:var(--wk-on-dark-soft)">torsten.macht@waldkaetzchen.de</a>
-        <span>0151 12545678</span>
-        <span>Online &amp; in der Natur</span>
-        <span>www.waldkaetzchen.de</span>
-      </div>
-    </div>
-  </div>
-  <div style="border-top:1px solid rgba(245,237,224,.13);padding:14px 22px;text-align:center;font-size:13px;color:var(--wk-on-dark-muted)">© 2026 Waldkätzchen – Alle Rechte vorbehalten</div>
-</footer>
-</div>
-</x-dc>
-<script type="text/x-dc" data-dc-script>
-class Component extends DCLogic {
-  state = { w: typeof window !== 'undefined' ? window.innerWidth : 1400, menuFuerWen: false, menuWissen: false, drawer: false };
-  componentDidMount() {
-    this._onResize = () => this.setState({ w: window.innerWidth });
-    window.addEventListener('resize', this._onResize);
-    this._onResize();
-  }
-  componentWillUnmount() { window.removeEventListener('resize', this._onResize); }
-  componentDidUpdate() {
-    // Nach dem Absenden ersetzt die Bestaetigung das Formular. Der Button, auf
-    // dem der Fokus lag, verschwindet dabei - ohne Zutun fiel der Fokus auf
-    // <body>, und eine erst jetzt eingefuegte Live-Region wird von
-    // Screenreadern nicht zuverlaessig vorgelesen. Ein Fokuswechsel auf die
-    // Meldung loest beides.
-    // Das Runtime uebergibt componentDidUpdate nur prevProps, keinen
-    // prevState - die Flanke wird darum selbst gemerkt.
-    if (this.state.sent && !this._sentFocused) {
-      this._sentFocused = true;
-      requestAnimationFrame(() => {
-        const el = document.querySelector('[role="status"]');
-        if (el) { el.setAttribute('tabindex', '-1'); el.focus(); }
-      });
-    } else if (!this.state.sent) {
-      this._sentFocused = false;
-    }
-  }
-  renderVals() {
-    const narrow = this.state.w < 1000;
-    return {
-      wide: !narrow,
-      narrow,
-      drawer: narrow && this.state.drawer,
-      menuFuerWen: this.state.menuFuerWen,
-      menuWissen: this.state.menuWissen,
-      toggleDrawer: () => this.setState(s => ({ drawer: !s.drawer })),
-      toggleFuerWen: () => this.setState(s => ({ menuFuerWen: !s.menuFuerWen, menuWissen: false })),
-      toggleWissen: () => this.setState(s => ({ menuWissen: !s.menuWissen, menuFuerWen: false })),
-    };
-  }
-}
-</script>
+    <div class="n-footer__bottom">© 2026 Waldkätzchen – Alle Rechte vorbehalten</div>
+  </footer>
 </body>
 </html>
