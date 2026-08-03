@@ -48,7 +48,7 @@
   line-height: 1.25;
 }
 .s-hero__lead { margin: 0 0 24px; color: var(--wk-on-dark-soft); font-size: clamp(16.5px, 1.5vw, 19px); line-height: 1.65; }
-.s-hero .n-actions > * { max-width: none; }
+.s-hero .n-actions, .s-hero .n-actions > * { max-width: none; }
 
 /* Ohne Foto: die Aquarellfläche trägt den Kopf. */
 .s-hero--wash { min-height: 0; align-items: center; }
@@ -193,4 +193,57 @@
   background-position: calc(100% - 20px) calc(50% + 2px), calc(100% - 14px) calc(50% + 2px);
   background-size: 6px 6px, 6px 6px;
   background-repeat: no-repeat;
+}
+
+/* --------------------------------------------------------------------------
+ * Hero-Varianten
+ *
+ * Die Hero-Illustrationen sind so gemalt, dass die linke Hälfte frei bleibt:
+ * dort steht die Aquarellfläche in Creme, rechts sitzen Torsten und die
+ * Figuren. Ein dunkler Schleier darüber würde genau das zudecken. Deshalb
+ * gibt es zwei Fassungen - je nachdem, ob die freie Fläche des Bildes hell
+ * oder dunkel ist.
+ * -------------------------------------------------------------------------- */
+
+/* Helle Bildfläche: kein dunkler Schleier, dunkler Text. Der Schleier hebt
+   nur den Kontrast zum Papierton, damit die Schrift auch über den zarten
+   Pflanzen am linken Rand sicher lesbar bleibt. */
+.s-hero--hell { background: var(--wk-paper); color: var(--wk-ink); }
+.s-hero--hell .s-hero__veil {
+  background: linear-gradient(90deg, rgba(247, 240, 228, 0.94) 0%, rgba(247, 240, 228, 0.86) 32%, rgba(247, 240, 228, 0.3) 56%, rgba(247, 240, 228, 0) 76%);
+}
+.s-hero--hell h1 { color: var(--wk-ink-strong); text-shadow: none; }
+.s-hero--hell .s-hero__claim { color: var(--wk-pink-ink); }
+.s-hero--hell .s-hero__lead { color: var(--wk-ink-soft); }
+.s-hero--hell .n-eyebrow { color: var(--wk-petrol-ink) !important; }
+/* Die freie Aquarellfläche dieser Bilder endet bei rund 40 Prozent der
+   Breite. Damit die Schrift nicht über Torsten oder die Figuren läuft,
+   steht sie hier enger und eine Stufe kleiner als auf den dunklen Köpfen. */
+.s-hero--hell:not(.s-hero--band) .s-hero__content > *:not(.n-actions) { max-width: 34ch; }
+.s-hero--hell:not(.s-hero--band) h1 { max-width: 17ch; font-size: clamp(30px, 3.6vw, 48px); }
+.s-hero--hell:not(.s-hero--band) .s-hero__claim { max-width: 26ch; font-size: clamp(18px, 1.9vw, 24px); }
+.s-hero--hell:not(.s-hero--band) .s-hero__lead { font-size: clamp(16px, 1.3vw, 17.5px); }
+
+/* Breites Band als Kopf: die Bänder sind 3:1 und haben eine freie Mitte,
+   deshalb steht der Text hier zentriert statt links. */
+.s-hero--band { min-height: clamp(300px, 32vw, 440px); align-items: center; }
+.s-hero--band .s-hero__image { object-position: center; }
+.s-hero--band .s-hero__veil { background: linear-gradient(180deg, rgba(9, 40, 33, 0.34), rgba(9, 40, 33, 0.6)); }
+.s-hero--band:not(.s-hero--mitte) .s-hero__veil {
+  background: linear-gradient(90deg, rgba(9, 40, 33, 0.86) 0%, rgba(9, 40, 33, 0.7) 40%, rgba(9, 40, 33, 0.2) 68%, rgba(9, 40, 33, 0.08) 100%);
+}
+.s-hero--band .s-hero__content { padding-block: clamp(40px, 6vw, 76px); }
+.s-hero--mitte .s-hero__content { text-align: center; }
+.s-hero--mitte .s-hero__content > * { max-width: 62ch; margin-inline: auto; }
+.s-hero--mitte .n-actions { justify-content: center; }
+.s-hero--band.s-hero--hell .s-hero__veil {
+  background: radial-gradient(ellipse 58% 84% at 50% 50%, rgba(247, 240, 228, 0.92) 0%, rgba(247, 240, 228, 0.74) 52%, rgba(247, 240, 228, 0) 100%);
+}
+
+@media (max-width: 999px) {
+  /* Auf schmalen Fenstern läuft das Bild im Fluss mit, der Text steht
+     darunter - also blendet die Unterkante in den Grund des Abschnitts. */
+  .s-hero--hell picture::after { background: linear-gradient(180deg, rgba(245, 237, 224, 0), var(--wk-paper)); }
+  .s-hero--band { min-height: 0; }
+  .s-hero--band .s-hero__content > * { max-width: none; }
 }
