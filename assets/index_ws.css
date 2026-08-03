@@ -360,7 +360,7 @@
 .n-rail__track {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: minmax(248px, 310px);
+  grid-auto-columns: clamp(268px, 30vw, 396px);
   gap: 18px;
   padding: 5px 3px 20px;
   overflow-x: auto;
@@ -374,56 +374,86 @@
 .n-rail__track::-webkit-scrollbar { height: 7px; }
 .n-rail__track::-webkit-scrollbar-thumb { border-radius: 99px; background: rgba(18, 61, 54, 0.32); }
 
+/* Karte nach dem Vorbild StarkFuerKinder: randloses Bild oben, darunter die
+   Überschrift, unten eine Zeile mit Kategorie links und rundem Pfeil rechts.
+   Bewusst ohne Fließtext - die Überschrift trägt die Karte allein.
+
+   Anders als im Vorbild sind die Bilder keine Fotos, sondern quadratische
+   Figuren mit gemaltem Grund. Sie laufen trotzdem randlos über die volle
+   Kartenbreite, sonst bliebe ihr Malgrund als sichtbares Rechteck auf der
+   getönten Fläche stehen. Der Beschnitt sitzt bewusst oberhalb der Mitte,
+   damit Köpfe und Kronen im Bild bleiben. */
 .n-rail-card {
   position: relative;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border-radius: var(--n-radius);
+  border-radius: 24px;
   background: var(--wk-paper-card);
-  box-shadow: var(--n-shadow);
+  box-shadow: 0 14px 34px rgba(18, 61, 54, 0.13);
   transition: transform 180ms ease, box-shadow 180ms ease;
 }
 .n-rail-card:hover, .n-rail-card:focus-within { transform: translateY(-5px); box-shadow: 0 24px 54px rgba(18, 61, 54, 0.22); }
-.n-rail-card__art { height: 148px; display: grid; place-items: center; }
-.n-rail-card__art img { height: 116px; width: auto; object-fit: contain; mix-blend-mode: multiply; }
+.n-rail-card__art { aspect-ratio: 16 / 11; overflow: hidden; }
+.n-rail-card__art img { width: 100%; height: 100%; object-fit: cover; object-position: center 34%; }
 .n-rail-card--blue .n-rail-card__art { background: #e6f7f8; }
 .n-rail-card--petrol .n-rail-card__art { background: #e5f0ec; }
 .n-rail-card--yellow .n-rail-card__art { background: #fff7d9; }
 .n-rail-card--orange .n-rail-card__art { background: #ffead8; }
 .n-rail-card--pink .n-rail-card__art { background: #fbecee; }
-.n-rail-card__body { flex: 1; padding: 17px 20px 19px; display: flex; flex-direction: column; gap: 9px; }
-.n-rail-card__tag {
-  align-self: start;
-  padding: 4px 11px;
-  border-radius: 99px;
-  background: rgba(18, 61, 54, 0.09);
-  color: var(--wk-petrol-ink);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
+
+.n-rail-card__body { flex: 1; padding: 22px 24px 20px; display: flex; flex-direction: column; gap: 16px; }
+.n-rail-card h3 {
+  margin: 0;
+  color: var(--wk-ink-strong);
+  font-family: var(--wk-font-serif);
+  font-size: clamp(20px, 1.6vw, 24px);
+  font-weight: 600;
+  line-height: 1.25;
 }
-.n-rail-card h3 { margin: 0; color: var(--wk-ink-strong); font-family: var(--wk-font-serif); font-size: 21px; font-weight: 600; line-height: 1.22; }
 /* Ein Link, ganze Karte klickbar - ohne zweiten Tabstopp. */
 .n-rail-card h3 a { color: inherit; text-decoration: none; }
 .n-rail-card h3 a::after { content: ''; position: absolute; inset: 0; }
 .n-rail-card h3 a:focus-visible { outline: none; }
 .n-rail-card:focus-within { outline: 3px solid var(--wk-forest-800); outline-offset: 3px; }
-.n-rail-card p { margin: 0; color: var(--wk-ink-soft); font-size: 15px; line-height: 1.55; }
-.n-rail-card__go { margin-top: auto; padding-top: 8px; color: var(--wk-pink-ink); font-size: 21px; line-height: 1; }
 
-.n-rail__nav { display: flex; justify-content: flex-end; gap: 10px; margin-top: 2px; }
-.n-rail__button {
-  width: 48px;
-  height: 48px;
+.n-rail-card__foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.n-rail-card__tag {
+  padding: 6px 14px;
+  border: 1px solid rgba(18, 61, 54, 0.18);
+  border-radius: 999px;
+  color: var(--wk-petrol-ink);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.n-rail-card__go {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
   display: grid;
   place-items: center;
-  border: 1px solid rgba(18, 61, 54, 0.24);
   border-radius: 50%;
-  background: var(--wk-paper-card);
+  background: var(--wk-forest-800);
+  color: #fff;
+  font-size: 18px;
+  line-height: 1;
+  transition: transform 180ms ease;
+}
+.n-rail-card:hover .n-rail-card__go { transform: translateX(3px); }
+
+.n-rail__nav { display: flex; justify-content: flex-end; gap: 12px; margin-top: 10px; }
+.n-rail__button {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(18, 61, 54, 0.16);
+  border-radius: 50%;
+  background: rgba(255, 253, 246, 0.9);
   color: var(--wk-ink-strong);
-  font-size: 24px;
+  font-size: 22px;
   line-height: 1;
   cursor: pointer;
   transition: transform 160ms ease, background-color 160ms ease;
@@ -500,7 +530,7 @@
   .n-limit li { grid-template-columns: 1fr; gap: 2px; }
   .n-animal-strip { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .n-animal-strip li:nth-child(n + 4) { display: none; }
-  .n-rail__track { grid-auto-columns: minmax(230px, 78vw); gap: 14px; }
+  .n-rail__track { grid-auto-columns: min(80vw, 320px); gap: 14px; }
   .n-rail__nav { justify-content: center; }
   .n-contact__welcome { grid-template-columns: 58px 1fr; gap: 11px; }
   .n-contact__welcome img { width: 58px; height: 58px; }
