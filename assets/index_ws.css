@@ -1,0 +1,534 @@
+/* --------------------------------------------------------------------------
+ * index_w: Schräge Kanten an den harten Farbwechseln
+ *
+ * Basis ist index_n. Ergänzt wird nur der vierte Divider aus Demo.html
+ * (.wk-sd--schraege, Form aus assets/dividers/schraege.svg). Regel für jede
+ * Stelle: die Maske trägt immer die Farbe des Abschnitts darüber und sitzt
+ * damit am Ende dieses Abschnitts – technisch hängt sie im Folgeabschnitt,
+ * gelesen wird sie als auslaufende Unterkante des vorherigen.
+ *
+ * Gerade Naht bleibt bewusst dort, wo die Demo sie vorsieht: unter dem Hero,
+ * um den ganzseitigen Bildschnitt herum und vor/nach dem Abschlussband.
+ * Ebenfalls ohne Divider: der geteilte Block Domäne/Zielgruppen – zwei
+ * halbbreite Schrägen nebeneinander ergäben eine Zickzack-Naht – sowie die
+ * Übergänge Wiedererkennen -> letzter Dienstag, Grundsatz -> Haltungsband
+ * und Haltungsband -> Hellblau.
+ *
+ * Lädt nach index_n.css und index_n_experience.css. Mit
+ * assets/index_n_dividers.css (wird von index_n.js nachgeladen) gibt es
+ * keine Überschneidung: die beiden bereits vorhandenen Übergänge
+ * (.n-principle, .n-offers) bleiben unverändert.
+ * -------------------------------------------------------------------------- */
+
+/* Türkis -> Waldgrün: das türkise Band läuft in den dunklen Abschnitt aus. */
+.n-no-coaching.wk-sd {
+  --wk-from: var(--wk-cyan);
+  padding-top: calc(var(--wk-sd-top) + clamp(30px, 4vw, 62px));
+}
+
+/* Petrol -> Warmcreme: „Warum das hier keine Coaching-Seite ist“ blutet in
+   den Waldkätzchen-Weg aus. Das ist die Kante, die vorher am härtesten stand. */
+.n-path.wk-sd {
+  --wk-from: var(--wk-forest-800);
+  padding-top: calc(var(--wk-sd-top) + clamp(30px, 4vw, 62px));
+}
+
+/* Papier -> Gelb: der Abschnitt über der Wissensbasis (Fragen, ohne
+   JavaScript der Ablauf) läuft ins gelbe Band aus. */
+.n-knowledge.wk-sd {
+  --wk-from: var(--wk-paper);
+  padding-top: calc(var(--wk-sd-top) + clamp(30px, 4vw, 62px));
+}
+
+/* Gelb -> Kontaktcreme: das gelbe Band läuft in den Kontaktabschnitt aus. */
+.n-contact.wk-sd {
+  --wk-from: var(--wk-yellow);
+  padding-top: calc(var(--wk-sd-top) + clamp(30px, 4vw, 62px));
+}
+
+/* --------------------------------------------------------------------------
+ * Haltungsband: Scrollbereich in der Farbe der Kachel darüber
+ *
+ * Vorher lief unter den Panels ein reservierter Streifen mit, der immer das
+ * dunkle Petrol des Abschnitts zeigte – erst mit der Hinweiszeile
+ * „Nach unten scrollen · die Haltung bewegt sich zur Seite“, nach deren
+ * Wegfall als tote Fläche. Statt diesen Streifen umzufärben, läuft die Spur
+ * jetzt über die volle Höhe: der Scrollbereich ist die Kachel darüber und
+ * trägt damit immer deren Farbe – auch währenddessen zwei Kacheln
+ * nebeneinander durchlaufen. Der Fortschrittsbalken liegt darauf.
+ *
+ * Nur außerhalb von prefers-reduced-motion: dort stehen die Panels
+ * untereinander, die Spur ist auto hoch und der Balken ausgeblendet.
+ * -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .n-horizontal__track { height: 100%; }
+  /* Eigene halbdunkle Bahn, damit der helle Balken auf allen vier Kacheln
+     ablesbar bleibt – auf Gelb und Orange reichte die nackte Fläche nicht. */
+  .n-horizontal__progress {
+    bottom: 20px;
+    height: 5px;
+    border-radius: 99px;
+    background: rgba(8, 37, 31, 0.28);
+  }
+  .n-horizontal__progress span { border-radius: inherit; }
+}
+@media (prefers-reduced-motion: no-preference) and (max-width: 680px) {
+  .n-horizontal__progress { bottom: 15px; height: 4px; }
+}
+
+/* --------------------------------------------------------------------------
+ * Mobil: Hero und Porträt ganz zeigen
+ *
+ * Beide Fotos liegen quer (Hero 16:9, Porträt 1,3:1) und füllten als
+ * object-fit:cover eine hochkant stehende Fläche. Übrig blieb vom Hero rund
+ * ein Viertel, beim Porträt stand Torsten ganz links im Bild und war komplett
+ * weggeschnitten – zu sehen war nur die Mauer.
+ *
+ * Statt an object-position zu drehen, laufen die Bilder auf schmalen Fenstern
+ * im Fluss mit: volle Breite, eigene Höhe, kein Beschnitt.
+ * -------------------------------------------------------------------------- */
+@media (max-width: 999px) {
+  /* Bild oben, Text unten, der Rest bleibt als Luft dazwischen. Die volle
+     Fensterhöhe aber nur, solange sie sich auch füllt: Bildhöhe (bei 16:9
+     56,25vw) plus Textblock. Auf hohen, breiten Fenstern stünde sonst ein
+     großes leeres Feld zwischen Foto und Überschrift. */
+  .n-hero {
+    min-height: min(100svh, 56.25vw + 540px);
+    align-content: space-between;
+  }
+  .n-hero picture {
+    position: relative;
+    z-index: 0;
+    inset: auto;
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .n-hero__image {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+  }
+  /* Der große Verlauf war der Textgrund über dem beschnittenen Bild. Jetzt
+     steht der Text auf dem Waldgrün des Abschnitts, und nur die Unterkante
+     des Fotos wird weich hineingeblendet. Die Tageszeit-Stimmung bleibt über
+     den Filter auf dem Bild erhalten. */
+  .n-hero__overlay { display: none; }
+  .n-hero picture::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -1px;
+    left: 0;
+    height: clamp(46px, 14vw, 92px);
+    background: linear-gradient(180deg, rgba(22, 72, 63, 0), var(--wk-forest-800));
+  }
+  .n-hero__content { padding: clamp(20px, 5vw, 34px) 0 clamp(40px, 9vw, 58px); }
+
+  /* Ganzseitiger Bildschnitt: so hoch wie das Foto, statt 100svh mit
+     Beschnitt. Der Verlauf darüber (::after) deckt weiter die ganze Fläche. */
+  .n-full-portrait { min-height: 0; }
+  .n-full-portrait img {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* ==========================================================================
+ * index_ws: Bausteine aus dem Langkonzept 2026
+ *
+ * Ergänzt index_w um die Abschnitte, die die Haltung präzisieren:
+ * Sprachwechsel, Logik von außen nach innen, Haltungsdreieck, Waldorte,
+ * fünf Blicke, Herleitung der Tiere, tragfähige Grenze, wissenschaftliches
+ * Fundament, Wissens-Slider und die Tiere im Kontaktformular.
+ * ========================================================================== */
+
+/* --- Sprachwechsel im dunklen Abschnitt ---------------------------------- */
+.n-swap {
+  margin-top: 22px;
+  padding: 18px 22px;
+  border-left: 3px solid var(--wk-yellow);
+  border-radius: 0 16px 16px 0;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--wk-on-dark-soft);
+}
+.n-swap strong { color: var(--wk-on-dark); }
+
+/* --- Von außen nach innen ------------------------------------------------ */
+.n-layer-list {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  list-style: none;
+  counter-reset: none;
+}
+.n-layer-list li {
+  position: relative;
+  padding: 26px 24px 24px 62px;
+  border-radius: var(--n-radius);
+  background: var(--wk-paper-card);
+  box-shadow: var(--n-shadow);
+}
+.n-layer-list b {
+  position: absolute;
+  left: 22px;
+  top: 25px;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--wk-forest-800);
+  color: #fff;
+  font-family: var(--wk-font-serif);
+  font-size: 15px;
+}
+.n-layer-list h3 {
+  margin: 0 0 7px;
+  color: var(--wk-ink-strong);
+  font-family: var(--wk-font-serif);
+  font-size: 21px;
+  line-height: 1.2;
+}
+.n-layer-list p { margin: 0; color: var(--wk-ink-soft); font-size: 15.5px; line-height: 1.6; }
+.n-layers__note {
+  max-width: 74ch;
+  margin: 30px auto 0;
+  padding-top: 22px;
+  border-top: 1px dashed rgba(18, 61, 54, 0.24);
+  color: var(--wk-ink-soft);
+  font-style: italic;
+  text-align: center;
+}
+
+/* --- Haltungsdreieck im ersten Panel ------------------------------------- */
+.n-triad {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.n-triad article {
+  padding: 17px 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.13);
+}
+.n-triad strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--wk-yellow);
+  font-family: var(--wk-font-serif);
+  font-size: 21px;
+  font-weight: 600;
+}
+.n-triad p { margin: 0; font-size: 15px !important; line-height: 1.5; }
+
+/* --- Waldorte: acht statt vier, deshalb kompakter ------------------------ */
+.n-forest-symbols span i {
+  display: block;
+  margin-top: 2px;
+  color: var(--wk-ink-soft);
+  font-size: 11.5px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.25;
+}
+.n-forest-symbols span { padding: 10px 8px; font-size: 14px; }
+.n-forest-symbols img { width: 42px; height: 42px; }
+
+/* --- Fünf Blicke: nummeriert und mit Leitsatz ---------------------------- */
+.n-cat-perspectives article { position: relative; }
+.n-cat-perspectives b {
+  position: absolute;
+  left: 9px;
+  top: 9px;
+  width: 23px;
+  height: 23px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--wk-forest-800);
+  color: #fff;
+  font-family: var(--wk-font-serif);
+  font-size: 13px;
+  font-weight: 600;
+}
+.n-cat-perspectives em {
+  display: block;
+  margin-top: 1px;
+  color: var(--wk-pink-ink);
+  font-size: 12.5px;
+  font-style: italic;
+}
+
+/* --- Warum Kuscheltiere: Herleitung plus Tierleiste ---------------------- */
+.n-why-toys { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(22px, 3vw, 46px); align-items: start; }
+.n-why-toys__aside {
+  margin-top: 16px;
+  color: var(--wk-ink-soft);
+  font-family: 'Segoe Print', 'Comic Sans MS', cursive;
+  font-size: 15px !important;
+}
+.n-why-toys__more { margin-top: 22px; }
+.n-text-link--dark { color: var(--wk-ink-strong); font-weight: 600; text-decoration: underline; }
+.n-animal-strip {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  list-style: none;
+}
+.n-animal-strip li {
+  padding: 12px 8px;
+  display: grid;
+  justify-items: center;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.55);
+  text-align: center;
+}
+.n-animal-strip img { height: 72px; width: auto; object-fit: contain; mix-blend-mode: multiply; }
+.n-animal-strip strong { margin-top: 5px; color: var(--wk-ink-strong); font-family: var(--wk-font-serif); font-size: 16px; }
+.n-animal-strip span { color: var(--wk-ink-soft); font-size: 11.5px; line-height: 1.25; }
+
+/* --- Die tragfähige Grenze ----------------------------------------------- */
+.n-limit {
+  margin-top: 26px;
+  padding: 24px 26px;
+  border-radius: var(--n-radius);
+  background: rgba(255, 253, 246, 0.6);
+}
+.n-limit__lead { margin: 0 0 14px; color: var(--wk-ink-strong); font-weight: 600; }
+.n-limit ol { margin: 0; padding: 0; display: grid; gap: 11px; list-style: none; counter-reset: limit; }
+.n-limit li { display: grid; grid-template-columns: minmax(105px, auto) 1fr; gap: 4px 14px; align-items: baseline; }
+.n-limit b { color: var(--wk-petrol-ink); font-family: var(--wk-font-serif); font-size: 18px; }
+.n-limit span { color: var(--wk-ink); font-style: italic; }
+.n-limit__note {
+  margin: 18px 0 0;
+  padding-top: 15px;
+  border-top: 1px dashed rgba(18, 61, 54, 0.24);
+  color: var(--wk-ink-soft);
+  font-size: 15px !important;
+}
+
+/* --- Wissenschaftliches Fundament ---------------------------------------- */
+.n-science-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 19px;
+  margin-bottom: 34px;
+}
+.n-science-grid article {
+  padding: 24px 23px;
+  border: 1px solid var(--wk-line);
+  border-radius: var(--n-radius);
+  background: var(--wk-paper-card);
+}
+.n-science-grid h3 {
+  margin: 0 0 9px;
+  color: var(--wk-ink-strong);
+  font-family: var(--wk-font-serif);
+  font-size: 22px;
+  line-height: 1.2;
+}
+.n-science-grid p { margin: 0 0 13px; color: var(--wk-ink-soft); font-size: 15.5px; line-height: 1.6; }
+.n-science-grid cite {
+  display: block;
+  color: var(--wk-petrol-ink);
+  font-size: 13px;
+  font-style: normal;
+  letter-spacing: 0.01em;
+}
+
+/* --- Wissens-Slider ------------------------------------------------------ */
+.n-knowledge__head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(24px, 5vw, 70px);
+  align-items: end;
+  margin-bottom: clamp(28px, 4vw, 46px);
+}
+.n-knowledge__head h2 { margin: 0; }
+.n-knowledge__intro { margin: 0; color: var(--wk-ink-strong); opacity: 0.86; }
+
+.n-rail { position: relative; }
+.n-rail__track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(248px, 310px);
+  gap: 18px;
+  padding: 5px 3px 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(18, 61, 54, 0.35) transparent;
+}
+.n-rail__track > * { scroll-snap-align: start; }
+.n-rail__track:focus-visible { outline: 3px solid var(--wk-forest-800); outline-offset: 4px; border-radius: 8px; }
+.n-rail__track::-webkit-scrollbar { height: 7px; }
+.n-rail__track::-webkit-scrollbar-thumb { border-radius: 99px; background: rgba(18, 61, 54, 0.32); }
+
+.n-rail-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--n-radius);
+  background: var(--wk-paper-card);
+  box-shadow: var(--n-shadow);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+.n-rail-card:hover, .n-rail-card:focus-within { transform: translateY(-5px); box-shadow: 0 24px 54px rgba(18, 61, 54, 0.22); }
+.n-rail-card__art { height: 148px; display: grid; place-items: center; }
+.n-rail-card__art img { height: 116px; width: auto; object-fit: contain; mix-blend-mode: multiply; }
+.n-rail-card--blue .n-rail-card__art { background: #e6f7f8; }
+.n-rail-card--petrol .n-rail-card__art { background: #e5f0ec; }
+.n-rail-card--yellow .n-rail-card__art { background: #fff7d9; }
+.n-rail-card--orange .n-rail-card__art { background: #ffead8; }
+.n-rail-card--pink .n-rail-card__art { background: #fbecee; }
+.n-rail-card__body { flex: 1; padding: 17px 20px 19px; display: flex; flex-direction: column; gap: 9px; }
+.n-rail-card__tag {
+  align-self: start;
+  padding: 4px 11px;
+  border-radius: 99px;
+  background: rgba(18, 61, 54, 0.09);
+  color: var(--wk-petrol-ink);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+.n-rail-card h3 { margin: 0; color: var(--wk-ink-strong); font-family: var(--wk-font-serif); font-size: 21px; font-weight: 600; line-height: 1.22; }
+/* Ein Link, ganze Karte klickbar - ohne zweiten Tabstopp. */
+.n-rail-card h3 a { color: inherit; text-decoration: none; }
+.n-rail-card h3 a::after { content: ''; position: absolute; inset: 0; }
+.n-rail-card h3 a:focus-visible { outline: none; }
+.n-rail-card:focus-within { outline: 3px solid var(--wk-forest-800); outline-offset: 3px; }
+.n-rail-card p { margin: 0; color: var(--wk-ink-soft); font-size: 15px; line-height: 1.55; }
+.n-rail-card__go { margin-top: auto; padding-top: 8px; color: var(--wk-pink-ink); font-size: 21px; line-height: 1; }
+
+.n-rail__nav { display: flex; justify-content: flex-end; gap: 10px; margin-top: 2px; }
+.n-rail__button {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(18, 61, 54, 0.24);
+  border-radius: 50%;
+  background: var(--wk-paper-card);
+  color: var(--wk-ink-strong);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 160ms ease, background-color 160ms ease;
+}
+.n-rail__button:hover:not([disabled]) { transform: translateY(-2px); background: #fff; }
+.n-rail__button[disabled] { opacity: 0.38; cursor: default; }
+.n-knowledge .n-actions { margin-top: 26px; }
+
+/* --- Tiere im Kontaktabschnitt ------------------------------------------- */
+.n-contact__critters { position: absolute; inset: 0; pointer-events: none; }
+.n-critter { position: absolute; width: clamp(74px, 8vw, 128px); opacity: 0.5; }
+.n-critter--snail { left: 2%; bottom: 8%; }
+.n-critter--butterfly { right: 4%; top: 12%; width: clamp(52px, 5.5vw, 88px); opacity: 0.62; }
+.n-critter--mushroom { left: 8%; top: 16%; width: clamp(54px, 5vw, 84px); }
+.n-critter--flower { right: 1%; bottom: 4%; }
+
+.n-contact__welcome {
+  margin: 24px 0 4px;
+  padding: 15px 18px 15px 15px;
+  display: grid;
+  grid-template-columns: 74px 1fr;
+  gap: 14px;
+  align-items: center;
+  border-radius: 22px;
+  background: rgba(255, 253, 246, 0.72);
+}
+.n-contact__welcome img { width: 74px; height: 74px; object-fit: contain; mix-blend-mode: multiply; }
+.n-contact__welcome p { margin: 0; color: var(--wk-ink); font-size: 15px !important; line-height: 1.55; }
+.n-contact__welcome strong { color: var(--wk-ink-strong); }
+
+/* Die Figuren aus assets/chars haben einen gemalten Hintergrund. Freistehend
+   wird daraus ein sichtbares Rechteck, deshalb sitzen sie in einem runden
+   Rahmen - so wirkt der Malgrund gewollt statt wie ein Fehler. */
+.n-contact-form--critters { position: relative; }
+.n-form-peek {
+  position: absolute;
+  right: 20px;
+  top: clamp(-58px, -6vw, -44px);
+  width: clamp(74px, 8vw, 100px);
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 4px solid var(--wk-paper-card);
+  border-radius: 50%;
+  box-shadow: 0 10px 22px rgba(18, 61, 54, 0.18);
+  transform: rotate(5deg);
+  pointer-events: none;
+}
+.n-form-peek img { width: 100%; height: 100%; object-fit: cover; }
+
+/* --- Reaktion auf schmalere Fenster -------------------------------------- */
+@media (max-width: 1080px) {
+  .n-layer-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .n-science-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 999px) {
+  .n-knowledge__head { grid-template-columns: 1fr; align-items: start; gap: 16px; }
+  .n-why-toys { grid-template-columns: 1fr; gap: 20px; }
+  .n-animal-strip { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .n-animal-strip img { height: 56px; }
+  .n-animal-strip span { display: none; }
+  .n-triad { grid-template-columns: 1fr; gap: 9px; }
+  .n-triad article { padding: 12px 14px; }
+  .n-triad strong { font-size: 18px; margin-bottom: 2px; }
+  .n-triad p { font-size: 14px !important; }
+  .n-forest-symbols { grid-template-columns: repeat(4, minmax(72px, 1fr)); gap: 8px; }
+  .n-forest-symbols img { width: 34px; height: 34px; }
+  .n-critter--mushroom, .n-critter--butterfly { display: none; }
+}
+@media (max-width: 680px) {
+  .n-layer-list { grid-template-columns: 1fr; gap: 14px; }
+  .n-layer-list li { padding: 20px 20px 19px 56px; }
+  .n-science-grid { grid-template-columns: 1fr; }
+  .n-limit { padding: 19px 18px; }
+  .n-limit li { grid-template-columns: 1fr; gap: 2px; }
+  .n-animal-strip { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .n-animal-strip li:nth-child(n + 4) { display: none; }
+  .n-rail__track { grid-auto-columns: minmax(230px, 78vw); gap: 14px; }
+  .n-rail__nav { justify-content: center; }
+  .n-contact__welcome { grid-template-columns: 58px 1fr; gap: 11px; }
+  .n-contact__welcome img { width: 58px; height: 58px; }
+  .n-form-peek { right: 10px; width: 66px; }
+  .n-critter { opacity: 0.34; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .n-rail-card, .n-rail__button { transition: none; }
+  .n-rail-card:hover, .n-rail-card:focus-within, .n-rail__button:hover:not([disabled]) { transform: none; }
+  .n-rail__track { scroll-behavior: auto; }
+}
+
+/* --- Haltungsband: Panels mit mehr Inhalt -------------------------------- */
+/* Panel 1 und 4 haben keine Figur mehr, sie bekommen deshalb die volle
+   Breite statt der Zweispaltigkeit aus der Basis. */
+.n-horizontal-panel--pink,
+.n-horizontal-panel--yellow { grid-template-columns: 1fr; }
+
+/* Die neuen Inhalte tragen mehr Text als vorher. Damit ein Panel in eine
+   Bildschirmhöhe passt, sind Überschrift und Zitat hier ruhiger gesetzt. */
+.n-horizontal-panel--pink h2,
+.n-horizontal-panel--yellow h2 { max-width: 26ch; font-size: clamp(28px, 3.1vw, 44px); }
+.n-horizontal-panel--petrol h2 { max-width: 22ch; font-size: clamp(30px, 3.6vw, 50px); }
+.n-horizontal-panel--orange h2 { max-width: 24ch; font-size: clamp(28px, 3.4vw, 46px); }
+.n-horizontal-panel--pink .n-panel-quote,
+.n-horizontal-panel--yellow .n-panel-quote {
+  margin-top: 20px;
+  font-size: clamp(17px, 1.6vw, 22px) !important;
+}
+.n-horizontal-panel--pink p,
+.n-horizontal-panel--yellow p { font-size: clamp(15.5px, 1.35vw, 17.5px); }
