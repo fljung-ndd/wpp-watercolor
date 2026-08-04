@@ -1,4 +1,11 @@
 (() => {
+  if (!document.querySelector('link[href="assets/index_wk_slider_polish.css"]')) {
+    const stylesheet = document.createElement('link');
+    stylesheet.rel = 'stylesheet';
+    stylesheet.href = 'assets/index_wk_slider_polish.css';
+    document.head.append(stylesheet);
+  }
+
   const apply = () => {
     const horizontal = document.querySelector('#haltung');
     if (!horizontal) return;
