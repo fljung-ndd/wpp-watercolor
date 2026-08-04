@@ -1,0 +1,198 @@
+/* Mobiler Haltungssidescroller und fünfter Markenfarbraum.
+ * Vier horizontale Kapitel bleiben erhalten. Die Scrollstrecke ist auf
+ * schmalen Geräten bewusst länger, damit jede Farbe Zeit bekommt.
+ */
+
+/* Nach Rosa, Petrol, Orange und Gelb folgt Blau als normaler Abschnitt. */
+.n-horizontal + .n-waldtiere {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+  padding-top: clamp(112px, 11vw, 154px);
+  background: var(--wk-cyan, #8fd7df) !important;
+  color: var(--wk-ink);
+}
+.n-horizontal + .n-waldtiere::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  top: -54px;
+  right: 0;
+  left: 0;
+  height: 56px;
+  background: var(--wk-cyan, #8fd7df);
+  clip-path: polygon(0 100%, 100% 0, 100% 100%);
+  pointer-events: none;
+}
+.n-horizontal + .n-waldtiere > .n-shell { position: relative; z-index: 1; }
+.n-horizontal + .n-waldtiere .n-wash { opacity: .13; }
+.n-horizontal + .n-waldtiere .n-section-heading h2,
+.n-horizontal + .n-waldtiere .n-panel-quote { color: var(--wk-ink-strong); }
+.n-horizontal + .n-waldtiere .n-eyebrow { color: var(--wk-petrol-ink) !important; }
+.n-horizontal + .n-waldtiere .n-waldtiere__purpose > div,
+.n-horizontal + .n-waldtiere .n-waldtiere__note {
+  background: rgba(255, 253, 246, .7);
+  border-radius: 18px;
+}
+.n-horizontal + .n-waldtiere .n-waldtiere__note { padding: 16px 18px; }
+
+/* Der helle Situationen-Bereich läuft danach in das blaue Schutzkapitel. */
+.n-situationen--readable::after {
+  background: var(--n-blue, #8fd7df) !important;
+}
+
+@media (max-width: 999px) and (prefers-reduced-motion: no-preference) {
+  body .n-horizontal {
+    height: 760svh !important;
+    overflow: visible !important;
+    background: var(--wk-forest-900) !important;
+  }
+  body .n-horizontal__stage {
+    position: sticky !important;
+    top: 0 !important;
+    height: 100svh !important;
+    overflow: hidden !important;
+  }
+  body .n-horizontal__track {
+    display: flex !important;
+    width: 400% !important;
+    height: 100% !important;
+    will-change: transform !important;
+  }
+  body .n-horizontal-panel {
+    flex: 0 0 25% !important;
+    width: 25% !important;
+    min-width: 25% !important;
+    min-height: 100% !important;
+    height: 100% !important;
+    padding: clamp(24px, 4svh, 38px) 18px 46px !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+    align-content: center !important;
+    overflow: hidden !important;
+  }
+  body .n-horizontal-panel__copy,
+  body .n-horizontal-panel__copy--wide {
+    width: 100%;
+    max-width: 700px;
+    margin-inline: auto;
+  }
+  body .n-horizontal-panel__figure { display: none !important; }
+  body .n-horizontal__progress {
+    display: block !important;
+    bottom: 13px !important;
+    height: 4px !important;
+  }
+  body .n-horizontal__hint { display: none !important; }
+  body .n-horizontal-panel .n-eyebrow {
+    margin-bottom: 7px;
+    font-size: 10.5px !important;
+    letter-spacing: .11em;
+  }
+  body .n-horizontal-panel h2 {
+    max-width: 20ch;
+    margin-bottom: 10px;
+    font-size: clamp(28px, 7.4vw, 39px) !important;
+    line-height: 1.04;
+  }
+  body .n-horizontal-panel p {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    font-size: clamp(13.5px, 3.7vw, 15px) !important;
+    line-height: 1.42 !important;
+  }
+  body .n-horizontal-panel .n-panel-quote {
+    margin-top: 12px;
+    font-size: clamp(18px, 5vw, 23px) !important;
+    line-height: 1.25 !important;
+  }
+  body .n-horizontal .n-panel-more { margin-top: 11px; }
+  body .n-horizontal .n-panel-more a { font-size: 13.5px; }
+
+  body .n-horizontal .n-triad {
+    grid-template-columns: 1fr !important;
+    gap: 6px !important;
+    margin-top: 12px !important;
+  }
+  body .n-horizontal .n-triad article {
+    min-height: 0;
+    padding: 8px 11px !important;
+    display: grid;
+    grid-template-columns: minmax(112px, auto) 1fr;
+    gap: 10px;
+    align-items: baseline;
+  }
+  body .n-horizontal .n-triad strong {
+    margin: 0;
+    font-size: 15px !important;
+  }
+  body .n-horizontal .n-triad p {
+    margin: 0;
+    font-size: 12.5px !important;
+  }
+
+  body .n-horizontal .n-forest-symbols {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 7px !important;
+    margin-top: 12px !important;
+  }
+  body .n-horizontal .n-forest-symbols span {
+    min-height: 78px !important;
+    padding: 7px 5px !important;
+    gap: 2px !important;
+    font-size: 12.5px !important;
+  }
+  body .n-horizontal .n-forest-symbols img {
+    width: 30px !important;
+    height: 30px !important;
+  }
+  body .n-horizontal .n-forest-symbols i { font-size: 10.5px; }
+
+  body .n-horizontal .n-cat-perspectives {
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    gap: 4px !important;
+    margin-top: 12px !important;
+  }
+  body .n-horizontal .n-cat-perspectives article {
+    min-height: 0;
+    padding: 7px 2px !important;
+  }
+  body .n-horizontal .n-cat-perspectives img { height: 38px !important; }
+  body .n-horizontal .n-cat-perspectives b {
+    left: 4px;
+    top: 4px;
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+  }
+  body .n-horizontal .n-cat-perspectives strong {
+    font-size: clamp(9px, 2.6vw, 11px) !important;
+    line-height: 1.05;
+  }
+  body .n-horizontal .n-cat-perspectives em,
+  body .n-horizontal .n-cat-perspectives span { display: none !important; }
+
+  body .n-horizontal-panel--yellow .n-why-toys {
+    display: block !important;
+    max-width: none !important;
+  }
+  body .n-horizontal-panel--yellow .n-why-toys p { max-width: 46ch; }
+}
+
+@media (max-width: 430px) and (max-height: 760px) and (prefers-reduced-motion: no-preference) {
+  body .n-horizontal-panel {
+    padding-top: 18px !important;
+    padding-bottom: 34px !important;
+  }
+  body .n-horizontal-panel h2 {
+    font-size: clamp(25px, 6.8vw, 31px) !important;
+  }
+  body .n-horizontal-panel p { font-size: 12.8px !important; }
+  body .n-horizontal .n-triad article { padding-block: 6px !important; }
+  body .n-horizontal .n-forest-symbols span { min-height: 68px !important; }
+  body .n-horizontal .n-forest-symbols img {
+    width: 25px !important;
+    height: 25px !important;
+  }
+}
