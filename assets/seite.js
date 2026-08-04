@@ -1,12 +1,14 @@
-/* Unterseiten: Menü und Einblendungen.
- *
- * Bewusst nicht index_n.js: das bringt Storyleiste, Haltungsband und die
- * FAQ-Einblendung mit, die es auf den Unterseiten alle nicht gibt - und es
- * blendet die Kopfzeile beim Scrollen aus, was auf einer Leseseite stört.
- */
+/* Unterseiten: Menü, Einblendungen und einheitliche Startseitenlinks. */
 (() => {
   const menuButton = document.querySelector('.n-menu-button');
   const navigation = document.querySelector('.n-navigation');
+
+  document.querySelectorAll('a[href]').forEach(link => {
+    const href = link.getAttribute('href');
+    if (!href) return;
+    const match = href.match(/^(?:\.\/)?(?:index_ws|index_wk|index)\.html(.*)$/i);
+    if (match) link.setAttribute('href', `./${match[1] || ''}`);
+  });
 
   menuButton?.addEventListener('click', () => {
     const open = menuButton.getAttribute('aria-expanded') === 'true';
@@ -18,8 +20,6 @@
     menuButton?.setAttribute('aria-expanded', 'false');
   }));
 
-  // Ohne Beobachter bliebe die Einblendanimation aus index_n.css auf
-  // opacity:0 stehen.
   const reveals = [...document.querySelectorAll('.n-reveal')];
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver(entries => {
