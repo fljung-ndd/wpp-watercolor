@@ -1,10 +1,4 @@
-/* Startseite: finale Dramaturgie und Interaktionen.
- *
- * Die bestehende HTML-Fassung bleibt die inhaltliche Basis. Dieses Skript
- * ordnet die Kapitel so, dass zuerst Wiedererkennen, Wendepunkt und das
- * horizontale Haltungserlebnis kommen. Danach folgen Waldtiere und konkrete
- * Situationen; die fachliche Einordnung schließt sich erst anschließend an.
- */
+/* Startseite: finale Dramaturgie, mobile Entlastung und Interaktionen. */
 (() => {
   const addStylesheet = href => {
     if (document.querySelector(`link[href="${href}"]`)) return;
@@ -17,24 +11,64 @@
 
   const byId = id => document.getElementById(id);
   const main = document.querySelector('main');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   if (!main) return;
 
-  document.querySelector('.n-hero__soft')?.remove();
-  const heroActions = document.querySelector('.n-hero .n-actions');
-  if (heroActions && !document.querySelector('.n-hero__signature')) {
-    heroActions.insertAdjacentHTML(
-      'beforebegin',
-      '<p class="n-hero__signature">wild sein dürfen / und verbunden bleiben <span aria-hidden="true">♡</span></p>'
-    );
+  /* ----------------------------------------------------------------------
+   * Hero: weniger Aussagen gleichzeitig, dafür eine wechselnde zweite Zeile.
+   * Die wechselnde Zeile ist für Screenreader verborgen; die statische
+   * Kernaussage bleibt als visuell versteckter Text erhalten.
+   * ---------------------------------------------------------------------- */
+  const heroContent = document.querySelector('.n-hero__content');
+  if (heroContent) {
+    heroContent.innerHTML = `
+      <p class="n-hero__brandline">Waldkätzchen <span>· Torsten Macht</span></p>
+      <h1 id="hero-title">
+        Verstehen statt bewerten.<br>
+        <span class="n-hero__cycling" id="hero-cycling" aria-hidden="true">Verbindung statt Druck.</span>
+        <span class="n-visually-hidden">Verbindung statt Druck.</span>
+      </h1>
+      <p class="n-hero__lead n-hero__lead--short">Heilpädagogisch-systemische Begleitung für Familien, Väter und Fachkräfte.</p>
+      <p class="n-hero__signature">wild sein dürfen / und verbunden bleiben <span aria-hidden="true">♡</span></p>
+      <div class="n-actions">
+        <a class="n-button n-button--pink" href="#kontakt">Erst einmal erzählen <span aria-hidden="true">♡</span></a>
+        <a class="n-button n-button--petrol" href="#erkennen">Wie Waldkätzchen schaut <span aria-hidden="true">↓</span></a>
+      </div>`;
+
+    const cycling = byId('hero-cycling');
+    const phrases = [
+      'Verbindung statt Druck.',
+      'Mitgefühl statt Urteilen.',
+      'Sicherheit statt Strenge.',
+      'Verstehen statt Kämpfen.',
+    ];
+    let phraseIndex = 0;
+    if (cycling && !reduceMotion.matches) {
+      window.setInterval(() => {
+        cycling.classList.add('is-changing');
+        window.setTimeout(() => {
+          phraseIndex = (phraseIndex + 1) % phrases.length;
+          cycling.textContent = phrases[phraseIndex];
+          cycling.classList.remove('is-changing');
+        }, 360);
+      }, 4300);
+    }
   }
 
+  /* Vertrauensband: vier belastbare Aussagen, keine horizontale Laufleiste. */
   const trust = byId('vertrauen');
   trust?.removeAttribute('data-story-step');
   trust?.removeAttribute('data-story-label');
-  const trustItems = trust ? [...trust.querySelectorAll('li')] : [];
-  const podcastTrust = trustItems.find(item => /Podcast/i.test(item.textContent));
-  if (podcastTrust) podcastTrust.querySelector('span').textContent = 'Online & vor Ort';
+  const trustList = trust?.querySelector('.n-trust-band__list');
+  if (trustList) {
+    trustList.innerHTML = `
+      <li><img class="n-trust-band__icon" src="assets/icons/01_lupe_blatt.webp" alt="" width="96" height="96" loading="lazy"><span>Heilpädagogisch fundiert</span></li>
+      <li><img class="n-trust-band__icon" src="assets/icons/03_herz.webp" alt="" width="96" height="96" loading="lazy"><span>Beziehungsorientiert</span></li>
+      <li><img class="n-trust-band__icon" src="assets/icons/13_kita_haus.webp" alt="" width="96" height="96" loading="lazy"><span>Online &amp; vor Ort</span></li>
+      <li><img class="n-trust-band__icon" src="assets/icons/handshake.webp" alt="" width="96" height="96" loading="lazy"><span>Kostenfreies Erstgespräch</span></li>`;
+  }
 
+  /* Großer Wendepunkt direkt vor dem Haltungserlebnis. */
   const story = document.querySelector('.n-story');
   let pivot = byId('wendepunkt');
   if (story && !pivot) {
@@ -60,6 +94,58 @@
     if (animals && situations) animals.after(situations);
   }
 
+  /* Sidescroller bleibt auf großen Bildschirmen, wird aber inhaltlich zum
+   Teaser. Auf Mobilgeräten stapelt das CSS die vier kurzen Panels vertikal. */
+  const panels = horizontal ? [...horizontal.querySelectorAll('.n-horizontal-panel')] : [];
+  if (panels[0]) {
+    const lead = panels[0].querySelector('.n-horizontal-panel__copy > p:not(.n-eyebrow):not(.n-panel-quote):not(.n-panel-more)');
+    if (lead) lead.textContent = 'Wir halten drei Dinge gleichzeitig im Blick – keines darf allein regieren.';
+    const triadCopy = [
+      ['Beziehung', 'Verbindung und Reparatur.'],
+      ['Selbstbestimmung', 'Einfluss, Nein-Räume und Würde.'],
+      ['Ko-Regulation', 'Ruhe leihen und gemeinsam wieder handlungsfähig werden.'],
+    ];
+    panels[0].querySelectorAll('.n-triad article').forEach((item, index) => {
+      const [title, text] = triadCopy[index] || [];
+      if (title) item.querySelector('strong').textContent = title;
+      if (text) item.querySelector('p').textContent = text;
+    });
+  }
+
+  if (panels[1]) {
+    const lead = panels[1].querySelector('.n-horizontal-panel__copy > p:not(.n-eyebrow):not(.n-panel-more)');
+    if (lead) lead.textContent = 'Vier Orte reichen hier als Einstieg. Sie zeigen Schutz, Unklarheit, alte Stimmen und einen gemeinsamen Ausgangspunkt.';
+    const symbols = panels[1].querySelector('.n-forest-symbols');
+    const keep = ['Lichtung', 'Höhle', 'Echos', 'Nebel'];
+    symbols?.querySelectorAll(':scope > span').forEach(item => {
+      if (!keep.some(label => item.textContent.trim().startsWith(label))) item.remove();
+    });
+    if (symbols && !panels[1].querySelector('.n-panel-more')) {
+      symbols.insertAdjacentHTML('afterend', '<p class="n-panel-more"><a class="n-text-link n-text-link--light" href="./Konzept.dc.html#orte">Alle acht Waldorte entdecken <span aria-hidden="true">→</span></a></p>');
+    }
+  }
+
+  if (panels[2]) {
+    const lead = panels[2].querySelector('.n-horizontal-panel__copy > p:not(.n-eyebrow):not(.n-panel-more)');
+    if (lead) lead.textContent = 'Erst beobachten, dann spüren, vermuten und das Umfeld sehen. Die Macherin kommt bewusst zuletzt.';
+    const perspectives = panels[2].querySelector('.n-cat-perspectives');
+    if (perspectives && !panels[2].querySelector('.n-panel-more')) {
+      perspectives.insertAdjacentHTML('afterend', '<p class="n-panel-more"><a class="n-text-link n-text-link--dark" href="./Konzept.dc.html#blicke">Die fünf Blicke im Detail <span aria-hidden="true">→</span></a></p>');
+    }
+  }
+
+  if (panels[3]) {
+    const toyCopy = panels[3].querySelector('.n-why-toys > div');
+    if (toyCopy) {
+      toyCopy.innerHTML = `
+        <p>Ein Kind sitzt schweigend in der Ecke. Tigi kommt zuerst. Er stupst an, bleibt – und nimmt der Situation den direkten Druck.</p>
+        <p>Über die Figur kann etwas gesagt werden, ohne dass sofort über das Kind gesprochen werden muss.</p>
+        <p class="n-panel-quote n-panel-quote--dark">Tigi kam zuerst. Ich kam danach.</p>`;
+    }
+    panels[3].querySelector('.n-animal-strip')?.remove();
+  }
+
+  /* Persönliche Verankerung: Name im Hero und klar im Über-mich-Abschnitt. */
   const about = byId('ueber-mich');
   if (about) {
     const alias = document.createElement('span');
@@ -70,18 +156,26 @@
     about.id = 'warum-waldkaetzchen';
     about.dataset.storyStep = '';
     about.dataset.storyLabel = 'Warum Waldkätzchen';
+
+    const aboutHeading = about.querySelector('.n-about__grid > div:last-child h2');
+    if (aboutHeading && !about.querySelector('.n-about__name')) {
+      aboutHeading.insertAdjacentHTML(
+        'beforebegin',
+        '<p class="n-about__name"><strong>Ich bin Torsten Macht.</strong> Heilpädagoge, IT-ler und Familienmensch.</p>'
+      );
+    }
   }
   const portrait = byId('begegnung');
   portrait?.removeAttribute('data-story-step');
   portrait?.removeAttribute('data-story-label');
-
   document.querySelectorAll('a[href="#ueber-mich"]').forEach(link => {
     link.setAttribute('href', '#warum-waldkaetzchen');
   });
 
+  /* Waldtiere und Situationen. */
   const animalIntro = animals?.querySelector('.n-section-heading p:last-child');
   if (animalIntro) {
-    animalIntro.textContent = 'Die Waldtiere sind keine perfekten Vorbilder. Sie sind Figuren mit Eigenheiten, Widersprüchen und eigenen Geschichten. Sie geben Situationen eine Gestalt, ohne Menschen festzulegen.';
+    animalIntro.textContent = 'Die Waldtiere sind Figuren mit Eigenheiten, Widersprüchen und eigenen Geschichten. Sie geben Situationen eine Gestalt, ohne Menschen festzulegen.';
   }
 
   const replacePlaceholder = (article, src, alt) => {
@@ -95,18 +189,22 @@
   replacePlaceholder(animalCards.find(card => /Niko/.test(card.textContent)), 'assets/chars/18_katze_kompass.webp', 'Symbolbild für Niko und Selbstbestimmung');
   replacePlaceholder(animalCards.find(card => /Iella/.test(card.textContent)), 'assets/chars/17_katze_pinguin_umarmung.webp', 'Symbolbild für Iella und sichere Verbindung');
 
+  situations?.classList.add('n-situationen--readable');
+  const situationTitle = situations?.querySelector('.n-section-heading h2');
+  if (situationTitle) situationTitle.textContent = 'Was wird sichtbar, wenn wir das Urteil verlangsamen?';
   const luisSituationArt = situations?.querySelector('.n-situation__art');
   if (luisSituationArt) {
     luisSituationArt.innerHTML = '<img src="assets/chars/13_ueberforderung.webp" alt="Symbolbild für Luis und Überforderung" width="512" height="512" loading="lazy">';
   }
 
   const compactSituations = situations ? [...situations.querySelectorAll('.n-situation-compact')] : [];
-  const autonomySituation = compactSituations.find(item => /Iella sagt Nein/.test(item.textContent));
-  if (autonomySituation) {
+  const autonomySituation = compactSituations.find(item => /Iella sagt Nein|Niko sagt Nein/.test(item.textContent));
+  if (autonomySituation && /Iella/.test(autonomySituation.textContent)) {
     autonomySituation.querySelector('summary strong').textContent = 'Niko sagt Nein – und alle hören nur Widerstand.';
     autonomySituation.innerHTML = autonomySituation.innerHTML.replaceAll('Iella', 'Niko');
   }
 
+  /* Angebot auf der Startseite als Einstiege, nicht als zweite Zielgruppenliste. */
   const offer = byId('angebot');
   if (offer) {
     const eyebrow = offer.querySelector('.n-section-heading .n-eyebrow');
@@ -119,6 +217,7 @@
   audienceBlock?.remove();
   domainAudience?.classList.add('n-domain-audience--single');
 
+  /* Podcast und wiederkehrende Signatur. */
   const podcast = byId('podcast');
   if (podcast) {
     podcast.removeAttribute('data-story-step');
@@ -142,6 +241,7 @@
     );
   }
 
+  /* Storyrail: auf Desktop wenige klare Kapitel, mobil wird sie ausgeblendet. */
   const storyNav = document.querySelector('.n-story-rail nav');
   const storyEntries = [
     ['start', 'Ankommen'],
@@ -155,7 +255,7 @@
     ['grundsatz', 'Grundsatz'],
     ['logik', 'Von außen nach innen'],
     ['fundament', 'Fundament'],
-    ['warum-waldkaetzchen', 'Warum Waldkätzchen'],
+    ['warum-waldkaetzchen', 'Torsten'],
     ['angebot', 'Angebot'],
     ['fragen', 'Fragen'],
     ['wissen', 'Wissen'],
@@ -208,13 +308,13 @@
   window.addEventListener('resize', requestStorySync, { passive: true });
   requestStorySync();
 
+  /* Horizontale Kartenleisten bleiben ohne Bibliothek bedienbar. */
   document.querySelectorAll('[data-rail]').forEach(rail => {
     const track = rail.querySelector('[data-rail-track]');
     const prev = rail.querySelector('[data-rail-prev]');
     const next = rail.querySelector('[data-rail-next]');
     if (!track || !prev || !next) return;
 
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const step = () => {
       const [first, second] = track.children;
       if (first && second) return second.getBoundingClientRect().left - first.getBoundingClientRect().left;
