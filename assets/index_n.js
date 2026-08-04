@@ -6,6 +6,15 @@
     document.head.append(stylesheet);
   });
 
+  /* index_wk.js ordnet die Seite und verdichtet zunächst die Panels. Nach dem
+     vollständigen Seitenaufbau stellt dieses Skript die originalen Inhalte
+     aus index_ws wieder her und ergänzt nur die neue Orange-Vertiefung. */
+  window.addEventListener('load', () => {
+    if (document.querySelector('script[src="assets/index_wk_slider_restore.js"]')) return;
+    const script = document.createElement('script');
+    script.src = 'assets/index_wk_slider_restore.js';
+    document.head.append(script);
+  }, { once: true });
 
   const knowledgeSection = document.querySelector('#wissen');
   if (knowledgeSection && !document.querySelector('#fragen')) {
@@ -134,10 +143,6 @@
     const maxShift = 100 - (100 / panelCount);
     let value = raw;
 
-    /* Auf dem Smartphone besteht die Strecke aus vier Farbräumen. Jeder Raum
-       bekommt eine kurze Ruhephase; danach gleitet er über ungefähr eine
-       weitere Bildschirmhöhe in den nächsten. Das letzte Viertel hält Gelb,
-       bevor der sticky Sidescroller endet und der blaue Abschnitt beginnt. */
     if (window.innerWidth <= 999 && panelCount === 4) {
       const scaled = raw * panelCount;
       const segment = Math.min(panelCount - 1, Math.floor(scaled));
@@ -146,9 +151,9 @@
       if (segment >= panelCount - 1) {
         value = 1;
       } else {
-        const hold = 0.28;
+        const hold = 0.18;
         const transition = local <= hold ? 0 : Math.min(1, (local - hold) / (1 - hold));
-        const eased = transition * transition * (3 - 2 * transition);
+        const eased = 0.5 - Math.cos(Math.PI * transition) / 2;
         value = (segment + eased) / (panelCount - 1);
       }
     }
