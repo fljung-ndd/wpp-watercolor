@@ -148,10 +148,6 @@
 .n-horizontal .n-cat-perspectives article { padding: 12px 8px; }
 .n-horizontal .n-cat-perspectives strong { font-size: 15px; }
 .n-horizontal .n-cat-perspectives em { font-size: 11.5px; }
-.n-horizontal-panel--yellow .n-why-toys {
-  display: block;
-  max-width: 850px;
-}
 .n-horizontal-panel--yellow .n-why-toys p { max-width: 58ch; }
 .n-horizontal .n-panel-more { margin-top: 18px; }
 
@@ -221,7 +217,7 @@
 .n-situationen--readable .n-section-heading > p:last-child,
 .n-situationen--readable .n-situation > p,
 .n-situationen--readable .n-situation__bridge { color: var(--wk-ink-soft); }
-.n-situationen--readable .n-eyebrow { color: var(--wk-petrol-ink); }
+.n-situationen--readable .n-eyebrow { color: var(--wk-petrol-ink) !important; }
 .n-situationen--readable .n-situation {
   margin-top: clamp(30px, 4vw, 46px);
   padding: clamp(24px, 4vw, 42px);
@@ -292,7 +288,7 @@
   background: var(--wk-paper);
   clip-path: polygon(0 100%, 100% 0, 100% 100%);
 }
-.n-science > * { position: relative; z-index: 1; }
+.n-science > *:not(.n-wash) { position: relative; z-index: 1; }
 
 /* Der alte türkisfarbene Divider passt nach der neuen Reihenfolge nicht mehr. */
 .n-no-coaching.wk-sd::before { display: none; }
