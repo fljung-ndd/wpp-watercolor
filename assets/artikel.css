@@ -5,6 +5,7 @@
 
 .n-section--orange { background: var(--wk-orange); color: var(--wk-ink); }
 .n-section--pink { background: var(--wk-pink-700); color: var(--wk-paper); }
+.n-section--petrol-deep { background: var(--wk-petrol-700); color: var(--wk-paper); }
 
 /* -- Kopf: Eyebrow, H1, Unterzeile, Beitragsbild -- */
 .w-head { padding-block: clamp(14px, 2.4vw, 26px) clamp(6px, 1vw, 14px); }
@@ -12,8 +13,10 @@
 .w-head__sub { margin: 0; max-width: 48ch; color: var(--wk-ink-soft); font-size: clamp(17px, 1.7vw, 20px); line-height: 1.55; }
 .w-head__img { width: min(380px, 100%); margin-inline: auto; filter: drop-shadow(0 20px 26px rgba(18, 61, 54, 0.18)); }
 .n-section--pink.w-head h1,
+.n-section--petrol-deep.w-head h1,
 .n-section--forest.w-head h1 { color: var(--wk-paper); }
 .n-section--pink.w-head .w-head__sub,
+.n-section--petrol-deep.w-head .w-head__sub,
 .n-section--forest.w-head .w-head__sub { color: var(--wk-on-dark-soft); }
 
 /* -- Fliesstext -- */
@@ -32,6 +35,10 @@
 .w-article ol > li { position: relative; padding-left: 30px; line-height: 1.68; counter-increment: w-ol; }
 .w-article ol > li::before { content: counter(w-ol) '.'; position: absolute; left: 0; top: 0; color: var(--wk-petrol-ink); font-family: var(--wk-font-serif); font-weight: 700; }
 
+/* Checkliste: gute Anzeichen vs. Warnsignale, z. B. bei der Wahl einer Fachkraft. */
+.w-article ul.w-list--good > li::before { content: '✓'; top: -1px; color: var(--wk-petrol); font-size: 15px; }
+.w-article ul.w-list--warn > li::before { content: '!'; top: -3px; color: var(--wk-pink-ink); font-size: 17px; font-weight: 700; }
+
 /* Begriff/Frage + Antwort im Fliessext, z. B. „Fünf Fragen“ oder „Drei Ebenen“. */
 .w-deflist { margin: 0 0 24px; padding: 0; display: grid; gap: 16px; }
 .w-deflist dt { margin: 0; color: var(--wk-petrol-ink); font-family: var(--wk-font-serif); font-size: 18.5px; }
@@ -41,6 +48,9 @@
 .w-quote { margin: 20px 0; padding: 15px 20px; border-radius: 14px; background: var(--wk-petrol-025); }
 .w-quote p { margin: 0 0 8px; color: var(--wk-ink-strong); font-family: var(--wk-font-serif); font-size: clamp(17px, 1.7vw, 20px); font-style: italic; line-height: 1.48; }
 .w-quote p:last-child { margin-bottom: 0; }
+
+/* Inline-Quellenverweis, z. B. „(PubMed)“ nach einer Aussage. */
+.w-cite { color: var(--wk-petrol-ink); font-size: 0.9em; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 2px; }
 
 .w-mantra { margin: 34px 0 0; color: var(--wk-petrol-ink); font-family: var(--wk-font-serif); font-weight: 700; font-size: clamp(21px, 2.3vw, 28px); line-height: 1.3; }
 .w-mantra + p { margin-top: 10px; }
@@ -75,6 +85,14 @@
 .w-source { margin-top: clamp(26px, 3vw, 36px); padding-top: 16px; border-top: 1px dashed rgba(18, 61, 54, 0.25); color: var(--wk-ink-muted); font-size: 13.5px; line-height: 1.6; }
 .w-source b { color: var(--wk-petrol-ink); }
 
+/* -- Literaturverzeichnis (ausführlicher als .w-source) -- */
+.w-biblio { margin-top: clamp(30px, 4vw, 44px); padding-top: 18px; border-top: 1px dashed rgba(18, 61, 54, 0.25); }
+.w-biblio h3 { margin: 0 0 14px; color: var(--wk-ink-strong); font-family: var(--wk-font-serif); font-size: 18px; }
+.w-biblio ul { margin: 0; padding: 0; display: grid; gap: 8px; list-style: none; }
+.w-biblio li { position: relative; padding-left: 15px; color: var(--wk-ink-muted); font-size: 13.5px; line-height: 1.55; }
+.w-biblio li::before { content: '–'; position: absolute; left: 0; color: var(--wk-petrol-ink); }
+.w-biblio a { color: var(--wk-petrol-ink); text-decoration: underline; text-decoration-style: dotted; }
+
 /* -- CTA-Teaser -- */
 .w-cta { max-width: 62ch; margin-inline: auto; text-align: center; }
 .w-cta h2 { margin: 0 0 12px; color: var(--wk-paper); font-family: var(--wk-font-serif); font-size: clamp(26px, 3vw, 36px); }
@@ -82,7 +100,7 @@
 .w-cta .n-actions { justify-content: center; }
 
 /* -- Serien-Navigation -- */
-.w-series__list { margin: 22px 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 13px; }
+.w-series__list { margin: 22px 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 13px; }
 .w-series__item a { display: flex; height: 100%; flex-direction: column; gap: 9px; padding: 17px 16px 19px; border-radius: 16px; background: var(--wk-paper-card); color: inherit; text-decoration: none; box-shadow: var(--wk-shadow); transition: transform 180ms ease, box-shadow 180ms ease; }
 .w-series__item a:hover, .w-series__item a:focus-visible { transform: translateY(-4px); box-shadow: var(--wk-shadow-lg); }
 .w-series__num { color: var(--wk-petrol-ink); font-family: var(--wk-font-serif); font-size: 13px; font-weight: 700; letter-spacing: 0.04em; }
@@ -91,9 +109,6 @@
 .w-series__item--current .w-series__num { color: var(--wk-yellow); }
 .w-series__item--current a strong { color: var(--wk-paper); }
 
-@media (max-width: 999px) {
-  .w-series__list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-}
 @media (max-width: 680px) {
   .w-head__img { width: min(260px, 62%); }
   .w-series__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
