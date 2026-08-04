@@ -1,10 +1,11 @@
 (() => {
-  ['assets/index_n_dots.css', 'assets/index_n_dividers.css'].forEach(href => {
+  ['assets/index_n_dots.css', 'assets/index_n_dividers.css', 'assets/index_wk_mobile_horizontal.css'].forEach(href => {
     const stylesheet = document.createElement('link');
     stylesheet.rel = 'stylesheet';
     stylesheet.href = href;
     document.head.append(stylesheet);
   });
+
 
   const knowledgeSection = document.querySelector('#wissen');
   if (knowledgeSection && !document.querySelector('#fragen')) {
@@ -121,15 +122,43 @@
 
   const updateHorizontal = () => {
     if (!horizontal || !horizontalTrack || reduceMotion.matches) {
-      if (horizontalTrack) horizontalTrack.style.transform = '';
+      if (horizontalTrack) horizontalTrack.style.removeProperty('transform');
       if (horizontalProgress) horizontalProgress.style.transform = 'scaleX(0)';
       return;
     }
+
     const rect = horizontal.getBoundingClientRect();
     const distance = horizontal.offsetHeight - window.innerHeight;
-    const value = distance > 0 ? Math.min(1, Math.max(0, -rect.top / distance)) : 0;
-    horizontalTrack.style.transform = `translate3d(${-value * 75}%, 0, 0)`;
-    if (horizontalProgress) horizontalProgress.style.transform = `scaleX(${value})`;
+    const raw = distance > 0 ? Math.min(1, Math.max(0, -rect.top / distance)) : 0;
+    const panelCount = Math.max(1, horizontalTrack.children.length);
+    const maxShift = 100 - (100 / panelCount);
+    let value = raw;
+
+    /* Auf dem Smartphone besteht die Strecke aus vier Farbräumen. Jeder Raum
+       bekommt eine kurze Ruhephase; danach gleitet er über ungefähr eine
+       weitere Bildschirmhöhe in den nächsten. Das letzte Viertel hält Gelb,
+       bevor der sticky Sidescroller endet und der blaue Abschnitt beginnt. */
+    if (window.innerWidth <= 999 && panelCount === 4) {
+      const scaled = raw * panelCount;
+      const segment = Math.min(panelCount - 1, Math.floor(scaled));
+      const local = scaled - segment;
+
+      if (segment >= panelCount - 1) {
+        value = 1;
+      } else {
+        const hold = 0.28;
+        const transition = local <= hold ? 0 : Math.min(1, (local - hold) / (1 - hold));
+        const eased = transition * transition * (3 - 2 * transition);
+        value = (segment + eased) / (panelCount - 1);
+      }
+    }
+
+    horizontalTrack.style.setProperty(
+      'transform',
+      `translate3d(${-value * maxShift}%, 0, 0)`,
+      'important'
+    );
+    if (horizontalProgress) horizontalProgress.style.transform = `scaleX(${raw})`;
   };
 
   const updateStory = currentY => {

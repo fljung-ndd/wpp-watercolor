@@ -1,4 +1,40 @@
-/* Finale Dramaturgie-Ergänzungen für index_wk.html. */
+/* Finale Dramaturgie- und Responsive-Ergänzungen für index_wk.html. */
+
+/* --------------------------------------------------------------------------
+ * Hero: eine klare Hauptaussage statt vieler konkurrierender Botschaften
+ * -------------------------------------------------------------------------- */
+.n-hero__brandline {
+  margin: 0 0 14px;
+  color: var(--wk-yellow);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+.n-hero__brandline span { color: var(--wk-on-dark-soft); }
+.n-hero h1 {
+  max-width: 17ch;
+  font-size: clamp(46px, 6vw, 82px);
+  line-height: 1.01;
+  text-wrap: balance;
+}
+.n-hero__cycling {
+  display: inline-block;
+  min-height: 1.05em;
+  color: var(--wk-pink-on-dark);
+  transition: opacity .36s ease, transform .36s ease;
+}
+.n-hero__cycling.is-changing {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+.n-hero__lead--short {
+  max-width: 43ch;
+  margin-top: 24px;
+  color: var(--wk-on-dark-soft);
+  font-size: clamp(17px, 1.5vw, 20px);
+  line-height: 1.55;
+}
 .n-hero__signature,
 .n-principle__signature {
   margin: 18px 0 0;
@@ -11,7 +47,33 @@
   margin-top: 28px;
   color: var(--wk-pink-ink);
 }
+.n-hero__content .n-actions { margin-top: 28px; }
 
+/* --------------------------------------------------------------------------
+ * Vertrauensband: feste Rasterfläche, niemals eine horizontale Scrollleiste
+ * -------------------------------------------------------------------------- */
+.n-trust-band { overflow: hidden; }
+.n-trust-band__list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px 22px;
+  padding: 13px 0;
+  overflow: visible;
+}
+.n-trust-band__list li {
+  min-width: 0;
+  justify-content: center;
+  padding: 8px 10px;
+  border-radius: 14px;
+}
+.n-trust-band__list span {
+  white-space: normal;
+  line-height: 1.25;
+}
+
+/* --------------------------------------------------------------------------
+ * Großer Wendepunkt
+ * -------------------------------------------------------------------------- */
 .n-pivot {
   position: relative;
   overflow: hidden;
@@ -52,6 +114,61 @@
   line-height: 1.55;
 }
 
+/* --------------------------------------------------------------------------
+ * Sidescroller: desktopseitig erhalten, aber deutlich reduziert
+ * -------------------------------------------------------------------------- */
+.n-horizontal-panel {
+  padding: clamp(42px, 5.2vw, 76px);
+}
+.n-horizontal-panel h2 {
+  max-width: 18ch;
+  font-size: clamp(34px, 4.2vw, 58px);
+}
+.n-horizontal-panel p {
+  font-size: clamp(15.5px, 1.35vw, 18px);
+  line-height: 1.55;
+}
+.n-horizontal-panel .n-panel-quote {
+  margin-top: 21px;
+  font-size: clamp(19px, 2vw, 27px) !important;
+}
+.n-horizontal .n-triad { margin-top: 18px; gap: 10px; }
+.n-horizontal .n-triad article { padding: 14px 15px; }
+.n-horizontal .n-triad strong { font-size: 18px; }
+.n-horizontal .n-triad p { font-size: 13.5px !important; line-height: 1.4; }
+.n-horizontal .n-forest-symbols {
+  grid-template-columns: repeat(4, minmax(105px, 1fr));
+  max-width: 700px;
+  margin-top: 20px;
+}
+.n-horizontal .n-forest-symbols span { padding: 12px 8px; }
+.n-horizontal .n-cat-perspectives { margin-top: 20px; }
+.n-horizontal .n-cat-perspectives span { display: none; }
+.n-horizontal .n-cat-perspectives img { height: 72px; }
+.n-horizontal .n-cat-perspectives article { padding: 12px 8px; }
+.n-horizontal .n-cat-perspectives strong { font-size: 15px; }
+.n-horizontal .n-cat-perspectives em { font-size: 11.5px; }
+.n-horizontal-panel--yellow .n-why-toys {
+  display: block;
+  max-width: 850px;
+}
+.n-horizontal-panel--yellow .n-why-toys p { max-width: 58ch; }
+.n-horizontal .n-panel-more { margin-top: 18px; }
+
+/* --------------------------------------------------------------------------
+ * Über mich: der Mensch hinter der Marke wird sichtbar benannt
+ * -------------------------------------------------------------------------- */
+.n-about__name {
+  margin: 0 0 12px;
+  color: var(--wk-petrol-ink);
+  font-size: 16px;
+  line-height: 1.5;
+}
+.n-about__name strong {
+  color: var(--wk-ink-strong);
+  font-family: var(--wk-font-serif);
+  font-size: 22px;
+}
 .n-anchor-alias {
   position: relative;
   display: block;
@@ -59,29 +176,295 @@
   scroll-margin-top: 90px;
 }
 
-.n-situation__art { overflow: hidden; }
+/* --------------------------------------------------------------------------
+ * Situationen: heller Lesebereich statt dunkler Textwand
+ * -------------------------------------------------------------------------- */
+.n-situationen--readable {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+  background: var(--wk-paper-warm, #f5ede0) !important;
+  color: var(--wk-ink);
+  padding-top: clamp(92px, 10vw, 138px);
+  padding-bottom: clamp(105px, 11vw, 150px);
+}
+.n-situationen--readable::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  top: -52px;
+  left: 0;
+  width: 100%;
+  height: 54px;
+  background: var(--wk-paper-warm, #f5ede0);
+  clip-path: polygon(0 100%, 100% 0, 100% 100%);
+}
+.n-situationen--readable::after {
+  content: '';
+  position: absolute;
+  z-index: 3;
+  right: 0;
+  bottom: -56px;
+  left: 0;
+  height: 58px;
+  background: var(--wk-forest-800, #123d36);
+  clip-path: polygon(0 0, 100% 100%, 0 100%);
+  pointer-events: none;
+}
+.n-situationen--readable > .n-shell { position: relative; z-index: 1; }
+.n-situationen--readable .n-section-heading h2,
+.n-situationen--readable h3 { color: var(--wk-ink-strong); }
+.n-situationen--readable .n-section-heading h2 {
+  max-width: 22ch;
+  font-size: clamp(36px, 5vw, 62px);
+}
+.n-situationen--readable .n-section-heading > p:last-child,
+.n-situationen--readable .n-situation > p,
+.n-situationen--readable .n-situation__bridge { color: var(--wk-ink-soft); }
+.n-situationen--readable .n-eyebrow { color: var(--wk-petrol-ink); }
+.n-situationen--readable .n-situation {
+  margin-top: clamp(30px, 4vw, 46px);
+  padding: clamp(24px, 4vw, 42px);
+  border: 1px solid rgba(18, 61, 54, .12);
+  border-radius: 30px;
+  background: rgba(255, 253, 246, .9);
+  box-shadow: 0 18px 48px rgba(18, 61, 54, .11);
+}
+.n-situationen--readable .n-situation__art {
+  overflow: hidden;
+  background: var(--wk-orange-025, #fff0dc);
+  box-shadow: inset 0 0 0 1px rgba(18, 61, 54, .08);
+}
 .n-situation__art img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   mix-blend-mode: multiply;
 }
-
-/* Nach der neuen Reihenfolge folgt auf die dunkelgrünen Situationen direkt
-   der ebenfalls dunkelgrüne Coaching-Abschnitt. Der alte türkise Divider
-   wäre dort inhaltlich falsch und erzeugte zusätzlich unnötige Leerhöhe. */
-.n-situationen + .n-no-coaching.wk-sd {
-  --wk-from: var(--wk-forest-800);
-  padding-top: clamp(72px, 8vw, 120px);
+.n-situationen--readable .n-situation__thought { color: var(--wk-pink-ink); }
+.n-situationen--readable .n-situation .n-panel-quote {
+  margin: 28px 0;
+  padding: 20px 22px;
+  border-left: 4px solid var(--wk-pink);
+  border-radius: 0 18px 18px 0;
+  background: var(--wk-pink-025, #fbecee);
+  color: var(--wk-ink-strong);
+  font-size: clamp(20px, 2.3vw, 29px) !important;
 }
-.n-situationen + .n-no-coaching.wk-sd::before { display: none; }
+.n-situationen--readable .n-cat-perspectives article {
+  border: 1px solid rgba(18, 61, 54, .1);
+  background: #fffdf8;
+  box-shadow: 0 8px 24px rgba(18, 61, 54, .08);
+}
+.n-situationen--readable .n-situation-compact {
+  border: 1px solid rgba(18, 61, 54, .12);
+  background: rgba(255, 253, 246, .9);
+  box-shadow: 0 10px 28px rgba(18, 61, 54, .07);
+}
+.n-situationen--readable .n-situation-compact summary strong,
+.n-situationen--readable .n-situation-compact > p,
+.n-situationen--readable .n-situation-compact__blicke dd { color: var(--wk-ink); }
+.n-situationen--readable .n-situation-compact__tag,
+.n-situationen--readable .n-situation-compact__blicke dt { color: var(--wk-petrol-ink); }
+.n-situationen--readable .n-situation-compact__toggle {
+  background: var(--wk-petrol-050, #e5f0ec);
+  color: var(--wk-forest-800);
+}
+.n-situationen--readable .n-situation-compact__blicke {
+  border-top-color: rgba(18, 61, 54, .16);
+}
+.n-situationen--readable .n-situation__footer {
+  background: var(--wk-forest-800);
+}
+.n-situationen--readable .n-situation__footer p,
+.n-situationen--readable .n-situation__footer strong { color: var(--wk-paper); }
+
+/* Zweiter ruhiger Schrägübergang: Schutzband -> wissenschaftliche Einordnung. */
+.n-science { position: relative; }
+.n-science::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  top: -42px;
+  right: 0;
+  left: 0;
+  height: 44px;
+  background: var(--wk-paper);
+  clip-path: polygon(0 100%, 100% 0, 100% 100%);
+}
+.n-science > * { position: relative; z-index: 1; }
+
+/* Der alte türkisfarbene Divider passt nach der neuen Reihenfolge nicht mehr. */
+.n-no-coaching.wk-sd::before { display: none; }
+.n-no-coaching.wk-sd { padding-top: clamp(72px, 8vw, 118px); }
 
 .n-domain-audience--single { grid-template-columns: 1fr; }
 .n-domain-audience--single .n-domain { min-height: 560px; }
-.n-domain-audience--single .n-domain__content { width: min(820px, calc(100% - 50px)); text-align: center; }
+.n-domain-audience--single .n-domain__content {
+  width: min(820px, calc(100% - 50px));
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+ * Mobil: kein Sidescroller-Zwang, keine überlagernde Kapitelrail
+ * -------------------------------------------------------------------------- */
+@media (max-width: 999px) {
+  body { overflow-x: hidden; }
+  .n-story-rail { display: none !important; }
+
+  .n-hero__content { padding-top: 24px; }
+  .n-hero h1 {
+    max-width: 100%;
+    font-size: clamp(39px, 10.8vw, 58px);
+    line-height: 1.03;
+  }
+  .n-hero__brandline { margin-bottom: 10px; font-size: 11.5px; }
+  .n-hero__lead--short { margin-top: 18px; font-size: 16px; }
+  .n-hero__signature { margin-top: 14px; font-size: 15px; }
+  .n-hero__content .n-actions { margin-top: 22px; }
+
+  .n-horizontal {
+    height: auto !important;
+    overflow: visible;
+    background: var(--wk-forest-900);
+  }
+  .n-horizontal__stage {
+    position: static !important;
+    top: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .n-horizontal__track {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    transform: none !important;
+    will-change: auto;
+  }
+  .n-horizontal-panel {
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    padding: 58px 24px 62px;
+    display: block;
+  }
+  .n-horizontal-panel__copy,
+  .n-horizontal-panel__copy--wide { max-width: 720px; margin-inline: auto; }
+  .n-horizontal-panel__figure { display: none !important; }
+  .n-horizontal__progress,
+  .n-horizontal__hint { display: none !important; }
+  .n-horizontal-panel h2 {
+    max-width: 19ch;
+    font-size: clamp(31px, 7.5vw, 44px);
+  }
+  .n-horizontal-panel p { font-size: 15.5px; }
+  .n-horizontal .n-triad { grid-template-columns: 1fr; gap: 8px; }
+  .n-horizontal .n-triad article { padding: 11px 14px; }
+  .n-horizontal .n-triad strong { margin-bottom: 2px; font-size: 17px; }
+  .n-horizontal .n-triad p { font-size: 13px !important; }
+  .n-horizontal .n-forest-symbols {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+  }
+  .n-horizontal .n-forest-symbols img { width: 38px; height: 38px; }
+  .n-horizontal .n-forest-symbols span { min-height: 112px; padding: 11px 7px; }
+  .n-horizontal .n-cat-perspectives {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 5px;
+  }
+  .n-horizontal .n-cat-perspectives article { padding: 8px 3px; }
+  .n-horizontal .n-cat-perspectives img { height: 43px; }
+  .n-horizontal .n-cat-perspectives strong { font-size: 11px; line-height: 1.1; }
+  .n-horizontal .n-cat-perspectives em { display: none; }
+  .n-horizontal-panel--yellow .n-why-toys { max-width: none; }
+
+  .n-situationen--readable .n-situation .n-cat-perspectives {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .n-situationen--readable .n-situation .n-cat-perspectives article {
+    position: relative;
+    min-height: 92px;
+    padding: 13px 13px 13px 82px;
+    display: block;
+    text-align: left;
+  }
+  .n-situationen--readable .n-situation .n-cat-perspectives img {
+    position: absolute;
+    left: 14px;
+    top: 17px;
+    width: 54px;
+    height: 54px;
+  }
+  .n-situationen--readable .n-situation .n-cat-perspectives b {
+    left: 8px;
+    top: 8px;
+  }
+  .n-situationen--readable .n-situation .n-cat-perspectives strong {
+    margin: 0;
+    font-size: 17px;
+  }
+  .n-situationen--readable .n-situation .n-cat-perspectives em {
+    margin: 2px 0 4px;
+    font-size: 12.5px;
+  }
+  .n-situationen--readable .n-situation .n-cat-perspectives span {
+    display: block !important;
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+}
 
 @media (max-width: 680px) {
+  .n-trust-band { border-top-width: 5px; border-bottom-width: 5px; }
+  .n-trust-band__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 5px;
+    padding: 8px 0;
+  }
+  .n-trust-band__list li {
+    justify-content: flex-start;
+    gap: 8px;
+    padding: 7px 5px;
+  }
+  .n-trust-band__icon { width: 31px; height: 31px; }
+  .n-trust-band__list span { font-size: 11.5px; }
+
   .n-pivot { padding-block: 76px; }
   .n-pivot__main { font-size: clamp(34px, 11vw, 52px); }
-  .n-hero__signature { font-size: 16px; }
+
+  .n-situationen--readable {
+    padding-top: 84px;
+    padding-bottom: 112px;
+  }
+  .n-situationen--readable .n-section-heading h2 {
+    font-size: clamp(33px, 9vw, 46px);
+    line-height: 1.08;
+  }
+  .n-situationen--readable .n-situation {
+    padding: 20px 17px;
+    border-radius: 22px;
+  }
+  .n-situationen--readable .n-situation__head {
+    align-items: flex-start;
+    gap: 13px;
+  }
+  .n-situationen--readable .n-situation__art { width: 58px; height: 58px; }
+  .n-situationen--readable .n-situation h3 {
+    font-size: clamp(25px, 7.5vw, 34px);
+  }
+  .n-situationen--readable .n-situation .n-panel-quote {
+    padding: 16px;
+    font-size: 20px !important;
+  }
+  .n-situationen--readable .n-situation-compact { padding: 17px 16px; }
+  .n-situationen--readable .n-situation__footer { padding: 20px 18px; }
+
+  .n-about__name strong { display: block; font-size: 21px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .n-hero__cycling { transition: none; }
 }
