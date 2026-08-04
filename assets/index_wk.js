@@ -195,9 +195,18 @@
     });
     if (storyCurrent) storyCurrent.value = activeLabel;
   };
-  window.addEventListener('scroll', syncStory, { passive: true });
-  window.addEventListener('resize', syncStory, { passive: true });
-  requestAnimationFrame(syncStory);
+  let storyTicking = false;
+  const requestStorySync = () => {
+    if (storyTicking) return;
+    storyTicking = true;
+    requestAnimationFrame(() => {
+      syncStory();
+      storyTicking = false;
+    });
+  };
+  window.addEventListener('scroll', requestStorySync, { passive: true });
+  window.addEventListener('resize', requestStorySync, { passive: true });
+  requestStorySync();
 
   document.querySelectorAll('[data-rail]').forEach(rail => {
     const track = rail.querySelector('[data-rail-track]');
