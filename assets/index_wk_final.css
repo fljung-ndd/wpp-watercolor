@@ -67,6 +67,15 @@
   mix-blend-mode: multiply;
 }
 
+/* Nach der neuen Reihenfolge folgt auf die dunkelgrünen Situationen direkt
+   der ebenfalls dunkelgrüne Coaching-Abschnitt. Der alte türkise Divider
+   wäre dort inhaltlich falsch und erzeugte zusätzlich unnötige Leerhöhe. */
+.n-situationen + .n-no-coaching.wk-sd {
+  --wk-from: var(--wk-forest-800);
+  padding-top: clamp(72px, 8vw, 120px);
+}
+.n-situationen + .n-no-coaching.wk-sd::before { display: none; }
+
 .n-domain-audience--single { grid-template-columns: 1fr; }
 .n-domain-audience--single .n-domain { min-height: 560px; }
 .n-domain-audience--single .n-domain__content { width: min(820px, calc(100% - 50px)); text-align: center; }
