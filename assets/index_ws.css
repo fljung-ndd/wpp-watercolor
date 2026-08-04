@@ -276,6 +276,10 @@
 }
 .n-why-toys__more { margin-top: 22px; }
 .n-text-link--dark { color: var(--wk-ink-strong); font-weight: 600; text-decoration: underline; }
+/* Verweis auf dem gesättigten Pink von Panel 1 - dort reicht die normale
+   Linkfarbe (Pink-Ink) nicht als Kontrast, deshalb hell statt dunkel. */
+.n-panel-more { margin-top: 20px; }
+.n-text-link--light { color: var(--wk-paper); font-weight: 600; text-decoration: underline; }
 .n-animal-strip {
   margin: 0;
   padding: 0;
