@@ -79,8 +79,10 @@
     pivot.dataset.storyLabel = 'Wendepunkt';
     pivot.innerHTML = `
       <div class="n-shell n-pivot__inner">
-        <p class="n-pivot__main">Vielleicht ist niemand falsch.<br>Vielleicht ist nur zu viel gleichzeitig.</p>
-        <p class="n-pivot__sub">Dann hilft es nicht, schneller zu urteilen.<br>Dann müssen wir genauer hinschauen.</p>
+        <img class="n-pivot__icon n-pivot__icon--left" src="assets/icons/18_gedankenknaeuel.webp" alt="" width="120" height="120" loading="lazy">
+        <img class="n-pivot__icon n-pivot__icon--right" src="assets/icons/01_lupe_blatt.webp" alt="" width="120" height="120" loading="lazy">
+        <p class="n-pivot__main">Vielleicht ist <em>niemand falsch</em>.<br>Vielleicht ist nur <em>zu viel gleichzeitig</em>.</p>
+        <p class="n-pivot__sub">Dann hilft es nicht, schneller zu urteilen.<br>Dann müssen wir <em>genauer hinschauen</em>.</p>
       </div>`;
     story.after(pivot);
   }
@@ -212,11 +214,6 @@
     if (eyebrow) eyebrow.textContent = 'Für wen ich da bin';
     if (title) title.textContent = 'Vier Einstiege – je nachdem, wer gerade Unterstützung sucht.';
   }
-  const audienceBlock = document.querySelector('.n-domain-audience .n-audience');
-  const domainAudience = document.querySelector('.n-domain-audience');
-  audienceBlock?.remove();
-  domainAudience?.classList.add('n-domain-audience--single');
-
   /* Podcast und wiederkehrende Signatur. */
   const podcast = byId('podcast');
   if (podcast) {
@@ -224,7 +221,7 @@
     podcast.removeAttribute('data-story-label');
     const copy = podcast.querySelector('.n-podcast-teaser__inner > div > p:last-child');
     const badge = podcast.querySelector('.n-podcast-teaser__badge');
-    if (copy) copy.textContent = 'Geschichten und fachliche Einordnungen für Situationen, in denen schnelle Tipps zu kurz greifen. Der Waldkätzchen-Podcast ist in Vorbereitung.';
+    if (copy) copy.textContent = 'Situationen festhalten, Gefühle sortieren, Impulse wiederfinden und die Waldkätzchen-Blicke Schritt für Schritt nutzen – ohne Leistungsdruck. Der Waldkätzchen-Podcast ist in Vorbereitung.';
     if (badge) {
       badge.textContent = '🎙 Podcast in Vorbereitung';
       badge.setAttribute('aria-label', 'Ankündigung: Podcast ist in Vorbereitung und noch nicht verfügbar');
