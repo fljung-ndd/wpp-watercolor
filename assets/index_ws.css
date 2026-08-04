@@ -525,6 +525,8 @@
   .n-forest-symbols { grid-template-columns: repeat(4, minmax(72px, 1fr)); gap: 8px; }
   .n-forest-symbols img { width: 34px; height: 34px; }
   .n-critter--mushroom, .n-critter--butterfly { display: none; }
+  /* Acht Waldorte + Maskottchen sind zusammen zu hoch für eine Bildschirmhöhe. */
+  .n-horizontal-panel--petrol .n-horizontal-panel__figure { display: none; }
 }
 @media (max-width: 680px) {
   .n-layer-list { grid-template-columns: 1fr; gap: 14px; }
